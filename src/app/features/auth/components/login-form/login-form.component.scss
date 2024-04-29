@@ -1,0 +1,38 @@
+.login-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  input{
+    width: 15rem;
+    height: 3rem;
+    border-radius: 30px;
+    border:1px solid #828282;
+    font-size: 1rem;
+    padding-left: 1rem;
+  }
+  .pass-icon{
+    margin-left: 12rem;
+    margin-top: -2rem;
+    color: black;
+}
+  input:first-child{
+    margin-bottom: 1rem;
+  }
+  .button{
+    height: 3rem;
+    background-color: #f48221;
+    color: white;
+    width: 15rem;
+    border-radius: 30px;
+    border:1px solid #f48221;
+    font-weight: 900;
+    font-family: "Arial";
+    font-size: 1.05rem;
+  }
+  .resetpass{
+    color: #828282;
+    font-size:1.05rem ;
+    margin-top: 2rem;
+  }
+
+}
