@@ -1,7 +1,10 @@
 {
   "common_welcome": "Hoşgeldiniz!",
-
   "auth_signinSubtitle" : "Kurumsal hesabınız ile giriş yapınız",
+  "academy": "AKADEMI",
 
-  "academy": "AKADEMI"
+  "username": "Kullanıcı Adı",
+  "password": "Şifre",
+  "reset_password": "Şifremi Unuttum",
+  "login": "Giriş"
 }

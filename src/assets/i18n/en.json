@@ -1,7 +1,10 @@
 {
   "common_welcome": "Welcome!",
-
   "auth_signinSubtitle" : "Sign in with your organizational account",
+  "academy": "ACADEMY",
 
-  "academy": "ACADEMY"
+  "username": "Username",
+  "password": "Password",
+  "reset_password": "Reset Password",
+  "login": "Login"
 }
