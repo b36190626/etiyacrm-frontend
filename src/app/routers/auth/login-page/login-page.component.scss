@@ -1,0 +1,65 @@
+// section{
+//   background-image:
+//   linear-gradient(to bottom, rgba(43, 39, 51, 0.52), rgba(17, 14, 27, 0.73)),
+//   url("../../../assets/images/etiya-login-page.jpg");
+//   background-size: cover;
+//   background-repeat: no-repeat;
+//   background-position: center;
+//   width: 100vw;
+//   height: 100vh;
+// }
+.etiya-header-container{
+  margin-bottom: 1rem;
+}
+img{
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  transform: translate(-50%, -50%);
+  width: 330px;
+  height: 86px;
+}
+
+.etiya-title {
+  font-family: "Exo";
+  font-weight: bold;
+  text-align: center;
+  font-style: normal;
+  font-size: 36px;
+  line-height: 36px;
+  /* identical to box height, or 100% */
+  text-align: center;
+  color: #333333;
+  margin-bottom: 0rem;
+}
+.etiya-subtitle {
+  font-family: "Exo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 12px;
+  text-align: center;
+  color: #828282;
+}
+.etiya-akademi{
+  color: white;
+  font-size: 2.4rem;
+  font-weight: 600;
+  font-family: "Exo";
+  letter-spacing: 1.70rem;
+  position: fixed;
+  left:50.8%;
+  top: 26%;
+  transform: translate(-50%, -50%);
+}
+
+// .login-bar{
+//   background-color: white;
+//   width: 530px;
+//   height: 484px;
+//   border-radius: 30px;
+//   position: absolute;
+//   left:50%;
+//   top: 60.2%;
+//   transform: translate(-50%, -50%);
+// }

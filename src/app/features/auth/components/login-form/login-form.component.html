@@ -1,0 +1,8 @@
+<form class="login-form">
+  <input  type="text" placeholder="Username" />
+  <input  type="{{showPassword ? 'text' : 'password'}}"
+          placeholder="Password" />
+          <span class="pass-icon" [ngClass]="{'fa-regular fa-eye': !showPassword, 'fa-solid fa-eye-slash': showPassword}" (click)="togglePasswordVisibility()"></span>
+  <p class="resetpass" routerLink="auth/login" (click)="true">Reset Password</p>
+  <button class="button">Login</button>
+</form>
