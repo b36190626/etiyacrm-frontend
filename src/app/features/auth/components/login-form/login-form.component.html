@@ -4,5 +4,7 @@
           placeholder="{{ 'password' | translate }}" />
           <span class="pass-icon" [ngClass]="{'fa-regular fa-eye': !showPassword, 'fa-solid fa-eye-slash': showPassword}" (click)="togglePasswordVisibility()"></span>
   <p class="resetpass" routerLink="auth/login" (click)="true">{{"reset_password" | translate}}</p>
-  <button class="button">{{"login" | translate}}</button>
+  <button class="button" (click)="togglePopup($event)" >{{"login" | translate}}</button>
+
+  <app-warning-popup *ngIf="showPopup"></app-warning-popup>
 </form>
