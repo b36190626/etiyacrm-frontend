@@ -1,11 +1,11 @@
 <div class="etiya-container">
-
-
-  @if (headertemplate) {
+  <div class="logo">
+    @if (headertemplate) {
     <ng-container *ngTemplateOutlet="headertemplate"></ng-container>
   }
-
-  <main>
+  </div>
+  <div class="login">
     <ng-content></ng-content>
-  </main>
+  </div>
+
 </div>

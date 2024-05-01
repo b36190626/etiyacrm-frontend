@@ -1,12 +1,6 @@
 .etiya-container{
   width: 100%;
   height: 100vh;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
   background-image:
   linear-gradient(to bottom, rgba(25, 10, 59, 0.52), rgba(17, 14, 27, 0.73)),
   url("../../../assets/images/etiya-login-page.jpg");
@@ -14,12 +8,17 @@
   background-repeat: no-repeat;
   background-position: center;
 
-  main {
-    margin-top: 8rem;
-    background-color: white;
-    padding: 4rem;
-    border:1px solid #000000;
-    box-shadow: 0px 0px 30px rgba(0,0,0,0.1);
-    border-radius: 2rem;
+  .logo{
+    display: flex;
+    align-items: center;
+
   }
+
+  .login{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
 }

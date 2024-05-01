@@ -2,7 +2,7 @@
   <input  type="text" placeholder="{{ 'username' | translate }}" />
   <input  type="{{showPassword ? 'text' : 'password'}}"
           placeholder="{{ 'password' | translate }}" />
-          <span class="pass-icon" [ngClass]="{'fa-regular fa-eye': !showPassword, 'fa-solid fa-eye-slash': showPassword}" (click)="togglePasswordVisibility()"></span>
+          <i class="pass-icon" [ngClass]="{'fa-regular fa-eye fa-2x': !showPassword, 'fa-solid fa-eye-slash fa-2x': showPassword}" (click)="togglePasswordVisibility()"></i>
   <p class="resetpass" routerLink="auth/login" (click)="true">{{"reset_password" | translate}}</p>
   <button class="button" (click)="togglePopup($event)" >{{"login" | translate}}</button>
 

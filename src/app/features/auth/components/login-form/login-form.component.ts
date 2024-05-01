@@ -15,7 +15,6 @@ import { WarningPopupComponent } from '../../../../../shared/components/warning-
 })
 export class LoginFormComponent {
   showPassword: boolean = false;
-
   constructor(
 
   ){}
