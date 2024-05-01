@@ -1,18 +1,21 @@
 .search-result{
-  width: 60vw;
+  width: 65vw;
   border-radius: 2rem;
   background-color: white;
-  margin-top: -1.2rem;
+  border: 1px solid #FBCDA6;
+  padding: 1rem;
 
   h1{
-    padding: 1rem;
+    margin-top: 0;
   }
 
   th{
     color: white;
     background-color: #F58220;
+    text-align: center;
   }
   td{
     background-color: #FBCDA6;
+    text-align: center;
   }
 }

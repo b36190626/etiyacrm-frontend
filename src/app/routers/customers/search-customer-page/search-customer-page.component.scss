@@ -1,8 +1,13 @@
 .search-page{
+  border: 1px solid #FBCDA6;
   margin-top: 1rem;
+  margin-left: 1rem;
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+}
+.search-group{
   display: flex;
   gap: 1rem;
   justify-content: space-between;
   background-color: #F8FAFF;
-
 }
