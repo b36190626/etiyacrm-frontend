@@ -12,6 +12,18 @@
     font-size: 1.5rem;
     padding-left: 1rem;
   }
+  .remember-me{
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      color: white;
+      margin-left: 24rem;
+    input{
+      width: 1rem;
+      margin-left: 1rem;
+      margin-top: 3rem;
+    }
+  }
   .pass-icon{
     margin-left: 30rem;
     margin-top: -3rem;
@@ -39,6 +51,7 @@
     font-size:1.05rem ;
     margin-top: 2rem;
     cursor: pointer;
+    margin-top: -3rem;
   }
 
 }

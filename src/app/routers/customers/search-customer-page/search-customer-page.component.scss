@@ -1,5 +1,16 @@
+.fieldset{
+  border: 2px solid #F58220;
+  display: flex;
+  margin-top: 0.4rem;
+
+  legend{
+    font-size: 1rem;
+    font-weight: 600;
+    margin-left: 1rem;
+  }
+}
+
 .search-page{
-  border: 1px solid #FBCDA6;
   margin-top: 1rem;
   margin-left: 1rem;
   padding-left: 1rem;
@@ -11,3 +22,5 @@
   justify-content: space-between;
   background-color: #F8FAFF;
 }
+
+

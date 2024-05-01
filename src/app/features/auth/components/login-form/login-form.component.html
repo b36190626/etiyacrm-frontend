@@ -2,9 +2,12 @@
   <input  type="text" placeholder="{{ 'username' | translate }}" />
   <input  type="{{showPassword ? 'text' : 'password'}}"
           placeholder="{{ 'password' | translate }}" />
-          <i class="pass-icon" [ngClass]="{'fa-regular fa-eye fa-2x': !showPassword, 'fa-solid fa-eye-slash fa-2x': showPassword}" (click)="togglePasswordVisibility()"></i>
+          <i class="pass-icon" [ngClass]="{'fa-regular fa-eye fa-2x': showPassword, 'fa-solid fa-eye-slash fa-2x': !showPassword}" (click)="togglePasswordVisibility()"></i>
+    <div class="remember-me">
+      <input type="checkbox" value="lsRememberMe" id="rememberMe">
+      <label for="rememberMe">Remember me</label>
+    </div>
   <p class="resetpass" routerLink="auth/login" (click)="true">{{"reset_password" | translate}}</p>
   <button class="button" (click)="togglePopup($event)" >{{"login" | translate}}</button>
-
   <app-warning-popup *ngIf="showPopup"></app-warning-popup>
 </form>

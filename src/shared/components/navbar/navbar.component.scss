@@ -4,14 +4,25 @@ nav{
   flex-direction: column;
   text-align: center;
   margin-top: 1rem;
+.b2c-active{
+  border: 1px solid #24233F;
+  height: 10.2rem;
+  padding-top: 3rem;
+  cursor: pointer;
+  background-color: #F58220;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
 
   .b2c, .b2b, .menu, .hand, .exit{
     border: 1px solid #24233F;
-    height: 21vh;
-    padding-top: 2rem;
+    height: 17vh;
+    padding-top: 3rem;
     cursor: pointer;
     background-color: #FBCDA6;
     color: #24233F;
     font-weight: bold;
+    font-size: 1.5rem;
   }
 }
