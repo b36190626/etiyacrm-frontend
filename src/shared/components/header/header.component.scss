@@ -1,61 +1,55 @@
 header{
+  height: 12vh;
+  max-width: 100%;
 
-  height: 15vh;
-  margin-top: 0;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
 
   .header{
-    background: #24233F;
+    display: flex;
+    justify-content: space-between;
     width: 100vw;
+    align-items: center;
+    height: 12vh;
+    background: #24233F;
+  }
+
+  img{
+    margin-left: 1rem;
+    margin-top: 1rem;
+    width: 16vw;
+    object-fit: cover;
+  }
+
+  .header-items{
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  .header-icon{
+  .header-language{
     display: flex;
-    flex-direction: column;
     align-items: center;
-    width: 20vw;
-
-
-    img{
-      width: 90%;
-      margin-top: 5%;
-    }
-
-  }
-  .profile-info{
+    gap: 2px;
     margin-right: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .header-avatar{
     display: flex;
-
+    align-items: center;
+    margin-right: 2rem;
+    gap: 1rem;
+  }
+  .header-avatar-title{
+    border-left: 1px solid #fff;
+    height: 9vh;
+    width: 8vw;
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+    margin-right: 3.5rem;
   }
 
-  .language-toggle{
-    margin-left: 2rem;
+  p{
     color: white;
-
+    font-family: "inter";
   }
-
-  .profile-name{
-    font-size: 1rem;
-    font-family: 'arial';
-    color: white;
-    font-weight: 600;
-    margin-left: 10%;
-    margin-top: 25%;
-    letter-spacing: 0.1rem;
-  }
-
-
-  span{
-    font-size: 1rem;
-    font-family: 'poppins';
-    font-weight: 400;
-    margin-left: 0.5rem;
-  }
-
-
 }
