@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MainLayoutComponent } from '../../layouts/main-layout/main-layout.component';
+import "@fontsource/inter/600.css";
 
 @Component({
   selector: 'app-header',
