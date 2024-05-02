@@ -1,32 +1,34 @@
+<fieldset class="fieldset">
+  <legend>Search Result</legend>
 <form class="search-result">
-  <h1>Search Result</h1>
-  <p-table [value]="list" [tableStyle]="{ 'width': '60rem' }">
-    <ng-template pTemplate="header">
-      <tr>
-        <!-- <p-checkbox formControlName="city" value="New York" inputId="ny"></p-checkbox> -->
-        <th>Customer Id</th>
-        <th>First Name</th>
-        <th>Second Name</th>
-        <th>Last Name</th>
-        <th>Role</th>
-        <th>ID Number</th>
-        <th>Account Number</th>
-        <th>GSM Number</th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-list>
-      <tr>
-        <!-- <p-checkbox formControlName="city" value="New York" inputId="ny"></p-checkbox> -->
-        <td>{{ list.id }}</td>
-        <td>{{ list.firstName }}</td>
-        <td>{{ list.middleName }}</td>
-        <td>{{ list.lastName | uppercase }}</td>
-        <td>{{ list.role }}</td>
-        <td>{{ list.nationalityId }}</td>
-        <td>{{ list.accountNumber }}</td>
-        <td>{{ list.gsmNumber }}</td>
-      </tr>
-    </ng-template>
-  </p-table>
+    <p-table [value]="list" [tableStyle]="{ 'width': '63vw', 'border-radius':'3rem' }">
+      <ng-template pTemplate="header">
+        <tr>
+          <!-- <p-checkbox formControlName="city" value="New York" inputId="ny"></p-checkbox> -->
+          <th>Customer Id</th>
+          <th>First Name</th>
+          <th>Second Name</th>
+          <th>Last Name</th>
+          <th>Role</th>
+          <th>ID Number</th>
+          <th>Account Number</th>
+          <th>GSM Number</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-list>
+        <tr>
+          <!-- <p-checkbox formControlName="city" value="New York" inputId="ny"></p-checkbox> -->
+          <td>{{ list.id }}</td>
+          <td>{{ list.firstName }}</td>
+          <td>{{ list.middleName }}</td>
+          <td>{{ list.lastName | uppercase }}</td>
+          <td>{{ list.role }}</td>
+          <td>{{ list.nationalityId }}</td>
+          <td>{{ list.accountNumber }}</td>
+          <td>{{ list.gsmNumber }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
 </form>
+</fieldset>
 
