@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormGroup, Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-demographic-form',
@@ -12,23 +13,26 @@ import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule } 
   styleUrl: './demographic-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DemographicFormComponent {
+export class DemographicFormComponent implements OnInit {
   customerForm!: FormGroup;
 
   isFormValid: boolean = false; //bootstrpsiz angular ile form validasyon takibi yaptım
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
   ngOnInit() {
     this.customerForm = this.fb.group({
 
-      firstName: new FormControl('', Validators.required),
-      middleName: new FormControl(''),
-      lastName: new FormControl('', Validators.required),
-      birthDate: new FormControl('', Validators.required),
-      gender: new FormControl('', Validators.required),
-      fatherName: new FormControl(''),
-      motherName: new FormControl(''),
-      nationalityId: new FormControl('', Validators.required)
+      firstName: ['', Validators.required],
+      middleName: [''],
+      lastName: ['', Validators.required],
+      birthDate: ['', Validators.required],
+      gender: ['', Validators.required],
+      fatherName: [''],
+      motherName: [''],
+      nationalityId: ['', Validators.required]
     });
     // Formun durumunu dinamik olarak izleme
     this.customerForm.statusChanges.subscribe(status => {
@@ -40,6 +44,7 @@ export class DemographicFormComponent {
   onSubmit() {
     if (this.customerForm.valid) {
       console.log('Form Submitted!', this.customerForm.value);
+      this.router.navigate(['/home/create-customer/contact-medium'])
     }
   }
 
