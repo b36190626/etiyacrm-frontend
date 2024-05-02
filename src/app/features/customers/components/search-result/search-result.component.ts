@@ -2,14 +2,13 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CustomerListItemDto } from '../../models/customer-list-item-dto';
 import { CustomerApiService } from '../../services/customerApi.service';
-import { CheckboxModule } from 'primeng/checkbox';
-import { TableModule } from 'primeng/table';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-search-result',
   standalone: true,
   imports: [
-    CommonModule, CheckboxModule, TableModule
+    CommonModule, NgxPaginationModule
   ],
   templateUrl: './search-result.component.html',
   styleUrl: './search-result.component.scss',
@@ -17,6 +16,7 @@ import { TableModule } from 'primeng/table';
 })
 export class SearchResultComponent implements OnInit{
   list: Array<CustomerListItemDto> = [];
+  p: number = 1;
 
   constructor(
     private customersApiService: CustomerApiService,
