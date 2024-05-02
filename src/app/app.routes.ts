@@ -17,13 +17,13 @@ export const routes: Routes = [
         path:"search",
         component:SearchCustomerPageComponent,
       },
-      {
-        path: "create-customer",
-        component: CreateCustomerPageComponent,
-        children:[{
-          path:"adress-info",
-          component:CreateCustomerPageComponent,
-        },]
+        {
+          path: "create-customer",
+          component: CreateCustomerPageComponent,
+            children:[{
+              path:"adress-info",
+              component:CreateCustomerPageComponent,
+          },]
       }
 
     ]
