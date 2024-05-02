@@ -1,34 +1,37 @@
 <fieldset class="fieldset">
-  <legend>Search Result</legend>
-<form class="search-result">
-    <p-table [value]="list" [tableStyle]="{'width': '61vw'}">
-      <ng-template pTemplate="header">
-        <tr>
-          <!-- <p-checkbox formControlName="city" value="New York" inputId="ny"></p-checkbox> -->
-          <th>Customer Id</th>
-          <th>First Name</th>
-          <th>Second Name</th>
-          <th>Last Name</th>
-          <th>Role</th>
-          <th>ID Number</th>
-          <th>Account Number</th>
-          <th>GSM Number</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-list>
-        <tr>
-          <!-- <p-checkbox formControlName="city" value="New York" inputId="ny"></p-checkbox> -->
-          <td>{{ list.id }}</td>
-          <td>{{ list.firstName }}</td>
-          <td>{{ list.middleName }}</td>
-          <td>{{ list.lastName | uppercase }}</td>
-          <td>{{ list.role }}</td>
-          <td>{{ list.nationalityId }}</td>
-          <td>{{ list.accountNumber }}</td>
-          <td>{{ list.gsmNumber }}</td>
-        </tr>
-      </ng-template>
-    </p-table>
-</form>
+      <legend>Search Result</legend>
+    <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Customer Id</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Second Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Role</th>
+        <th scope="col">ID Number</th>
+        <th scope="col">Account Number</th>
+        <th scope="col">GSM Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of list | paginate: { itemsPerPage: 10, currentPage: p }">
+        <td>{{ item.id }}</td>
+        <td>{{ item.firstName }}</td>
+        <td>{{ item.middleName }}</td>
+        <td>{{ item.lastName | uppercase }}</td>
+        <td>{{ item.role }}</td>
+        <td>{{ item.nationalityId }}</td>
+        <td>{{ item.accountNumber }}</td>
+        <td>{{ item.gsmNumber }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-center align-items-center my-3">
+    <pagination-controls  (pageChange)="p = $event"></pagination-controls>
+  </div>
+
+
+
 </fieldset>
+
 

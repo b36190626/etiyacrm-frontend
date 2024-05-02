@@ -1,16 +1,6 @@
 header{
   height: 12vh;
-  max-width: 100vh;
-
-
-  .header{
-    display: flex;
-    justify-content: space-between;
-    width: 99vw;
-    align-items: center;
-    height: 12vh;
-    background: #24233F;
-  }
+  background: #24233F;
 
   img{
     margin-left: 1rem;
@@ -19,36 +9,18 @@ header{
     object-fit: cover;
   }
 
-  .header-items{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .header-language{
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    margin-right: 3rem;
-    padding-bottom: 3rem;
+  .header-avatar-title{
+    margin-top: 1rem;
+    padding-left: 1rem;
   }
 
   .header-avatar{
-    display: flex;
-    align-items: center;
-    margin-right: 2rem;
-    gap: 1rem;
-  }
-  .header-avatar-title{
+    margin-top: 1rem;
     border-left: 1px solid #fff;
-    height: 9vh;
-    width: 8vw;
-    padding-left: 1rem;
-    padding-top: 0.5rem;
-    margin-right: 3.5rem;
+    height: 8vh;
   }
 
-  p{
+  p, span{
     color: white;
     font-family: "inter";
   }
