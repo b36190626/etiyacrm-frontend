@@ -1,23 +1,23 @@
 <fieldset class="fieldset">
   <legend>Search Filter</legend>
   <form class="search-form">
-    <input  type="text" placeholder="ID Number" />
-    <input  type="text" placeholder="Customer ID" />
-    <input  type="text" placeholder="Account Number" />
-    <input  type="text" placeholder="GSM Number" />
-    <input  type="text" placeholder="First Name" />
-    <input  type="text" placeholder="Last Name" />
-    <input  type="text" placeholder="Order Number" />
+    <input  type="text" placeholder="ID Number" [(ngModel)]="id" />
+    <input  type="text" placeholder="Customer ID" [(ngModel)]="customerId"/>
+    <input  type="text" placeholder="Account Number" [(ngModel)]="accoundNumber"/>
+    <input  type="text" placeholder="GSM Number" [(ngModel)]="gsmNumber"/>
+    <input  type="text" placeholder="First Name" [(ngModel)]="firstname"/>
+    <input  type="text" placeholder="Last Name" [(ngModel)]="lastname"/>
+    <input  type="text" placeholder="Order Number" [(ngModel)]="orderNumber"/>
 
     <div class="button-group">
       <div>
-        <button class="clear-button">
+        <button class="clear-button" type="reset">
           <i class="fa-solid fa-eraser" style="color: white;"></i>
           Clear
         </button>
       </div>
       <div class="search-group">
-        <button class="search-button">
+        <button class="search-button" (click)="searchCustomer()">
           <i class="fa-solid fa-magnifying-glass" style="color: white"></i>
           Search
         </button>
