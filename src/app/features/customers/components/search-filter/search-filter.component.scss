@@ -2,6 +2,8 @@
   border: 1px solid #FBCDA6;
   display: flex;
   border-radius: 2rem;
+  background-color: white;
+
 
   legend{
     font-size: 1rem;
@@ -17,7 +19,6 @@
   width: 20vw;
   height: 78vh;
   gap: 2rem;
-  background-color: white;
   border-radius: 2rem;
   padding-bottom: 1rem;
   padding-top: 3rem;
@@ -26,8 +27,8 @@
   }
 
   input{
-    width: 20rem;
-    height: 3rem;
+    width: 17vw;
+    height: 10vh;
     border-radius: 2rem;
     border:1px solid #f48221;
     padding-left: 1rem;
@@ -45,10 +46,10 @@
   }
 
   .search-button{
-      height: 3rem;
+      height: 5vh;
       background-color: #f48221;
       color: white;
-      width: 6rem;
+      width: 6vw;
       border-radius: 2rem;
       border:1px solid #f48221;
       font-weight: 500;
@@ -58,10 +59,10 @@
   }
 
   .clear-button{
-    height: 3rem;
+    height: 5vh;
     background-color: #C4C4C4;
     color: white;
-    width: 6rem;
+    width: 6vw;
     border-radius: 2rem;
     border:1px solid #C4C4C4;
     font-weight: 500;
