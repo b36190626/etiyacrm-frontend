@@ -3,11 +3,12 @@ nav{
   flex-direction: column;
   text-align: center;
   margin-top: 1.5rem;
+
 .b2c-active{
+  padding-top: 2rem;
   border: 1px solid #24233F;
   height: 17vh;
   width: 8vw;
-  padding-top: 3rem;
   cursor: pointer;
   background-color: #F58220;
   color: white;
@@ -16,10 +17,10 @@ nav{
 }
 
   .b2c, .b2b, .menu, .hand, .exit{
+    padding-top: 2rem;
     border: 1px solid #24233F;
     height: 17vh;
     width: 8vw;
-    padding-top: 3rem;
     cursor: pointer;
     background-color: #FBCDA6;
     color: #24233F;

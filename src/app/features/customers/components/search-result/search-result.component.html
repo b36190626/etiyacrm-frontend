@@ -1,37 +1,37 @@
 <fieldset class="fieldset">
-  <legend>Search Result</legend>
-<form class="search-result">
+      <legend>Search Result</legend>
     <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Customer Id</th>
-          <th scope="col">First Name</th>
-          <th scope="col">Second Name</th>
-          <th scope="col">Last Name</th>
-          <th scope="col">Role</th>
-          <th scope="col">ID Number</th>
-          <th scope="col">Account Number</th>
-          <th scope="col">GSM Number</th>
-        </tr>
-      </thead>
+    <thead>
+      <tr>
+        <th scope="col">Customer Id</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Second Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Role</th>
+        <th scope="col">ID Number</th>
+        <th scope="col">Account Number</th>
+        <th scope="col">GSM Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of list | paginate: { itemsPerPage: 10, currentPage: p }">
+        <td>{{ item.id }}</td>
+        <td>{{ item.firstName }}</td>
+        <td>{{ item.middleName }}</td>
+        <td>{{ item.lastName | uppercase }}</td>
+        <td>{{ item.role }}</td>
+        <td>{{ item.nationalityId }}</td>
+        <td>{{ item.accountNumber }}</td>
+        <td>{{ item.gsmNumber }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-center align-items-center my-3">
+    <pagination-controls  (pageChange)="p = $event"></pagination-controls>
+  </div>
 
-      <tbody>
-        @for (item of list; track $index) {
-        <tr>
-          <td>{{ item.id }}</td>
-          <td>{{ item.firstName }}</td>
-          <td>{{ item.middleName }}</td>
-          <td>{{ item.lastName | uppercase }}</td>
-          <td>{{ item.role }}</td>
-          <td>{{ item.nationalityId }}</td>
-          <td>{{ item.accountNumber }}</td>
-          <td>{{ item.gsmNumber }}</td>
-        </tr>
-        }
-      </tbody>
 
 
-    </table>
-</form>
 </fieldset>
+
 

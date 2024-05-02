@@ -18,4 +18,6 @@ import { SearchResultComponent } from '../../../features/customers/components/se
   styleUrl: './search-customer-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchCustomerPageComponent { }
+export class SearchCustomerPageComponent{
+constructor() {}
+}

@@ -5,7 +5,7 @@
   margin-top: 1%;
   margin-left: 1%;
   padding-left: 1%;
-  width: 90vw;
+  height: auto;
 
   legend{
     font-size: 1rem;
@@ -17,25 +17,5 @@
   }
 }
 
-.search-page{
-  margin-left: 10rem;
-  padding-left: 1rem;
-  padding-bottom: 1rem;
-}
-.search-group{
-  margin-top: 1%;
-  display: flex;
-  justify-content: flex-start;
-  gap: 1rem;
-  background-color: #F8FAFF;
-}
-
-.search-result{
-  width: 63vw;
-}
-
-.search-filter{
-  width: 22vw;
-}
 
 
