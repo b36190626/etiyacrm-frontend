@@ -25,15 +25,6 @@ export class SearchFilterComponent {
   constructor(){}
 
   searchCustomer(){
-  //   const search: any[]= [this.id, this.customerId, this.accoundNumber, this.gsmNumber,
-  //     this.firstname, this.lastname, this.orderNumber
-  //   ]
-  //   this.togglePopup;
-  // }
-  // showPopup: boolean = false;
 
-  // togglePopup(event: Event) {
-  //   event?.preventDefault();
-  //   this.showPopup = !this.showPopup;
   }
 }
