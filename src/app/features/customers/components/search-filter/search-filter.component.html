@@ -1,13 +1,13 @@
 <fieldset class="fieldset">
   <legend>Search Filter</legend>
-  <form class="search-form">
-    <input  type="text" placeholder="ID Number" [(ngModel)]="id" />
-    <input  type="text" placeholder="Customer ID" [(ngModel)]="customerId"/>
-    <input  type="text" placeholder="Account Number" [(ngModel)]="accoundNumber"/>
-    <input  type="text" placeholder="GSM Number" [(ngModel)]="gsmNumber"/>
-    <input  type="text" placeholder="First Name" [(ngModel)]="firstname"/>
-    <input  type="text" placeholder="Last Name" [(ngModel)]="lastname"/>
-    <input  type="text" placeholder="Order Number" [(ngModel)]="orderNumber"/>
+  <form class="search-form" (ngSubmit)="onSubmit">
+    <input  type="number" placeholder="ID Number" [(ngModel)]="id" name="id" />
+    <input  type="number" placeholder="Customer ID" [(ngModel)]="customerId" name="customerId"/>
+    <input  type="text" placeholder="Account Number" [(ngModel)]="accoundNumber" name="accoundNumber"/>
+    <input  type="text" placeholder="GSM Number" [(ngModel)]="gsmNumber" name="gsmNumber"/>
+    <input  type="text" placeholder="First Name" [(ngModel)]="firstname" name="firstname"/>
+    <input  type="text" placeholder="Last Name" [(ngModel)]="lastname" name="lastname"/>
+    <input  type="text" placeholder="Order Number" [(ngModel)]="orderNumber" name="orderNumber"/>
 
     <div class="button-group">
       <div>
@@ -17,7 +17,7 @@
         </button>
       </div>
       <div class="search-group">
-        <button class="search-button" (click)="searchCustomer()">
+        <button class="search-button" type="submit" (click)="onSubmit()">
           <i class="fa-solid fa-magnifying-glass" style="color: white"></i>
           Search
         </button>

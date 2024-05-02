@@ -1,3 +1,4 @@
+import { SearchService } from './../../services/searchService';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CustomerListItemDto } from '../../models/customer-list-item-dto';
@@ -17,19 +18,23 @@ import { TableModule } from 'primeng/table';
 })
 export class SearchResultComponent implements OnInit{
   list: Array<CustomerListItemDto> = [];
+  searchData: any[] = [];
 
   constructor(
     private customersApiService: CustomerApiService,
+    private searchSerivce: SearchService,
     private change: ChangeDetectorRef
   ) {}
   ngOnInit(): void {
     this.getList();
+
   }
 
   getList() {
-    this.customersApiService.getList().subscribe(customers => {
+      this.customersApiService.getList().subscribe(customers => {
       this.list = customers;
       this.change.markForCheck();
     });
   }
+
 }
