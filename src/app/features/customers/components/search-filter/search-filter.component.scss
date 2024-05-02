@@ -1,6 +1,7 @@
 .fieldset{
   border: 1px solid #FBCDA6;
   display: flex;
+  flex-direction: column;
   border-radius: 2rem;
   background-color: white;
 
@@ -8,7 +9,10 @@
   legend{
     font-size: 1rem;
     font-weight: 600;
-    margin-left: 1rem;
+    margin-left: 1.5rem;
+    float: none;
+    width: auto;
+    padding-right: 1rem;
   }
 }
 
@@ -17,32 +21,36 @@
   flex-direction: column;
   align-items: center;
   width: 20vw;
-  height: 78vh;
+  height: 75vh;
   gap: 2rem;
   border-radius: 2rem;
-  padding-bottom: 1rem;
-  padding-top: 3rem;
+  padding-top: 1%;
+  padding-left: 5%;
+
   h1{
     margin-bottom: 0;
   }
 
+  .search-input{
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
   input{
     width: 17vw;
-    height: 10vh;
+    height: 6vh;
     border-radius: 2rem;
     border:1px solid #f48221;
-    padding-left: 1rem;
     font-size: 1rem;
 
-  };
-    font-size: 1rem;
-    padding-left: 1rem;
+  }
 
   .button-group{
     display: flex;
     justify-content: space-around;
     gap: 2rem;
-    margin-top: 2rem;
   }
 
   .search-button{

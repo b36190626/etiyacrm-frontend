@@ -1,31 +1,41 @@
 .fieldset{
   border: 2px solid #F58220;
   display: flex;
-  margin-top: 0.4rem;
+  flex-direction: column;
+  margin-top: 1%;
   margin-left: 1%;
+  padding-left: 1%;
   width: 90vw;
 
   legend{
     font-size: 1rem;
     font-weight: 600;
-    margin-left: 1rem;
+    margin-left: 0.5rem;
+    float: none;
+    width: auto;
+    padding-right: 1rem;
   }
 }
 
 .search-page{
-  margin-top: 1rem;
-  margin-left: 1rem;
+  margin-left: 10rem;
   padding-left: 1rem;
   padding-bottom: 1rem;
 }
 .search-group{
+  margin-top: 1%;
   display: flex;
+  justify-content: flex-start;
   gap: 1rem;
-  justify-content: space-between;
   background-color: #F8FAFF;
 }
 
 .search-result{
   width: 63vw;
 }
+
+.search-filter{
+  width: 22vw;
+}
+
 
