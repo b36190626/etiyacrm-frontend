@@ -62,23 +62,55 @@
       color: white;
       width: 6vw;
       border-radius: 2rem;
-      border:1px solid #f48221;
+      border:1px solid #2F88FF;
       font-weight: 500;
       font-family: "Arial";
       font-size: 1.05rem;
       cursor: pointer;
   }
+  .search-button:hover{
+    background-color: #FBCDA6;
+  }
+  .search-button-disabled {
+      height: 5vh;
+      background-color: lightgrey;
+      color: white;
+      width: 6vw;
+      border-radius: 2rem;
+      border:1px solid #f48221;
+      font-weight: 500;
+      font-family: "Arial";
+      font-size: 1.05rem;
+      cursor: pointer;
+}
+
 
   .clear-button{
     height: 5vh;
-    background-color: #C4C4C4;
+    background-color: #f48221;
     color: white;
     width: 6vw;
     border-radius: 2rem;
-    border:1px solid #C4C4C4;
+    border:1px solid #2F88FF;
     font-weight: 500;
     font-family: "Arial";
     font-size: 1.05rem;
     cursor: pointer;
-}
+  }
+  .clear-button:hover{
+    background-color: #FBCDA6;
+  }
+
+  .clear-button-disabled{
+    height: 5vh;
+    background-color: lightgrey;
+    color: white;
+    width: 6vw;
+    border-radius: 2rem;
+    border:1px solid #f48221;
+    font-weight: 500;
+    font-family: "Arial";
+    font-size: 1.05rem;
+    cursor: pointer;
+  }
 }
