@@ -17,6 +17,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 })
 export class SearchResultComponent implements OnInit{
   list: Array<CustomerListItemDto> = [];
+  p: number = 1;
   constructor(
     private customersApiService: CustomerApiService,
     private searchSerivce: SearchService,
