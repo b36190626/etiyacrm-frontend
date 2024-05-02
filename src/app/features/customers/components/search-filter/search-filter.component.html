@@ -1,26 +1,23 @@
 <fieldset class="fieldset">
   <legend>Search Filter</legend>
-  <form class="search-form">
-    <div class="search-input">
-      <input class="form-control" type="text" placeholder="ID Number" />
-      <input class="form-control" type="text" placeholder="Customer ID" />
-      <input class="form-control" type="text" placeholder="Account Number" />
-      <input class="form-control" type="text" placeholder="GSM Number" />
-      <input class="form-control" type="text" placeholder="First Name" />
-      <input class="form-control" type="text" placeholder="Last Name" />
-      <input class="form-control" type="text" placeholder="Order Number" />
-
-    </div>
+  <form class="search-form" (ngSubmit)="onSubmit">
+    <input  type="number" placeholder="ID Number" [(ngModel)]="id" name="id" />
+    <input  type="number" placeholder="Customer ID" [(ngModel)]="customerId" name="customerId"/>
+    <input  type="text" placeholder="Account Number" [(ngModel)]="accoundNumber" name="accoundNumber"/>
+    <input  type="text" placeholder="GSM Number" [(ngModel)]="gsmNumber" name="gsmNumber"/>
+    <input  type="text" placeholder="First Name" [(ngModel)]="firstname" name="firstname"/>
+    <input  type="text" placeholder="Last Name" [(ngModel)]="lastname" name="lastname"/>
+    <input  type="text" placeholder="Order Number" [(ngModel)]="orderNumber" name="orderNumber"/>
 
     <div class="button-group">
       <div>
-        <button class="clear-button">
+        <button class="clear-button" type="reset">
           <i class="fa-solid fa-eraser" style="color: white;"></i>
           Clear
         </button>
       </div>
       <div class="search-group">
-        <button class="search-button">
+        <button class="search-button" type="submit" (click)="onSubmit()">
           <i class="fa-solid fa-magnifying-glass" style="color: white"></i>
           Search
         </button>
