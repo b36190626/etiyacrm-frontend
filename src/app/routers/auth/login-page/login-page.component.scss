@@ -1,26 +1,15 @@
   .etiya-login{
     display: flex;
+    justify-content: space-between;
+    gap: 8rem;
     align-items: center;
-    margin-right: 20rem;
-  .etiya-title {
-    font-family: "Exo";
-    font-weight: 100;
-    text-align: center;
-    font-style: normal;
-    font-size: 2rem;
-    line-height: 2rem;
-    /* identical to box height, or 100% */
-    text-align: center;
-    color: white;
-    margin-bottom: 0rem;
-  }
+
   .etiya-logo{
     display: flex;
+    justify-content: center;
     flex-direction: column;
+    margin-top: 5rem;
     width: 20vw;
-    height: 10vh;
-    margin-bottom: 5rem;
-    margin-right: 15rem;
   }
 
   .etiya-login-form-text{
@@ -29,22 +18,29 @@
     padding-left: 7rem;
     margin-top: 7rem;
   }
-  .etiya-login-form{
-    margin-top: 10rem;
+  .etiya-title {
+    font-family: "Exo";
+    font-weight: 100;
+    font-style: normal;
+    font-size: 2.5rem;
+    line-height: 2rem;
+    color: white;
+    margin-bottom: 2rem;
   }
+
   .etiya-subtitle {
     font-family: "Arial";
     font-style: normal;
     font-weight: 400;
-    font-size: 1.3rem;
-    line-height: 12px;
-    text-align: center;
+    font-size: 1rem;
+    line-height: 1rem;
     color: white;
+    margin-bottom: 2rem;
   }
 
   .etiya-akademi{
     color: white;
-    font-size: 2.4rem;
+    font-size: 2rem;
     font-weight: 600;
     font-family: "Exo";
     letter-spacing: 1.70rem;

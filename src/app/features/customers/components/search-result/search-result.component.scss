@@ -1,6 +1,6 @@
 .fieldset{
   border: 1px solid #FBCDA6;
-  display: flex;
+
   border-radius: 2rem;
   background-color: white;
 
@@ -13,15 +13,11 @@
     padding-right: 1rem;
   }
 
-.search-result{
+table{
+  width: 63vw;
   border-radius: 2rem;
-  padding: 1rem;
-
-  }
-
-  h1{
-    margin-top: 0;
-  }
+  margin: 1rem 0 1rem 1rem;
+}
 
   th{
     color: white;
@@ -33,3 +29,5 @@
     text-align: center;
   }
 }
+
+
