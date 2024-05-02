@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { WarningPopupComponent } from '../../../../../shared/components/warning-popup/warning-popup.component';
 import { FormsModule } from '@angular/forms';
-import { SearchService } from '../../services/searchService';
+import { SearchService } from '../../services/search.service';
+
 
 @Component({
   selector: 'app-search-filter',

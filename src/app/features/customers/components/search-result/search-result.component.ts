@@ -1,9 +1,11 @@
-import { SearchService } from './../../services/searchService';
+import { SearchService } from './../../services/search.service';
+
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CustomerListItemDto } from '../../models/customer-list-item-dto';
 import { CustomerApiService } from '../../services/customerApi.service';
 import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @Component({
   selector: 'app-search-result',
@@ -20,7 +22,7 @@ export class SearchResultComponent implements OnInit{
   p: number = 1;
   constructor(
     private customersApiService: CustomerApiService,
-    private searchSerivce: SearchService,
+    private searchService: SearchService,
     private change: ChangeDetectorRef
   ) {}
   ngOnInit(): void {
