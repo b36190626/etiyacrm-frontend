@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { WarningPopupComponent } from '../../../../../shared/components/warning-popup/warning-popup.component';
-import { FormsModule } from '@angular/forms';
-import { SearchService } from '../../services/searchService';
+import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-search-filter',
@@ -14,26 +14,24 @@ import { SearchService } from '../../services/searchService';
   styleUrl: './search-filter.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchFilterComponent implements OnInit {
-  id!: number
-  customerId!:number
-  accoundNumber!:string
-  gsmNumber!:string
-  firstname!:string
-  lastname!:string
-  orderNumber!:string
-
+export class SearchFilterComponent {
+  isAnyInputFilled: boolean = false;
+  form: FormGroup = this.fb.group({
+    id:[],
+    customerId:[],
+    accoundNumber:[],
+    gsmNumber:[],
+    firstname:[],
+    lastname:[],
+    orderNumber:[],
+  })
   constructor(
-    private searchService: SearchService
+    private fb: FormBuilder,
   ){}
 
-
-  onSubmit(){
-
+  onInputChange(){
+    this.isAnyInputFilled = Object.values(this.form.value).some(val => val !== null);
   }
 
-  ngOnInit(): void {
-
-  }
 
 }
