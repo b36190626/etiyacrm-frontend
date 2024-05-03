@@ -1,3 +1,23 @@
-:host {
-  display: block;
+.top-bar{
+  display: flex;
+
+}
+.nav-item{
+  border: 1px solid white;
+  background-color: #24233F;
+  color: white;
+}
+
+.nav-link{
+  color: white;
+  cursor: pointer;
+}
+
+.trash-button{
+  border: none;
+  margin-left: 2rem;
+
+  i{
+    cursor: pointer;
+  }
 }
