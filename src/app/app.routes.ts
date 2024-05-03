@@ -7,6 +7,7 @@ import { AddressInfoComponent } from './features/customers/components/address-in
 import { CreateCustomerLayoutComponent } from '../shared/layouts/create-customer-layout/create-customer-layout.component';
 import { DemographicFormComponent } from './features/customers/components/demographic-form/demographic-form.component';
 import { CustomerDetailsPageComponent } from './routers/customers/customer-details-page/customer-details-page.component';
+import { CustomerInfoComponent } from './features/customer-details/components/customer-info/customer-info.component';
 
 export const routes: Routes = [
   {
@@ -26,7 +27,8 @@ export const routes: Routes = [
         component:CustomerDetailsPageComponent,
         children:[
           {
-
+            path:"customer-info",
+            component: CustomerInfoComponent,
           },
         ]
       },
