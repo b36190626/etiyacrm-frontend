@@ -10,6 +10,7 @@ import { CustomerDetailsPageComponent } from './routers/customers/customer-detai
 import { CustomerInfoComponent } from './features/customer-details/components/customer-info/customer-info.component';
 
 import { CustomerInfoAddressFormComponent } from './features/customer-details/components/customer-info-address-form/customer-info-address-form.component';
+import { CustomerInfoUpdateFormComponent } from './features/customer-details/components/customer-info-update-form/customer-info-update-form.component';
 
 
 export const routes: Routes = [
@@ -42,6 +43,10 @@ export const routes: Routes = [
             path: "customer-address",
             component: CustomerInfoAddressFormComponent,
           },
+          {
+            path:"customer-info-update",
+            component: CustomerInfoUpdateFormComponent,
+          }
         ]
       },
     ]
