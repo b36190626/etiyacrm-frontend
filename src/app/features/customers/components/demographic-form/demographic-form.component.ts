@@ -37,7 +37,7 @@ export class DemographicFormComponent implements OnInit {
     // Formun durumunu dinamik olarak izleme
     this.customerForm.statusChanges.subscribe(status => {
     this.isFormValid = status === 'VALID';
-    console.log(this.isFormValid);
+    console.log("status");
 });
   }
 
