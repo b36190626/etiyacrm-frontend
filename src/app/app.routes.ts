@@ -19,27 +19,7 @@ export const routes: Routes = [
         path:"search",
         component:SearchCustomerPageComponent,
       },
-      {
-        path: "create-customer",
-        component: CreateCustomerPageComponent,
-        // children:[
-        // {
-        //   path: "address-info",
-        //   component: AddressInfoComponent,
-        // },
-        // {
-        //   path: "contact-medium",
-        //   component: ContactMediumComponent,
-        // },
-        // ]
-    },
-    {
-        path: "contact-medium",
-        component: ContactMediumComponent,
-      },
-      {
-        path: "address-info",
-        component: AddressInfoComponent
+        //accepted
       }
 
 
