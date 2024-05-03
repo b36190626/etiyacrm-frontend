@@ -39,13 +39,8 @@ export const routes: Routes = [
             component: CustomerInfoComponent,
           },
           {
-
             path: "customer-address",
             component: CustomerInfoAddressFormComponent,
-
-            path:"customer-info-update",
-            component: CustomerInfoUpdateFormComponent,
-
           },
         ]
       },
