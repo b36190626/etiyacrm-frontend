@@ -27,7 +27,8 @@ export const routes: Routes = [
         component:CustomerDetailsPageComponent,
         children:[
           {
-            path:"customer-info",
+            path:"",
+            pathMatch: 'full',
             component: CustomerInfoComponent,
           },
         ]
