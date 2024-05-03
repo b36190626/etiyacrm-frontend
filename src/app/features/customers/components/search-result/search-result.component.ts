@@ -1,17 +1,17 @@
-import { SearchService } from './../../services/search.service';
 
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CustomerListItemDto } from '../../models/customer-list-item-dto';
 import { CustomerApiService } from '../../services/customerApi.service';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { Router, RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-search-result',
   standalone: true,
   imports: [
-    CommonModule, NgxPaginationModule
+    CommonModule, NgxPaginationModule, RouterModule
   ],
   templateUrl: './search-result.component.html',
   styleUrl: './search-result.component.scss',
@@ -19,15 +19,16 @@ import { NgxPaginationModule } from 'ngx-pagination';
 })
 export class SearchResultComponent implements OnInit{
   list: Array<CustomerListItemDto> = [];
+  @Output() selectedCustomer = new EventEmitter<number>();
+
   p: number = 1;
   constructor(
     private customersApiService: CustomerApiService,
-    private searchService: SearchService,
-    private change: ChangeDetectorRef
+    private change: ChangeDetectorRef,
+    private route: Router,
   ) {}
   ngOnInit(): void {
     this.getList();
-
   }
 
   getList() {
@@ -35,6 +36,11 @@ export class SearchResultComponent implements OnInit{
       this.list = customers;
       this.change.markForCheck();
     });
+  }
+
+  getCustomerInfo(customerId: number){
+    this.selectedCustomer.emit(customerId);
+    this.route.navigate(["/home/customer/customer-info/", customerId ])
   }
 
 }

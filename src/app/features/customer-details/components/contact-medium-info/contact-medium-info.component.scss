@@ -1,5 +1,8 @@
-.container {
-  margin-top: 2rem;
+.info-page{
+  background-color: white;
+  border-radius: 2rem;
+  width: 90vw;
+  height: 74vh;
 }
 
 h4 {
@@ -10,11 +13,10 @@ h4 {
   color: #f48221;
   font-weight: 700;
   width: 85vw;
-
-i {
+}
+i{
   cursor: pointer;
 }
-
 label {
   display: flex;
   width: 12vw;
@@ -24,9 +26,8 @@ label {
   font-size: 1.5rem;
   margin-top: 2.5rem;
 }
-
 .row {
   display: flex;
   justify-content: left;
- }
 }
+

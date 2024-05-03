@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 
@@ -13,7 +13,7 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './customer-info-update-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CustomerInfoUpdateFormComponent {
+export class CustomerInfoUpdateFormComponent implements OnInit {
   customerUpdateForm!: FormGroup;
   isFormValid: boolean = false;
 

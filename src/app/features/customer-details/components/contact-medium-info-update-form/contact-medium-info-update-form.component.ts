@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
@@ -15,23 +15,29 @@ import { RouterModule } from '@angular/router';
   styleUrl: './contact-medium-info-update-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ContactMediumInfoUpdateFormComponent {
-  ContactMediumInfoUpdateForm: FormGroup ;
+export class ContactMediumInfoUpdateFormComponent implements OnInit {
+  contactMediumInfoUpdateForm!: FormGroup ;
   isFormValid: boolean = false;
 
   constructor(private fb: FormBuilder) {
-    this.ContactMediumInfoUpdateForm = this.fb.group({
+
+  }
+  ngOnInit(): void {
+    this.contactMediumInfoUpdateForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       homePhone: [''],
       mobilePhone: ['', Validators.required],
       fax: ['']
     });
+    this.contactMediumInfoUpdateForm.statusChanges.subscribe(status => {
+      this.isFormValid = status === 'VALID';
+    })
   }
 
   onSubmit() {
-    if (this.ContactMediumInfoUpdateForm.valid) {
+    if (this.contactMediumInfoUpdateForm.valid) {
       this.isFormValid = true;
-      console.log(this.ContactMediumInfoUpdateForm.value);
+      console.log(this.contactMediumInfoUpdateForm.value);
     } else {
       this.isFormValid = false;
       console.log("Form geçersiz.");
