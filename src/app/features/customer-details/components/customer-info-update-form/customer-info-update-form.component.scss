@@ -1,3 +1,10 @@
+.info-page{
+  background-color: white;
+  border-radius: 2rem;
+  width: 90vw;
+  height: 74vh;
+}
+
 h4 {
   border-bottom: 3px solid #f48221;
   text-indent: 3rem;
@@ -12,7 +19,7 @@ label {
   font-weight: 600;
   font-size: 1.2rem;
   width: 8rem;
-  margin-right: 3rem; // Ensure labels have some spacing
+  margin-right: 3rem;
 }
 .form-actions {
   display: flex;
@@ -29,7 +36,7 @@ label {
   flex-wrap: wrap;
 }
 .row:first-of-type {
-  margin-top: 4rem;  /* İstenen boşluğu ayarlayın, örneğin 2rem */
+  margin-top: 4rem;
 }
 .row input[type="text"],
 .row input[type="date"],
@@ -37,7 +44,7 @@ label {
   flex: 0 1 45%;
   height: 2.3rem;
   padding: 8px;
-  border: 1px solid f48221;
+  border: 1px solid #f48221;
   border-radius: 0.8rem;
 }
 .form-control {
