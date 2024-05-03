@@ -4,6 +4,7 @@ import { MainLayoutComponent } from '../shared/layouts/main-layout/main-layout.c
 import { SearchCustomerPageComponent } from './routers/customers/search-customer-page/search-customer-page.component';
 import { CreateCustomerPageComponent } from './routers/customers/create-customer-page/create-customer-page.component';
 import { ContactMediumComponent } from './features/customers/components/contact-medium/contact-medium.component';
+import { AddressInfoComponent } from './features/customers/components/address-info/address-info.component';
 
 export const routes: Routes = [
   {
@@ -36,6 +37,10 @@ export const routes: Routes = [
         path: "contact-medium",
         component: ContactMediumComponent,
       },
+      {
+        path: "address-info",
+        component: AddressInfoComponent
+      }
 
 
     ]
