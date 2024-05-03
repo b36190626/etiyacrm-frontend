@@ -1,3 +1,55 @@
-:host {
-  display: block;
+.address-info {
+  width: 100%;
+  padding: 20px;
+  background-color: #FFF;
+
+  h4 {
+    border-bottom: 3px solid #f48221;
+    text-indent: 3rem;
+    padding-bottom: 10px;
+    font-size: 2rem;
+    color: #f48221;
+    font-weight: 700;
+    width: 85vw;
+  }
+  i{
+    cursor: pointer;
+  }
+  label {
+    display: flex;
+    width: 12vw;
+    color: black;
+    font-weight: 500;
+    margin-left: 3rem;
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .row {
+    display: flex;
+    justify-content: left;
+  }
+
+  .add-new-address{
+    border: 1px solid #F58634 ;
+    width: 25vw;
+    height: 30vh;
+    margin-top: 2rem;
+    text-align: center;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+
+  }
+
+  .address-button{
+    border: 1px solid #F58634 ;
+    margin:auto;
+  }
+
+  .previous, .next{
+    border-radius: 2rem;
+    background-color: #FBCDA6;
+    font-weight: bold;
+    width: 8vw;
+  }
 }
