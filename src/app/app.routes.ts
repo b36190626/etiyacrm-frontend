@@ -19,11 +19,29 @@ export const routes: Routes = [
         path:"search",
         component:SearchCustomerPageComponent,
       },
-        //accepted
+      {
+        path: "create-customer",
+        component: CreateCustomerPageComponent,
+        // children:[
+        // {
+        //   path: "adresinfo",
+        //   component: ,
+        // },
+        // {
+        //   path: "kontakmediu",
+        //   component: ,
+        // },
+        // ]
+    },
+    {
+        path: "contact-medium",
+        component: ContactMediumComponent,
+      },
+      {
+        path: "address-info",
+        component: AddressInfoComponent
       }
-
-
     ]
-
   }
+
 ];
