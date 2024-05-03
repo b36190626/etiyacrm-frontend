@@ -29,7 +29,11 @@ export const routes: Routes = [
         children:[
           {
             path:"",
-            pathMatch: 'full',
+            pathMatch: 'prefix',
+            component: CustomerInfoComponent,
+          },
+          {
+            path: 'customer-info',
             component: CustomerInfoComponent,
           },
           {
