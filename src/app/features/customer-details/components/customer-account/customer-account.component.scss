@@ -1,0 +1,42 @@
+h3{
+  color: #F58220;
+}
+
+.create-customer{
+  background-color: #FBCDA6;
+  border: none;
+  border-radius: 2rem;
+  height: 2.3rem;
+  margin-bottom: 2%;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+th{
+  color: white;
+  background-color: #F58220;
+  text-align: center;
+}
+
+td{
+  background-color: #FBCDA6;
+  text-align: center;
+}
+
+.product-table{
+  button{
+    border: none;
+    border-radius: 2rem;
+    height: 2.3rem;
+    background-color: #FBCDA6;
+    color: black;
+    cursor: pointer;
+    padding-left: 2%;
+    padding-right: 2%;
+  }
+
+  td{
+    background-color: #f8ddc6;
+    text-align: center;
+  }
+}

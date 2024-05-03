@@ -21,8 +21,8 @@
         <td>{{ item.lastName | uppercase }}</td>
         <td>{{ item.role }}</td>
         <td>{{ item.nationalityId }}</td>
-        <td>{{ item.accountNumber }}</td>
-        <td>{{ item.gsmNumber }}</td>
+        <td>{{ item.billingAccounts.accountNumber }}</td>
+        <td>{{ item.contactMedium.mobilePhone }}</td>
       </tr>
     </tbody>
   </table>
