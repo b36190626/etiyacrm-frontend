@@ -1,23 +1,23 @@
 <fieldset class="fieldset">
   <legend>Search Filter</legend>
-  <form class="search-form" (ngSubmit)="onSubmit">
-    <input class="form-control" type="number" placeholder="ID Number" [(ngModel)]="id" name="id" />
-    <input class="form-control" type="number" placeholder="Customer ID" [(ngModel)]="customerId" name="customerId"/>
-    <input class="form-control" type="text" placeholder="Account Number" [(ngModel)]="accoundNumber" name="accoundNumber"/>
-    <input class="form-control" type="text" placeholder="GSM Number" [(ngModel)]="gsmNumber" name="gsmNumber"/>
-    <input class="form-control" type="text" placeholder="First Name" [(ngModel)]="firstname" name="firstname"/>
-    <input class="form-control" type="text" placeholder="Last Name" [(ngModel)]="lastname" name="lastname"/>
-    <input class="form-control" type="text" placeholder="Order Number" [(ngModel)]="orderNumber" name="orderNumber"/>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="search-form">
+    <input class="form-control" formControlName="id"  type="number" placeholder="ID Number"  name="id" />
+    <input class="form-control" formControlName="customerId" type="number" placeholder="Customer ID"  name="customerId"/>
+    <input class="form-control" formControlName="accountNumber" type="text" placeholder="Account Number"  name="accountNumber"/>
+    <input class="form-control" formControlName="gsmNumber" type="text" placeholder="GSM Number"  name="gsmNumber"/>
+    <input class="form-control" formControlName="firstname" type="text" placeholder="First Name"  name="firstname"/>
+    <input class="form-control" formControlName="lastname" type="text" placeholder="Last Name"  name="lastname"/>
+    <input class="form-control" formControlName="orderNumber" type="text" placeholder="Order Number" name="orderNumber"/>
 
     <div class="button-group">
       <div>
-        <button class="clear-button" type="reset">
+        <button class="clear-button" [ngClass]="{ 'clear-button': isFormValid,'clear-button-disabled': !isFormValid }" type="reset">
           <i class="fa-solid fa-eraser" style="color: white;"></i>
           Clear
         </button>
       </div>
       <div class="search-group">
-        <button class="search-button" type="submit" (click)="onSubmit()">
+        <button class="search-button" [ngClass]="{ 'search-button': isFormValid,'search-button-disabled': !isFormValid }" type="click" (click)="onSubmit()">
           <i class="fa-solid fa-magnifying-glass" style="color: white"></i>
           Search
         </button>

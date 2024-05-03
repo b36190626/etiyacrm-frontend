@@ -1,0 +1,36 @@
+.address-info {
+  width: 100%;
+  padding: 20px;
+  background-color: #FFF;
+
+  p{
+
+    border-bottom: 3px solid #F58634;
+    padding-bottom: 1rem;
+
+  }
+
+  .add-new-address{
+    border: 1px solid #F58634 ;
+    width: 25vw;
+    height: 30vh;
+    margin-top: 2rem;
+    text-align: center;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+
+  }
+
+  .address-button{
+    border: 1px solid #F58634 ;
+    margin:auto;
+  }
+
+  .previous, .next{
+    border: 1px solid black;
+    background-color: #FBCDA6;
+    font-weight: bold;
+    width: 8vw;
+  }
+}

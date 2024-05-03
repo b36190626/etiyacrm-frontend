@@ -5,19 +5,22 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { WarningPopupComponent } from '../../../../../shared/components/warning-popup/warning-popup.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-message.pipe';
 @Component({
   selector: 'etiya-login-form',
   standalone: true,
   imports: [
-    CommonModule, RouterModule, TranslateModule, WarningPopupComponent, SelectButtonModule
+    CommonModule, RouterModule, TranslateModule, WarningPopupComponent, SelectButtonModule, ControlErrorMessagePipe
   ],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginFormComponent {
-
+  showPassword: boolean = false;
+  showPopup: boolean = false;
   form: FormGroup = this.fb.group({
+    username: [],
     password: [
       '',
       [
@@ -26,19 +29,16 @@ export class LoginFormComponent {
     ]
   })
 
-  showPassword: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
   ){}
 
 
-
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
-
-  showPopup: boolean = false;
 
   togglePopup(event: Event) {
     event?.preventDefault();

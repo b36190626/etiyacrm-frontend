@@ -1,0 +1,12 @@
+<div class="address-info">
+  <p>Address Info</p>
+
+  <div class="add-new-address">
+      <button class="btn address-button" (click)="togglePopup($event)">Add New Address</button>
+  </div>
+  <div class="d-flex justify-content-between my-5" >
+      <button class="previous">Previous</button>
+      <button class="next">Next</button>
+  </div>
+<app-add-address-popup *ngIf="showPopup"></app-add-address-popup>
+</div>
