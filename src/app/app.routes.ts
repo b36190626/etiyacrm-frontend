@@ -37,7 +37,7 @@ export const routes: Routes = [
             component: CustomerInfoComponent,
           },
           {
-            path: "customer-info",
+            path: "customer-info/:id",
             component: CustomerInfoComponent,
           },
           {
