@@ -12,6 +12,7 @@ import { ContactMediumInfoComponent } from './features/customer-details/componen
 import { ContactMediumInfoUpdateFormComponent } from './features/customer-details/components/contact-medium-info-update-form/contact-medium-info-update-form.component';
 import { CustomerInfoAddressFormComponent } from './features/customer-details/components/customer-info-address-form/customer-info-address-form.component';
 import { CustomerInfoUpdateFormComponent } from './features/customer-details/components/customer-info-update-form/customer-info-update-form.component';
+import { CustomerAccountComponent } from './features/customer-details/components/customer-account/customer-account.component';
 
 export const routes: Routes = [
   {
@@ -43,7 +44,10 @@ export const routes: Routes = [
             path: "customer-info-update",
             component: CustomerInfoUpdateFormComponent,
           },
-
+          {
+            path:"customer-account",
+            component: CustomerAccountComponent
+          },
           {
             path: "customer-address",
             component: CustomerInfoAddressFormComponent,
