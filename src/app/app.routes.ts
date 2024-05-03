@@ -6,6 +6,7 @@ import { ContactMediumComponent } from './features/customers/components/contact-
 import { AddressInfoComponent } from './features/customers/components/address-info/address-info.component';
 import { CreateCustomerLayoutComponent } from '../shared/layouts/create-customer-layout/create-customer-layout.component';
 import { DemographicFormComponent } from './features/customers/components/demographic-form/demographic-form.component';
+import { CustomerDetailsPageComponent } from './routers/customers/customer-details-page/customer-details-page.component';
 
 export const routes: Routes = [
   {
@@ -19,6 +20,15 @@ export const routes: Routes = [
       {
         path:"search",
         component:SearchCustomerPageComponent,
+      },
+      {
+        path:"customer",
+        component:CustomerDetailsPageComponent,
+        children:[
+          {
+
+          },
+        ]
       },
     ]
   },

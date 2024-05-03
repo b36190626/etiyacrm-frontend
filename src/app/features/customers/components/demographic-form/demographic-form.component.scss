@@ -16,7 +16,7 @@ label {
 .form-actions {
   display: flex;
   justify-content: space-between;
-  padding-top: 10px;
+  padding-top: 3rem;
 }
 
 .row {
@@ -54,26 +54,26 @@ label {
 .button-cancel {
   background-color: #FBCDA6;
   color: black;
-  margin-left: 2rem;
+
   cursor: pointer;
   width: 9rem;
 }
 
 .invalid-next-button{
-  margin-right: 7rem;
+  margin-right: 12rem;
 }
 
-  .valid-next-button {
+.valid-next-button {
       background-color: #FBCDA6;
       padding: 10px;
       width: 9rem;
       border: none;
       color: black;
-      margin-right: 7rem;
+      margin-right: 12rem;
       border-radius: 2rem;
       font-weight: 500;
       cursor: pointer;
-  }
+}
 
 .valid-next-button:hover{
       background-color: #f48221;
