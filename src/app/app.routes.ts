@@ -8,7 +8,9 @@ import { CreateCustomerLayoutComponent } from '../shared/layouts/create-customer
 import { DemographicFormComponent } from './features/customers/components/demographic-form/demographic-form.component';
 import { CustomerDetailsPageComponent } from './routers/customers/customer-details-page/customer-details-page.component';
 import { CustomerInfoComponent } from './features/customer-details/components/customer-info/customer-info.component';
-import { CustomerInfoUpdateFormComponent } from './features/customer-details/components/customer-info-update-form/customer-info-update-form.component';
+
+import { CustomerInfoAddressFormComponent } from './features/customer-details/components/customer-info-address-form/customer-info-address-form.component';
+
 
 export const routes: Routes = [
   {
@@ -33,8 +35,13 @@ export const routes: Routes = [
             component: CustomerInfoComponent,
           },
           {
+
+            path: "customer-address",
+            component: CustomerInfoAddressFormComponent,
+
             path:"customer-info-update",
             component: CustomerInfoUpdateFormComponent,
+
           },
         ]
       },

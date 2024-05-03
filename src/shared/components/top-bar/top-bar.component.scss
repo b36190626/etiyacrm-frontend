@@ -21,3 +21,7 @@
     cursor: pointer;
   }
 }
+.active {
+  color: red;  /* Aktif link kırmızı renkte olacak */
+  font-weight: bold;  /* Yazı tipi kalınlaştırılmış */
+}
