@@ -1,0 +1,86 @@
+h4 {
+  border-bottom: 3px solid #f48221;
+  text-indent: 3rem;
+  padding-bottom: 10px;
+  font-size: 2rem;
+  color: #f48221;
+  font-weight: 700;
+  width: 85vw;
+}
+label {
+  color: black;
+  font-weight: 700;
+  width: 8rem;
+  margin-right: 3rem; // Ensure labels have some spacing
+}
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 3rem;
+  gap: 2rem;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+.row:first-of-type {
+  margin-top: 4rem;  /* İstenen boşluğu ayarlayın, örneğin 2rem */
+}
+.row input[type="text"],
+.row input[type="date"],
+.row select {
+  flex: 0 1 45%;
+  height: 2.3rem;
+  padding: 8px;
+  border: 1px solid f48221;
+  border-radius: 0.8rem;
+}
+.form-control {
+  border: 1px solid #FBCDA6;
+  border-radius: 0.5rem;
+  height: 2.3rem;
+}
+.invalid-next-button, .button-cancel{
+  padding: 10px;
+  width: 9rem;
+  border: none;
+  border-radius: 2rem;
+  font-weight: 500;
+  color: black;
+}
+.button-cancel {
+  background-color: #FBCDA6;
+  color: black;
+  cursor: pointer;
+  width: 9rem;
+}
+
+.invalid-next-button{
+  margin-right: 12rem;
+}
+
+.valid-next-button {
+      background-color: #FBCDA6;
+      padding: 10px;
+      width: 9rem;
+      border: none;
+      color: black;
+      margin-right: 12rem;
+      border-radius: 2rem;
+      font-weight: 500;
+      cursor: pointer;
+}
+
+.valid-next-button:hover{
+      background-color: #f48221;
+      color:white;
+  }
+
+.button-cancel:hover {
+  background-color: #f48221;
+  color: white;
+}

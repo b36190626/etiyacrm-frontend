@@ -1,0 +1,41 @@
+h4 {
+  border-bottom: 3px solid #f48221;
+  text-indent: 3rem;
+  padding-bottom: 10px;
+  font-size: 2rem;
+  color: #f48221;
+  font-weight: 700;
+  width: 85vw;
+}
+i{
+  cursor: pointer;
+}
+label {
+  display: flex;
+  width: 12vw;
+  color: black;
+  font-weight: 500;
+  margin-left: 3rem;
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
+}
+.row {
+  display: flex;
+  justify-content: left;
+}
+.cancel-button {
+  background-color: #FBCDA6;
+  padding: 10px;
+  width: 9rem;
+  border: none;
+  color: black;
+  border-radius: 2rem;
+  font-weight: 500;
+  margin-top: 6rem;
+  margin-left: 72rem;
+  cursor: pointer;
+}
+.cancel-button:hover{
+  background-color: #f48221;
+  color:white;
+}

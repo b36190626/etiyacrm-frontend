@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-top-bar',
   standalone: true,
   imports: [
-    CommonModule,
+    CommonModule, RouterModule,
     RouterLink
   ],
   templateUrl: './top-bar.component.html',
