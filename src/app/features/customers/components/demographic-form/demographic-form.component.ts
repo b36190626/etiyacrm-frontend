@@ -44,7 +44,7 @@ export class DemographicFormComponent implements OnInit {
   onSubmit() {
     if (this.customerForm.valid) {
       console.log('Form Submitted!', this.customerForm.value);
-      this.router.navigate(['/home/create-customer/contact-medium'])
+      this.router.navigate(['create-customer/address-info'])
     }
   }
 

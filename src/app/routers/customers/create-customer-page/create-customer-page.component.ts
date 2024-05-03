@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DemographicFormComponent } from "../../../features/customers/components/demographic-form/demographic-form.component";
+import { RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-create-customer-page',
@@ -11,7 +12,7 @@ import { DemographicFormComponent } from "../../../features/customers/components
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         CommonModule, ReactiveFormsModule,
-        DemographicFormComponent,
+        DemographicFormComponent, RouterModule
     ]
 })
 export class CreateCustomerPageComponent { }
