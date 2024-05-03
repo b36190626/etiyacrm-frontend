@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class DemographicFormComponent implements OnInit {
   customerForm!: FormGroup;
-
+ //TODO HELLO
   isFormValid: boolean = false; //bootstrpsiz angular ile form validasyon takibi yaptım
 
   constructor(
@@ -37,7 +37,7 @@ export class DemographicFormComponent implements OnInit {
     // Formun durumunu dinamik olarak izleme
     this.customerForm.statusChanges.subscribe(status => {
     this.isFormValid = status === 'VALID';
-    console.log(status);
+    console.log("status");
 });
   }
 
