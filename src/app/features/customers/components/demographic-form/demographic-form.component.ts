@@ -15,7 +15,6 @@ import { Router } from '@angular/router';
 })
 export class DemographicFormComponent implements OnInit {
   customerForm!: FormGroup;
- //TODO HELLO
   isFormValid: boolean = false; //bootstrpsiz angular ile form validasyon takibi yaptım
 
   constructor(

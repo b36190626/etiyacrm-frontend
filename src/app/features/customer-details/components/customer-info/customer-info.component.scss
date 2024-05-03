@@ -23,3 +23,19 @@ label {
   display: flex;
   justify-content: left;
 }
+.cancel-button {
+  background-color: #FBCDA6;
+  padding: 10px;
+  width: 9rem;
+  border: none;
+  color: black;
+  border-radius: 2rem;
+  font-weight: 500;
+  margin-top: 6rem;
+  margin-left: 72rem;
+  cursor: pointer;
+}
+.cancel-button:hover{
+  background-color: #f48221;
+  color:white;
+}
