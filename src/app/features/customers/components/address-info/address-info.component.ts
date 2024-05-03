@@ -8,7 +8,8 @@ import { CustomerAdressModalComponent } from '../../../../../shared/components/c
   standalone: true,
   imports: [
     CommonModule,RouterModule,
-    CustomerAdressModalComponent, CustomerAdressModalComponent
+    CustomerAdressModalComponent,
+    CustomerAdressModalComponent
   ],
   templateUrl: './address-info.component.html',
   styleUrl: './address-info.component.scss',
