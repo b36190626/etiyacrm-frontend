@@ -5,8 +5,8 @@
         <div class="col"></div>
           <label for="catalog">Catalog Selection:</label>
             <select id="catalog" class="form-select" formControlName="catalog" required>
-              <option value="">Catalog Selection 1</option>
-              <option value="catalog1">Catalog 1</option>
+              <option value="">Select</option>
+              <option value="catalog1">Catalog Selection 1</option>
             </select>
       </div>
       <div class="row d-flex align-items-end mt-3">
@@ -25,6 +25,24 @@
     </form>
   </div>
 
-
-  <div></div>
+    <div class="table-responsive" style="max-height: 35vh; overflow-y: auto;">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Prod Offer ID</th>
+            <th>Prod Offer Name</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+              {{ product.prodOfferId }}
+            </td>
+            <td>{{ product.prodOfferName }}</td>
+            <td>{{ product.price }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 </div>
