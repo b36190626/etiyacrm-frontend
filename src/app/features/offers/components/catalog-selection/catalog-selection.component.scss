@@ -25,5 +25,34 @@ label{
   font-weight: 500;
   width: 5vw;
   height: 5vh;
+}
 
+.search-button:hover{
+  background-color: #F58220;
+  color: white;
+}
+
+table{
+  border-radius: 2rem;
+  margin: 1rem 0 1rem 1rem;
+  width: 35vw;
+  border: 1px solid black;
+}
+
+
+th{
+  color: white;
+  background-color: #F58220;
+  text-align: center;
+}
+td{
+  background-color: #f8ddc6;
+  text-align: center;
+  width: 2vw;
+}
+
+.form-check-input{
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
 }

@@ -5,8 +5,9 @@
         <div class="col"></div>
           <label for="campaign">Campaign Selection:</label>
             <select id="campaign" class="form-select" formControlName="campaign" required>
-              <option value="">Campaign Selection 1</option>
-              <option value="campaign1">Campaign Selection 2</option>
+              <option value="">Select</option>
+              <option value="campaign1">Campaign Selection 1</option>
+              <option value="campaign2">Campaign Selection 2</option>
             </select>
       </div>
       <div class="row d-flex align-items-end mt-3">
@@ -26,5 +27,26 @@
   </div>
 
 
-  <div></div>
+  <div class="table-responsive" style="max-height: 35vh; overflow-y: auto;">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Campaign ID</th>
+          <th>Campaign Name</th>
+          <th>Prod Offer ID</th>
+          <th>Prod Offer Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products" >
+          <td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            {{ product.campaignId }}
+          </td>
+          <td>{{ product.campaignName }}</td>
+          <td>{{ product.prodOfferId }}</td>
+          <td>{{ product.prodOfferName }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
