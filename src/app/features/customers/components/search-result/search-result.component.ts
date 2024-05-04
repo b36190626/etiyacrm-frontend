@@ -22,7 +22,7 @@ import { CustomerNotFoundComponent } from '../customer-not-found/customer-not-fo
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchResultComponent implements OnInit{
-  customerFound: boolean = false;
+  customerFound: boolean = true;
   customer: any;
   list: Array<CustomerListItemDto> = [];
   @Output() selectedCustomer = new EventEmitter<number>();

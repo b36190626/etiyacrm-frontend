@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { NavigationEnd, Router, RouterModule } from "@angular/router";
 
 
@@ -15,20 +15,23 @@ import { NavigationEnd, Router, RouterModule } from "@angular/router";
 })
 export class NavbarComponent implements OnInit {
 currentRoute!: string
+isActive: boolean = true;
 
   constructor(
     private router: Router,
+    private change: ChangeDetectorRef,
   ){}
   ngOnInit(): void {
     this.router.events.subscribe(event => {
       if(event instanceof NavigationEnd){
         this.currentRoute = event.urlAfterRedirects;
+        this.change.markForCheck();
       }
     });
   }
 
   isB2CActive(): boolean{
-    return this.currentRoute.includes("/home/search");
+    return this.currentRoute.includes("/home/search")
   }
 
 
