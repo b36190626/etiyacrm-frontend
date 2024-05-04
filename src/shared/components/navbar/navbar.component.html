@@ -1,5 +1,5 @@
 <nav>
-  <div class="b2c" (click)="b2cClick()" [ngClass]="{'b2c' : toggle, 'b2c-active': !toggle}">
+  <div class="b2c" (click)="b2cClick()" [ngClass]="{'b2c-active': isB2CActive(), 'b2c': !isB2CActive()}">
     <i class="fa-solid fa-people-group fa-2xl"></i>
     <p>B2C</p>
   </div>
