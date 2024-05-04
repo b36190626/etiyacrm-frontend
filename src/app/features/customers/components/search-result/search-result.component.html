@@ -1,11 +1,11 @@
 <fieldset class="fieldset">
-      <legend>Search Result</legend>
-    <table class="table">
+  <legend>Search Result</legend>
+  <table class="table table-striped">
     <thead>
       <tr>
         <th scope="col">Customer Id</th>
         <th scope="col">First Name</th>
-        <th scope="col">Second Name</th>
+        <th scope="col">Middle Name</th>
         <th scope="col">Last Name</th>
         <th scope="col">Role</th>
         <th scope="col">ID Number</th>
@@ -21,7 +21,9 @@
         <td>{{ item.lastName | uppercase }}</td>
         <td>{{ item.role }}</td>
         <td>{{ item.nationalityId }}</td>
-        <td>{{ item.billingAccounts.accountNumber }}</td>
+        <!-- Dikkat: billingAccounts bir array olduğu için [0] kullanıldı -->
+        <td>{{ item.billingAccounts[0]?.accountNumber ? item.billingAccounts[0]?.accountNumber
+          : '-' }}</td>
         <td>{{ item.contactMedium.mobilePhone }}</td>
       </tr>
     </tbody>

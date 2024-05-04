@@ -5,7 +5,8 @@ h3{
 .create-customer{
   background-color: #FBCDA6;
   border: none;
-  border-radius: 2rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
   height: 2.3rem;
   margin-bottom: 2%;
   padding-left: 2%;
@@ -21,22 +22,43 @@ th{
 td{
   background-color: #FBCDA6;
   text-align: center;
+  font-weight: bold;
 }
-
-.product-table{
+tr.action-row td.accordion-action {
+  border: none;
+  background-color: #FFFFFF;
+  text-align: center;
   button{
-    border: none;
-    border-radius: 2rem;
-    height: 2.3rem;
+    border: 1px solid black;
+    border-radius: 0.3rem;
+    margin: 1rem;
+    height: 3rem;
+    width: 13rem;
+    font-weight: bold;
     background-color: #FBCDA6;
     color: black;
     cursor: pointer;
-    padding-left: 2%;
-    padding-right: 2%;
+
   }
+}
+.accordion-body{
+  background-color: white;
+  padding: 3rem 0;
+
+}
+.product-table{
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
 
   td{
+    font-weight: lighter;
+    border: 1px solid black;
     background-color: #f8ddc6;
     text-align: center;
-  }
+
+
+
+}
+
 }
