@@ -1,39 +1,41 @@
 <fieldset class="fieldset">
-  <legend>Search Result</legend>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Customer Id</th>
-        <th scope="col">First Name</th>
-        <th scope="col">Middle Name</th>
-        <th scope="col">Last Name</th>
-        <th scope="col">Role</th>
-        <th scope="col">ID Number</th>
-        <th scope="col">Account Number</th>
-        <th scope="col">GSM Number</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of list | paginate: { itemsPerPage: 10, currentPage: p }">
-        <td>{{ item.id }}</td>
-        <td>{{ item.firstName }}</td>
-        <td>{{ item.middleName }}</td>
-        <td>{{ item.lastName | uppercase }}</td>
-        <td>{{ item.role }}</td>
-        <td>{{ item.nationalityId }}</td>
-        <!-- Dikkat: billingAccounts bir array olduğu için [0] kullanıldı -->
-        <td>{{ item.billingAccounts[0]?.accountNumber ? item.billingAccounts[0]?.accountNumber
+    <legend>Search Result</legend>
+    <div *ngIf="customerFound">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Customer Id</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Second Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Role</th>
+            <th scope="col">ID Number</th>
+            <th scope="col">Account Number</th>
+            <th scope="col">GSM Number</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list | paginate: { itemsPerPage: 10, currentPage: p }">
+            <td class="cursor" (click)="getCustomerInfo(item.id)">{{ item.id }}</td>
+            <td>{{ item.firstName }}</td>
+            <td>{{ item.middleName }}</td>
+            <td>{{ item.lastName | uppercase }}</td>
+            <td>{{ item.role }}</td>
+            <td>{{ item.nationalityId }}</td>
+            <!-- Dikkat: billingAccounts bir array olduğu için [0] kullanıldı -->
+            <td>{{ item.billingAccounts[0]?.accountNumber ? item.billingAccounts[0]?.accountNumber
           : '-' }}</td>
-        <td>{{ item.contactMedium.mobilePhone }}</td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="d-flex justify-content-center align-items-center my-3">
-    <pagination-controls  (pageChange)="p = $event"></pagination-controls>
-  </div>
-
-
-
+            <td>{{ item.contactMedium.mobilePhone }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-center align-items-center my-3">
+        <pagination-controls  (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+    <div *ngIf="!customerFound">
+      <app-customer-not-found></app-customer-not-found>
+    </div>
 </fieldset>
 
 

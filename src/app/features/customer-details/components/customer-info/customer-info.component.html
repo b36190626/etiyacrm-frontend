@@ -1,39 +1,41 @@
-<div class="container-fluid mt-5 m-3">
+<div class="info-page container-fluid mt-5 m-3" style="background-color: white;">
   <h4>Customer Info <i class="fa-solid fa-pen-clip" style="color: #24233F;" routerLink ="/home/customer/customer-info-update"></i> </h4>
       <div class="row">
           <div class="col-md-6 mb-3 d-flex">
               <label>First Name:</label>
-              <label> {{name}} </label>
+              <label>{{customerInfo.firstName}}</label>
           </div>
           <div class="col-md-6 mb-3 d-flex">
               <label>Middle Name:</label>
-              <label> {{name}} </label>
+              <label>{{customerInfo.middleName}}</label>
           </div>
           <div class="col-md-6 mb-3 d-flex">
             <label>Last Name:</label>
-            <label> {{name}} </label>
+            <label>{{customerInfo.lastName}}</label>
           </div>
           <div class="col-md-6 mb-3 d-flex">
             <label>Birth Date:</label>
-            <label> {{name}} </label>
+            <label>{{customerInfo.birthDate}}</label>
         </div>
         <div class="col-md-6 mb-3 d-flex">
           <label>Gender:</label>
-          <label> {{name}} </label>
+          <label>{{customerInfo.gender}}</label>
       </div>
       <div class="col-md-6 mb-3 d-flex">
         <label>Father Name:</label>
-        <label> {{name}} </label>
+        <label>{{customerInfo.fatherName}}</label>
       </div>
       <div class="col-md-6 mb-3 d-flex">
         <label>Mother Name:</label>
-        <label> {{name}} </label>
+        <label>{{customerInfo.motherName}}</label>
       </div>
       <div class="col-md-6 mb-3 d-flex">
         <label>Nationality ID:</label>
-        <label> {{name}} </label>
+        <label>{{customerInfo.nationalityId}}</label>
       </div>
     </div>
-    <button type="button" class="cancel-button" routerLink="/home/search">Cancel</button>
+    <div class="button-action">
+      <button type="button" class="cancel-button" routerLink="/home/search">Cancel</button>
+    </div>
 </div>
 
