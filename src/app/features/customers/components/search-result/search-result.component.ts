@@ -5,19 +5,25 @@ import { CustomerListItemDto } from '../../models/customer-list-item-dto';
 import { CustomerApiService } from '../../services/customerApi.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Router, RouterModule } from '@angular/router';
+import { CustomerNotFoundComponent } from '../customer-not-found/customer-not-found.component';
 
 
 @Component({
   selector: 'app-search-result',
   standalone: true,
   imports: [
-    CommonModule, NgxPaginationModule, RouterModule
+    CommonModule,
+    NgxPaginationModule,
+    RouterModule,
+    CustomerNotFoundComponent
   ],
   templateUrl: './search-result.component.html',
   styleUrl: './search-result.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchResultComponent implements OnInit{
+  customerFound: boolean = false;
+  customer: any;
   list: Array<CustomerListItemDto> = [];
   @Output() selectedCustomer = new EventEmitter<number>();
 
@@ -42,5 +48,15 @@ export class SearchResultComponent implements OnInit{
     this.selectedCustomer.emit(customerId);
     this.route.navigate(["/home/customer/customer-info/", customerId ])
   }
+
+    // Customer araması sonucuna göre customerFound değişkenini güncelleyen bir metot
+    searchCustomer() {
+      // Customer araması yapılır, customer bulunursa:
+      this.customerFound = true;
+      this.customer = { /* Customer bilgileri burada */ };
+
+      // Customer bulunamazsa:
+      // this.customerFound = false;
+    }
 
 }

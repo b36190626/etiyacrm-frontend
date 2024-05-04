@@ -25,15 +25,33 @@ constructor(
   private customerApiService: CustomerApiService,
   private change: ChangeDetectorRef,
   private activatedRoute: ActivatedRoute
-){
+){}
 
-}
+// ngOnInit(): void {
+//   this.getCustomerInfo();
+//   console.log("çalıştı")
+// }
+// getCustomerInfo(){
+//   this.activatedRoute.params.subscribe((params =>{
+//     this.customerId = params['customerId'];
+//   })).unsubscribe();
+//       this.customerApiService.getById(this.customerId).subscribe({
+//       next: (customerDetails) => {
+//         this.customerInfo = customerDetails;
+//       },
+//       complete: () => {
+//         this.change.markForCheck();
+//       }
+//     })
+// }
+
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.customerId = params['id'];
       console.log(this.customerId,"customerId")
-      this.getCustomerInfo();
-    })
+
+    }).unsubscribe();
+    this.getCustomerInfo();
   }
   getCustomerInfo(){
     this.customerApiService.getById(this.customerId).subscribe({
