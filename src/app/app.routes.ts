@@ -82,10 +82,15 @@ export const routes: Routes = [
         path: 'contact-medium',
         component: ContactMediumComponent,
       },
+
+    ]
+},
+
     ],
   },
   {
     path: 'offers',
     component: OfferSelectionPageComponent,
   },
+
 ];

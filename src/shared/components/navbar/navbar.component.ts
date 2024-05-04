@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -12,17 +12,27 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './navbar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
+currentRoute!: string
 
   constructor(
     private router: Router,
   ){}
-
-  toggle = true;
-  status = 'Enable';
-  b2cClick(){
-    this.toggle = !this.toggle;
-    this.status = this.toggle ? 'Enable' : 'Disable';
-    this.router.navigate(['home/search']);
+  ngOnInit(): void {
+    this.router.events.subscribe(event => {
+      if(event instanceof NavigationEnd){
+        this.currentRoute = event.urlAfterRedirects;
+      }
+    })
   }
- }
+
+  isB2CActive(): boolean{
+    return this.currentRoute.includes("/home/search");
+  }
+
+
+  b2cClick(){
+    this.router.navigate(["/home/search"]);
+    console.log(this.currentRoute);
+  }
+}
