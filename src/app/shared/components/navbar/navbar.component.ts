@@ -1,6 +1,7 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { NavigationEnd, Router, RouterModule } from "@angular/router";
+
 
 @Component({
   selector: 'app-navbar',
@@ -23,7 +24,7 @@ currentRoute!: string
       if(event instanceof NavigationEnd){
         this.currentRoute = event.urlAfterRedirects;
       }
-    })
+    });
   }
 
   isB2CActive(): boolean{
