@@ -3,9 +3,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { SelectButtonModule } from 'primeng/selectbutton';
-import { WarningPopupComponent } from '../../../../../shared/components/warning-popup/warning-popup.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-message.pipe';
+import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
 @Component({
   selector: 'etiya-login-form',
   standalone: true,
