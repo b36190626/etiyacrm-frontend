@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <app-header></app-header>
+  <div class="offer-selection">
+    <h3>Offer Selection</h3>
+
+    <div class="container-fluid row d-flex justify-content-evenly">
+      <div class="col-md-5">
+        <nav class="nav">
+          <a class="nav-link" (click)="selectTab('catalog')" [class.active]="selectedTab === 'catalog'">Catalog</a>
+          <a class="nav-link" (click)="selectTab('campaign')" [class.active]="selectedTab === 'campaign'">Campaign</a>
+        </nav>
+        <div class="selection">
+          <div *ngIf="selectedTab === 'catalog'">
+            <app-catalog-selection></app-catalog-selection>
+          </div>
+          <div *ngIf="selectedTab === 'campaign'">
+            <app-campaign-selection></app-campaign-selection>
+          </div>
+        </div>
+      </div>
+
+      <div class="button col-md-2 d-flex justify-content-center align-items-center ">
+        <button class="add-basket">Add To Basket</button>
+      </div>
+
+      <div class=" col-md-4">
+        <h4>Basket</h4>
+        <div class="basket">
+          <app-basket></app-basket>
+        </div>
+      </div>
+    </div>
+    <div class="form-actions text-right">
+      <button type="button" class="cancel-button" >Cancel</button>
+      <button type="button" class="next-button" >Next</button>
+  </div>
+  </div>
+</div>
+

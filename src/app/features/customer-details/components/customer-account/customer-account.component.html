@@ -1,7 +1,9 @@
-<div class="my-2 mx-4">
+<div class="container-fluid">
   <h3>Customer Account</h3>
-  <button class="create-account" routerLink="" >Create New Account</button>
-  <table class="table">
+  <button class="create-customer" routerLink="/create-customer">Create New Account</button>
+
+
+  <table class="table table-striped mt-3">
     <thead>
       <tr>
         <th scope="col">Account Status</th>
@@ -11,62 +13,69 @@
         <th scope="col">Action</th>
       </tr>
     </thead>
-
     <tbody>
-      <tr
-        *ngFor="let item of list | paginate : { itemsPerPage: 4, currentPage: p }"
-      >
-        <td class="">{{ item.billingAccounts.status }}</td>
-        <td class="">{{ item.billingAccounts.accountNumber }}</td>
-        <td class="">{{ item.billingAccounts.accountName }}</td>
-        <td class="">{{ item.billingAccounts.orders.offers.type }}</td>
-        <td class="d-flex justify-content-center gap-3">
-          <i class="fa-regular fa-circle-xmark"></i>
-          <i
-            class="fa-solid fa-pen-clip"
-            style="color: #24233f"
-            routerLink=""
-          ></i>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="d-flex justify-content-center align-items-center my-3">
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
-  </div>
-</div>
+      <ng-container *ngFor="let account of list; let i = index" class="aaccordion-item">
 
 
 
+            <tr data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + i" aria-expanded="false" [attr.aria-controls]="'collapse' + i">
+              <ng-container *ngIf="account.billingAccounts && account.billingAccounts.length > 0">
+                <td>{{ account.billingAccounts[0].status || '-'}}</td>
+                <td>{{ account.billingAccounts[0].accountNumber || '-' }}</td>
+                <td>{{ account.billingAccounts[0].accountName || '-'}}</td>
+                <td>{{ account.billingAccounts[0].orders && account.billingAccounts[0].orders[0]?.offers && account.billingAccounts[0].orders[0].offers[0]
+                  ? account.billingAccounts[0].orders[0].offers[0].type.name
+                  : '-' }}
+                </td>
+                <td class="justify-content-center gap-3">
+                  <i class="fa-regular fa-circle-xmark"></i>
+                  <i class="fa-solid fa-pen-clip" style="color: #24233f" routerLink="/edit-account/{{account.billingAccounts[0].id}}"></i>
+                </td>
+              </ng-container>
+            </tr>
 
-<!-- accordionla açılacak tablo -->
-<div class="product-table w-50 m-auto">
-  <table class="table table-bordered ">
-    <thead>
-      <tr>
-        <th scope="col">Product ID</th>
-        <th scope="col">Product Name</th>
-        <th scope="col">Campaign Name</th>
-        <th scope="col">Campaign Id</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of list">
-        <td>{{ item.billingAccounts.orders.offers.products.id }}</td>
-        <td>{{ item.billingAccounts.orders.offers.products.name }}</td>
-        <td></td>
-        <td>{{ item.billingAccounts.orders.offers.products.id }}</td>
-        <td class="accordion-header d-flex justify-content-center gap-3">
-          <i class="fa-regular fa-circle-xmark"></i>
-          <i class="fa-regular fa-eye"></i>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="d-flex justify-content-start gap-5">
-    <button>Start New Sale</button>
-    <button>Transfer</button>
-    <button>Service Address Change</button>
-  </div>
-</div>
+
+
+        <!-- Accordion içeriği -->
+        <tr>
+          <td colspan="5" class="p-0">
+            <div id="collapse{{i}}" class="accordion-collapse collapse" [attr.aria-labelledby]="'heading' + i" data-bs-parent="#accountsAccordion">
+              <div class="accordion-body">
+          <table class="table product-table">
+            <thead>
+              <tr>
+                <th scope="col">Product ID </th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Campaign Name</th>
+                <th scope="col">Campaign ID</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let account of account.billingAccounts">
+                <ng-container *ngFor="let order of account.orders">
+                  <ng-container *ngFor="let offer of order.offers">
+                    <tr *ngFor="let product of offer.products">
+                      <td>{{ product.id || '-' }}</td>
+                      <td>{{ product.name || '-'}}</td>
+                      <td>{{ offer.name || '-'}}</td>
+                      <td>{{ offer.id || '-'}}</td>
+                      <td class="accordion-side-buttons">
+                        <i class="fa-regular fa-circle-xmark"></i>
+                        <i class="fa-regular fa-eye"></i>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+              <tr class="action-row">
+                <td colspan="5" class="accordion-action">
+                  <button>Start New Sale</button>
+                  <button>Transfer</button>
+                  <button>Service Address Change</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>

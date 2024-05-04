@@ -13,75 +13,84 @@ import { ContactMediumInfoUpdateFormComponent } from './features/customer-detail
 import { CustomerInfoAddressFormComponent } from './features/customer-details/components/customer-info-address-form/customer-info-address-form.component';
 import { CustomerInfoUpdateFormComponent } from './features/customer-details/components/customer-info-update-form/customer-info-update-form.component';
 import { CustomerAccountComponent } from './features/customer-details/components/customer-account/customer-account.component';
+import { OfferSelectionPageComponent } from './routers/offers/offer-selection-page/offer-selection-page.component';
 
 export const routes: Routes = [
   {
-    path: "auth/login",
+    path: 'auth/login',
     component: LoginPageComponent,
   },
   {
-    path:"home",
+    path: 'home',
     component: MainLayoutComponent,
-    children:[
+    children: [
       {
-        path:"search",
-        component:SearchCustomerPageComponent,
+        path: 'search',
+        component: SearchCustomerPageComponent,
       },
       {
-        path:"customer",
-        component:CustomerDetailsPageComponent,
-        children:[
+        path: 'customer',
+        component: CustomerDetailsPageComponent,
+        children: [
           {
-            path:"",
+            path: '',
             pathMatch: 'full',
             component: CustomerInfoComponent,
           },
           {
-            path: "customer-info/:id",
+            path: 'customer-info/:id',
             component: CustomerInfoComponent,
           },
           {
-            path: "customer-info-update",
+            path: 'customer-info-update',
             component: CustomerInfoUpdateFormComponent,
           },
           {
-            path:"customer-account",
-            component: CustomerAccountComponent
+            path: 'customer-account',
+            component: CustomerAccountComponent,
           },
           {
-            path: "customer-address",
+            path: 'customer-address',
             component: CustomerInfoAddressFormComponent,
           },
           {
-            path:"contact-medium-info",
-            component: ContactMediumInfoComponent
+            path: 'contact-medium-info',
+            component: ContactMediumInfoComponent,
           },
           {
-            path:"contact-medium-info-update",
-            component: ContactMediumInfoUpdateFormComponent
-          }
-        ]
+            path: 'contact-medium-info-update',
+            component: ContactMediumInfoUpdateFormComponent,
+          },
+        ],
       },
-    ]
+    ],
   },
   {
-    path: "create-customer",
+    path: 'create-customer',
     component: CreateCustomerLayoutComponent,
-    children:[
+    children: [
       {
-        path: "",
-        pathMatch: "full",
-        component: DemographicFormComponent
+        path: '',
+        pathMatch: 'full',
+        component: DemographicFormComponent,
       },
       {
-        path: "address-info",
-        component: AddressInfoComponent
+        path: 'address-info',
+        component: AddressInfoComponent,
       },
       {
-        path: "contact-medium",
+        path: 'contact-medium',
         component: ContactMediumComponent,
       },
+
     ]
 },
+
+    ],
+  },
+  {
+    path: 'offers',
+    component: OfferSelectionPageComponent,
+  },
 
 ];

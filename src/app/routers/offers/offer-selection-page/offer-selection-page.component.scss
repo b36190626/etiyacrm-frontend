@@ -1,0 +1,79 @@
+.offer-selection{
+  margin-left: 1rem;
+  h3 {
+    color: #f48221;
+    font-size: 1.5rem;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+
+  .selection, .basket{
+    border: 1px solid #f48221;
+    height: 60vh;
+  }
+
+  .add-basket{
+    background-color: #FBCDA6;
+    border: none;
+    border-radius: 2rem;
+    color: black;
+    height: 5vh;
+    font-weight: bold;
+    width: 10vw;
+  }
+
+  .nav-link{
+    border: 1px solid #f48221;
+    border-bottom: none;
+    background-color: #FBCDA6;
+    color: black;
+    font-weight: bold;
+    border-top-right-radius: 2rem;
+    cursor: pointer;
+
+  }
+
+  .nav-link.active{
+    background-color: white;
+    border-bottom: none;
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    margin-bottom: 2rem;
+    margin-left: 5rem;
+    margin-right: 5rem;
+
+    .cancel-button {
+      background-color: #FBCDA6;
+      color: black;
+      border: none;
+      border-radius: 2rem;
+      font-weight: 500;
+      cursor: pointer;
+      width: 9rem;
+      padding: 10px;
+    }
+
+    .next-button {
+      background-color: #FBCDA6;
+      padding: 10px;
+      width: 9rem;
+      border: none;
+      color: black;
+      margin-right: 5rem;
+      border-radius: 2rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .next-button:hover ,.cancel-button:hover{
+      background-color: #f48221;
+      color:white;
+  }
+  }
+
+
+
+}

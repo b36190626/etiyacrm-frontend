@@ -1,39 +1,71 @@
 export interface CustomerListItemDto {
   id: number;
+  customerId: number;
   firstName: string;
   middleName: string;
   lastName: string;
+  birthDate: string;
+  gender: string;
+  nationalityId: number;
   role: string;
-  nationalityId: string;
-  accountNumber: string;
-  gsmNumber: string;
-  billingAccounts: BillingAccounts;
-  contactMedium: ContactMedium;
+  motherName: string;
+  fatherName: string;
+  addresses: AddressDTO[];
+  contactMedium: ContactMediumDTO;
+  billingAccounts: BillingAccountDTO[];
 }
 
-interface ContactMedium{
-  mobilePhone: string;
-}
-interface BillingAccounts {
+export interface AddressDTO {
   id: number;
-  status: string;
-  accountNumber: string;
-  accountName: string;
-  accountType: string;   // bu ne
-  orders: Orders;
+  city: CityDTO;
+  street: string;
+  flatNumber: number;
+  description: string;
 }
 
-interface Orders {
-  id: number;
-  offers: Offers;
-}
-
-interface Offers{
-  id: number;
-  type: string;
-  products: Products;
-}
-interface Products{
+export interface CityDTO {
   id: number;
   name: string;
+}
+
+export interface ContactMediumDTO {
+  email: string;
+  homePhone: string;
+  mobilePhone: string;
+  fax: string;
+}
+
+export interface BillingAccountDTO {
+  id: number;
+  accountNumber: string;
+  accountName: string;
+  description: string;
+  status: string;
+  addresses: AddressDTO[];
+  orders: OrderDTO[];
+}
+
+export interface OrderDTO {
+  id: number;
+  offers: OfferDTO[];
+}
+
+export interface OfferDTO {
+  id: number;
+  type: OfferTypeDTO;
+  name: string;
+  products: ProductDTO[];
+}
+
+export interface OfferTypeDTO {
+  id: number;
+  typeName: string;
+  name: string;
+}
+
+export interface ProductDTO {
+  id: number;
+  name: string;
+  description: string;
+  amount: number;
 }
