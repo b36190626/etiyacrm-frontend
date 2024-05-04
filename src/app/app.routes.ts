@@ -1,19 +1,20 @@
-import { Routes } from '@angular/router';
-import { LoginPageComponent } from './routers/auth/login-page/login-page.component';
-import { SearchCustomerPageComponent } from './routers/customers/search-customer-page/search-customer-page.component';
-import { AddressInfoComponent } from './features/customers/components/address-info/address-info.component';
-import { DemographicFormComponent } from './features/customers/components/demographic-form/demographic-form.component';
-import { CustomerDetailsPageComponent } from './routers/customers/customer-details-page/customer-details-page.component';
-import { CustomerInfoComponent } from './features/customer-details/components/customer-info/customer-info.component';
-import { ContactMediumComponent } from './features/customers/components/contact-medium/contact-medium.component';
-import { ContactMediumInfoComponent } from './features/customer-details/components/contact-medium-info/contact-medium-info.component';
-import { ContactMediumInfoUpdateFormComponent } from './features/customer-details/components/contact-medium-info-update-form/contact-medium-info-update-form.component';
-import { CustomerInfoAddressFormComponent } from './features/customer-details/components/customer-info-address-form/customer-info-address-form.component';
-import { CustomerInfoUpdateFormComponent } from './features/customer-details/components/customer-info-update-form/customer-info-update-form.component';
-import { CustomerAccountComponent } from './features/customer-details/components/customer-account/customer-account.component';
-import { OfferSelectionPageComponent } from './routers/offers/offer-selection-page/offer-selection-page.component';
-import { MainLayoutComponent } from './shared/layouts/main-layout/main-layout.component';
-import { CreateCustomerLayoutComponent } from './shared/layouts/create-customer-layout/create-customer-layout.component';
+import { Routes } from "@angular/router";
+import { LoginPageComponent } from "./routers/auth/login-page/login-page.component";
+import { MainLayoutComponent } from "./shared/layouts/main-layout/main-layout.component";
+import { SearchCustomerPageComponent } from "./routers/customers/search-customer-page/search-customer-page.component";
+import { CustomerDetailsPageComponent } from "./routers/customers/customer-details-page/customer-details-page.component";
+import { CustomerInfoComponent } from "./features/customer-details/components/customer-info/customer-info.component";
+import { CustomerInfoUpdateFormComponent } from "./features/customer-details/components/customer-info-update-form/customer-info-update-form.component";
+import { CustomerAccountComponent } from "./features/customer-details/components/customer-account/customer-account.component";
+import { CustomerInfoAddressFormComponent } from "./features/customer-details/components/customer-info-address-form/customer-info-address-form.component";
+import { ContactMediumInfoComponent } from "./features/customer-details/components/contact-medium-info/contact-medium-info.component";
+import { ContactMediumInfoUpdateFormComponent } from "./features/customer-details/components/contact-medium-info-update-form/contact-medium-info-update-form.component";
+import { CreateCustomerLayoutComponent } from "./shared/layouts/create-customer-layout/create-customer-layout.component";
+import { DemographicFormComponent } from "./features/customers/components/demographic-form/demographic-form.component";
+import { AddressInfoComponent } from "./features/customers/components/address-info/address-info.component";
+import { ContactMediumComponent } from "./features/customers/components/contact-medium/contact-medium.component";
+import { OfferSelectionPageComponent } from "./routers/offers/offer-selection-page/offer-selection-page.component";
+
 
 export const routes: Routes = [
   {
