@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ControlErrorMessagePipe } from '../../../app/core/pipes/control-error-message.pipe';
+import { ControlErrorMessagePipe } from '../../../core/pipes/control-error-message.pipe';
+
 
 @Component({
   selector: 'app-warning-popup',

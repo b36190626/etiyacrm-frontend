@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CustomerAdressModalComponent } from '../../../../../shared/components/customer-adress-modal/customer-adress-modal.component';
+import { CustomerAdressModalComponent } from '../../../../shared/components/customer-adress-modal/customer-adress-modal.component';
+
 
 @Component({
   selector: 'app-address-info',
@@ -9,7 +10,6 @@ import { CustomerAdressModalComponent } from '../../../../../shared/components/c
   imports: [
     CommonModule,RouterModule,
     CustomerAdressModalComponent,
-    CustomerAdressModalComponent
   ],
   templateUrl: './address-info.component.html',
   styleUrl: './address-info.component.scss',

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
-import { CreateCustomerPageComponent } from '../../../app/routers/customers/create-customer-page/create-customer-page.component';
+import { CreateCustomerPageComponent } from '../../../routers/customers/create-customer-page/create-customer-page.component';
 
 @Component({
   selector: 'app-create-customer-layout',
