@@ -1,11 +1,18 @@
 .top-bar{
   display: flex;
-
 }
 .nav-item{
+  display: flex;
   border: 1px solid white;
   background-color: #24233F;
   color: white;
+  border-radius: 0 30px 30px 0;
+  font-weight: 600;
+}
+a {
+  text-align: center;
+  border-radius: 0 30px 30px 0;
+  width: 12vw;
 }
 
 .nav-link{
@@ -22,6 +29,7 @@
   }
 }
 .active {
-  color: #f48221;  /* Aktif link kırmızı renkte olacak */
-
+  background-color: #f48221;  /* Aktif link kırmızı renkte olacak */
+  color:black;
+  font-weight: 600;
 }
