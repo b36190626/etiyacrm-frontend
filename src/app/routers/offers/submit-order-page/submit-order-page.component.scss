@@ -1,0 +1,67 @@
+.submit-order{
+  margin-left: 1rem;
+
+  h3{
+    color: #f48221;
+    font-size: 1.5rem;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    margin-top: 2rem;
+  }
+  label {
+    display: flex;
+    width: 18rem;
+    color: black;
+    font-weight: 500;
+    margin-left: 2.5rem;
+    font-size: 1.3rem;
+  }
+  .order-items-label{ // buraya sonra göz atılacak
+    display: flex;
+  }
+  .order-items{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0 2rem 0;
+    border: 1px solid #f48221;
+    width: 60vw;
+    margin-left: 2.5rem;
+  }
+  .button-group{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .submit-button{
+  background-color: #FBCDA6;
+  padding: 10px;
+  width: 9rem;
+  border: none;
+  color: black;
+  border-radius: 2rem;
+  font-weight: 500;
+  margin-top: 6rem;
+  margin-right: 18rem;
+  cursor: pointer;
+  }
+  .submit-button:hover{
+    background-color: #f48221;
+    color:white;
+  }
+  .previous-button{
+    background-color: #FBCDA6;
+    padding: 10px;
+    width: 9rem;
+    border: none;
+    color: black;
+    border-radius: 2rem;
+    font-weight: 500;
+    margin-top: 6rem;
+    cursor: pointer;
+    }
+    .previous-button:hover{
+      background-color: #f48221;
+      color:white;
+    }
+}
+

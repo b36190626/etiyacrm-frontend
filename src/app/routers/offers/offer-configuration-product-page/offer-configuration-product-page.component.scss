@@ -1,0 +1,31 @@
+.offer-configuration{
+  margin-left: 1rem;
+
+  h3{
+    color: #f48221;
+    font-size: 1.5rem;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    margin-top: 2rem;
+  }
+  .product-forms{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0 2rem 0;
+    border: 1px solid #f48221;
+    width: 85vw;
+  }
+  label {
+    display: flex;
+    width: 12rem;
+    color: black;
+    font-weight: 500;
+    margin-left: 2.5rem;
+    font-size: 1.3rem;
+  }
+  .prod-info{
+    display: flex;
+    align-items: center;
+    gap: 150px;
+  }
+}

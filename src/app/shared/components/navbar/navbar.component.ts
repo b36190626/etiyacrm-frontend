@@ -28,15 +28,14 @@ isActive: boolean = true;
         this.change.markForCheck();
       }
     });
+
   }
 
-  isB2CActive(): boolean{
-    return this.currentRoute.includes("/home/search")
-  }
-
+  // isB2CActive(): boolean{
+  //   return this.currentRoute.includes("/home/search")
+  // }
 
   b2cClick(){
     this.router.navigate(["/home/search"]);
-    console.log(this.currentRoute);
   }
 }
