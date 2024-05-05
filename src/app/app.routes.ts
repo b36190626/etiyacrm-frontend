@@ -14,6 +14,9 @@ import { DemographicFormComponent } from "./features/customers/components/demogr
 import { AddressInfoComponent } from "./features/customers/components/address-info/address-info.component";
 import { ContactMediumComponent } from "./features/customers/components/contact-medium/contact-medium.component";
 import { OfferSelectionPageComponent } from "./routers/offers/offer-selection-page/offer-selection-page.component";
+import { OfferConfigurationProductPageComponent } from "./routers/offers/offer-configuration-product-page/offer-configuration-product-page.component";
+import { OffersLayoutComponent } from "./shared/layouts/offers-layout/offers-layout.component";
+import { SubmitOrderPageComponent } from "./routers/offers/submit-order-page/submit-order-page.component";
 
 
 export const routes: Routes = [
@@ -87,7 +90,22 @@ export const routes: Routes = [
     },
     {
       path:"offers",
-      component: OfferSelectionPageComponent,
-    }
+      component: OffersLayoutComponent,
+      children:[
+        {
+          path: "",
+          pathMatch: "full",
+          component: OfferSelectionPageComponent
+        },
+        {
+          path: "configuration-product",
+          component: OfferConfigurationProductPageComponent
+        },
+        {
+          path:"submit-order",
+          component: SubmitOrderPageComponent
+        }
 
+      ]
+    },
 ];

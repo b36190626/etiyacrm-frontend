@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <div class="submit-order">
+    <h3>Submit Order</h3>
+    <div class="row">
+      <div class="row-md-6 mb-3 d-flex">
+        <label>Order ID</label>
+        <label>{{products.orderId}}</label>
+      </div>
+        <div class="row-md-6 mb-3 d-flex">
+        <label>Order Items</label>
+        <div class="order-items">
+          <label class="order-items-label"
+          *ngFor="let item of products.orderItems"> {{item.id}} - {{item.name}} </label>
+        </div>
+      </div>
+
+      <div class="row-md-6 mb-3 d-flex">
+        <label>Service Address</label>
+        <label>{{products.serviceAddress}}</label>
+      </div>
+      <div class="row-md-6 mb-3 d-flex">
+        <label>Total Amount</label>
+        <label>{{products.totalAmount}} ₺</label>
+      </div>
+    </div>
+    <div class="button-group">
+      <button class="previous-button" type="button">Previous</button>
+      <button class="submit-button" type="submit">Submit</button>
+    </div>
+  </div>
+</div>

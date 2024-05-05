@@ -11,7 +11,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     NgxPaginationModule,
-    RouterModule
+    RouterModule,
+    NgxPaginationModule
   ],
   templateUrl: './customer-account.component.html',
   styleUrl: './customer-account.component.scss',
