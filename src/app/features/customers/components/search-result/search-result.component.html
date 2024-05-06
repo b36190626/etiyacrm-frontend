@@ -15,6 +15,7 @@
           </tr>
         </thead>
         <tbody>
+
           <tr *ngFor="let customer of customers| paginate: { itemsPerPage: 10, currentPage:p }">
             <td class="cursor" (click)="getCustomerInfo(customer.items[0].customerId)">{{ customer.items[0].customerId }}</td>
             <td>{{ customer.items[0].firstName}}</td>
@@ -27,6 +28,7 @@
             <!-- <td>{{ item.billingAccounts[0]?.accountNumber ? item.billingAccounts[0]?.accountNumber
           : '-' }}</td>
             <td>{{ item.contactMedium.mobilePhone }}</td> -->
+
           </tr>
         </tbody>
       </table>

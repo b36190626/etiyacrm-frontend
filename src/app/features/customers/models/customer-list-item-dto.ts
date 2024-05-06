@@ -1,4 +1,5 @@
 export interface CustomerListItemDto {
+
   items: items[];
   page: number;
   size: number;
