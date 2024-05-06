@@ -15,16 +15,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of list | paginate: { itemsPerPage: 10, currentPage: p }">
-            <td class="cursor" (click)="getCustomerInfo(item.id)">{{ item.id }}</td>
-            <td>{{ item.firstName }}</td>
-            <td>{{ item.middleName }}</td>
-            <td>{{ item.lastName | uppercase }}</td>
-            <td>11</td>
-            <td>{{ item.nationalityId }}</td>
+
+          <tr *ngFor="let customer of customers| paginate: { itemsPerPage: 10, currentPage:p }">
+            <td class="cursor" (click)="getCustomerInfo(customer.items[0].customerId)">{{ customer.items[0].customerId }}</td>
+            <td>{{ customer.items[0].firstName}}</td>
+            <td>{{ customer.items[0].middleName}}</td>
+            <td>{{ customer.items[0].lastName | uppercase }}</td>
+            <td>{{ customer.items[0].nationalityIdentity }}</td>
+            <td></td>
+            <td></td>
             <!-- Dikkat: billingAccounts bir array olduğu için [0] kullanıldı -->
-            <td>111</td>
-            <td>111</td>
+            <!-- <td>{{ item.billingAccounts[0]?.accountNumber ? item.billingAccounts[0]?.accountNumber
+          : '-' }}</td>
+            <td>{{ item.contactMedium.mobilePhone }}</td> -->
+
           </tr>
         </tbody>
       </table>

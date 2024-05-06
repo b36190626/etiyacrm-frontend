@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { SingleFocusLayoutComponent } from './shared/layouts/single-focus-layout/single-focus-layout.component';
+import { SingleFocusLayoutComponent } from './shared/components/single-focus-layout/single-focus-layout.component';
 
 @Component({
   selector: 'app-root',

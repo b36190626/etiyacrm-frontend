@@ -1,5 +1,5 @@
 <div class="info-page container-fluid mt-5 m-3" style="background-color: white;">
-  <h4>Customer Info <i class="fa-solid fa-pen-clip" style="color: #24233F;" routerLink ="/home/customer/customer-info-update"></i> </h4>
+  <h4>Customer Info <i class="fa-solid fa-pen-clip" style="color: #24233F;" routerLink ="/home/customer/customer-info-update/{{customerId}}"></i> </h4>
       <div class="row">
           <div class="col-md-6 mb-3 d-flex">
               <label>First Name:</label>
@@ -31,7 +31,7 @@
       </div>
       <div class="col-md-6 mb-3 d-flex">
         <label>Nationality ID:</label>
-        <label>{{customerInfo.nationalityId}}</label>
+        <label>{{customerInfo.nationalityIdentity}}</label>
       </div>
     </div>
     <div class="button-action">

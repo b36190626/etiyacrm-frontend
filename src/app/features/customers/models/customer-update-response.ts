@@ -1,5 +1,4 @@
-export interface CustomerDetailsDto {
-  id: number;
+export interface CustomerUpdateResponse{
   customerId: number;
   firstName: string;
   middleName: string;
