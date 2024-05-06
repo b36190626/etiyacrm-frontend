@@ -2,13 +2,8 @@
 import { CustomerListItemDto } from './../models/customer-list-item-dto';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { CustomerUpdateResponse } from '../models/customer-update-response';
-
-import { CustomerListItemDto } from '../models/customer-list-item-dto';
-import { map, Observable } from 'rxjs';
-
 import { CustomerDetailsDto } from '../models/customer-details-dto';
 import { CustomerUpdateRequest } from '../models/customer-update-request';
 
@@ -49,7 +44,7 @@ export class CustomerApiService {
     return this.http.put<CustomerUpdateResponse>
     (`http://localhost:8081/customerservice/api/v1/individualcustomers/${id}`,customer)
 
-    
+
   }
 
 
