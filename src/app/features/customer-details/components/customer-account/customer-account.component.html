@@ -20,7 +20,7 @@
 
 
             <tr data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + i" aria-expanded="false" [attr.aria-controls]="'collapse' + i">
-              <ng-container *ngIf="account.billingAccounts && account.billingAccounts.length > 0">
+              <!-- <ng-container *ngIf="account.billingAccounts && account.billingAccounts.length > 0">
                 <td>{{ account.billingAccounts[0].status || '-'}}</td>
                 <td>{{ account.billingAccounts[0].accountNumber || '-' }}</td>
                 <td>{{ account.billingAccounts[0].accountName || '-'}}</td>
@@ -32,7 +32,7 @@
                   <i class="fa-regular fa-circle-xmark" type="button"></i>
                   <i class="fa-solid fa-pen-clip m-1" type="button" style="color: #24233f" routerLink="/edit-account/{{account.billingAccounts[0].id}}"></i>
                 </td>
-              </ng-container>
+              </ng-container> -->
 
             </tr>
 
@@ -54,7 +54,7 @@
               </tr>
             </thead>
             <tbody>
-              <ng-container *ngFor="let account of account.billingAccounts">
+              <!-- <ng-container *ngFor="let account of account.billingAccounts">
                 <ng-container *ngFor="let order of account.orders">
                   <ng-container *ngFor="let offer of order.offers">
                     <tr *ngFor="let product of offer.products">
@@ -69,7 +69,7 @@
                     </tr>
                   </ng-container>
                 </ng-container>
-              </ng-container>
+              </ng-container> -->
               <tr class="action-row">
                 <td colspan="5" class="accordion-action">
                   <button>Start New Sale</button>

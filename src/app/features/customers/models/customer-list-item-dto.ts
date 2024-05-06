@@ -1,18 +1,28 @@
 export interface CustomerListItemDto {
   id: number;
-  customerId: number;
   firstName: string;
   middleName: string;
   lastName: string;
-  birthDate: string;
   gender: string;
-  nationalityId: number;
-  role: string;
+  birthDate: string;
+  nationalityId: string;
   motherName: string;
-  fatherName: string;
-  addresses: AddressDTO[];
-  contactMedium: ContactMediumDTO;
-  billingAccounts: BillingAccountDTO[];
+  bfatherName: string;
+
+  // id: number;
+  // customerId: number;
+  // firstName: string;
+  // middleName: string;
+  // lastName: string;
+  // birthDate: string;
+  // gender: string;
+  // nationalityId: number;
+  // role: string;
+  // motherName: string;
+  // fatherName: string;
+  // addresses: AddressDTO[];
+  // contactMedium: ContactMediumDTO;
+  // billingAccounts: BillingAccountDTO[];
 }
 
 export interface AddressDTO {
