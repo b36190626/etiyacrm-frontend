@@ -23,11 +23,10 @@ import { CustomerNotFoundComponent } from '../customer-not-found/customer-not-fo
 })
 export class SearchResultComponent implements OnInit{
   customerFound: boolean = true;
-  customer: any;
-  list: Array<CustomerListItemDto> = [];
+  customers: Array<CustomerListItemDto> = [];
   @Output() selectedCustomer = new EventEmitter<number>();
 
-  p: number = 1;
+  p: number = 0;
   constructor(
     private customersApiService: CustomerApiService,
     private change: ChangeDetectorRef,
@@ -38,9 +37,10 @@ export class SearchResultComponent implements OnInit{
   }
 
   getList() {
-      this.customersApiService.getList().subscribe(customers => {
-      this.list = customers;
+      this.customersApiService.getList().subscribe(response => {
+      this.customers = response;
       this.change.markForCheck();
+      console.log(this.customers);
     });
   }
 
@@ -53,7 +53,6 @@ export class SearchResultComponent implements OnInit{
     searchCustomer() {
       // Customer araması yapılır, customer bulunursa:
       this.customerFound = true;
-      this.customer = { /* Customer bilgileri burada */ };
 
       // Customer bulunamazsa:
       // this.customerFound = false;

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AddressInfoComponent } from '../../../features/customers/components/address-info/address-info.component';
+import { AddressInfoComponent } from '../../../../features/customers/components/address-info/address-info.component';
 
 @Component({
   selector: 'app-offer-configuration-product-page',

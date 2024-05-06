@@ -57,6 +57,7 @@ constructor(
     this.customerApiService.getById(this.customerId).subscribe({
       next: (customerDetails) => {
         this.customerInfo = customerDetails;
+        console.log(customerDetails)
       },
       complete: () => {
         this.change.markForCheck();
