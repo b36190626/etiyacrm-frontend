@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { CustomerListItemDto } from '../../../customers/models/customer-list-item-dto';
+
 import { CustomerApiService } from '../../../customers/services/customerApi.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RouterModule } from '@angular/router';
+import { GetListResponseDto } from '../../../customers/models/get-list-response-dto';
+import { CustomerResponseDto } from '../../../customers/models/customer-response-dto';
 
 @Component({
   selector: 'app-customer-account',
@@ -19,7 +21,7 @@ import { RouterModule } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomerAccountComponent implements OnInit{
-  list: Array<CustomerListItemDto> = [];
+  list: GetListResponseDto<CustomerResponseDto>;
   p: number = 1;
   selectedRow: number = -1;
 

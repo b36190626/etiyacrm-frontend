@@ -1,11 +1,13 @@
 
-import { CustomerListItemDto } from './../models/customer-list-item-dto';
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CustomerUpdateResponse } from '../models/customer-update-response';
 import { CustomerDetailsDto } from '../models/customer-details-dto';
 import { CustomerUpdateRequest } from '../models/customer-update-request';
+import { GetListResponseDto } from '../models/get-list-response-dto';
+import { CustomerResponseDto } from '../models/customer-response-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -19,21 +21,9 @@ export class CustomerApiService {
   //     ('http://localhost:8081/customerservice/api/v1/individualcustomers')
   // }
 
-  getList(): Observable<CustomerListItemDto[]> {
-    return this.http.get<CustomerListItemDto>('http://localhost:8081/customerservice/api/v1/individualcustomers').pipe(
-      map((response: any) => response.items.map((item: any) => ({
-        id: item.id,
-        firstName: item.firstName,
-        middleName: item.middleName,
-        lastName: item.lastName,
-        email: item.email,
-        gender: item.gender,
-        birthDate: item.birthDate,
-        motherName: item.motherName,
-        fatherName: item.fatherName,
-        nationalityIdentity: item.nationalityIdentity
-      })))
-    );
+  getList(): Observable<GetListResponseDto<CustomerResponseDto>> {
+    return this.http.get<GetListResponseDto<CustomerResponseDto>>('http://localhost:8081/customerservice/api/v1/individualcustomers?page=0&size=10');
+
   }
 
   getById(id: number): Observable<CustomerDetailsDto> {
@@ -43,9 +33,6 @@ export class CustomerApiService {
   putCustomer(id: number, customer: CustomerUpdateRequest): Observable<CustomerUpdateResponse>{
     return this.http.put<CustomerUpdateResponse>
     (`http://localhost:8081/customerservice/api/v1/individualcustomers/${id}`,customer)
-
-
   }
-
 
 }
