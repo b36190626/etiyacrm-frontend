@@ -2,6 +2,10 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CreateCustomerRequest } from '../../models/customer/requests/create-customer-request';
+import { setIndividualCustomer } from '../../../../shared/stores/customers/individual-customer.action';
+import { select, Store } from '@ngrx/store';
+import { selectIndividualCustomer } from '../../../../shared/stores/customers/individual-customer.selector';
 
 @Component({
   selector: 'app-demographic-form',
@@ -19,11 +23,28 @@ export class DemographicFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private store: Store<{ individualCustomer: CreateCustomerRequest }>
   ) {}
   ngOnInit() {
-    this.customerForm = this.fb.group({
 
+    this.createForm();
+
+    this.store
+      .pipe(select(selectIndividualCustomer))
+      .subscribe((individualCustomer) => {
+        this.customerForm.patchValue(individualCustomer);
+        console.log('individualCustomerState:', individualCustomer);
+      });
+    // Formun durumunu dinamik olarak izleme
+    this.customerForm.statusChanges.subscribe(status => {
+    this.isFormValid = status === 'VALID';
+    console.log("status");
+});
+  }
+
+  createForm(){
+    this.customerForm = this.fb.group({
       firstName: ['', Validators.required],
       middleName: [''],
       lastName: ['', Validators.required],
@@ -33,18 +54,28 @@ export class DemographicFormComponent implements OnInit {
       motherName: [''],
       nationalityId: ['', Validators.required]
     });
-    // Formun durumunu dinamik olarak izleme
-    this.customerForm.statusChanges.subscribe(status => {
-    this.isFormValid = status === 'VALID';
-    console.log("status");
-});
+  }
+
+  createCustomer() {
+    const individualCustomer: CreateCustomerRequest = {
+      firstName: this.customerForm.value.firstName,
+      middleName: this.customerForm.value.middleName,
+      lastName: this.customerForm.value.lastName,
+      gender: this.customerForm.value.gender,
+      motherName: this.customerForm.value.motherName,
+      fatherName: this.customerForm.value.fatherName,
+      birthDate: this.customerForm.value.birthDate,
+      nationalityIdentity: this.customerForm.value.nationalityId,
+    };
+    this.store.dispatch(setIndividualCustomer({ individualCustomer }));
+    this.router.navigate(['/create-customer/address-info']);
   }
 
   onSubmit() {
     if (this.customerForm.valid) {
       console.log('Form Submitted!', this.customerForm.value);
-      this.router.navigate(['create-customer/address-info'])
     }
+    this.createCustomer();
   }
 
   onCancel() {

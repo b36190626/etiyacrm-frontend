@@ -9,5 +9,4 @@ export interface CustomerResponseDto {
     motherName: string;
     fatherName: string;
     nationalityIdentity: number;
-
   }

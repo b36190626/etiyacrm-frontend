@@ -2,7 +2,7 @@ import { CustomerApiService } from './../../../customers/services/customerApi.se
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { CustomerDetailsDto } from '../../../customers/models/customer-details-dto';
+import { CustomerDetailsDto } from '../../../customers/models/customer/customer-details-dto';
 import { SearchResultComponent } from '../../../customers/components/search-result/search-result.component';
 
 @Component({

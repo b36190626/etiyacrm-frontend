@@ -5,7 +5,7 @@ import { CustomerApiService } from '../../../customers/services/customerApi.serv
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RouterModule } from '@angular/router';
 import { GetListResponseDto } from '../../../customers/models/get-list-response-dto';
-import { CustomerResponseDto } from '../../../customers/models/customer-response-dto';
+import { CustomerResponseDto } from '../../../customers/models/customer/customer-response-dto';
 
 @Component({
   selector: 'app-customer-account',

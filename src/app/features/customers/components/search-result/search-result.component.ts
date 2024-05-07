@@ -6,7 +6,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { Router, RouterModule } from '@angular/router';
 import { CustomerNotFoundComponent } from '../customer-not-found/customer-not-found.component';
 import { GetListResponseDto } from '../../models/get-list-response-dto';
-import { CustomerResponseDto } from '../../models/customer-response-dto';
+import { CustomerResponseDto } from '../../models/customer/customer-response-dto';
 
 
 

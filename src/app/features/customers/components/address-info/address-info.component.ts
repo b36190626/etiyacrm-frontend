@@ -8,7 +8,8 @@ import { CustomerAdressModalComponent } from '../../../../shared/components/cust
   selector: 'app-address-info',
   standalone: true,
   imports: [
-    CommonModule,RouterModule,
+    CommonModule,
+    RouterModule,
     CustomerAdressModalComponent,
   ],
   templateUrl: './address-info.component.html',

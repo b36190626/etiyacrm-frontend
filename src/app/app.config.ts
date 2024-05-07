@@ -7,12 +7,17 @@ import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideStore } from '@ngrx/store';
+import { getAppProviders } from './shared/providers/app-providers';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes),
     provideBrowserAnimations(),
     provideHttpClient(),
-    provideTranslate(), provideAnimationsAsync(),
+    provideTranslate(),
+    provideAnimationsAsync(),
+    provideStore(),
+    getAppProviders()
   ]
 };
 function provideBrowserAnimations(){

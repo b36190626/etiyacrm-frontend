@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { CustomerUpdateRequest } from '../../../customers/models/customer-update-request';
+import { CustomerUpdateRequest } from '../../../customers/models/customer/requests/customer-update-request';
 
 @Component({
   selector: 'app-customer-info-update-form',
