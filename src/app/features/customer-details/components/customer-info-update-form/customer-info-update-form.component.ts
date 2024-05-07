@@ -71,7 +71,7 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
       },
       complete: () => {
         this.customerUpdateForm.reset();
-        this.router.navigate(['home/customer'])
+        this.router.navigate(['home/customer/customer-info/',this.pathId])
       }
     })
   }

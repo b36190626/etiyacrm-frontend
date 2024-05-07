@@ -1,11 +1,13 @@
 
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { CustomerListItemDto } from '../../models/customer-list-item-dto';
 import { CustomerApiService } from '../../services/customerApi.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Router, RouterModule } from '@angular/router';
 import { CustomerNotFoundComponent } from '../customer-not-found/customer-not-found.component';
+import { GetListResponseDto } from '../../models/get-list-response-dto';
+import { CustomerResponseDto } from '../../models/customer-response-dto';
+
 
 
 @Component({
@@ -23,7 +25,7 @@ import { CustomerNotFoundComponent } from '../customer-not-found/customer-not-fo
 })
 export class SearchResultComponent implements OnInit{
   customerFound: boolean = true;
-  customers: Array<CustomerListItemDto> = [];
+  customers: GetListResponseDto<CustomerResponseDto>;
   @Output() selectedCustomer = new EventEmitter<number>();
 
   p: number = 0;
@@ -32,6 +34,7 @@ export class SearchResultComponent implements OnInit{
     private change: ChangeDetectorRef,
     private route: Router,
   ) {}
+
   ngOnInit(): void {
     this.getList();
   }

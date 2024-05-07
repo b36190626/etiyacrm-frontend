@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
-import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { RouterLink, RouterModule } from "@angular/router";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { ActivatedRoute, RouterLink, RouterModule } from "@angular/router";
 
 @Component({
   selector: 'app-top-bar',
@@ -13,4 +13,19 @@ import { RouterLink, RouterModule } from "@angular/router";
   styleUrl: './top-bar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TopBarComponent { }
+export class TopBarComponent implements OnInit {
+  pathId!: number;
+
+  constructor(
+    private activatedRoute: ActivatedRoute
+  ){}
+
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe(params => {
+      this.pathId = params['id'];
+      console.log('pathID:', this.pathId);
+
+      }).unsubscribe();
+
+  }
+}

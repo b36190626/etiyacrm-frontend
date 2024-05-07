@@ -1,6 +1,6 @@
-export interface CustomerListItemDto {
+export interface GetListResponseDto<T> {
 
-  items: items[];
+  items: T[];
   page: number;
   size: number;
   totalElements: number;
@@ -9,19 +9,8 @@ export interface CustomerListItemDto {
   hasPrevious: boolean
 }
 
-  export interface items {
-    id: number;
-    customerId: number;
-    firstName: string;
-    middleName: string;
-    lastName: string;
-    gender: string;
-    birthDate: Date;
-    motherName: string;
-    fatherName: string;
-    nationalityIdentity: number;
 
-  }
+
   //role: string;
   // addresses: AddressDTO[];
   // contactMedium: ContactMediumDTO;
