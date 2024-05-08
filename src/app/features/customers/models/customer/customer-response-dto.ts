@@ -1,6 +1,5 @@
 export interface CustomerResponseDto {
     id: number;
-    customerId: number;
     firstName: string;
     middleName: string;
     lastName: string;
