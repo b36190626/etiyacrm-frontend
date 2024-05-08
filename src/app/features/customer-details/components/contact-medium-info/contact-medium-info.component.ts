@@ -25,7 +25,7 @@ export class ContactMediumInfoComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
+    this.activatedRoute.parent.params.subscribe(params => {
       this.customerId = params['id'];
     }).unsubscribe();
     this.getContactMedium();
