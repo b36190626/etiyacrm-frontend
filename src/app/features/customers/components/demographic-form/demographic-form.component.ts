@@ -52,7 +52,7 @@ export class DemographicFormComponent implements OnInit {
       gender: ['', Validators.required],
       fatherName: [''],
       motherName: [''],
-      nationalityId: ['', Validators.required]
+      nationalityIdentity: ['', Validators.required]
     });
   }
 
@@ -65,7 +65,7 @@ export class DemographicFormComponent implements OnInit {
       motherName: this.customerForm.value.motherName,
       fatherName: this.customerForm.value.fatherName,
       birthDate: this.customerForm.value.birthDate,
-      nationalityIdentity: this.customerForm.value.nationalityId,
+      nationalityIdentity: this.customerForm.value.nationalityIdentity,
     };
     this.store.dispatch(setIndividualCustomer({ individualCustomer }));
     this.router.navigate(['/create-customer/address-info']);

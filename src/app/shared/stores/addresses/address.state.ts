@@ -9,7 +9,7 @@ export const initialAddressState: AddressState = {
     city: '',
     street: '',
     district: '',
-    flatNumber: null,
+    flatNumber: 0,
     description: '',
   },
 }

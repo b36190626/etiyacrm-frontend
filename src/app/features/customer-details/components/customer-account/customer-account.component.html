@@ -54,8 +54,8 @@
               </tr>
             </thead>
             <tbody>
-              <!-- <ng-container *ngFor="let account of account.billingAccounts">
-                <ng-container *ngFor="let order of account.orders">
+              <!-- <ng-container *ngFor="let account of account.billingAccounts">  // PRODUCT - OFFER - ORDER- BILLING ACCOUNTS TABLOLARI / SERVIS MI YAZILACAK? - DISTRICT TABLOSU OLUŞACAK(İLİŞKİSİ DE KURULACAK- ex: ankara tıklandığında şehirleri gelecek one to many) Normalizasyon uygunluğu için gerekli.
+                <ng-container *ngFor="let order of account.orders"> // ADDRESS KISMI(FRONT END) DÜZELDİKTEN SONRA DBYE KAYIT İŞLEMİ YAPILACAK.
                   <ng-container *ngFor="let offer of order.offers">
                     <tr *ngFor="let product of offer.products">
                       <td>{{ product.id || '-' }}</td>
