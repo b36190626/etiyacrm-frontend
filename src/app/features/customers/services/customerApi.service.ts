@@ -1,11 +1,14 @@
+
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CustomerDetailsDto } from '../models/customer/customer-details-dto';
-import { CustomerUpdateRequest } from '../models/customer/requests/customer-update-request';
 import { GetListResponseDto } from '../models/get-list-response-dto';
 import { CustomerResponseDto } from '../models/customer/customer-response-dto';
+import { CustomerDetailsDto } from '../models/customer/customer-details-dto';
+import { CustomerUpdateRequest } from '../models/customer/requests/customer-update-request';
 import { CustomerUpdateResponse } from '../models/customer/responses/customer-update-response';
+
 
 @Injectable({
   providedIn: 'root'
@@ -27,4 +30,5 @@ export class CustomerApiService {
     return this.http.put<CustomerUpdateResponse>
     (`http://localhost:8081/customerservice/api/v1/individualcustomers/${id}`,customer)
   }
+
 }
