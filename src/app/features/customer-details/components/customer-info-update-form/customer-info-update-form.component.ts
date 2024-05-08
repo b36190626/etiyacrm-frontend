@@ -27,7 +27,7 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {}
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
+    this.activatedRoute.parent.params.subscribe(params => {
     this.pathId = params['id'];
     console.log('pathID:', this.pathId);
 
@@ -71,7 +71,7 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
       },
       complete: () => {
         this.customerUpdateForm.reset();
-        this.router.navigate(['home/customer/customer-info/',this.pathId])
+        this.router.navigate(['home/customer/',this.pathId ,'info'])
       }
     })
   }
