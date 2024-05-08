@@ -58,7 +58,7 @@ export const routes: Routes = [
             component: CustomerInfoAddressFormComponent,
           },
           {
-            path:"contact-medium-info/:id",
+            path:"contact-medium-info",
             component: ContactMediumInfoComponent
           },
           {
@@ -105,7 +105,6 @@ export const routes: Routes = [
           path:"submit-order",
           component: SubmitOrderPageComponent
         }
-
       ]
     },
 ];
