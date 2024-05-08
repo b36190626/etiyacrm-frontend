@@ -49,7 +49,7 @@ export class SearchResultComponent implements OnInit{
 
   getCustomerInfo(customerId: number){
     this.selectedCustomer.emit(customerId);
-    this.route.navigate(["/home/customer/customer-info/", customerId ])
+    this.route.navigate(["/home/customer", customerId, "info" ])
   }
 
     // Customer araması sonucuna göre customerFound değişkenini güncelleyen bir metot
