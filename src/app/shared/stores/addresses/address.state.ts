@@ -6,8 +6,10 @@ export interface AddressState{
 
 export const initialAddressState: AddressState = {
   address: {
+    city: '',
+    street: '',
+    district: '',
+    flatNumber: null,
     description: '',
-    cityId: null,
-    customerId: null,
   },
 }

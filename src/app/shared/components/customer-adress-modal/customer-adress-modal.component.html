@@ -6,7 +6,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
           <!-- Form içeriği burada yer alacak -->
           <div class="row">
             <div class="col-md-6 mb-3 d-flex">
@@ -52,7 +52,7 @@
             ></textarea>
           </div>
         <div class="button-group d-flex justify-content-center">
-          <button type="button" class="cancel-button" (click)="closeModal()">
+          <button type="button" class="cancel-button" (click)="onCancel()">
             Cancel
           </button>
           <button
