@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { GetListResponseDto } from '../models/get-list-response-dto';
 import { ContactMediumResponseDto } from '../models/contact-medium/contact-medium-response-dto';
 import { Observable } from 'rxjs';
-import { GetContactMediumResponseDto } from '../models/contact-medium/requests/get-contact-medium-request';
+import { GetContactMediumRequestDto } from '../models/contact-medium/requests/get-contact-medium-request';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +16,8 @@ export class ContactMediumApiService {
     return this.http.get<GetListResponseDto<ContactMediumResponseDto>>
     ('http://localhost:8081/customerservice/api/v1/individualcustomers?page=0&size=10');
   }
-  getById(customerId: number): Observable<GetContactMediumResponseDto>{
-    return this.http.get<GetContactMediumResponseDto>(`http://localhost:8081/customerservice/api/v1/contact-mediums/${customerId}`)
+  getById(customerId: number): Observable<GetContactMediumRequestDto>{
+    return this.http.get<GetContactMediumRequestDto>(`http://localhost:8081/customerservice/api/v1/contact-mediums/${customerId}`)
   }
 
 }
