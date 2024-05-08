@@ -1,5 +1,4 @@
 export interface CustomerUpdateResponse{
-  customerId: number;
   firstName: string;
   middleName: string;
   lastName: string;

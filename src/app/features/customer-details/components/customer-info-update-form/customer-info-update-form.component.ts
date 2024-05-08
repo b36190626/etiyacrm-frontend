@@ -47,12 +47,11 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
     });
     this.customerUpdateForm.statusChanges.subscribe(status => {
     this.isFormValid = status === 'VALID';
-    console.log("status");
 });
   }
   updateCustomer(){
     const request: CustomerUpdateRequest = {
-      customerId:  this.pathId,
+      customerId: this.pathId,
       firstName: this.customerUpdateForm.value.firstName,
       middleName: this.customerUpdateForm.value.middleName,
       lastName: this.customerUpdateForm.value.lastName,
@@ -62,16 +61,14 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
       motherName: this.customerUpdateForm.value.motherName,
       nationalityIdentity: this.customerUpdateForm.value.nationalityIdentity,
     };
-    this.customerApiService.putCustomer(request.customerId, request).subscribe({
-      next: (response) =>{
-        console.info('updateCustomer', response)
-      },
+    this.customerApiService.putCustomer(this.pathId, request).subscribe({
+      next: (response) =>{},
       error: (error) => {
         console.error('Error', error)
       },
       complete: () => {
         this.customerUpdateForm.reset();
-        this.router.navigate(['home/customer/',this.pathId ,'info'])
+        this.router.navigate(['/home/customer/',this.pathId ,'info'])
       }
     })
   }
@@ -83,4 +80,3 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
     }
   }
 }
-
