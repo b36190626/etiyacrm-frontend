@@ -1,4 +1,4 @@
-export interface GetContactMediumResponseDto{
+export interface GetContactMediumRequestDto{
   email: string;
   mobilePhone: string;
   homePhone: string;

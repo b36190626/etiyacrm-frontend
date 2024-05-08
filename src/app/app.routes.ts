@@ -33,7 +33,7 @@ export const routes: Routes = [
         component:SearchCustomerPageComponent,
       },
       {
-        path:"customer",
+        path:"customer/:id",
         component:CustomerDetailsPageComponent,
         children:[
           {
@@ -42,19 +42,19 @@ export const routes: Routes = [
             component: CustomerInfoComponent,
           },
           {
-            path: "customer-info/:id",
+            path: "info",
             component: CustomerInfoComponent,
           },
           {
-            path: "customer-info-update/:id",
+            path: "info-update",
             component: CustomerInfoUpdateFormComponent,
           },
           {
-            path:"customer-account",
+            path:"account",
             component: CustomerAccountComponent
           },
           {
-            path: "customer-address",
+            path: "address",
             component: CustomerInfoAddressFormComponent,
           },
           {
@@ -105,7 +105,6 @@ export const routes: Routes = [
           path:"submit-order",
           component: SubmitOrderPageComponent
         }
-
       ]
     },
 ];

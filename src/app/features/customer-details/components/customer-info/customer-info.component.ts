@@ -1,6 +1,6 @@
 import { CustomerApiService } from './../../../customers/services/customerApi.service';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CustomerDetailsDto } from '../../../customers/models/customer/customer-details-dto';
 import { SearchResultComponent } from '../../../customers/components/search-result/search-result.component';
@@ -17,7 +17,6 @@ import { SearchResultComponent } from '../../../customers/components/search-resu
   providers:[SearchResultComponent]
 })
 export class CustomerInfoComponent implements OnInit{
-@Input() id!: number;
 customerId!: number;
 customerInfo!: CustomerDetailsDto;
 
@@ -27,32 +26,17 @@ constructor(
   private activatedRoute: ActivatedRoute
 ){}
 
-// ngOnInit(): void {
-//   this.getCustomerInfo();
-//   console.log("çalıştı")
-// }
-// getCustomerInfo(){
-//   this.activatedRoute.params.subscribe((params =>{
-//     this.customerId = params['customerId'];
-//   })).unsubscribe();
-//       this.customerApiService.getById(this.customerId).subscribe({
-//       next: (customerDetails) => {
-//         this.customerInfo = customerDetails;
-//       },
-//       complete: () => {
-//         this.change.markForCheck();
-//       }
-//     })
-// }
-
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
+    this.activatedRoute.parent.params.subscribe(params => {
       this.customerId = params['id'];
       console.log(this.customerId,"customerId")
+      console.log(params)
 
     }).unsubscribe();
     this.getCustomerInfo();
   }
+
+
   getCustomerInfo(){
     this.customerApiService.getById(this.customerId).subscribe({
       next: (customerDetails) => {
