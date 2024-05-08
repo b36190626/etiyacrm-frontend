@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CustomerAdressModalComponent } from '../../../../shared/components/customer-adress-modal/customer-adress-modal.component';
 
 
@@ -19,12 +19,16 @@ import { CustomerAdressModalComponent } from '../../../../shared/components/cust
 export class AddressInfoComponent {
   form: any;
   showPopup: boolean = false;
-constructor(){}
+constructor(
+  private router: Router,
+){}
 
 togglePopup(event: Event) {
   event?.preventDefault();
   this.showPopup = !this.showPopup;
 }
 
-
+onPrevious(){
+  this.router.navigate(['/create-customer']);
+}
 }

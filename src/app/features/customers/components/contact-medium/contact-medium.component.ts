@@ -72,5 +72,6 @@ export class ContactMediumComponent implements OnInit {
 
   onCancel() {
     this.contactForm.reset();
+    this.router.navigate(['/create-customer/address-info'])
   }
 }
