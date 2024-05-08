@@ -1,21 +1,21 @@
 <div class="info-page container-fluid mt-5 m-3">
   <h4>Contact Medium <i class="fa-solid fa-pen-clip" style="color: #24233F;" routerLink ="/home/customer/contact-medium-info-update"></i></h4>
-  <div class="row">
+  <div *ngIf="contactMediumInfo" class="row">
     <div class="col-md-6 mb-3 d-flex">
       <label>E-mail:</label>
-      <label>{{ email }}</label>
+      <label>{{ contactMediumInfo.email }}</label>
     </div>
     <div class="col-md-6 mb-3 d-flex">
       <label>Home Phone:</label>
-      <label>{{ homePhone }}</label>
+      <label>{{ contactMediumInfo.homePhone }}</label>
     </div>
     <div class="col-md-6 mb-3 d-flex">
       <label>Mobile Phone:</label>
-      <label>{{ mobilePhone }}</label>
+      <label>{{ contactMediumInfo.mobilePhone }}</label>
     </div>
     <div class="col-md-6 mb-3 d-flex">
       <label>Fax:</label>
-      <label>{{ fax }}</label>
+      <label>{{ contactMediumInfo.fax }}</label>
     </div>
   </div>
 </div>
