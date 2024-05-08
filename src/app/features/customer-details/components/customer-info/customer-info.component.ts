@@ -1,6 +1,6 @@
 import { CustomerApiService } from './../../../customers/services/customerApi.service';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CustomerDetailsDto } from '../../../customers/models/customer/customer-details-dto';
 import { SearchResultComponent } from '../../../customers/components/search-result/search-result.component';
@@ -17,7 +17,6 @@ import { SearchResultComponent } from '../../../customers/components/search-resu
   providers:[SearchResultComponent]
 })
 export class CustomerInfoComponent implements OnInit{
-@Input() id!: number;
 customerId!: number;
 customerInfo!: CustomerDetailsDto;
 
@@ -36,6 +35,7 @@ constructor(
     }).unsubscribe();
     this.getCustomerInfo();
   }
+
 
   getCustomerInfo(){
     this.customerApiService.getById(this.customerId).subscribe({
