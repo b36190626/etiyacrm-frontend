@@ -21,6 +21,8 @@ import { setAddress } from '../../stores/addresses/address.action';
 export class CustomerAdressModalComponent implements OnInit {
   addressForm !: FormGroup;
   isFormValid: boolean = false;
+  cities = [];
+  districts = [];
 
   constructor(
     private fb: FormBuilder,
@@ -70,8 +72,9 @@ export class CustomerAdressModalComponent implements OnInit {
   onSubmit() {
     if (this.addressForm.valid) {
       console.log('Form Submitted!', this.addressForm.value);
+      this.createAddress();
     }
-    this.createAddress();
+
   }
 
   onCancel() {

@@ -74,8 +74,9 @@ export class DemographicFormComponent implements OnInit {
   onSubmit() {
     if (this.customerForm.valid) {
       console.log('Form Submitted!', this.customerForm.value);
+      this.createCustomer();
     }
-    this.createCustomer();
+
   }
 
   onCancel() {

@@ -1,7 +1,7 @@
 export interface CreateAddressRequest{
-  city: string;
-  street: string;
-  district: string;
-  flatNumber: number;
-  description: string;
+  city: String;
+  street: String;
+  district: String;
+  flatNumber: Number;
+  description: String;
 }

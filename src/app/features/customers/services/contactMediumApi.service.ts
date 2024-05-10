@@ -5,7 +5,8 @@ import { ContactMediumResponseDto } from '../models/contact-medium/contact-mediu
 import { Observable } from 'rxjs';
 import { GetContactMediumRequestDto } from '../models/contact-medium/requests/get-contact-medium-request';
 import { UpdateContactMediumRequest } from '../models/contact-medium/requests/update-contact-medium-request';
-import { UpdateContactMediumResponse } from '../models/contact-medium/responses/update-contact-medium-response';
+import { UpdatedContactMediumResponse } from '../models/contact-medium/responses/updated-contact-medium-response';
+
 
 
 @Injectable({
@@ -23,8 +24,8 @@ export class ContactMediumApiService {
     return this.http.get<GetContactMediumRequestDto>(`http://localhost:8081/customerservice/api/v1/contact-mediums/${customerId}`)
   }
 
-  putContactMedium(id: number, contactMedium: UpdateContactMediumRequest): Observable<UpdateContactMediumResponse>{
-    return this.http.put<UpdateContactMediumResponse>
+  putContactMedium(id: number, contactMedium: UpdateContactMediumRequest): Observable<UpdatedContactMediumResponse>{
+    return this.http.put<UpdatedContactMediumResponse>
     (`http://localhost:8081/customerservice/api/v1/contact-mediums/${id}`, contactMedium)
   }
 

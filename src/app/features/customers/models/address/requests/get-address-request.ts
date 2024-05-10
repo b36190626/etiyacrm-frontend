@@ -1,4 +1,4 @@
-export interface UpdateAddressRequestDto {
+export interface GetAddressRequest {
   id: String;
 
   description: String;
@@ -7,5 +7,4 @@ export interface UpdateAddressRequestDto {
   cityId: String;
   districtId: String;
   customerId: String;
-
 }
