@@ -1,4 +1,4 @@
-export interface AddressResponseDto{
+export interface GetAddressRequestDto {
   id: String;
 
   description: String;

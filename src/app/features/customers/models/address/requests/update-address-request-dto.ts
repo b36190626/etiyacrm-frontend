@@ -1,4 +1,4 @@
-export interface AddressResponseDto{
+export interface UpdateAddressRequestDto {
   id: String;
 
   description: String;
@@ -7,4 +7,5 @@ export interface AddressResponseDto{
   cityId: String;
   districtId: String;
   customerId: String;
+
 }
