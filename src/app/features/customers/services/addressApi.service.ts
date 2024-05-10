@@ -25,9 +25,17 @@ export class AddressApiService {
     return this.http.get<GetAddressRequest>(`http://localhost:8081/customerservice/api/v1/addresses/${customerId}`)
   }
 
-  putContactMedium(id: String, address: UpdateAddressRequest): Observable<UpdatedAddressResponse>{
+  putAddress(id: String, address: UpdateAddressRequest): Observable<UpdatedAddressResponse>{
     return this.http.put<UpdatedAddressResponse>
     (`http://localhost:8081/customerservice/api/v1/addresses/${id}`, address)
+  }
+
+  getCities(): Observable<any> {
+    return this.http.get('http://localhost:8081/customerservice/api/v1/cities');
+  }
+
+  getDistricts(): Observable<any> {
+    return this.http.get(`http://localhost:8081/customerservice/api/v1/districts`);
   }
 
 }
