@@ -1,3 +1,5 @@
+import { AddressResponseDto } from './../../../features/customers/models/address/address-response-dto';
+import { AddressApiService } from './../../../features/customers/services/addressApi.service';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -19,14 +21,17 @@ import { setAddress } from '../../stores/addresses/address.action';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomerAdressModalComponent implements OnInit {
+  customerId!: String;
+  cityDistrictInfo!:AddressResponseDto;
   addressForm !: FormGroup;
   isFormValid: boolean = false;
-  cities = [];
-  districts = [];
+  cities: any = [];
+  districts: any = [];
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private addressApiService: AddressApiService,
     private store: Store<{ address: CreateAddressRequest}>
   ) {}
 
@@ -38,8 +43,16 @@ export class CustomerAdressModalComponent implements OnInit {
     .subscribe((address) => {
       this.addressForm.patchValue(address);
       console.log('addressState: ', address);
-    })
-
+    });
+    this.addressApiService.getCities().subscribe(data => {
+      this.cities = data;
+    });
+    this.addressApiService.getById(this.customerId).subscribe(data => {
+      this.districts = [];
+      if (data) {
+        this.addressApiService.getDistricts().subscribe(data => {
+          this.districts = data;
+    })}});
     this.addressForm.statusChanges.subscribe(
       status => {
         this.isFormValid = status === 'VALID';
