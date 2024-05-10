@@ -1,6 +1,4 @@
-export interface AddressResponseDto{
-  id: String;
-
+export interface UpdatedAddressResponse {
   description: String;
   street: String
   flatNumber: Number;
