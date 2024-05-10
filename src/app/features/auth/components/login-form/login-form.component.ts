@@ -27,6 +27,9 @@ import { NoTurkishCharacterDirective } from '../../../../core/directives/no-turk
 export class LoginFormComponent {
   showPassword: boolean = false;
   showPopup: boolean = false;
+  usernameErrorMessage: string = '';
+  passwordErrorMessage: string = '';
+
   form: FormGroup = this.fb.group({
     username: [
       '',
@@ -66,6 +69,9 @@ export class LoginFormComponent {
       return null;
     }
     return { 'loginCharacter': true };
+  }
+
+  onSubmit() {
   }
 
 }

@@ -17,6 +17,7 @@ import { OfferSelectionPageComponent } from "./routers/offers/offer-selection-pa
 import { OfferConfigurationProductPageComponent } from "./routers/offers/offer-selection-page/offer-configuration-product-page/offer-configuration-product-page.component";
 import { OffersLayoutComponent } from "./shared/layouts/offers-layout/offers-layout.component";
 import { SubmitOrderPageComponent } from "./routers/offers/submit-order-page/submit-order-page.component";
+import { confirmationRouteGuard } from "./shared/guards/confirmation-route.guard";
 
 
 export const routes: Routes = [
@@ -68,7 +69,8 @@ export const routes: Routes = [
           },
           {
             path:"contact-medium-info-update",
-            component: ContactMediumInfoUpdateFormComponent
+            component: ContactMediumInfoUpdateFormComponent,
+            canDeactivate: [confirmationRouteGuard],
           }
         ]
       },
