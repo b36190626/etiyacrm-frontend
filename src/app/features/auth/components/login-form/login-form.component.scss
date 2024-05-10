@@ -50,7 +50,7 @@
     cursor: pointer;
   }
 
-  .button{
+  .valid-login-button{
     height: 3rem;
     background-color: #F58220;
     color: white;
@@ -60,9 +60,19 @@
     font-weight: 400;
     font-family: "Arial";
     font-size: 1.5rem;
-    cursor: pointer;
 
   }
 
+  .invalid-login-button{
+        height: 3rem;
+    background-color: #FBCDA6;
+    color: white;
+    width: 12rem;
+    border-radius: 30px;
+    border:1px solid #FBCDA6;
+    font-weight: 400;
+    font-family: "Arial";
+    font-size: 1.5rem;
+  }
 
 }

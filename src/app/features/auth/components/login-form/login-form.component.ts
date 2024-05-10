@@ -3,14 +3,22 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { SelectButtonModule } from 'primeng/selectbutton';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-message.pipe';
 import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
+import { NoTurkishCharacterDirective } from '../../../../core/directives/no-turkish-character.directive';
 @Component({
   selector: 'etiya-login-form',
   standalone: true,
   imports: [
-    CommonModule, RouterModule, TranslateModule, WarningPopupComponent, SelectButtonModule, ControlErrorMessagePipe
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    TranslateModule,
+    WarningPopupComponent,
+    SelectButtonModule,
+    ControlErrorMessagePipe,
+    NoTurkishCharacterDirective
   ],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',
@@ -20,10 +28,17 @@ export class LoginFormComponent {
   showPassword: boolean = false;
   showPopup: boolean = false;
   form: FormGroup = this.fb.group({
-    username: [],
+    username: [
+      '',
+    [
+      Validators.required,
+      Validators.maxLength(20),
+      this.noCharacterValidator
+    ]],
     password: [
       '',
       [
+        Validators.required,
         Validators.minLength(8),
       ]
     ]
@@ -43,6 +58,14 @@ export class LoginFormComponent {
   togglePopup(event: Event) {
     event?.preventDefault();
     this.showPopup = !this.showPopup;
+  }
+
+  noCharacterValidator(control) {
+    const turkishChars = /^[a-zA-Z][a-zA-Z]{3,20}$/;
+    if (turkishChars.test(control.value)) {
+      return null;
+    }
+    return { 'loginCharacter': true };
   }
 
 }

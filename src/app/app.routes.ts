@@ -21,6 +21,11 @@ import { SubmitOrderPageComponent } from "./routers/offers/submit-order-page/sub
 
 export const routes: Routes = [
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'auth/login'
+  },
+  {
     path: "auth/login",
     component: LoginPageComponent,
   },
