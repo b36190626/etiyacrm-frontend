@@ -6,7 +6,6 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-message.pipe';
 import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
-import { NoTurkishCharacterDirective } from '../../../../core/directives/no-turkish-character.directive';
 @Component({
   selector: 'etiya-login-form',
   standalone: true,
@@ -18,7 +17,6 @@ import { NoTurkishCharacterDirective } from '../../../../core/directives/no-turk
     WarningPopupComponent,
     SelectButtonModule,
     ControlErrorMessagePipe,
-    NoTurkishCharacterDirective
   ],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',
@@ -27,8 +25,6 @@ import { NoTurkishCharacterDirective } from '../../../../core/directives/no-turk
 export class LoginFormComponent {
   showPassword: boolean = false;
   showPopup: boolean = false;
-  usernameErrorMessage: string = '';
-  passwordErrorMessage: string = '';
 
   form: FormGroup = this.fb.group({
     username: [

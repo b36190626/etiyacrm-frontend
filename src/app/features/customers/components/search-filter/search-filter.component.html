@@ -1,13 +1,13 @@
 <fieldset class="fieldset">
   <legend>Search Filter</legend>
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="search-form">
-    <input class="form-control" formControlName="id"  type="number" placeholder="ID Number"  name="id" />
-    <input class="form-control" formControlName="customerId" type="number" placeholder="Customer ID"  name="customerId"/>
-    <input class="form-control" formControlName="accountNumber" type="text" placeholder="Account Number"  name="accountNumber"/>
-    <input class="form-control" formControlName="gsmNumber" type="text" placeholder="GSM Number"  name="gsmNumber"/>
+    <input class="form-control" formControlName="id"  type="number" placeholder="ID Number"  name="id" appNoStringInput/>
+    <input class="form-control" formControlName="customerId" type="number" placeholder="Customer ID"  name="customerId" appNoStringInput/>
+    <input class="form-control" formControlName="accountNumber" type="text" placeholder="Account Number"  name="accountNumber" appNoStringInput/>
+    <input class="form-control" formControlName="gsmNumber" type="text" placeholder="GSM Number"  name="gsmNumber" appNoStringInput/>
     <input class="form-control" formControlName="firstname" type="text" placeholder="First Name"  name="firstname"/>
     <input class="form-control" formControlName="lastname" type="text" placeholder="Last Name"  name="lastname"/>
-    <input class="form-control" formControlName="orderNumber" type="text" placeholder="Order Number" name="orderNumber"/>
+    <input class="form-control" formControlName="orderNumber" type="text" placeholder="Order Number" name="orderNumber" appNoStringInput/>
 
     <div class="button-group">
       <div>

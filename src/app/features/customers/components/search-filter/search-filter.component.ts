@@ -2,13 +2,17 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
+import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
 
 
 @Component({
   selector: 'app-search-filter',
   standalone: true,
   imports: [
-    CommonModule,ReactiveFormsModule, WarningPopupComponent
+    CommonModule,
+    ReactiveFormsModule,
+    WarningPopupComponent,
+    NoStringInputDirective
   ],
   templateUrl: './search-filter.component.html',
   styleUrl: './search-filter.component.scss',

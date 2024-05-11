@@ -54,6 +54,7 @@ export const routes: Routes = [
           {
             path: "info-update",
             component: CustomerInfoUpdateFormComponent,
+            canDeactivate: [confirmationRouteGuard],
           },
           {
             path:"account",

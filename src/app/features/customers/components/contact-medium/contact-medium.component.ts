@@ -6,12 +6,17 @@ import { select, Store } from '@ngrx/store';
 import { CreateContactMediumRequest } from '../../models/contact-medium/requests/create-contact-medium-request';
 import { setContactMedium } from '../../../../shared/stores/contact-medium/contact-medium.action';
 import { selectContactMedium } from '../../../../shared/stores/contact-medium/contact-medium.selector';
+import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-message.pipe';
+import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
 
 @Component({
   selector: 'app-contact-medium',
   standalone: true,
   imports: [
-    CommonModule, ReactiveFormsModule
+    CommonModule,
+    ReactiveFormsModule,
+    ControlErrorMessagePipe,
+    NoStringInputDirective
   ],
   templateUrl: './contact-medium.component.html',
   styleUrl: './contact-medium.component.scss',
@@ -44,7 +49,10 @@ export class ContactMediumComponent implements OnInit {
 
   createForm(){
     this.contactForm = this.fb.group({
-      email: ['', Validators.required],
+      email: ['', [
+        Validators.required,
+        Validators.email,
+      ]],
       homePhone: [''],
       mobilePhone: ['', Validators.required],
       fax: ['']

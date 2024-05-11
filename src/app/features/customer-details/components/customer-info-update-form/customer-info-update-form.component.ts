@@ -4,12 +4,16 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CustomerUpdateRequest } from '../../../customers/models/customer/requests/customer-update-request';
+import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
 
 @Component({
   selector: 'app-customer-info-update-form',
   standalone: true,
   imports: [
-    CommonModule,ReactiveFormsModule, RouterModule
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule,
+    NoStringInputDirective
   ],
   templateUrl: './customer-info-update-form.component.html',
   styleUrl: './customer-info-update-form.component.scss',

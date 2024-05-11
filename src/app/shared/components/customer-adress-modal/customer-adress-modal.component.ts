@@ -8,13 +8,15 @@ import { select, Store } from '@ngrx/store';
 import { CreateAddressRequest } from '../../../features/customers/models/address/requests/create-address-request';
 import { selectAddress } from '../../stores/addresses/address.selector';
 import { setAddress } from '../../stores/addresses/address.action';
+import { NoStringInputDirective } from '../../../core/directives/no-string-input.directive';
 
 @Component({
   selector: 'app-customer-adress-modal',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NoStringInputDirective
   ],
   templateUrl: './customer-adress-modal.component.html',
   styleUrl: './customer-adress-modal.component.scss',
@@ -65,8 +67,14 @@ export class CustomerAdressModalComponent implements OnInit {
       city: ['', Validators.required], //city{id, name olarak tutuluyor}
       street: ['', Validators.required],
       district: ['', Validators.required],
-      flatNumber: [null, Validators.required],
-      description: ['', Validators.required]
+      flatNumber: [null, [
+        Validators.required,
+        Validators.maxLength(250)
+      ]],
+      description: ['', [
+        Validators.required,
+        Validators.maxLength(250)
+      ]]
     })
   }
 

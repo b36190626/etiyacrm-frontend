@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { UpdateContactMediumRequest } from '../../../customers/models/contact-medium/requests/update-contact-medium-request';
 import { ContactMediumApiService } from '../../../customers/services/contactMediumApi.service';
+import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
+import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-message.pipe';
 
 @Component({
   selector: 'app-contact-medium-info-update-form',
@@ -11,7 +13,9 @@ import { ContactMediumApiService } from '../../../customers/services/contactMedi
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    NoStringInputDirective,
+    ControlErrorMessagePipe
   ],
   templateUrl: './contact-medium-info-update-form.component.html',
   styleUrl: './contact-medium-info-update-form.component.scss',

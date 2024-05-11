@@ -8,13 +8,13 @@
       </div>
       <div class="col-md-6 mb-3 d-flex">
         <label for="home-phone">Home Phone:</label>
-        <input type="text" id="home-phone" class="form-control" formControlName="homePhone">
+        <input type="text" id="home-phone" class="form-control" formControlName="homePhone" appNoStringInput>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 mb-3 d-flex">
         <label for="mobile-phone">Mobile Phone*:</label>
-        <input type="text" id="mobile-phone" class="form-control" formControlName="mobilePhone" required>
+        <input type="text" id="mobile-phone" class="form-control" formControlName="mobilePhone" required appNoStringInput>
       </div>
       <div class="col-md-6 mb-3 d-flex">
         <label for="fax">Fax:</label>
@@ -26,4 +26,7 @@
       <button type="submit" class="button-next" [ngClass]="{ 'valid-next-button': isFormValid,'invalid-next-button': !isFormValid }">Save</button>
   </div>
   </form>
+  <div *ngIf="contactMediumInfoUpdateForm.get('email')?.invalid && contactMediumInfoUpdateForm.get('email')?.touched">
+    <span class="text-danger">{{ contactMediumInfoUpdateForm.get('email')!.errors | etiyaControlErrorMessage }}</span>
+  </div>
 </div>

@@ -6,12 +6,15 @@ import { CreateCustomerRequest } from '../../models/customer/requests/create-cus
 import { setIndividualCustomer } from '../../../../shared/stores/customers/individual-customer.action';
 import { select, Store } from '@ngrx/store';
 import { selectIndividualCustomer } from '../../../../shared/stores/customers/individual-customer.selector';
+import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
 
 @Component({
   selector: 'app-demographic-form',
   standalone: true,
   imports: [
-    CommonModule, ReactiveFormsModule,
+    CommonModule,
+    ReactiveFormsModule,
+    NoStringInputDirective
   ],
   templateUrl: './demographic-form.component.html',
   styleUrl: './demographic-form.component.scss',
