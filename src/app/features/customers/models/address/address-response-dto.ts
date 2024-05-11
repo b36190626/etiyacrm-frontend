@@ -1,10 +1,8 @@
 export interface AddressResponseDto{
-  id: String;
-
-  description: String;
-  street: String
-  flatNumber: Number;
-  cityId: String;
-  districtId: String;
-  customerId: String;
+  id: string;
+  description: string;
+  street: string
+  flatNumber: number;
+  districtId: string;
+  customerId: string;
 }

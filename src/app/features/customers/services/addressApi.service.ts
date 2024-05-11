@@ -21,11 +21,11 @@ export class AddressApiService {
     return this.http.get<GetListResponseDto<AddressResponseDto>>
     ('http://localhost:8081/customerservice/api/v1/addresses');
   }
-  getById(customerId: String): Observable<GetAddressRequest>{
+  getById(customerId: string): Observable<GetAddressRequest>{
     return this.http.get<GetAddressRequest>(`http://localhost:8081/customerservice/api/v1/addresses/${customerId}`)
   }
 
-  putAddress(id: String, address: UpdateAddressRequest): Observable<UpdatedAddressResponse>{
+  putAddress(id: string, address: UpdateAddressRequest): Observable<UpdatedAddressResponse>{
     return this.http.put<UpdatedAddressResponse>
     (`http://localhost:8081/customerservice/api/v1/addresses/${id}`, address)
   }

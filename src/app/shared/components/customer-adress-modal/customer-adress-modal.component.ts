@@ -23,7 +23,7 @@ import { NoStringInputDirective } from '../../../core/directives/no-string-input
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomerAdressModalComponent implements OnInit {
-  customerId!: String;
+  customerId!: string;
   cityDistrictInfo!:AddressResponseDto;
   addressForm !: FormGroup;
   isFormValid: boolean = false;

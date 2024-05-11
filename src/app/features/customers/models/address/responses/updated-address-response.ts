@@ -1,8 +1,8 @@
 export interface UpdatedAddressResponse {
-  description: String;
-  street: String
-  flatNumber: Number;
-  cityId: String;
-  districtId: String;
-  customerId: String;
+  description: string;
+  street: string
+  flatNumber: number;
+  cityId: string;
+  districtId: string;
+  customerId: string;
 }
