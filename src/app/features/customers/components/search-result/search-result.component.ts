@@ -26,7 +26,7 @@ import { CustomerResponseDto } from '../../models/customer/customer-response-dto
 export class SearchResultComponent implements OnInit{
   customerFound: boolean = true;
   customers: GetListResponseDto<CustomerResponseDto>;
-  @Output() selectedCustomer = new EventEmitter<number>();
+  @Output() selectedCustomer = new EventEmitter<string>();
 
   p: number = 0;
   constructor(
@@ -47,7 +47,7 @@ export class SearchResultComponent implements OnInit{
     });
   }
 
-  getCustomerInfo(customerId: number){
+  getCustomerInfo(customerId: string){
     this.selectedCustomer.emit(customerId);
     this.route.navigate(["/home/customer", customerId, "info" ])
   }

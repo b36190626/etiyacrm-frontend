@@ -14,7 +14,7 @@ import { ActivatedRoute, RouterLink, RouterModule } from "@angular/router";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TopBarComponent implements OnInit {
-  pathId!: number;
+  pathId!: string;
 
   constructor(
     private activatedRoute: ActivatedRoute

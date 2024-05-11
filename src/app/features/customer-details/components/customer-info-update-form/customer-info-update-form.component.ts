@@ -22,7 +22,7 @@ import { NoStringInputDirective } from '../../../../core/directives/no-string-in
 export class CustomerInfoUpdateFormComponent implements OnInit {
   customerUpdateForm!: FormGroup;
   isFormValid: boolean = false;
-  pathId!: number;
+  pathId!: string;
 
   constructor(
     private fb: FormBuilder,

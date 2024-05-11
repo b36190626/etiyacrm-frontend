@@ -1,6 +1,6 @@
 export interface CustomerDetailsDto {
-  id: number;
-  customerId: number;
+  id: string;
+  customerId: string;
   firstName: string;
   middleName: string;
   lastName: string;
@@ -8,5 +8,5 @@ export interface CustomerDetailsDto {
   birthDate: Date;
   motherName: string;
   fatherName: string;
-  nationalityIdentity: number;
+  nationalityIdentity: string;
 }

@@ -1,5 +1,5 @@
 export interface CustomerUpdateRequest {
-  customerId: number;
+  customerId: string;
   firstName: string;
   middleName: string;
   lastName: string;
@@ -7,5 +7,5 @@ export interface CustomerUpdateRequest {
   birthDate: Date;
   motherName: string;
   fatherName: string;
-  nationalityIdentity: number;
+  nationalityIdentity: string;
 }

@@ -24,7 +24,7 @@ import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-me
 export class ContactMediumInfoUpdateFormComponent implements OnInit {
   contactMediumInfoUpdateForm!: FormGroup ;
   isFormValid: boolean = false;
-  pathId!: number;
+  pathId!: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,

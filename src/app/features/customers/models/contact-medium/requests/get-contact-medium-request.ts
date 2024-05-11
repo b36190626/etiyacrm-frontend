@@ -3,5 +3,5 @@ export interface GetContactMediumRequestDto{
   mobilePhone: string;
   homePhone: string;
   fax: string;
-  customerId: number;
+  id: string;
 }

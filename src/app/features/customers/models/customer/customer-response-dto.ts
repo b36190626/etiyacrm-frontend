@@ -1,5 +1,5 @@
 export interface CustomerResponseDto {
-    id: number;
+    id: string;
     firstName: string;
     middleName: string;
     lastName: string;
@@ -7,5 +7,5 @@ export interface CustomerResponseDto {
     birthDate: Date;
     motherName: string;
     fatherName: string;
-    nationalityIdentity: number;
+    nationalityIdentity: string;
   }

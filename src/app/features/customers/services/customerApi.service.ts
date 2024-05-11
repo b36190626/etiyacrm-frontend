@@ -22,11 +22,11 @@ export class CustomerApiService {
 
   }
 
-  getById(id: number): Observable<CustomerDetailsDto> {
+  getById(id: string): Observable<CustomerDetailsDto> {
     return this.http.get<CustomerDetailsDto>(`http://localhost:8081/customerservice/api/v1/individualcustomers/${id}`)
   }
 
-  putCustomer(id: number, customer: CustomerUpdateRequest): Observable<CustomerUpdateResponse>{
+  putCustomer(id: string, customer: CustomerUpdateRequest): Observable<CustomerUpdateResponse>{
     return this.http.put<CustomerUpdateResponse>
     (`http://localhost:8081/customerservice/api/v1/individualcustomers/${id}`,customer)
   }

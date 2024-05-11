@@ -20,11 +20,11 @@ export class ContactMediumApiService {
     return this.http.get<GetListResponseDto<ContactMediumResponseDto>>
     ('http://localhost:8081/customerservice/api/v1/individualcustomers?page=0&size=10');
   }
-  getById(customerId: number): Observable<GetContactMediumRequestDto>{
+  getById(customerId: string): Observable<GetContactMediumRequestDto>{
     return this.http.get<GetContactMediumRequestDto>(`http://localhost:8081/customerservice/api/v1/contact-mediums/${customerId}`)
   }
 
-  putContactMedium(id: number, contactMedium: UpdateContactMediumRequest): Observable<UpdatedContactMediumResponse>{
+  putContactMedium(id: string, contactMedium: UpdateContactMediumRequest): Observable<UpdatedContactMediumResponse>{
     return this.http.put<UpdatedContactMediumResponse>
     (`http://localhost:8081/customerservice/api/v1/contact-mediums/${id}`, contactMedium)
   }

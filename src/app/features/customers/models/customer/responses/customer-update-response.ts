@@ -6,5 +6,5 @@ export interface CustomerUpdateResponse{
   birthDate: Date;
   motherName: string;
   fatherName: string;
-  nationalityIdentity: number;
+  nationalityIdentity: string;
 }

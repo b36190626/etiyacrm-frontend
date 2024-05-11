@@ -3,5 +3,5 @@ export interface UpdateContactMediumRequest{
   mobilePhone: string;
   homePhone: string;
   fax: string;
-  customerId: number;
+  customerId: string;
 }

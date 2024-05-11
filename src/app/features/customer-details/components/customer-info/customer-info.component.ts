@@ -17,7 +17,7 @@ import { SearchResultComponent } from '../../../customers/components/search-resu
   providers:[SearchResultComponent]
 })
 export class CustomerInfoComponent implements OnInit{
-customerId!: number;
+customerId!: string;
 customerInfo!: CustomerDetailsDto;
 
 constructor(

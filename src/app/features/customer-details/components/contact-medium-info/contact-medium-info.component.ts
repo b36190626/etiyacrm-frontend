@@ -15,7 +15,7 @@ import { ContactMediumApiService } from '../../../customers/services/contactMedi
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactMediumInfoComponent implements OnInit{
-  customerId!: number;
+  customerId!: string;
   contactMediumInfo!: GetContactMediumRequestDto;
 
   constructor(
