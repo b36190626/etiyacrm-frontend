@@ -21,8 +21,8 @@ export class AddressApiService {
     return this.http.get<GetListResponseDto<AddressResponseDto>>
     ('http://localhost:8081/customerservice/api/v1/addresses');
   }
-  getById(customerId: string): Observable<GetAddressRequest>{
-    return this.http.get<GetAddressRequest>(`http://localhost:8081/customerservice/api/v1/addresses/${customerId}`)
+  getById(customerId: string): Observable<GetAddressRequest[]>{
+    return this.http.get<GetAddressRequest[]>(`http://localhost:8081/customerservice/api/v1/addresses/${customerId}`)
   }
 
   putAddress(id: string, address: UpdateAddressRequest): Observable<UpdatedAddressResponse>{

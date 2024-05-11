@@ -31,15 +31,24 @@
     justify-content: left;
   }
 
-  .add-new-address{
+  .address-info{
     border: 1px solid #F58634 ;
-    width: 25vw;
-    height: 30vh;
+    width: 39vw;
+    height: 45vh;
     margin-top: 2rem;
-    text-align: center;
+    padding-left: 3rem;
+  }
+
+  .address-options{
     display: flex;
-    justify-content:center;
-    align-items: center;
+    flex-direction: row-reverse;
+    padding-right: 2rem;
+    padding-top: 2rem;
+  }
+
+  .option-click{
+    border: 2px solid #F58634 ;
+    background-color: #FBCDA6;
 
   }
 
