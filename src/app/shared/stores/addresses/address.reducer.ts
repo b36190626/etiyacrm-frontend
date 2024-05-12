@@ -6,8 +6,6 @@ export const addressReducer = createReducer(
   initialAddressState,
   on(setAddress, (state, {address}) => ({
     ...state,
-    address: {
-      ...address,
-    },
+    addresses: [...state.addresses, address],
   }))
 );

@@ -1,9 +1,10 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { AddressState } from "./address.state";
 
-const selectAddressState = createFeatureSelector<AddressState>('Address');
+const selectAddressState = createFeatureSelector<AddressState>('Addresses');
 
-export const selectAddress = createSelector(
+
+export const selectAllAddresses = createSelector(
   selectAddressState,
-  (state: AddressState) => state.address
+  (state: AddressState) => state.addresses
 );

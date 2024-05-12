@@ -5,10 +5,10 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { CreateAddressRequest } from '../../../features/customers/models/address/requests/create-address-request';
-import { selectAddress } from '../../stores/addresses/address.selector';
 import { setAddress } from '../../stores/addresses/address.action';
 import { NoStringInputDirective } from '../../../core/directives/no-string-input.directive';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { selectAllAddresses } from '../../stores/addresses/address.selector';
 
 @Component({
   selector: 'app-customer-adress-modal',
@@ -45,7 +45,7 @@ export class CustomerAdressModalComponent implements OnInit {
     this.loadCitiesOnOpenModal();
 
     this.store
-    .pipe(select(selectAddress))
+    .pipe(select(selectAllAddresses))
     .subscribe((address) => {
       this.addressForm.patchValue(address);
       console.log('addressState: ', address);
@@ -90,15 +90,15 @@ export class CustomerAdressModalComponent implements OnInit {
   // }
 
   createAddress() {
-    const address: CreateAddressRequest = {
+    const newAddress = {
       city: this.addressForm.value.city,
       street: this.addressForm.value.street,
       district: this.addressForm.value.district,
       flatNumber: this.addressForm.value.flatNumber,
       description: this.addressForm.value.description,
     };
-    this.store.dispatch(setAddress({ address }));
-    this.router.navigate(['/create-customer/contact-medium']);
+    this.store.dispatch(setAddress({ address: newAddress }));
+    ;
   }
     onCityChange(cityId: any) {
 
@@ -117,6 +117,7 @@ export class CustomerAdressModalComponent implements OnInit {
     if (this.addressForm.valid) {
       console.log('Form Submitted!', this.addressForm.value);
       this.createAddress();
+      this.router.navigate(['/create-customer/address-info'])
     }
 
   }
