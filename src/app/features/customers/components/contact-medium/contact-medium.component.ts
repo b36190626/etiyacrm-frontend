@@ -8,7 +8,6 @@ import { setContactMedium } from '../../../../shared/stores/contact-medium/conta
 import { selectContactMedium } from '../../../../shared/stores/contact-medium/contact-medium.selector';
 import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-message.pipe';
 import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
-import { MobilePhoneFormatDirective } from '../../../../core/directives/mobile-phone-format.directive';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @Component({
@@ -22,7 +21,6 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
     ReactiveFormsModule,
     ControlErrorMessagePipe,
     NoStringInputDirective,
-    MobilePhoneFormatDirective,
     NgxMaskDirective
   ],
   templateUrl: './contact-medium.component.html',
@@ -44,7 +42,6 @@ export class ContactMediumComponent implements OnInit {
       event.preventDefault();
     }
   }
-
   ngOnInit() {
     this.createForm();
 
