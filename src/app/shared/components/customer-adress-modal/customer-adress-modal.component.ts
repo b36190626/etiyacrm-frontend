@@ -1,4 +1,3 @@
-import { AddressResponseDto } from './../../../features/customers/models/address/address-response-dto';
 import { AddressApiService } from './../../../features/customers/services/addressApi.service';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -8,7 +7,7 @@ import { CreateAddressRequest } from '../../../features/customers/models/address
 import { setAddress } from '../../stores/addresses/address.action';
 import { NoStringInputDirective } from '../../../core/directives/no-string-input.directive';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { selectAllAddresses } from '../../stores/addresses/address.selector';
+import { selectAddress } from '../../stores/addresses/address.selector';
 
 @Component({
   selector: 'app-customer-adress-modal',
@@ -24,7 +23,7 @@ import { selectAllAddresses } from '../../stores/addresses/address.selector';
 })
 export class CustomerAdressModalComponent implements OnInit {
 
-  cityDistrictInfo!:AddressResponseDto;
+
   addressForm !: FormGroup;
   isFormValid: boolean = false;
   cities: any = [];
@@ -45,7 +44,7 @@ export class CustomerAdressModalComponent implements OnInit {
     this.loadCitiesOnOpenModal();
 
     this.store
-    .pipe(select(selectAllAddresses))
+    .pipe(select(selectAddress))
     .subscribe((address) => {
       this.addressForm.patchValue(address);
       console.log('addressState: ', address);
@@ -97,7 +96,7 @@ export class CustomerAdressModalComponent implements OnInit {
       flatNumber: this.addressForm.value.flatNumber,
       description: this.addressForm.value.description,
     };
-    this.store.dispatch(setAddress({ address: newAddress }));
+    this.store.dispatch(setAddress({ Address: newAddress }));
     ;
   }
     onCityChange(cityId: any) {
