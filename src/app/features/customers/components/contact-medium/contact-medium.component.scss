@@ -31,15 +31,7 @@ label {
 .row:first-of-type {
   margin-top: 4rem;
 }
-.row input[type="text"],
-.row input[type="email"],
-.row select {
-  flex: 0 1 70vh;
-  height: 2.3rem;
-  padding: 1rem;
-  border: 1px solid f48221;
-  border-radius: 0.8rem;
-}
+
 .form-control {
   border: 1px solid #FBCDA6;
   border-radius: 0.5rem;

@@ -33,4 +33,7 @@ togglePopup(event: Event) {
 onPrevious(){
   this.router.navigate(['/create-customer']);
 }
+onNext(){
+  this.router.navigate(['/create-customer/contact-medium']);
+}
 }
