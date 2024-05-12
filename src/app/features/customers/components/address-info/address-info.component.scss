@@ -1,3 +1,9 @@
+.info-page{
+  background-color: white;
+  border-radius: 2rem;
+  width: 90vw;
+  height: 74vh;
+}
 .address-info {
   width: 100%;
   padding: 20px;
@@ -11,7 +17,13 @@
     color: #333;
     font-weight: 700;
   }
-
+  .addresses{
+    border: 1px solid #F58634 ;
+    width: 25vw;
+    height: 30vh;
+    margin-top: 2rem;
+    padding-left: 3rem;
+  }
   .add-new-address{
     border: 1px solid #F58634 ;
     width: 25vw;
@@ -19,11 +31,20 @@
     margin-top: 2rem;
     text-align: center;
     display: flex;
-    justify-content:center;
-    align-items: center;
+    justify-content:space-around;
 
   }
+  .address-options{
+    display: flex;
+    flex-direction: row-reverse;
+    padding-right: 2rem;
+    padding-top: 2rem;
+  }
+  .option-click{
+    border: 2px solid #F58634 ;
+    background-color: #FBCDA6;
 
+  }
   .address-button{
     border: 1px solid #F58634 ;
     margin:auto;

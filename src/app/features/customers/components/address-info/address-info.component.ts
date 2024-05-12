@@ -17,6 +17,8 @@ import { CustomerAdressModalComponent } from '../../../../shared/components/cust
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddressInfoComponent {
+  addressList: Array<any>=["samipaşazade"]; //doldur
+  optionClick: boolean=true;
   form: any;
   showPopup: boolean = false;
 constructor(
