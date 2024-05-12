@@ -3,6 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="modalLabel">Add new Address</h5>
+        <!-- address infoya gitmesi lazım,modala değil. burası kapanış, info açılış butonu. -->
         <button type="button" (click)="loadCitiesOnOpenModal()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -42,7 +43,7 @@
           <button type="button" class="cancel-button" data-bs-dismiss="modal">
             Cancel
           </button>
-          <button
+          <button aria-label="Close"
             type="submit"
             class="save-button"
             [ngClass]="{

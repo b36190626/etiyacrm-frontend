@@ -97,7 +97,6 @@ export class CustomerAdressModalComponent implements OnInit {
       description: this.addressForm.value.description,
     };
     this.store.dispatch(setAddress({ Address: newAddress }));
-    ;
   }
     onCityChange(cityId: any) {
 
