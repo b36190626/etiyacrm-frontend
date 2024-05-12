@@ -5,6 +5,7 @@ import { CustomerAdressModalComponent } from '../../../../shared/components/cust
 
 import { select, Store } from '@ngrx/store';
 import { selectAddress } from '../../../../shared/stores/addresses/address.selector';
+import { CreateAddressRequest } from '../../models/address/requests/create-address-request';
 
 
 
@@ -24,30 +25,25 @@ import { selectAddress } from '../../../../shared/stores/addresses/address.selec
 export class AddressInfoComponent implements OnInit {
 
   addresses$=this.store.pipe(select(selectAddress)) //doldur
-  addressList: any; //doldur
-  // addresses$: Array<any>=["samipaşazade"]; //doldur
-  // addressList: Array<any>=["samipaşazade"]; //doldur
+  addressList: CreateAddressRequest[]=[];
+ü
   optionClick: boolean=true;
   form: any;
   showPopup: boolean = false;
-  allAdressess: CreateAddressRequest[];
 
 constructor(
   private router: Router,
-  private store: Store<{addresses:any}>
+  private store: Store<{ address: CreateAddressRequest}>
 ){
   //this.addresses$ = this.store.pipe(select(selectAllAddresses));
 }
   ngOnInit(): void {
-    console.log(this.store)
+    this.store.pipe(select(selectAddress)).subscribe((address) =>
+      {
+        this.addressList.push(address)
+      })
   }
-    this.store
-    .pipe(select(selectAllAddresses))
-    .subscribe((address) => {
-      console.log('addressState: ', address);
-      this.allAdressess = address;
-    })
-    }
+
 
 togglePopup(event: Event) {
   event?.preventDefault();

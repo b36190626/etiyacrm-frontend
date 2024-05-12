@@ -5,10 +5,10 @@ import { createReducer, on } from "@ngrx/store";
 
 export const addressReducer = createReducer(
   initialAddressState,
-  on(setAddress, (state, {Address}) => ({
+  on(setAddress, (state, {address}) => ({
     ...state,
-    Address: {
-      ...Address,
+    address: {
+      ...address,
     }
   }))
 );

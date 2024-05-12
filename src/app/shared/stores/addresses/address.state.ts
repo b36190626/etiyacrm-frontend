@@ -1,11 +1,11 @@
 import { CreateAddressRequest } from "../../../features/customers/models/address/requests/create-address-request";
 
 export interface AddressState{
-  addresses: CreateAddressRequest;
+  address: CreateAddressRequest;
 }
 
 export const initialAddressState: AddressState = {
-  addresses: {
+  address: {
     city: '',
     street: '',
     district: '',
