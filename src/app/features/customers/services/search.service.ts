@@ -11,7 +11,7 @@ export class SearchService {
   constructor(private http: HttpClient) { }
 
   getByNationalityIdentity(nationalityId: string): Observable<CustomerDetailsDto> {
-    return this.http.get<CustomerDetailsDto>(`http://localhost:8082/api/v1/search-service/${nationalityId}`)
+    return this.http.get<CustomerDetailsDto>(`http://localhost:8082/api/v1/search-service`)
   }
 
 }
