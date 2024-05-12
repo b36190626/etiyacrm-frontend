@@ -1,7 +1,7 @@
 <fieldset class="fieldset">
   <legend>Search Filter</legend>
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="search-form">
-    <input class="form-control" formControlName="id"  type="number" placeholder="ID Number"  name="id" appNoStringInput/>
+    <input class="form-control" formControlName="nationalityIdentity"  type="number" placeholder="ID Number"  name="nationalityIdentity" appNoStringInput/>
     <input class="form-control" formControlName="customerId" type="number" placeholder="Customer ID"  name="customerId" appNoStringInput/>
     <input class="form-control" formControlName="accountNumber" type="text" placeholder="Account Number"  name="accountNumber" appNoStringInput/>
     <input class="form-control" formControlName="gsmNumber" type="text" placeholder="GSM Number"  name="gsmNumber" appNoStringInput/>
