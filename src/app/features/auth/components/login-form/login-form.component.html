@@ -59,11 +59,11 @@
 
 
   <div class="d-flex justify-content-center">
-    <button type="submit" class="btn" [disabled]="!form.valid" [ngClass]="{ 'valid-login-button': form.valid,'invalid-login-button': !form.valid }" (click)="togglePopup($event)">
+    <button type="submit" class="btn"  [ngClass]="{ 'valid-login-button': form.valid,'invalid-login-button': !form.valid }" (click)="togglePopup($event)">
       {{ "login" | translate }}
     </button>
   </div>
 
-  <!-- <app-warning-popup *ngIf="showPopup"></app-warning-popup> -->
+  <app-warning-popup *ngIf="showPopup"></app-warning-popup>
 </form>
 </div>

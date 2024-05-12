@@ -41,7 +41,7 @@
               <label for="mother-name">Mother Name:</label>
               <input type="text" id="mother-name" class="form-control" formControlName="motherName">
           </div>
-          <div class="col-md-6 mb-3 d-flex">
+          <div class="col-md-6 d-flex">
               <label for="nationality-identity">Nationality ID*:</label>
               <input type="text" id="nationality-identity" class="form-control" formControlName="nationalityIdentity" appNoStringInput>
           </div>
@@ -51,4 +51,7 @@
           <button type="submit" class="button-next" [ngClass]="{ 'valid-next-button': isFormValid,'invalid-next-button': !isFormValid }">Save</button>
       </div>
   </form>
+  <div class="mt-2" *ngIf="customerUpdateForm.get('nationalityIdentity')?.invalid && customerUpdateForm.get('nationalityIdentity')?.touched">
+    <app-warning-popup [message]="customerUpdateForm.get('nationalityIdentity')!.errors | etiyaControlErrorMessage"></app-warning-popup>
+  </div>
 </div>
