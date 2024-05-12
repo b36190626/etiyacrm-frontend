@@ -47,7 +47,12 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
       gender: ['', Validators.required],
       fatherName: [''],
       motherName: [''],
-      nationalityIdentity: ['', Validators.required]
+      nationalityIdentity: ['', [
+        Validators.required,
+        Validators.maxLength(11),
+        Validators.minLength(11),
+        Validators.pattern("^[1-9]{1}[0-9]{9}[02468]{1}$")
+      ]]
     });
     this.customerUpdateForm.statusChanges.subscribe(status => {
     this.isFormValid = status === 'VALID';

@@ -8,15 +8,22 @@ import { setContactMedium } from '../../../../shared/stores/contact-medium/conta
 import { selectContactMedium } from '../../../../shared/stores/contact-medium/contact-medium.selector';
 import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-message.pipe';
 import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
+import { MobilePhoneFormatDirective } from '../../../../core/directives/mobile-phone-format.directive';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-contact-medium',
   standalone: true,
+  providers: [
+    provideNgxMask(),
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     ControlErrorMessagePipe,
-    NoStringInputDirective
+    NoStringInputDirective,
+    MobilePhoneFormatDirective,
+    NgxMaskDirective
   ],
   templateUrl: './contact-medium.component.html',
   styleUrl: './contact-medium.component.scss',
@@ -31,6 +38,13 @@ export class ContactMediumComponent implements OnInit {
     private router: Router,
     private store: Store<{ contactMedium: CreateContactMediumRequest }>
   ) {}
+
+  onKeyDown(event: any) {
+    if (event.keyCode !== 8 && event.target.selectionStart === 0) {
+      event.preventDefault();
+    }
+  }
+
   ngOnInit() {
     this.createForm();
 
