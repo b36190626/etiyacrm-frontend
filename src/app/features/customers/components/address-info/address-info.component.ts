@@ -2,19 +2,11 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CustomerAdressModalComponent } from '../../../../shared/components/customer-adress-modal/customer-adress-modal.component';
-import { CreateAddressRequest } from '../../models/address/requests/create-address-request';
-import { Observable } from 'rxjs';
-import { select, Store } from '@ngrx/store';
-import { selectAllAddresses } from '../../../../shared/stores/addresses/address.selector';
+import { Store } from '@ngrx/store';
 
 
 @Component({
   selector: 'app-address-info',
-  template: `
-  <div *ngFor="let address of addresses$ | async">
-    <p>{{ address.street }}, {{ address.city }}</p>
-  </div>
-`,
   standalone: true,
   imports: [
     CommonModule,
@@ -26,7 +18,7 @@ import { selectAllAddresses } from '../../../../shared/stores/addresses/address.
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddressInfoComponent implements OnInit {
-  addresses$: Observable<CreateAddressRequest[]>;
+  addresses$: Array<any>=["samipaşazade"]; //doldur
   addressList: Array<any>=["samipaşazade"]; //doldur
   optionClick: boolean=true;
   form: any;
@@ -36,7 +28,7 @@ constructor(
   private router: Router,
   private store: Store
 ){
-  this.addresses$ = this.store.pipe(select(selectAllAddresses));
+  //this.addresses$ = this.store.pipe(select(selectAllAddresses));
 }
   ngOnInit(): void {
 
