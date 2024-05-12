@@ -8,7 +8,7 @@ textarea{
 }
 
 
-.invalid-save-button, .cancel-button{
+.invalid-save-button, .cancel-button, .valid-save-button{
   padding: 10px;
   width: 9rem;
   border: none;
@@ -24,7 +24,11 @@ textarea{
   cursor: pointer;
   width: 9rem;
 }
+.valid-save-button{
+  background-color: #FBCDA6;
+  cursor: pointer;
 
+}
 .button-group{
   gap: 2rem;
   margin-top: 2rem;

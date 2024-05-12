@@ -24,25 +24,19 @@
               </select>
             </div>
             <div class="col-md-6 mb-3 d-flex">
-              <label for="street">Street*</label>
-              <input type="text" class="form-control" />
+              <label for="street" class="form-label">Street*</label>
+              <input id="street" formControlName="street" type="text" class="form-control" />
             </div>
 
             <div class="col-md-6 mb-3 d-flex">
-              <label for="flat">House/Flat Number*</label>
-              <input type="text" class="form-control" appNoStringInput/>
+              <label for="flat" class="form-label">House/Flat Number*</label>
+              <input id="flat" formControlName="flatNumber" type="text" class="form-control" appNoStringInput />
             </div>
           </div>
 
           <div class="d-flex flex-column">
-            <label for="adres">Address Description*</label>
-            <textarea
-              name=""
-              id=""
-              cols="10"
-              rows="5"
-              class="form-control"
-            ></textarea>
+            <label for="description">Address Description*</label>
+            <textarea id="description" formControlName="description" cols="10" rows="5" class="form-control"></textarea>
           </div>
         <div class="modal-footer button-group d-flex justify-content-center">
           <button type="button" class="cancel-button" data-bs-dismiss="modal">

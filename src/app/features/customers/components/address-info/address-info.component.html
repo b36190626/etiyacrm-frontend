@@ -2,8 +2,9 @@
 <div class="address-info">
   <h4>Address Info</h4>
   <div class="row">
-  <div class="col-md-6" *ngIf="addressList.length>0">
-    <div class="addresses" *ngFor="let address of addressList">
+  <div class="col-md-6" *ngIf="addresses$ | async as addressList">
+    <div class="addresses" *ngFor="let address of addressList" class="address">
+      <p>{{ address.street }}, {{ address.city }}</p>
       <div class="address-options">
         <i class="fa-solid fa-ellipsis-vertical fa-xl"></i>
         <div class="option-click" *ngIf="optionClick">
