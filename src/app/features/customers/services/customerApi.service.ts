@@ -19,7 +19,6 @@ export class CustomerApiService {
 
   getList(): Observable<GetListResponseDto<CustomerResponseDto>> {
     return this.http.get<GetListResponseDto<CustomerResponseDto>>('http://localhost:8081/customerservice/api/v1/individualcustomers?page=0&size=10');
-
   }
 
   getById(id: string): Observable<CustomerDetailsDto> {

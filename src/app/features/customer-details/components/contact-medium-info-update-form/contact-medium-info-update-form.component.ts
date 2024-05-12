@@ -6,16 +6,21 @@ import { UpdateContactMediumRequest } from '../../../customers/models/contact-me
 import { ContactMediumApiService } from '../../../customers/services/contactMediumApi.service';
 import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
 import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-message.pipe';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-contact-medium-info-update-form',
   standalone: true,
+  providers: [
+    provideNgxMask(),
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
     NoStringInputDirective,
-    ControlErrorMessagePipe
+    ControlErrorMessagePipe,
+    NgxMaskDirective
   ],
   templateUrl: './contact-medium-info-update-form.component.html',
   styleUrl: './contact-medium-info-update-form.component.scss',
@@ -32,6 +37,13 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
   ) {}
+
+  onKeyDown(event: any) {
+    if (event.keyCode !== 8 && event.target.selectionStart === 0) {
+      event.preventDefault();
+    }
+  }
+
   ngOnInit(): void {
     this.activatedRoute.parent.params.subscribe(params =>{
       this.pathId = params['id'];

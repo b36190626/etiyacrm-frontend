@@ -7,6 +7,8 @@ import { setIndividualCustomer } from '../../../../shared/stores/customers/indiv
 import { select, Store } from '@ngrx/store';
 import { selectIndividualCustomer } from '../../../../shared/stores/customers/individual-customer.selector';
 import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
+import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-message.pipe';
+import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
 
 @Component({
   selector: 'app-demographic-form',
@@ -14,7 +16,9 @@ import { NoStringInputDirective } from '../../../../core/directives/no-string-in
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    NoStringInputDirective
+    NoStringInputDirective,
+    ControlErrorMessagePipe,
+    WarningPopupComponent
   ],
   templateUrl: './demographic-form.component.html',
   styleUrl: './demographic-form.component.scss',
@@ -56,7 +60,13 @@ export class DemographicFormComponent implements OnInit {
       gender: ['', Validators.required],
       fatherName: [''],
       motherName: [''],
-      nationalityIdentity: ['', Validators.required]
+      nationalityIdentity: ['', [
+        Validators.required,
+        Validators.maxLength(11),
+        Validators.minLength(11),
+        Validators.pattern("^[1-9]{1}[0-9]{9}[02468]{1}$")
+        //buraya tc içi başka kontroller gelmeli
+      ]]
     });
   }
 

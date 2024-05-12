@@ -29,6 +29,7 @@ export class CustomerAdressModalComponent implements OnInit {
   cities: any = [];
   districts: any = [];
   filteredDistricts: any[] = [];
+  allAdressess: CreateAddressRequest[];
 
   constructor(
     private fb: FormBuilder,
@@ -46,8 +47,8 @@ export class CustomerAdressModalComponent implements OnInit {
     this.store
     .pipe(select(selectAddress))
     .subscribe((address) => {
-      this.addressForm.patchValue(address);
       console.log('addressState: ', address);
+      this.allAdressess = address;
     })
 
     this.addressForm.statusChanges.subscribe(
@@ -96,7 +97,9 @@ export class CustomerAdressModalComponent implements OnInit {
       flatNumber: this.addressForm.value.flatNumber,
       description: this.addressForm.value.description,
     };
+
     this.store.dispatch(setAddress({ Address: newAddress }));
+
   }
     onCityChange(cityId: any) {
 

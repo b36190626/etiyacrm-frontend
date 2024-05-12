@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CustomerUpdateRequest } from '../../../customers/models/customer/requests/customer-update-request';
 import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
+import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-message.pipe';
+import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
 
 @Component({
   selector: 'app-customer-info-update-form',
@@ -13,7 +15,9 @@ import { NoStringInputDirective } from '../../../../core/directives/no-string-in
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
-    NoStringInputDirective
+    NoStringInputDirective,
+    ControlErrorMessagePipe,
+    WarningPopupComponent
   ],
   templateUrl: './customer-info-update-form.component.html',
   styleUrl: './customer-info-update-form.component.scss',
@@ -47,7 +51,12 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
       gender: ['', Validators.required],
       fatherName: [''],
       motherName: [''],
-      nationalityIdentity: ['', Validators.required]
+      nationalityIdentity: ['', [
+        Validators.required,
+        Validators.maxLength(11),
+        Validators.minLength(11),
+        Validators.pattern("^[1-9]{1}[0-9]{9}[02468]{1}$")
+      ]]
     });
     this.customerUpdateForm.statusChanges.subscribe(status => {
     this.isFormValid = status === 'VALID';
