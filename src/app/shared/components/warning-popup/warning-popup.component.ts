@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ControlErrorMessagePipe } from '../../../core/pipes/control-error-message.pipe';
 
 
@@ -14,7 +14,7 @@ import { ControlErrorMessagePipe } from '../../../core/pipes/control-error-messa
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WarningPopupComponent {
-
+@Input() message: unknown;
 
   isOpen: boolean = true
   openModal(){
