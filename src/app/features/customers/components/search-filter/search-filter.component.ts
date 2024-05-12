@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
 import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
 
@@ -21,7 +21,11 @@ import { NoStringInputDirective } from '../../../../core/directives/no-string-in
 export class SearchFilterComponent implements OnInit{
   isFormValid: boolean = false;
   form: FormGroup = this.fb.group({
-    id:[''],
+    nationalityIdentity:['', [
+      Validators.maxLength(11),
+      Validators.minLength(11),
+      Validators.pattern("^[1-9]{1}[0-9]{9}[02468]{1}$")
+    ]],
     customerId:[''],
     accountNumber:[''],
     gsmNumber:[''],
@@ -35,7 +39,7 @@ export class SearchFilterComponent implements OnInit{
   {
     this.form.valueChanges.subscribe(()=>{
       this.isFormValid = this.form.valid &&
-      (this.form.get('id'))?.value ||
+      (this.form.get('nationalityIdentity'))?.value ||
       (this.form.get('customerId'))?.value ||
       (this.form.get('accountNumber'))?.value ||
       (this.form.get('gsmNumber'))?.value ||
