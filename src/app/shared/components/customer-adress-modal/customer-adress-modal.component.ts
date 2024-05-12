@@ -47,8 +47,9 @@ export class CustomerAdressModalComponent implements OnInit {
     this.store
     .pipe(select(selectAddress))
     .subscribe((address) => {
+      this.addressForm.patchValue(address),
       console.log('addressState: ', address);
-      this.allAdressess = address;
+      //this.allAdressess = address;
     })
 
     this.addressForm.statusChanges.subscribe(
@@ -98,7 +99,8 @@ export class CustomerAdressModalComponent implements OnInit {
       description: this.addressForm.value.description,
     };
 
-    this.store.dispatch(setAddress({ Address: newAddress }));
+    this.store.dispatch(setAddress({ address: newAddress }));
+    console.log(newAddress)
 
   }
     onCityChange(cityId: any) {
