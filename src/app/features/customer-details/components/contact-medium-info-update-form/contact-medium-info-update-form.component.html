@@ -73,15 +73,7 @@
       </button>
     </div>
   </form>
-  <div
-    *ngIf="
-      contactMediumInfoUpdateForm.get('email')?.invalid &&
-      contactMediumInfoUpdateForm.get('email')?.touched
-    "
-  >
-    <span class="text-danger">{{
-      contactMediumInfoUpdateForm.get("email")!.errors
-        | etiyaControlErrorMessage
-    }}</span>
+  <div class="error-message mt-2" *ngIf="contactMediumInfoUpdateForm.get('email')?.invalid && contactMediumInfoUpdateForm.get('email')?.touched">
+    <app-warning-popup [message]="contactMediumInfoUpdateForm.get('email')!.errors | etiyaControlErrorMessage"></app-warning-popup>
   </div>
 </div>
