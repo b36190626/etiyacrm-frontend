@@ -23,7 +23,7 @@ import { CreateAddressRequest } from '../../models/address/requests/create-addre
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddressInfoComponent implements OnInit {
-
+  isFormValid = false;
   addressList: CreateAddressRequest[]=[];
 
   optionClick: boolean=true;
@@ -51,6 +51,9 @@ togglePopup(event: Event) {
   this.showPopup = !this.showPopup;
 }
 
+updateNextButtonState(valid: boolean) {
+  this.isFormValid = valid;
+}
 onPrevious(){
   this.router.navigate(['/create-customer']);
 }

@@ -20,7 +20,8 @@
   </div>
   <div class="col-md-6">
   <div class="add-new-address">
-
+<!-- STORE TEK BİR ADRES TUTUYOR, ARRAYE ALDIĞIMIZ ADRESLER SONRAKI SAYFADA KAYBOLUYOR -->
+<!-- MODAL İÇİ FORM KONTROL NEXT BUTONU İÇİN -->
 <button type="button" class="btn address-button" data-bs-toggle="modal" data-bs-target="#customerAddressModal">
   Add New Adress
 </button>
@@ -31,10 +32,10 @@
 
   <div class="d-flex justify-content-between my-5" >
       <button type="button" class="btn previous" (click)="onPrevious()">Previous</button>
-      <button type="button" class="btn next" (click)="onNext()">Next</button>
+      <button type="button" class="btn next" [disabled]="!isFormValid" (click)="onNext()">Next</button>
   </div>
 
-<app-customer-adress-modal></app-customer-adress-modal>
+<app-customer-adress-modal (formValid)="updateNextButtonState($event)"></app-customer-adress-modal>
 </div>
 </div>
 
