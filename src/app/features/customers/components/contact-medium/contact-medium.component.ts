@@ -9,6 +9,7 @@ import { selectContactMedium } from '../../../../shared/stores/contact-medium/co
 import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-message.pipe';
 import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
 
 @Component({
   selector: 'app-contact-medium',
@@ -21,7 +22,8 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
     ReactiveFormsModule,
     ControlErrorMessagePipe,
     NoStringInputDirective,
-    NgxMaskDirective
+    NgxMaskDirective,
+    WarningPopupComponent
   ],
   templateUrl: './contact-medium.component.html',
   styleUrl: './contact-medium.component.scss',
@@ -79,7 +81,7 @@ export class ContactMediumComponent implements OnInit {
       customerId: this.contactForm.value.customerId //bu request içinde olduğu için yazmak zorunda kaldım
     };
     this.store.dispatch(setContactMedium({ contactMedium }));
-    this.router.navigate(['/']);
+    this.router.navigate(['/home/search']);
   }
 
   onSubmit() {

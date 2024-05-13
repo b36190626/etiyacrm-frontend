@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <h4>Contact Medium</h4>
-  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="mt-3">
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="mt-3 mx-5">
     <div class="row">
       <div class="col-md-6 mb-3 d-flex">
         <label for="email">E-mail*:</label>
@@ -65,13 +65,7 @@
       </button>
     </div>
   </form>
-  <div
-    *ngIf="
-      contactForm.get('email')?.invalid && contactForm.get('email')?.touched
-    "
-  >
-    <span class="text-danger">{{
-      contactForm.get("email")!.errors | etiyaControlErrorMessage
-    }}</span>
+  <div class="error-message" *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">
+    <app-warning-popup [message]="contactForm.get('email')!.errors | etiyaControlErrorMessage"></app-warning-popup>
   </div>
 </div>
