@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CustomerDetailsDto } from '../models/customer/customer-details-dto';
+import { SearchFilterRequest } from '../models/customer/requests/search-filter-request';
+import { SearchFilterResponse } from '../models/search-filter/responses/search-filter-response';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +12,8 @@ export class SearchService {
 
   constructor(private http: HttpClient) { }
 
-  getByNationalityIdentity(nationalityId: string): Observable<CustomerDetailsDto> {
-    return this.http.get<CustomerDetailsDto>(`http://localhost:8082/api/v1/search-service`)
+  getBySearchFilter(searchFilter: SearchFilterRequest): Observable<SearchFilterResponse> {
+    return this.http.get<SearchFilterResponse>(`http://localhost:8082/api/v1/search-service ${searchFilter}`)
   }
 
 }
