@@ -76,4 +76,8 @@
   <div class="error-message mt-2" *ngIf="contactMediumInfoUpdateForm.get('email')?.invalid && contactMediumInfoUpdateForm.get('email')?.touched">
     <app-warning-popup [message]="contactMediumInfoUpdateForm.get('email')!.errors | etiyaControlErrorMessage"></app-warning-popup>
   </div>
+
+  <div *ngIf="isSuccess">
+    <app-success-popup [message]=""></app-success-popup>
+  </div>
 </div>

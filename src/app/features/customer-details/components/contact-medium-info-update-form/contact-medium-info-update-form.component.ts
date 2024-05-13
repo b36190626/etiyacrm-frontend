@@ -8,6 +8,7 @@ import { NoStringInputDirective } from '../../../../core/directives/no-string-in
 import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-message.pipe';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
+import { SuccessPopupComponent } from '../../../../shared/components/success-popup/success-popup.component';
 
 @Component({
   selector: 'app-contact-medium-info-update-form',
@@ -22,7 +23,8 @@ import { WarningPopupComponent } from '../../../../shared/components/warning-pop
     NoStringInputDirective,
     ControlErrorMessagePipe,
     NgxMaskDirective,
-    WarningPopupComponent
+    WarningPopupComponent,
+    SuccessPopupComponent
   ],
   templateUrl: './contact-medium-info-update-form.component.html',
   styleUrl: './contact-medium-info-update-form.component.scss',
@@ -32,6 +34,7 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
   contactMediumInfoUpdateForm!: FormGroup ;
   isFormValid: boolean = false;
   pathId!: string;
+  isSuccess: boolean = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -78,6 +81,7 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
       complete: () => {
         this.contactMediumInfoUpdateForm.reset();
         this.router.navigate(['/home/customer/', this.pathId , 'contact-medium-info'])
+        this.isSuccess = true;
       }
     })
   }

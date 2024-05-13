@@ -9,7 +9,7 @@ import { AddressApiService } from '../../../customers/services/addressApi.servic
   standalone: true,
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
   ],
   templateUrl: './customer-info-address-form.component.html',
   styleUrl: './customer-info-address-form.component.scss',
