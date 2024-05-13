@@ -1,12 +1,8 @@
-<ul class="nav d-flex justify-content-center align-items-center mt-4">
+<ul class="nav">
   <li class="nav-item">
     <a class="nav-link active" aria-current="page" routerLink="/home/customer/{{pathId}}/info" routerLinkActive="active">Customer Info</a>
     <a class="nav-link" routerLink="/home/customer/{{pathId}}/account" routerLinkActive="active">Customer Account</a>
     <a class="nav-link" routerLink="/home/customer/{{pathId}}/address" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Address</a>
     <a class="nav-link" routerLink="/home/customer/{{pathId}}/contact-medium-info" routerLinkActive="active">Contact Medium</a>
-  </li>
-
-  <li class="trash-button">
-    <i class="fa-solid fa-trash-can fa-2xl"></i>
   </li>
 </ul>

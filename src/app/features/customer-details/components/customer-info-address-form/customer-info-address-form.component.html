@@ -8,7 +8,7 @@
   </h4>
 
   <div class="d-flex justify-content-between mx-5">
-    <div class="address-info" *ngFor="let address of addressInfo; let i=index">
+    <div class="address-info" *ngFor="let address of addressInfo | slice:1; let i=index">
       <div class="address-options dropdown">
         <i class="fa-solid fa-ellipsis-vertical fa-xl " role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
         <div class="option-click dropdown-menu">
@@ -17,12 +17,12 @@
         </div>
       </div>
 
-      <p style="color: black">
+      <p *ngIf="addressInfo.slice(1)" style="color: black">
         City, District,
         <br>
-        {{ address.street }}, {{address.flatNumber}},
+        {{ address[i].street }}, {{address[i].flatNumber}},
         <br>
-        {{ address.description }}
+        {{ address[i].description }}
       </p>
 
       <div class="radio-button-container">

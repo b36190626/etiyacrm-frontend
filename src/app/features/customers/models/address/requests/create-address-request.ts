@@ -4,4 +4,5 @@ export interface CreateAddressRequest{
   district: string;
   flatNumber: number;
   description: string;
+  isDefault: boolean;
 }
