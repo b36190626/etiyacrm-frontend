@@ -18,7 +18,6 @@ import { AddressApiService } from '../../../customers/services/addressApi.servic
 export class CustomerInfoAddressFormComponent implements OnInit {
   customerId!: string;
   addressInfo!: GetAddressRequest[];
-  optionClick: boolean=true;
 
   constructor(
     private addressApiService: AddressApiService,

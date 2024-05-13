@@ -1,24 +1,31 @@
-<div class="info-page container-fluid mt-5 m-3" style="background-color: white">
-<div class="address-info">
-  <h4>Address Info</h4>
-  <div class="row">
-  <div class="col-md-6" *ngIf="addressList.length>0">
-    <div class="addresses" *ngFor="let address of addressList">
-      <div class="address-options">
-        <i class="fa-solid fa-ellipsis-vertical fa-xl"></i>
-        <div class="option-click" *ngIf="optionClick">
-          <p>edit</p>
-          <p>delete</p>
+<div class="info-page container-fluid mt-2 mx-3" style="background-color: white">
+  <div class="address-info">
+    <h4>Address Info</h4>
+    <div class="row">
+      <div class="col-md-6" *ngIf="addressList.length > 0">
+        <div class="addresses" *ngFor="let address of addressList; let i=index">
+          <div class="address-options dropdown">
+            <i
+              class="fa-solid fa-ellipsis-vertical fa-xl"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            ></i>
+            <div class="option-click dropdown-menu">
+              <a class="dropdown-item" routerLink="">edit</a>
+              <a class="dropdown-item" routerLink="">delete</a>
+            </div>
+          </div>
+          <li>City : {{ address.city }}</li>
+          <li>District: {{ address.district }}</li>
+          <li>Street: {{ address.street }}</li>
+          <li>Flat Number: {{ address.flatNumber }}</li>
+          <li>Description: {{ address.description }}</li>
+
+          <div class="radio-button-container">
+            <input class="form-check-input" type="radio" id="selectAddress{{address[i]}}" name="selectedAddress" value="{{address[i]}}">
         </div>
-      </div>
-      <li> City : {{ address.city }} </li>
-      <li> District: {{ address.district }} </li>
-      <li> Street: {{ address.street }} </li>
-      <li> Flat Number: {{ address.flatNumber }} </li>
-      <li> Description: {{ address.description }} </li>
-    </div>
-
-
+        </div>
 
 
         <!-- <div class="row" *ngIf="addressList.length > 0">
@@ -41,38 +48,43 @@
         </div>
       </ng-container>
 -->
+      </div>
+      <div class="col-md-6">
+        <div class="add-new-address">
+          <!-- STORE TEK BİR ADRES TUTUYOR, ARRAYE ALDIĞIMIZ ADRESLER SONRAKI SAYFADA KAYBOLUYOR -->
+          <!-- MODAL İÇİ FORM KONTROL NEXT BUTONU İÇİN -->
+          <!-- YORUMLU KISIM TEK BİR ADRES TUTUYOR(GERİ DÖNÜŞTE) DÜZELTİLECEK -->
+          <button
+            type="button"
+            class="btn address-button"
+            data-bs-toggle="modal"
+            data-bs-target="#customerAddressModal"
+          >
+            Add New Adress
+          </button>
+        </div>
+      </div>
+    </div>
 
+    <div class="d-flex justify-content-between my-5">
+      <button type="button" class="btn previous" (click)="onPrevious()">
+        Previous
+      </button>
+      <button
+        type="button"
+        class="btn next"
+        [disabled]="!isFormValid"
+        (click)="onNext()"
+      >
+        Next
+      </button>
+    </div>
 
-
-
-
-
+    <app-customer-adress-modal
+      (formValid)="updateNextButtonState($event)"
+    ></app-customer-adress-modal>
   </div>
-  <div class="col-md-6">
-  <div class="add-new-address">
-<!-- STORE TEK BİR ADRES TUTUYOR, ARRAYE ALDIĞIMIZ ADRESLER SONRAKI SAYFADA KAYBOLUYOR -->
-<!-- MODAL İÇİ FORM KONTROL NEXT BUTONU İÇİN -->
-<!-- YORUMLU KISIM TEK BİR ADRES TUTUYOR(GERİ DÖNÜŞTE) DÜZELTİLECEK -->
-<button type="button" class="btn address-button" data-bs-toggle="modal" data-bs-target="#customerAddressModal">
-  Add New Adress
-</button>
-
-  </div>
-  </div>
-  </div>
-
-  <div class="d-flex justify-content-between my-5" >
-      <button type="button" class="btn previous" (click)="onPrevious()">Previous</button>
-      <button type="button" class="btn next" [disabled]="!isFormValid" (click)="onNext()">Next</button>
-  </div>
-
-<app-customer-adress-modal (formValid)="updateNextButtonState($event)"></app-customer-adress-modal>
 </div>
-</div>
-
-
-
-
 
 <!-- <div class="info-page container-fluid mt-5 m-3" style="background-color: white">
   <div class="address-info">

@@ -25,8 +25,6 @@ import { CreateAddressRequest } from '../../models/address/requests/create-addre
 export class AddressInfoComponent implements OnInit {
   isFormValid = false;
   addressList: CreateAddressRequest[]=[];
-
-  optionClick: boolean=true;
   form: any;
   showPopup: boolean = false;
 
