@@ -6,7 +6,7 @@ import { select, Store } from '@ngrx/store';
 import { CreateAddressRequest } from '../../../features/customers/models/address/requests/create-address-request';
 import { setAddress } from '../../stores/addresses/address.action';
 import { NoStringInputDirective } from '../../../core/directives/no-string-input.directive';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { selectAddress } from '../../stores/addresses/address.selector';
 
 @Component({
@@ -25,6 +25,7 @@ export class CustomerAdressModalComponent implements OnInit {
 
 
   addressForm !: FormGroup;
+  @Output() formValid = new EventEmitter<boolean>();
   isFormValid: boolean = false;
   cities: any = [];
   districts: any = [];
@@ -54,6 +55,7 @@ export class CustomerAdressModalComponent implements OnInit {
 
     this.addressForm.statusChanges.subscribe(
       status => {
+        this.formValid.emit(status === 'VALID');
         this.isFormValid = status === 'VALID';
         console.log(status);
     });
@@ -118,7 +120,7 @@ export class CustomerAdressModalComponent implements OnInit {
 
   onSubmit() {
     if (this.addressForm.valid) {
-      console.log('Form Submitted!', this.addressForm.value);
+      console.log('Form Created on Modal', this.addressForm.value);
       this.createAddress();
       this.router.navigate(['/create-customer/address-info'])
     }

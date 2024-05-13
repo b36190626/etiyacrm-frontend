@@ -23,10 +23,9 @@ import { CreateAddressRequest } from '../../models/address/requests/create-addre
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddressInfoComponent implements OnInit {
-
-  addresses$=this.store.pipe(select(selectAddress)) //doldur
+  isFormValid = false;
   addressList: CreateAddressRequest[]=[];
-ü
+
   optionClick: boolean=true;
   form: any;
   showPopup: boolean = false;
@@ -34,14 +33,16 @@ export class AddressInfoComponent implements OnInit {
 constructor(
   private router: Router,
   private store: Store<{ address: CreateAddressRequest}>
-){
-  //this.addresses$ = this.store.pipe(select(selectAllAddresses));
-}
+){}
   ngOnInit(): void {
     this.store.pipe(select(selectAddress)).subscribe((address) =>
       {
         this.addressList.push(address)
+
       })
+  }
+  isValidAddress(address: any): boolean {
+    return address.city && address.district && address.street && address.flatNumber && address.description;
   }
 
 
@@ -50,6 +51,9 @@ togglePopup(event: Event) {
   this.showPopup = !this.showPopup;
 }
 
+updateNextButtonState(valid: boolean) {
+  this.isFormValid = valid;
+}
 onPrevious(){
   this.router.navigate(['/create-customer']);
 }
