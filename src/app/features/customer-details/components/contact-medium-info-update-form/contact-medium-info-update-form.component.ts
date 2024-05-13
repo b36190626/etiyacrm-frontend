@@ -7,6 +7,7 @@ import { ContactMediumApiService } from '../../../customers/services/contactMedi
 import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
 import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-message.pipe';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
 
 @Component({
   selector: 'app-contact-medium-info-update-form',
@@ -20,7 +21,8 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
     RouterModule,
     NoStringInputDirective,
     ControlErrorMessagePipe,
-    NgxMaskDirective
+    NgxMaskDirective,
+    WarningPopupComponent
   ],
   templateUrl: './contact-medium-info-update-form.component.html',
   styleUrl: './contact-medium-info-update-form.component.scss',
