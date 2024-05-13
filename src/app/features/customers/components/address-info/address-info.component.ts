@@ -37,8 +37,8 @@ constructor(
   ngOnInit(): void {
     this.store.pipe(select(selectAddress)).subscribe((address) =>
       {
+        //if(address.city && address.district && address.street && address.flatNumber && address.description)
         this.addressList.push(address)
-
       })
   }
   isValidAddress(address: any): boolean {
