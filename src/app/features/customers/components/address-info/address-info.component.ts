@@ -6,7 +6,7 @@ import { CustomerAdressModalComponent } from '../../../../shared/components/cust
 import { select, Store } from '@ngrx/store';
 import { selectAddress } from '../../../../shared/stores/addresses/address.selector';
 import { CreateAddressRequest } from '../../models/address/requests/create-address-request';
-import { IdToNamePipe } from '../../../../shared/pipes/idToName.pipe';
+import { IdToNamePipe } from '../../../../core/pipes/idToName.pipe';
 
 @Component({
   selector: 'app-address-info',

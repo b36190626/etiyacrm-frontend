@@ -10,6 +10,8 @@ import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-me
 import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
+import { AddressState } from '../../../../shared/stores/addresses/address.state';
+import { ContactMediumState } from '../../../../shared/stores/contact-medium/contact-medium.state';
 
 @Component({
   selector: 'app-contact-medium',
@@ -23,7 +25,8 @@ import { WarningPopupComponent } from '../../../../shared/components/warning-pop
     ControlErrorMessagePipe,
     NoStringInputDirective,
     NgxMaskDirective,
-    WarningPopupComponent
+    WarningPopupComponent,
+
   ],
   templateUrl: './contact-medium.component.html',
   styleUrl: './contact-medium.component.scss',
@@ -36,7 +39,8 @@ export class ContactMediumComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private store: Store<{ contactMedium: CreateContactMediumRequest }>
+    private store: Store<{ contactMedium: CreateContactMediumRequest }>,
+    private storeDb: Store<{ address: AddressState, contactMedium: ContactMediumState }>
   ) {}
 
   onKeyDown(event: any) {
@@ -83,13 +87,17 @@ export class ContactMediumComponent implements OnInit {
     this.store.dispatch(setContactMedium({ contactMedium }));
     this.router.navigate(['/home/search']);
   }
-
+  saveData() {
+    this.store.dispatch({ type: '[IndividualCustomer] Save Individual Customer' })
+  }
   onSubmit() {
     if (this.contactForm.valid) {
       console.log('Form Submitted!', this.contactForm.value);
+      this.saveData();
     }
     this.createContactMedium();
   }
+
 
   onCancel() {
     this.contactForm.reset();
