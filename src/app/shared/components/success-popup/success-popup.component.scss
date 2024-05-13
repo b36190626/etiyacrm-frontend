@@ -1,0 +1,21 @@
+.popup {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: 30vw;
+}
+.popup-inner {
+  background: white;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: rgb(224, 220, 220);
+  margin: auto;
+}
+
+.popup-message, p{
+  color: rgb(82, 169, 82);
+  font-weight: bold;
+}

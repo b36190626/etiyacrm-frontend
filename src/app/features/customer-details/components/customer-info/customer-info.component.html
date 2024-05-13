@@ -1,4 +1,4 @@
-<div class="info-page container-fluid mt-5 m-3" style="background-color: white;">
+<div class="info-page container-fluid mt-5" style="background-color: white;">
   <h4>Customer Info <i class="fa-solid fa-pen-clip" style="color: #24233F;" routerLink ="/home/customer/{{customerId}}/info-update"></i> </h4>
       <div *ngIf="customerInfo" class="row">
           <div class="col-md-6 mb-3 d-flex">
@@ -33,9 +33,10 @@
         <label>Nationality ID:</label>
         <label>{{customerInfo.nationalityIdentity}}</label>
       </div>
+      <div class="button-action">
+        <button type="button" class="cancel-button" routerLink="/home/search">Cancel</button>
+      </div>
     </div>
-    <div class="button-action">
-      <button type="button" class="cancel-button" routerLink="/home/search">Cancel</button>
-    </div>
+
 </div>
 
