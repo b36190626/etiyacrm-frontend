@@ -37,5 +37,4 @@ export class AddressApiService {
   getDistricts(): Observable<any> {
     return this.http.get(`http://localhost:8081/customerservice/api/v1/districts`);
   }
-  //districtGetByCityId methodu yazılacak.
 }
