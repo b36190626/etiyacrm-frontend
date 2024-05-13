@@ -3,30 +3,30 @@
     <app-customer-adress-modal
     (formValid)="updateNextButtonState($event)"
     (cityList)="cityTransferParent($event)"
+    (districtList)="districtTransferParent($event)"
   ></app-customer-adress-modal>
     <h4>Address Info</h4>
     <div class="row">
       <div class="col-md-6" *ngIf="addressList.length > 0">
         <div class="addresses"  *ngFor="let address of addressList |slice:1; let i=index">
           <div class="address-options dropdown">
-            <i
+            <div
               class="fa-solid fa-ellipsis-vertical fa-xl"
               role="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
-            ></i>
+            ></div>
             <div class="option-click dropdown-menu">
               <a class="dropdown-item" routerLink="">edit</a>
               <a class="dropdown-item" routerLink="">delete</a>
             </div>
           </div>
-          <li>City : {{ address.city }}</li>
+          <li>City: {{ address.city | appIdToName:cities }}</li>
 
-          <li>District: {{ address.district }}</li>
+          <li>District: {{ address.district | appIdToName:districts }}</li>
           <li>Street: {{ address.street }}</li>
           <li>Flat Number: {{ address.flatNumber }}</li>
           <li>Description: {{ address.description }}</li>
-
 
           <div class="radio-button-container">
             <input class="form-check-input" type="radio" id="selectAddress{{address[i]}}" name="selectedAddress" value="{{address[i]}}">
