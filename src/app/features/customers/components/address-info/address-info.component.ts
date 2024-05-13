@@ -6,11 +6,12 @@ import { CustomerAdressModalComponent } from '../../../../shared/components/cust
 import { select, Store } from '@ngrx/store';
 import { selectAddress } from '../../../../shared/stores/addresses/address.selector';
 import { CreateAddressRequest } from '../../models/address/requests/create-address-request';
+import { IdToNamePipe } from '../../../../shared/pipes/idToName.pipe';
 
 @Component({
   selector: 'app-address-info',
   standalone: true,
-  imports: [CommonModule, RouterModule, CustomerAdressModalComponent],
+  imports: [CommonModule, RouterModule, CustomerAdressModalComponent, IdToNamePipe],
   templateUrl: './address-info.component.html',
   styleUrl: './address-info.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,6 +19,7 @@ import { CreateAddressRequest } from '../../models/address/requests/create-addre
 export class AddressInfoComponent implements OnInit {
   cities: any = [];
   districts: any = [];
+  filteredDistricts: any = [];
   isFormValid = false;
   addressList: CreateAddressRequest[] = [];
   form: any;
@@ -30,7 +32,6 @@ export class AddressInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.pipe(select(selectAddress)).subscribe((address: CreateAddressRequest[]) => {
-      //if(address.city && address.district && address.street && address.flatNumber && address.description)
       this.addressList = address;
     });
   }
@@ -47,6 +48,10 @@ export class AddressInfoComponent implements OnInit {
 
   cityTransferParent(cityList: any[]) {
     this.cities = cityList;
+
+  }
+  districtTransferParent(districtList: any[]) {
+    this.districts = districtList;
   }
 
   togglePopup(event: Event) {

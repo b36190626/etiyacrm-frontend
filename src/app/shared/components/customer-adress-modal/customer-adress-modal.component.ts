@@ -38,7 +38,7 @@ export class CustomerAdressModalComponent implements OnInit {
   @Output() cityList = new EventEmitter<any>();
   @Output() districtList = new EventEmitter<any>();
   filteredDistricts: any[] = [];
-  allAdressess: CreateAddressRequest[];
+
 
   constructor(
     private fb: FormBuilder,
@@ -55,7 +55,7 @@ export class CustomerAdressModalComponent implements OnInit {
     this.store.pipe(select(selectAddress)).subscribe((address) => {
       this.addressForm.patchValue(address),
         console.log('addressState: ', address);
-      //this.allAdressess = address;
+
     });
 
     this.addressForm.statusChanges.subscribe((status) => {
@@ -81,20 +81,20 @@ export class CustomerAdressModalComponent implements OnInit {
       this.cities = citiesData;
       this.districts = [];
       if (citiesData && citiesData.length > 0) {
-        //length hata verdi size yazdım
+
 
         this.addressApiService.getDistricts().subscribe((districtsData) => {
           this.districts = districtsData;
-          this.cdr.detectChanges(); // lanet olsun
+          this.districtList.emit(this.districts);
+          this.cdr.detectChanges(); // LAĞNET olsun HALA UNUTUYORUZ
           console.log(districtsData);
-        });
+        })
+        this.cityList.emit(this.cities);
+        this.districtList.emit(this.districts);
+        console.log("cityList", this.cityList)
       }
     });
   }
-
-  // onOpenModal() {
-  //   this.loadCities();
-  // }
 
   createAddress() {
     const newAddress: CreateAddressRequest = {
@@ -114,7 +114,7 @@ export class CustomerAdressModalComponent implements OnInit {
     this.addressForm.get('district').reset({ value: '', disabled: true });
     if (cityId) {
       this.addressForm.get('district').enable();
-      this.filteredDistricts = this.districts.filter(
+      this.filteredDistricts= this.districts.filter(
         (district) => district.cityId === cityId
       );
 
@@ -123,11 +123,6 @@ export class CustomerAdressModalComponent implements OnInit {
     }
   }
 
-  citiesTransferEmit(){
-    this.cityList.emit(this.cities);
-    this.districtList.emit(this.districts);
-    console.log("cityList", this.cityList)
-  }
 
   onSubmit() {
     if (this.addressForm.valid) {
