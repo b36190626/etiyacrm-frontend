@@ -118,7 +118,7 @@ export class CustomerAdressModalComponent implements OnInit {
 
   onSubmit() {
     if (this.addressForm.valid) {
-      console.log('Form Submitted!', this.addressForm.value);
+      console.log('Form Created on Modal', this.addressForm.value);
       this.createAddress();
       this.router.navigate(['/create-customer/address-info'])
     }
