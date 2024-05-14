@@ -12,8 +12,8 @@ export class SearchService {
 
   constructor(private http: HttpClient) { }
 
-  getBySearchFilter(searchFilter: SearchFilterRequest): Observable<SearchFilterResponse> {
-    return this.http.get<SearchFilterResponse>(`http://localhost:8082/api/v1/search-service ${searchFilter}`)
+  getBySearchFilter(searchFilter: string): Observable<SearchFilterResponse> {
+    return this.http.get<SearchFilterResponse>(searchFilter)
   }
 
 }
