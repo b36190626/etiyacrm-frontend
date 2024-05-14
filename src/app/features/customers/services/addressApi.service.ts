@@ -6,6 +6,8 @@ import { AddressResponseDto } from '../models/address/address-response-dto';
 import { GetAddressRequest } from '../models/address/requests/get-address-request';
 import { UpdateAddressRequest } from '../models/address/requests/update-address-request';
 import { UpdatedAddressResponse } from '../models/address/responses/updated-address-response';
+import { CreateAddressRequest } from '../models/address/requests/create-address-request';
+import { CreatedAddressResponse } from '../models/address/responses/created-address-response';
 
 
 
@@ -30,6 +32,10 @@ export class AddressApiService {
     (`http://localhost:8081/customerservice/api/v1/addresses/${id}`, address)
   }
 
+  postAddress(address: CreateAddressRequest): Observable<CreatedAddressResponse>{
+    return this.http.post<CreatedAddressResponse>('http://localhost:8081/customerservice/api/v1/individualcustomers', address);
+  }
+
   getCities(): Observable<any> {
     return this.http.get('http://localhost:8081/customerservice/api/v1/cities');
   }
@@ -38,6 +44,5 @@ export class AddressApiService {
     return this.http.get(`http://localhost:8081/customerservice/api/v1/districts`);
   }
 
-  // getDistrictsByName():
 
 }

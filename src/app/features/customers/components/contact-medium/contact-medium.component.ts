@@ -1,3 +1,4 @@
+import { CustomerApiService } from './../../services/customerApi.service';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -10,8 +11,10 @@ import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-me
 import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
-import { AddressState } from '../../../../shared/stores/addresses/address.state';
-import { ContactMediumState } from '../../../../shared/stores/contact-medium/contact-medium.state';
+import { Observable } from 'rxjs';
+import { selectIndividualCustomer } from '../../../../shared/stores/customers/individual-customer.selector';
+import { CreateCustomerRequest } from '../../models/customer/requests/create-customer-request';
+import { CreateAddressRequest } from '../../models/address/requests/create-address-request';
 
 @Component({
   selector: 'app-contact-medium',
@@ -35,13 +38,20 @@ import { ContactMediumState } from '../../../../shared/stores/contact-medium/con
 export class ContactMediumComponent implements OnInit {
   contactForm!: FormGroup;
   isFormValid: boolean = false; //bootstrpsiz angular ile form validasyon takibi yaptım
+  IndividualCustomerState$: Observable<CreateCustomerRequest>;
+  AddressState$: Observable<CreateAddressRequest>;
+  ContactMediumState$: Observable<CreateContactMediumRequest>;
+  customerId: any;
 
   constructor(
     private fb: FormBuilder,
+    private customerApiService: CustomerApiService,
     private router: Router,
     private store: Store<{ contactMedium: CreateContactMediumRequest }>,
-    private storeDb: Store<{ address: AddressState, contactMedium: ContactMediumState }>
-  ) {}
+  ) {
+    this.IndividualCustomerState$ = this.store.pipe(select(selectIndividualCustomer))
+
+    ;}
 
   onKeyDown(event: any) {
     if (event.keyCode !== 8 && event.target.selectionStart === 0) {
@@ -87,13 +97,27 @@ export class ContactMediumComponent implements OnInit {
     this.store.dispatch(setContactMedium({ contactMedium }));
     this.router.navigate(['/home/search']);
   }
-  saveData() {
-    this.store.dispatch({ type: '[IndividualCustomer] Save Individual Customer' })
+
+  saveToDatabase() {
+    this.IndividualCustomerState$.subscribe(state => {
+      this.customerApiService.postCustomer(state).subscribe(response => {
+        console.log('Account saved', response);
+        this.customerId = response.customerId;
+        console.log(this.customerId);
+
+      });
+    });
   }
+
+  fetchAndSaveToDatabase(){
+
+  }
+
   onSubmit() {
     if (this.contactForm.valid) {
       console.log('Form Submitted!', this.contactForm.value);
-      this.saveData();
+      this.saveToDatabase();
+      console.log(this.customerId)
     }
     this.createContactMedium();
   }
