@@ -67,7 +67,7 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
   }
   updateContactMedium(){
     const request: UpdateContactMediumRequest = {
-      customerId: this.pathId,
+      customerId: this.pathId, //id değişecek
       email: this.contactMediumInfoUpdateForm.value.email,
       homePhone: this.contactMediumInfoUpdateForm.value.homePhone,
       mobilePhone: this.contactMediumInfoUpdateForm.value.mobilePhone,
