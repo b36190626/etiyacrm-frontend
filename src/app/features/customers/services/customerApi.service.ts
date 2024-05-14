@@ -1,3 +1,4 @@
+import { CreateCustomerRequest } from './../models/customer/requests/create-customer-request';
 
 
 import { HttpClient } from '@angular/common/http';
@@ -8,6 +9,7 @@ import { CustomerResponseDto } from '../models/customer/customer-response-dto';
 import { CustomerDetailsDto } from '../models/customer/customer-details-dto';
 import { CustomerUpdateRequest } from '../models/customer/requests/customer-update-request';
 import { CustomerUpdateResponse } from '../models/customer/responses/customer-update-response';
+import { CreatedCustomerResponse } from '../models/customer/responses/CreatedCustomerResponse';
 
 
 @Injectable({
@@ -23,6 +25,10 @@ export class CustomerApiService {
 
   getById(id: string): Observable<CustomerDetailsDto> {
     return this.http.get<CustomerDetailsDto>(`http://localhost:8081/customerservice/api/v1/individualcustomers/${id}`)
+  }
+
+  postCustomer(customer: CreateCustomerRequest): Observable<CreatedCustomerResponse>{ //postCustomerResponse
+    return this.http.post<CreatedCustomerResponse>('http://localhost:8081/customerservice/api/v1/individualcustomers', customer);
   }
 
   putCustomer(id: string, customer: CustomerUpdateRequest): Observable<CustomerUpdateResponse>{
