@@ -1,1 +1,28 @@
-<p>create-billing-account works!</p>,
+<div class="billing-account container-fluid">
+
+  <app-header></app-header>
+
+  <h4>Create Billing Account</h4>
+
+  <form action="createAccountForm">
+      <div class=" d-flex gap-3">
+        <label for="account-name">Account Name*:</label>
+        <input
+          type="text"
+          id="account-name"
+          placeholder="Billing Account"
+          class="form-control"
+          formControlName="accountName"
+          required
+        />
+      </div>
+
+      <div class="d-flex flex-column gap-2">
+        <label for="description">Account Description*</label>
+        <textarea id="description" formControlName="description" cols="10" rows="5" class="form-control"></textarea>
+      </div>
+  </form>
+
+  <app-address-info></app-address-info>
+
+</div>

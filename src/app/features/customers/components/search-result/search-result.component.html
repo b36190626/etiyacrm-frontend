@@ -1,7 +1,7 @@
 <fieldset class="fieldset">
     <legend>Search Result</legend>
-    <div *ngIf="customerFound">
-      <table class="table" *ngIf="customers">
+    <div>
+      <table class="table" *ngIf="customerList">
         <thead>
           <tr>
             <th scope="col">Customer Id</th>
@@ -16,15 +16,16 @@
         </thead>
         <tbody>
 
-          <tr *ngFor="let customer of customers.items | paginate: { itemsPerPage: 10, currentPage:p }">
+          <tr *ngFor="let customer of customerList | paginate: { itemsPerPage: 10, currentPage:p }">
             <td class="cursor" (click)="getCustomerInfo(customer.id)">{{ customer.id }}</td>
             <td>{{ customer.firstName}}</td>
             <td>{{ customer.middleName}}</td>
             <td>{{ customer.lastName }}</td>
-            <td></td>
+            <td>{{customer.role}}</td>
             <td>{{customer.nationalityIdentity}}</td>
-            <td></td>
-            <td></td>
+            <td>{{customer.accountNumber}}</td>
+            <td>{{customer.mobilePhone}}</td>
+
 
           </tr>
         </tbody>
@@ -32,8 +33,5 @@
       <div class="d-flex justify-content-center align-items-center my-3">
         <pagination-controls  (pageChange)="p = $event"></pagination-controls>
       </div>
-    </div>
-    <div *ngIf="!customerFound">
-      <app-customer-not-found></app-customer-not-found>
     </div>
 </fieldset>

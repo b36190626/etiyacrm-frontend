@@ -3,11 +3,18 @@
 
     <div class="row">
       <div class="col-3">
-        <app-search-filter></app-search-filter>
+        <app-search-filter (customerList)="receiveSearchResults($event)" ></app-search-filter>
       </div>
-      <div class="col-9">
-        <app-search-result></app-search-result>
+      @if (customerFound) {
+        <div class="col-9">
+        <app-search-result [customerList]="customerList"></app-search-result>
       </div>
+      } @else if(!customerFound) {
+        <div class="col-9">
+          <app-customer-not-found></app-customer-not-found>
+        </div>
+      }
+
     </div>
 
 </fieldset>
