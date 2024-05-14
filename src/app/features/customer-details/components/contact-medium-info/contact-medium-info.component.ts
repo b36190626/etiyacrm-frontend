@@ -1,6 +1,6 @@
 import { GetContactMediumRequestDto } from './../../../customers/models/contact-medium/requests/get-contact-medium-request';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ContactMediumApiService } from '../../../customers/services/contactMediumApi.service';
 @Component({
@@ -16,7 +16,6 @@ import { ContactMediumApiService } from '../../../customers/services/contactMedi
 })
 export class ContactMediumInfoComponent implements OnInit{
   customerId!: string;
-  @Output() sendCustomerId = new EventEmitter<string>();
   contactMediumInfo!: GetContactMediumRequestDto;
 
   constructor(
@@ -45,12 +44,6 @@ export class ContactMediumInfoComponent implements OnInit{
         this.change.markForCheck();
       }
     })
-  }
-
-  onClick(){
-    this.sendCustomerId.emit(this.customerId);
-    this.router.navigate(['/home/customer/', this.contactMediumInfo.id , 'contact-medium-info-update'])
-    console.log(this.customerId, this.contactMediumInfo.id)
   }
 
 }
