@@ -64,7 +64,7 @@ export const routes: Routes = [
             children: [
               {
                 path:"create-account",
-                pathMatch: 'full',
+                pathMatch: 'prefix',
                 component:CreateBillingAccountComponent
               },
 

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { UpdateContactMediumRequest } from '../../../customers/models/contact-medium/requests/update-contact-medium-request';
@@ -34,6 +34,7 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
   contactMediumInfoUpdateForm!: FormGroup ;
   isFormValid: boolean = false;
   pathId!: string;
+  @Input() customerId: string;
   isSuccess: boolean = false;
 
   constructor(
@@ -64,10 +65,12 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
       this.isFormValid = status === 'VALID';
     })
 
+    console.log("customer id", this.customerId)
   }
+
   updateContactMedium(){
     const request: UpdateContactMediumRequest = {
-      customerId: this.pathId, //id değişecek
+      //customerId: this.customerId, //id değişecek
       email: this.contactMediumInfoUpdateForm.value.email,
       homePhone: this.contactMediumInfoUpdateForm.value.homePhone,
       mobilePhone: this.contactMediumInfoUpdateForm.value.mobilePhone,
@@ -80,7 +83,7 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
       },
       complete: () => {
         this.contactMediumInfoUpdateForm.reset();
-        this.router.navigate(['/home/customer/', this.pathId , 'contact-medium-info'])
+        this.router.navigate(['/home/customer/', this.customerId , 'contact-medium-info'])
         this.isSuccess = true;
       }
     })
