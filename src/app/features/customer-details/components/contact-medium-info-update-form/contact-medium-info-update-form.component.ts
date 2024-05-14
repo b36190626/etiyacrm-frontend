@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { UpdateContactMediumRequest } from '../../../customers/models/contact-medium/requests/update-contact-medium-request';
@@ -34,7 +34,7 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
   contactMediumInfoUpdateForm!: FormGroup ;
   isFormValid: boolean = false;
   pathId!: string;
-  @Input() customerId: string;
+  customerId!: string;
   isSuccess: boolean = false;
 
   constructor(
@@ -65,12 +65,15 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
       this.isFormValid = status === 'VALID';
     })
 
-    console.log("customer id", this.customerId)
+    this.activatedRoute.paramMap.subscribe(params => {
+      this.customerId = params.get("customerId")
+      console.log("customerAydiiii =", this.customerId)
+    })
+
   }
 
   updateContactMedium(){
     const request: UpdateContactMediumRequest = {
-      //customerId: this.customerId, //id değişecek
       email: this.contactMediumInfoUpdateForm.value.email,
       homePhone: this.contactMediumInfoUpdateForm.value.homePhone,
       mobilePhone: this.contactMediumInfoUpdateForm.value.mobilePhone,
