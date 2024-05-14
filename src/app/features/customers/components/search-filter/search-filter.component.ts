@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
 import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
-import { SearchService } from '../../services/search.service';
+import { SearchApiService } from '../../services/searchApi.service';
+import { SearchFilterResponse } from '../../models/search-filter/responses/search-filter-response';
 
 
 @Component({
@@ -21,6 +22,8 @@ import { SearchService } from '../../services/search.service';
 })
 export class SearchFilterComponent implements OnInit{
   isFormValid: boolean = false;
+  @Output() customerList = new EventEmitter<SearchFilterResponse[]>();
+  customers: any = [];
   form: FormGroup = this.fb.group({
     nationalityIdentity:['', [
       Validators.maxLength(11),
@@ -34,9 +37,10 @@ export class SearchFilterComponent implements OnInit{
     lastname:[''],
     orderNumber:[''],
   })
+
   constructor(
     private fb: FormBuilder,
-    private searchService: SearchService,
+    private searchApiService: SearchApiService,
   )
   {
     this.form.valueChanges.subscribe(()=>{
@@ -49,12 +53,9 @@ export class SearchFilterComponent implements OnInit{
       (this.form.get('lastname'))?.value ||
       (this.form.get('orderNumber'))?.value;
     })
-
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   onSubmit(){
     this.getFilters();
@@ -69,15 +70,16 @@ export class SearchFilterComponent implements OnInit{
     queryParams.push(this.form.get('firstname')?.value ? `firstName=${this.form.get('firstname')?.value}` : '');
     queryParams.push(this.form.get('lastname')?.value ? `lastName=${this.form.get('lastname')?.value}` : '');
     queryParams.push(this.form.get('orderNumber')?.value ? `orderNumber=${this.form.get('orderNumber')?.value}` : '');
-    
-  const queryString = queryParams.join('&');
-  const apiUrl = `http://localhost:8082/api/v1/search-service?${queryString}`;
 
-  this.searchService.getBySearchFilter(apiUrl).subscribe(response => {
-    console.log("apiurllllllll",apiUrl);
-    console.log("dasyudgasyujdgaukds",response);
-  })
+    const queryString = queryParams.join('&');
+    const apiUrl = `http://localhost:8082/api/v1/search-service?${queryString}`;
 
+    this.searchApiService.getBySearchFilter(apiUrl).subscribe(response => {
+      this.customers = response;
+      this.customerList.emit(this.customers);
+      console.log("apiUrl",apiUrl);
+      console.log("customer list response:",response);
+    })
   }
 
 }
