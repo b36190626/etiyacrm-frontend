@@ -18,6 +18,8 @@ import { OfferConfigurationProductPageComponent } from "./routers/offers/offer-s
 import { OffersLayoutComponent } from "./shared/layouts/offers-layout/offers-layout.component";
 import { SubmitOrderPageComponent } from "./routers/offers/submit-order-page/submit-order-page.component";
 import { confirmationRouteGuard } from "./shared/guards/confirmation-route.guard";
+import { CreateBillingAccountComponent } from "./features/customer-details/components/create-billing-account/create-billing-account.component";
+import { UpdateBillingAccountComponent } from "./features/customer-details/components/update-billing-account/update-billing-account.component";
 
 
 export const routes: Routes = [
@@ -58,7 +60,15 @@ export const routes: Routes = [
           },
           {
             path:"account",
-            component: CustomerAccountComponent
+            component: CustomerAccountComponent,
+            children: [
+              {
+                path:"create-account",
+                pathMatch: 'full',
+                component:CreateBillingAccountComponent
+              },
+
+            ]
           },
           {
             path: "address",
@@ -78,6 +88,10 @@ export const routes: Routes = [
     ]
   },
   {
+    path:"update-account",
+    component:UpdateBillingAccountComponent
+  },
+  {
     path: "create-customer",
     component: CreateCustomerLayoutComponent,
     children:[
@@ -94,8 +108,10 @@ export const routes: Routes = [
         path: "contact-medium",
         component: ContactMediumComponent,
       },
+
     ]
     },
+
     {
       path:"offers",
       component: OffersLayoutComponent,
