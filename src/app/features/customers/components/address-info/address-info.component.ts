@@ -36,16 +36,6 @@ export class AddressInfoComponent implements OnInit {
     });
   }
 
-  isValidAddress(address: any): boolean {
-    return (
-      address.city &&
-      address.district &&
-      address.street &&
-      address.flatNumber &&
-      address.description
-    );
-  }
-
   cityTransferParent(cityList: any[]) {
     this.cities = cityList;
 

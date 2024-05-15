@@ -1,5 +1,5 @@
 export interface CreatedCustomerResponse {
-  customerId: string;
+  id: string;
   firstName: string;
   middleName: string;
   lastName: string;
@@ -9,3 +9,4 @@ export interface CreatedCustomerResponse {
   fatherName: string;
   nationalityIdentity: string;
 }
+

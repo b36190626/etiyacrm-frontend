@@ -1,8 +1,8 @@
 export interface CreateAddressRequest{
-  city: string;
   street: string;
-  district: string;
+  districtId: string;
+  customerId: string;
   flatNumber: number;
   description: string;
-  isDefault: boolean;
+  isDefaultAddress: boolean;
 }

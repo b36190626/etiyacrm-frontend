@@ -1,27 +1,30 @@
-import { CustomerApiService } from './../../services/customerApi.service';
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { forkJoin, of } from 'rxjs';
+import { catchError, switchMap, take } from 'rxjs/operators';
+
+import { CustomerApiService } from './../../services/customerApi.service';
+import { AddressApiService } from '../../services/addressApi.service';
+import { ContactMediumApiService } from './../../services/contactMediumApi.service';
+
 import { CreateContactMediumRequest } from '../../models/contact-medium/requests/create-contact-medium-request';
-import { setContactMedium } from '../../../../shared/stores/contact-medium/contact-medium.action';
+import { selectIndividualCustomer } from '../../../../shared/stores/customers/individual-customer.selector';
+import { selectAddress } from '../../../../shared/stores/addresses/address.selector';
 import { selectContactMedium } from '../../../../shared/stores/contact-medium/contact-medium.selector';
+
 import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-message.pipe';
 import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
-import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
-import { Observable } from 'rxjs';
-import { selectIndividualCustomer } from '../../../../shared/stores/customers/individual-customer.selector';
-import { CreateCustomerRequest } from '../../models/customer/requests/create-customer-request';
-import { CreateAddressRequest } from '../../models/address/requests/create-address-request';
 
 @Component({
   selector: 'app-contact-medium',
   standalone: true,
-  providers: [
-    provideNgxMask(),
-  ],
+  providers: [provideNgxMask()],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -29,102 +32,127 @@ import { CreateAddressRequest } from '../../models/address/requests/create-addre
     NoStringInputDirective,
     NgxMaskDirective,
     WarningPopupComponent,
-
   ],
   templateUrl: './contact-medium.component.html',
-  styleUrl: './contact-medium.component.scss',
+  styleUrls: ['./contact-medium.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactMediumComponent implements OnInit {
   contactForm!: FormGroup;
-  isFormValid: boolean = false; //bootstrpsiz angular ile form validasyon takibi yaptım
-  IndividualCustomerState$: Observable<CreateCustomerRequest>;
-  AddressState$: Observable<CreateAddressRequest>;
-  ContactMediumState$: Observable<CreateContactMediumRequest>;
-  customerId: any;
+  isFormValid = false;
 
   constructor(
     private fb: FormBuilder,
     private customerApiService: CustomerApiService,
+    private addressApiService: AddressApiService,
+    private contactMediumApiService: ContactMediumApiService,
     private router: Router,
-    private store: Store<{ contactMedium: CreateContactMediumRequest }>,
-  ) {
-    this.IndividualCustomerState$ = this.store.pipe(select(selectIndividualCustomer))
+    private store: Store,
+  ) {}
 
-    ;}
-
-  onKeyDown(event: any) {
-    if (event.keyCode !== 8 && event.target.selectionStart === 0) {
-      event.preventDefault();
-    }
-  }
   ngOnInit() {
     this.createForm();
-
-    this.store
-      .pipe(select(selectContactMedium))
-      .subscribe((contactMedium) => {
-        this.contactForm.patchValue(contactMedium);
-        console.log('contactMediumState:', contactMedium);
-      });
-
-    // Formun durumunu dinamik olarak izleme
-    this.contactForm.statusChanges.subscribe(status => {
-    this.isFormValid = status === 'VALID';
-    });
+    this.subscribeToContactMediumState();
+    this.trackFormStatusChanges();
   }
 
-  createForm(){
+  createForm() {
     this.contactForm = this.fb.group({
-      email: ['', [
-        Validators.required,
-        Validators.email,
-      ]],
+      email: ['', [Validators.required, Validators.email]],
       homePhone: [''],
       mobilePhone: ['', Validators.required],
       fax: ['']
     });
   }
 
-  createContactMedium(){
-    const contactMedium: CreateContactMediumRequest = {
-      email: this.contactForm.value.email,
-      homePhone: this.contactForm.value.email,
-      mobilePhone: this.contactForm.value.email,
-      fax: this.contactForm.value.email,
-      customerId: this.contactForm.value.customerId //bu request içinde olduğu için yazmak zorunda kaldım
-    };
-    this.store.dispatch(setContactMedium({ contactMedium }));
-    this.router.navigate(['/home/search']);
-  }
-
-  saveToDatabase() {
-    this.IndividualCustomerState$.subscribe(state => {
-      this.customerApiService.postCustomer(state).subscribe(response => {
-        console.log('Account saved', response);
-        this.customerId = response.customerId;
-        console.log(this.customerId);
-
-      });
+  subscribeToContactMediumState() {
+    this.store.pipe(select(selectContactMedium)).subscribe(contactMedium => {
+      this.contactForm.patchValue(contactMedium);
+      console.log('contactMediumState:', contactMedium);
     });
   }
 
-  fetchAndSaveToDatabase(){
+  trackFormStatusChanges() {
+    this.contactForm.statusChanges.subscribe(status => {
+      this.isFormValid = status === 'VALID';
+    });
+  }
 
+  saveToDatabase() {
+    forkJoin({
+      customer: this.store.pipe(select(selectIndividualCustomer), take(1)),
+      addresses: this.store.pipe(select(selectAddress), take(1))
+    }).pipe(
+      switchMap(({ customer, addresses }) => {
+        console.log('Customerlar:', customer);
+        console.log('Addressler:', addresses);
+
+        return this.customerApiService.postCustomer(customer).pipe(
+          switchMap(createdCustomerResponseMapCustomer => {
+            const customerId = createdCustomerResponseMapCustomer.id;
+            if (!customerId) {
+              throw new Error('Customer hatasi -> ID hala undefined');
+            }
+
+            console.log('Responsedan gelen Customer ID:', customerId);
+            const validAddresses = addresses.filter(address => address.districtId && address.districtId.trim() !== ''); //filtrele trimle ama 0th indis verisini bana getirme. Validation Err.....
+
+            const newAddresses = validAddresses.map(address => ({
+              description: address.description || 'Default Description',
+              street: address.street || 'Default Street',
+              flatNumber: address.flatNumber || 0,
+              districtId: address.districtId,
+              customerId,
+              isDefaultAddress: address.isDefaultAddress || true
+            }));
+
+            console.log('newaddresler BURADA', newAddresses);
+            return forkJoin(newAddresses.map(address => this.addressApiService.postAddress(address))).pipe(
+              switchMap(() => {
+                const contactMedium: CreateContactMediumRequest = {
+                  email: this.contactForm.value.email,
+                  homePhone: this.contactForm.value.homePhone,
+                  mobilePhone: this.contactForm.value.mobilePhone,
+                  fax: this.contactForm.value.fax,
+                  customerId
+                };
+
+                console.log('Contact-Medium verisi GELDİ?:', contactMedium);
+                return this.contactMediumApiService.postContactMedium(contactMedium);
+              }),
+              catchError(error => {
+                console.error('adddress eklenemedi ', error);
+                console.error('Addressin son hali ', newAddresses);
+                return of(null);
+              })
+            );
+          }),
+          catchError(error => {
+            console.error('cu', error);
+            return of(null);
+          })
+        );
+      }),
+      catchError(error => {
+        console.error('....state gelmedi......', error);
+        return of(null);
+      })
+    ).subscribe(response => {
+      if (response) {
+        this.router.navigate(['/home/search']);
+      }
+    });
   }
 
   onSubmit() {
     if (this.contactForm.valid) {
       console.log('Form Submitted!', this.contactForm.value);
       this.saveToDatabase();
-      console.log(this.customerId)
     }
-    this.createContactMedium();
   }
-
 
   onCancel() {
     this.contactForm.reset();
-    this.router.navigate(['/create-customer/address-info'])
+    this.router.navigate(['/create-customer/address-info']);
   }
 }

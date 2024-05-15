@@ -21,15 +21,15 @@
               <a class="dropdown-item" routerLink="">delete</a>
             </div>
           </div>
-          <p style="font-weight: bolder;" *ngIf="address.isDefault"> Primary Adress </p>
-          <li>City: {{ address.city | appIdToName:cities }}</li>
-          <li>District: {{ address.district | appIdToName:districts }}</li>
+          <p style="font-weight: bolder;" *ngIf="address.isDefaultAddress"> Primary Adress </p>
+          <li>City: {{ address.customerId| appIdToName:cities }}</li>
+          <li>District: {{ address.districtId | appIdToName:districts }}</li>
           <li>Street: {{ address.street }}</li>
           <li>Flat Number: {{ address.flatNumber }}</li>
           <li>Description: {{ address.description }}</li>
 
-        <div class="radio-button-container" *ngIf="address.isDefault">
-          <input class="form-check-input" type="radio" id="selectAddress{{i}}" name="selectedAddress" [value]="address.isDefault" checked>
+        <div class="radio-button-container" *ngIf="address.isDefaultAddress">
+          <input class="form-check-input" type="radio" id="selectAddress{{i}}" name="selectedAddress" [value]="address.isDefaultAddress" checked>
         </div>
 
         </div>
