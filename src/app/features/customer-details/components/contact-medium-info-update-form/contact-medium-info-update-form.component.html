@@ -8,56 +8,28 @@
     <div class="row">
       <div class="col-md-6 mb-3 d-flex">
         <label for="email">E-mail*:</label>
-        <input
-          type="email"
-          id="email"
-          class="form-control"
-          formControlName="email"
-          required
-        />
+        <input type="email" id="email" class="form-control" formControlName="email" required />
       </div>
       <div class="col-md-6 mb-3 d-flex">
         <label for="home-phone">Home Phone:</label>
-        <input
-          type="text"
-          id="home-phone"
-          class="form-control"
-          formControlName="homePhone"
-          mask="(000) 000 00 00"
-          [showMaskTyped]="true"
-        />
+        <input type="text" id="home-phone" class="form-control" formControlName="homePhone" mask="(000) 000 00 00" [showMaskTyped]="true" />
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 mb-3 d-flex">
         <label for="mobile-phone">Mobile Phone*:</label>
-        <input
-          type="text"
-          id="mobile-phone"
-          class="form-control"
-          formControlName="mobilePhone"
-          required
-          mask="(000) 000 00 00"
-          [showMaskTyped]="true"
-        />
+        <input type="text" id="mobile-phone" class="form-control" formControlName="mobilePhone" required mask="(000) 000 00 00" [showMaskTyped]="true" />
       </div>
       <div class="col-md-6 mb-3 d-flex">
         <label for="fax">Fax:</label>
-        <input
-          type="text"
-          id="fax"
-          class="form-control"
-          formControlName="fax"
-          mask="0 (999) 999 99 99"
-          [showMaskTyped]="true"
-        />
+        <input type="text" id="fax" class="form-control" formControlName="fax" mask="0 (999) 999 99 99" [showMaskTyped]="true" />
       </div>
     </div>
     <div class="form-actions">
       <button
         type="button"
         class="button-cancel"
-        routerLink="/home/customer{{ pathId }}"
+        routerLink="/home/customer/{{ pathId }}"
       >
         Cancel
       </button>
@@ -78,6 +50,6 @@
   </div>
 
   <div *ngIf="isSuccess">
-    <app-success-popup [message]=""></app-success-popup>
+    <app-success-popup [message]="'Update successful!'"></app-success-popup>
   </div>
 </div>

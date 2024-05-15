@@ -28,8 +28,9 @@ export class ContactMediumInfoComponent implements OnInit{
   ngOnInit(): void {
     this.activatedRoute.parent.params.subscribe(params => {
       this.customerId = params['id'];
-
-    }).unsubscribe();
+      console.log(this.customerId)
+    });
+    console.log(this.customerId)
     this.getContactMedium();
   }
 
@@ -37,6 +38,7 @@ export class ContactMediumInfoComponent implements OnInit{
     this.contactMediumApiService.getById(this.customerId).subscribe({
         next: (contactMediumDetails) => {
         this.contactMediumInfo = contactMediumDetails;
+        console.log(this.customerId)
 
         console.log(contactMediumDetails);
       },
