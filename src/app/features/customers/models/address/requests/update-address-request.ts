@@ -3,7 +3,7 @@ export interface UpdateAddressRequest {
   description: string;
   street: string
   flatNumber: number;
-  isDefaultAddress: boolean;
+  //isDefaultAddress: boolean;
   districtId: string;
   customerId: string;
 }
