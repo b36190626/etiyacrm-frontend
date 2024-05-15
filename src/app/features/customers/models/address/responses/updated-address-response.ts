@@ -5,4 +5,5 @@ export interface UpdatedAddressResponse {
   cityId: string;
   districtId: string;
   customerId: string;
+  //isDefaultAddress: boolean;
 }

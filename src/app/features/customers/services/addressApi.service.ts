@@ -33,7 +33,7 @@ export class AddressApiService {
   }
 
   postAddress(address: CreateAddressRequest): Observable<CreatedAddressResponse>{
-    return this.http.post<CreatedAddressResponse>('http://localhost:8081/customerservice/api/v1/individualcustomers', address);
+    return this.http.post<CreatedAddressResponse>('http://localhost:8081/customerservice/api/v1/addresses', address);
   }
 
   getCities(): Observable<any> {

@@ -5,4 +5,5 @@ export interface GetAddressRequest {
   flatNumber: number;
   districtId: string;
   customerId: string;
+  //isDefaultAddress: boolean;
 }

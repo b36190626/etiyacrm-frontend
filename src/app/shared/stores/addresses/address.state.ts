@@ -6,11 +6,12 @@ export interface AddressState{
 
 export const initialAddressState: AddressState = {
   address: [{
-    city: '',
+    // city: '',
+    customerId: '',
     street: '',
-    district: '',
+    districtId: '',
     flatNumber: null,
     description: '',
-    isDefault: false
+    isDefaultAddress: false,
   }],
 }

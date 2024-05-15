@@ -72,9 +72,10 @@ export class CustomerAdressModalComponent implements OnInit {
       district: [{ value: '', disabled: true }, Validators.required],
       flatNumber: [null, Validators.required],
       description: ['', Validators.required],
-      isDefault: [true, Validators.required],
+      isDefault: [false, Validators.required], //if isDefault changes, don't allow to check gibi birşey yapalım.
     });
   }
+
 
   loadCitiesOnOpenModal() {
     this.addressApiService.getCities().subscribe((citiesData) => {
@@ -98,17 +99,19 @@ export class CustomerAdressModalComponent implements OnInit {
 
   createAddress() {
     const newAddress: CreateAddressRequest = {
-      city: this.addressForm.value.city,
+      //city: this.addressForm.value.city, //city district.id den gelecek
       street: this.addressForm.value.street,
-      district: this.addressForm.value.district,
+      districtId: this.addressForm.value.district,
       flatNumber: this.addressForm.value.flatNumber,
       description: this.addressForm.value.description,
-      isDefault: this.addressForm.value.isDefault
+      isDefaultAddress: this.addressForm.value.isDefault,
+      customerId:'',
     };
 
     this.store.dispatch(setAddress({ address: newAddress }));
     console.log(newAddress);
   }
+
 
   onCityChange(cityId: any) {
     this.addressForm.get('district').reset({ value: '', disabled: true });

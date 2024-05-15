@@ -5,4 +5,5 @@ export interface AddressResponseDto{
   flatNumber: number;
   districtId: string;
   customerId: string;
+  //isDefaultAddress: boolean;
 }

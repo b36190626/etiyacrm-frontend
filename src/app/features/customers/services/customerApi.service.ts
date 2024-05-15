@@ -9,7 +9,7 @@ import { CustomerResponseDto } from '../models/customer/customer-response-dto';
 import { CustomerDetailsDto } from '../models/customer/customer-details-dto';
 import { CustomerUpdateRequest } from '../models/customer/requests/customer-update-request';
 import { CustomerUpdateResponse } from '../models/customer/responses/customer-update-response';
-import { CreatedCustomerResponse } from '../models/customer/responses/CreatedCustomerResponse';
+import { CreatedCustomerResponse } from '../models/customer/responses/created-customer-response';
 
 
 @Injectable({
