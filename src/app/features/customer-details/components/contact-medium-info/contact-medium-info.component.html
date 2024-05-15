@@ -1,7 +1,7 @@
 <div class="info-page container-fluid mt-5 m-3">
   <h4>Contact Medium
     <i class="fa-solid fa-pen-clip" style="color: #24233F;"
-    [routerLink]="['/home/customer', contactMediumInfo?.id, 'contact-medium-info-update', {customerId: customerId}]">
+    (click)="onClick()">
     </i></h4>
   <div *ngIf="contactMediumInfo" class="row">
     <div class="col-md-6 mb-3 d-flex">
