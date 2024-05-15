@@ -53,7 +53,7 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.parent.params.subscribe(params =>{
       this.pathId = params['id'];
-    }).unsubscribe();
+    });
 
     this.contactMediumInfoUpdateForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -66,7 +66,7 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
     })
 
     this.activatedRoute.paramMap.subscribe(params => {
-      this.customerId = params.get("customerId")
+      this.customerId = params.get("customerId")!;
       console.log("customerAydiiii =", this.customerId)
     })
 
