@@ -34,6 +34,7 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
   contactMediumInfoUpdateForm!: FormGroup ;
   isFormValid: boolean = false;
   pathId!: string;
+  customerId!: string;
   isSuccess: boolean = false;
 
   constructor(
@@ -64,10 +65,15 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
       this.isFormValid = status === 'VALID';
     })
 
+    this.activatedRoute.paramMap.subscribe(params => {
+      this.customerId = params.get("customerId")
+      console.log("customerAydiiii =", this.customerId)
+    })
+
   }
+
   updateContactMedium(){
     const request: UpdateContactMediumRequest = {
-      customerId: this.pathId,
       email: this.contactMediumInfoUpdateForm.value.email,
       homePhone: this.contactMediumInfoUpdateForm.value.homePhone,
       mobilePhone: this.contactMediumInfoUpdateForm.value.mobilePhone,
@@ -80,7 +86,7 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
       },
       complete: () => {
         this.contactMediumInfoUpdateForm.reset();
-        this.router.navigate(['/home/customer/', this.pathId , 'contact-medium-info'])
+        this.router.navigate(['/home/customer/', this.customerId , 'contact-medium-info'])
         this.isSuccess = true;
       }
     })
