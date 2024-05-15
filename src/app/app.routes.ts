@@ -37,7 +37,8 @@ export const routes: Routes = [
     component: MainLayoutComponent,
     children:[
       {
-        path:"search",
+        path:"",
+        pathMatch: 'full',
         component:SearchCustomerPageComponent,
       },
       {

@@ -36,6 +36,6 @@ isActive: boolean = true;
   // }
 
   b2cClick(){
-    this.router.navigate(["/home/search"]);
+    this.router.navigate(["/home"]);
   }
 }
