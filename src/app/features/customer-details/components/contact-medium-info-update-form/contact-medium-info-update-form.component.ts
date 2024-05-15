@@ -53,11 +53,10 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.parent.params.subscribe(params =>{
-      this.pathId = params['id'];
-      this.activatedRoute.queryParams.subscribe(params => {
-        this.customerId = params['customerId'];
-        console.log(this.customerId,"geldiiiiii")
-      })
+    this.pathId = params['id'];
+
+    this.customerId = history.state.customerId;
+    console.log(this.customerId,"geldi looo")
       this.change.markForCheck();
     });
 

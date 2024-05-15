@@ -28,22 +28,20 @@ export class ContactMediumInfoComponent implements OnInit{
   ngOnInit(): void {
     this.activatedRoute.parent.params.subscribe(params => {
       this.customerId = params['id'];
-
+      this.contactMediumApiService.setCustomerId(this.customerId);
     });
+
     this.getContactMedium();
   }
   onClick(){
     this.router.navigate
-    (['/home/customer', this.contactMediumInfo.id,'contact-medium-info-update'], {queryParams: {customerId: this.customerId}})
+    (['/home/customer', this.contactMediumInfo.id,'contact-medium-info-update'], {state:{customerId: this.customerId}})
   }
 
   getContactMedium(){
     this.contactMediumApiService.getById(this.customerId).subscribe({
         next: (contactMediumDetails) => {
         this.contactMediumInfo = contactMediumDetails;
-        // console.log(this.customerId)
-
-        // console.log(contactMediumDetails);
       },
       complete: () => {
         this.change.markForCheck();
