@@ -3,11 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GetListResponseDto } from '../models/get-list-response-dto';
 import { AddressResponseDto } from '../models/address/address-response-dto';
-import { GetAddressRequest } from '../models/address/requests/get-address-request';
 import { UpdateAddressRequest } from '../models/address/requests/update-address-request';
 import { UpdatedAddressResponse } from '../models/address/responses/updated-address-response';
 import { CreateAddressRequest } from '../models/address/requests/create-address-request';
 import { CreatedAddressResponse } from '../models/address/responses/created-address-response';
+import { CitiesResponseDto } from '../models/cities/cities-response-dto';
+import { DistrictsResponseDto } from '../models/districts/districts-response-dto';
 
 
 
@@ -23,8 +24,8 @@ export class AddressApiService {
     return this.http.get<GetListResponseDto<AddressResponseDto>>
     ('http://localhost:8081/customerservice/api/v1/addresses');
   }
-  getById(customerId: string): Observable<GetAddressRequest[]>{
-    return this.http.get<GetAddressRequest[]>(`http://localhost:8081/customerservice/api/v1/addresses/${customerId}`)
+  getById(customerId: string): Observable<AddressResponseDto[]>{
+    return this.http.get<AddressResponseDto[]>(`http://localhost:8081/customerservice/api/v1/addresses/${customerId}`)
   }
 
   putAddress(id: string, address: UpdateAddressRequest): Observable<UpdatedAddressResponse>{
@@ -36,13 +37,27 @@ export class AddressApiService {
     return this.http.post<CreatedAddressResponse>('http://localhost:8081/customerservice/api/v1/addresses', address);
   }
 
-  getCities(): Observable<any> {
-    return this.http.get('http://localhost:8081/customerservice/api/v1/cities');
+  getCities(): Observable<CitiesResponseDto> { //getCitiesRequest,response...
+    return this.http.get<CitiesResponseDto>('http://localhost:8081/customerservice/api/v1/cities');
   }
 
-  getDistricts(): Observable<any> {
-    return this.http.get(`http://localhost:8081/customerservice/api/v1/districts`);
+  getDistricts(): Observable<DistrictsResponseDto> {
+    return this.http.get<DistrictsResponseDto>(`http://localhost:8081/customerservice/api/v1/districts`);
   }
+  getCityById(cityId): Observable<CitiesResponseDto> { //getCitiesRequest,response...
+    return this.http.get<CitiesResponseDto>(`http://localhost:8081/customerservice/api/v1/cities/${cityId}`);
+  }
+  getDistrictById(districtId: string): Observable<DistrictsResponseDto> {
+    return this.http.get<DistrictsResponseDto>(`http://localhost:8081/customerservice/api/v1/districts/${districtId}`);
+  }
+  // getCityName(cityId: string, cities: CitiesResponseDto[]): string {
+  //   const city = cities.find(c => c.id === cityId);
+  //   return city.name ? city.name : 'City not found';
+  // }
 
-
+  // getDistrictName(districtId: string, districts: DistrictsResponseDto[]): string {
+  //   const district = districts.find(d => d.id === districtId);
+  //   return district ? district.name : 'District not found';
+  // }
 }
+

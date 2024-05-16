@@ -81,7 +81,7 @@ export class CustomerAdressModalComponent implements OnInit {
     this.addressApiService.getCities().subscribe((citiesData) => {
       this.cities = citiesData;
       this.districts = [];
-      if (citiesData && citiesData.length > 0) {
+      if (citiesData) {
 
 
         this.addressApiService.getDistricts().subscribe((districtsData) => {
@@ -91,7 +91,7 @@ export class CustomerAdressModalComponent implements OnInit {
           console.log(districtsData);
         })
         this.cityList.emit(this.cities);
-        this.districtList.emit(this.districts);
+        //this.districtList.emit(this.districts);
         console.log("cityList", this.cityList)
       }
     });

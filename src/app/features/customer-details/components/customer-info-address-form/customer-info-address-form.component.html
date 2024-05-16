@@ -1,35 +1,36 @@
 <div class="info-page container-fluid mt-5 m-3" style="background-color: white">
   <h4>
-    Address Info<i
-      class="fa-solid fa-pen-clip"
-      style="color: #24233f"
-      routerLink=""
-    ></i>
+    Address Info<i class="fa-solid fa-pen-clip" style="color: #24233f" routerLink=""></i>
   </h4>
 
   <div class="d-flex justify-content-between mx-5">
-    <div class="address-info" *ngFor="let address of addressInfo let i=index">
+    <div class="address-info" *ngFor="let detail of addressDetails; let i = index">
       <div class="address-options dropdown">
-        <i class="fa-solid fa-ellipsis-vertical fa-xl " role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+        <i class="fa-solid fa-ellipsis-vertical fa-xl" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
         <div class="option-click dropdown-menu">
           <a class="dropdown-item" routerLink="">edit</a>
           <a class="dropdown-item" routerLink="">delete</a>
         </div>
       </div>
 
-      <p *ngIf="addressInfo" style="color: black">
-        City, District,
+      <p style="color: black">
+        <ng-container *ngIf="detail.cityName">
+          City: {{ detail.cityName }}
+        </ng-container>
         <br>
-        {{ address.street }}, {{address.flatNumber}},
+        <ng-container *ngIf="detail.districtName">
+          District: {{ detail.districtName }}
+        </ng-container>
         <br>
-        {{ address.description }}
+        {{ detail.address.street }}, {{ detail.address.flatNumber }}
+        <br>
+        {{ detail.address.description }}
       </p>
 
       <div class="radio-button-container">
-        <input class="form-check-input" type="radio" id="selectAddress{{address}}" name="selectedAddress" value="{{address}}">
+        <input class="form-check-input" type="radio" id="selectAddress{{i}}" name="selectedAddress" value="{{i}}">
+      </div>
     </div>
-    </div>
-
   </div>
 
   <div class="button-container d-flex justify-content-between my-5">
