@@ -20,6 +20,7 @@ import { selectContactMedium } from '../../../../shared/stores/contact-medium/co
 import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-message.pipe';
 import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
 import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
+import { SuccessMessageService } from '../../services/successMessage.service';
 
 @Component({
   selector: 'app-contact-medium',
@@ -40,6 +41,7 @@ import { WarningPopupComponent } from '../../../../shared/components/warning-pop
 export class ContactMediumComponent implements OnInit {
   contactForm!: FormGroup;
   isFormValid = false;
+  routerCustomerId: string;
 
   constructor(
     private fb: FormBuilder,
@@ -48,6 +50,7 @@ export class ContactMediumComponent implements OnInit {
     private contactMediumApiService: ContactMediumApiService,
     private router: Router,
     private store: Store,
+    private successMessageService: SuccessMessageService
   ) {}
 
   ngOnInit() {
@@ -90,6 +93,8 @@ export class ContactMediumComponent implements OnInit {
         return this.customerApiService.postCustomer(customer).pipe(
           switchMap(createdCustomerResponseMapCustomer => {
             const customerId = createdCustomerResponseMapCustomer.id;
+            this.routerCustomerId = customerId;
+            console.log("router customer id", this.routerCustomerId);
             if (!customerId) {
               throw new Error('Customer hatasi -> ID hala undefined');
             }
@@ -139,7 +144,8 @@ export class ContactMediumComponent implements OnInit {
       })
     ).subscribe(response => {
       if (response) {
-        this.router.navigate(['/home/search']);
+        this.successMessageService.setSuccessMessage('Customer created successfully');
+        this.router.navigate(['/home/customer/',this.routerCustomerId,'info']);
       }
     });
   }

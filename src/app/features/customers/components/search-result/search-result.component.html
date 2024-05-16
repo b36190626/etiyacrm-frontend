@@ -17,7 +17,7 @@
         <tbody>
 
           <tr *ngFor="let customer of customerList | paginate: { itemsPerPage: 10, currentPage:p }">
-            <td class="cursor" (click)="getCustomerInfo(customer.id)">{{ customer.id }}</td>
+            <td class="cursor" (click)="getCustomerInfo(customer.id)">{{ customer.id | slice:0:8 }}</td>
             <td>{{ customer.firstName}}</td>
             <td>{{ customer.middleName}}</td>
             <td>{{ customer.lastName }}</td>

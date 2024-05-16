@@ -1,5 +1,8 @@
-<div class="not-found d-flex align-items-sm-start gap-5 m-lg-5">
-  <p>No customer found! Would you like to create the customer?</p>
-  <button class="create-customer shadow-sm" routerLink="/create-customer">Create Customer</button>
+<div class="not-found d-flex flex-column justify-content-between">
+  <div class="d-flex align-items-sm-start gap-5 m-lg-5">
+    <p>No customer found! Would you like to create the customer?</p>
+    <button class="create-customer shadow-sm" routerLink="/create-customer">Create Customer</button>
+  </div>
+  <app-warning-popup [message]="message" ></app-warning-popup>
 </div>
 

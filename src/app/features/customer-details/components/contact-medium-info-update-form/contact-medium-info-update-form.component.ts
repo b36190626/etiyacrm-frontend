@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { UpdateContactMediumRequest } from '../../../customers/models/contact-medium/requests/update-contact-medium-request';
@@ -42,6 +42,7 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
     private contactMediumApiService: ContactMediumApiService,
     private fb: FormBuilder,
     private router: Router,
+    private change: ChangeDetectorRef,
   ) {}
 
   onKeyDown(event: any) {
@@ -52,7 +53,11 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.parent.params.subscribe(params =>{
-      this.pathId = params['id'];
+    this.pathId = params['id'];
+
+    this.customerId = history.state.customerId;
+    console.log(this.customerId,"geldi looo")
+      this.change.markForCheck();
     });
 
     this.contactMediumInfoUpdateForm = this.fb.group({
@@ -63,11 +68,6 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
     });
     this.contactMediumInfoUpdateForm.statusChanges.subscribe(status => {
       this.isFormValid = status === 'VALID';
-    })
-
-    this.activatedRoute.paramMap.subscribe(params => {
-      this.customerId = params.get("customerId")!;
-      console.log("customerAydiiii =", this.customerId)
     })
 
   }

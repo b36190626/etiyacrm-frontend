@@ -29,7 +29,7 @@
       <button
         type="button"
         class="button-cancel"
-        routerLink="/home/customer/{{ pathId }}"
+        routerLink="/home/customer/{{ customerId }}/info"
       >
         Cancel
       </button>
@@ -50,6 +50,6 @@
   </div>
 
   <div *ngIf="isSuccess">
-    <app-success-popup [message]="'Update successful!'"></app-success-popup>
+    <app-success-popup [successMessage]="'Update successful!'"></app-success-popup>
   </div>
 </div>

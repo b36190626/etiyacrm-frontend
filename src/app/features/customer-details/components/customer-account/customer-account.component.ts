@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
-import { CustomerApiService } from '../../../customers/services/customerApi.service';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { GetListResponseDto } from '../../../customers/models/get-list-response-dto';
 import { CustomerResponseDto } from '../../../customers/models/customer/customer-response-dto';
+import { GetBillingAccountRequest } from '../../../customers/models/billing-account/requests/get-billing-account-request';
+import { BillingAccountApiService } from '../../../customers/services/billingAccountApi.service';
 
 @Component({
   selector: 'app-customer-account',
@@ -21,26 +22,46 @@ import { CustomerResponseDto } from '../../../customers/models/customer/customer
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomerAccountComponent implements OnInit{
+  customerId!: string;
+  billingAccountInfo!: GetBillingAccountRequest[];
+
   list: GetListResponseDto<CustomerResponseDto>;
   p: number = 1;
   selectedRow: number = -1;
 
   constructor(
-    private customersApiService: CustomerApiService,
-    private change: ChangeDetectorRef
+    //private customersApiService: CustomerApiService,
+    private billingAccountApiService: BillingAccountApiService,
+    private change: ChangeDetectorRef,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.getList();
+    this.activatedRoute.parent.params.subscribe(params => {
+      this.customerId = params['id'];
+    }).unsubscribe();
+    this.getBillingAccount();
 
   }
 
-  getList() {
-      this.customersApiService.getList().subscribe(customers => {
-      this.list = customers;
-      this.change.markForCheck();
-    });
+  getBillingAccount(){
+    this.billingAccountApiService.getById(this.customerId).subscribe({
+      next: (accountDetails) => {
+        this.billingAccountInfo = accountDetails;
+        console.log(accountDetails, "geldi");
+      },
+      complete: () => {
+        this.change.markForCheck();
+      }
+    })
   }
+
+  // getList() {
+  //     this.customersApiService.getList().subscribe(customers => {
+  //     this.list = customers;
+  //     this.change.markForCheck();
+  //   });
+  // }
 
 
 

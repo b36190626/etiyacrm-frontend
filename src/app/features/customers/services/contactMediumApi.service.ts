@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GetListResponseDto } from '../models/get-list-response-dto';
 import { ContactMediumResponseDto } from '../models/contact-medium/contact-medium-response-dto';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { GetContactMediumRequestDto } from '../models/contact-medium/requests/get-contact-medium-request';
 import { UpdateContactMediumRequest } from '../models/contact-medium/requests/update-contact-medium-request';
 import { UpdatedContactMediumResponse } from '../models/contact-medium/responses/updated-contact-medium-response';
@@ -15,7 +15,18 @@ import { CreateContactMediumRequest } from '../models/contact-medium/requests/cr
 })
 export class ContactMediumApiService {
 
+  private customerIdSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  customerId$: Observable<string> = this.customerIdSubject.asObservable();
+
   constructor(private http: HttpClient) { }
+
+  setCustomerId(customerId: string): void {
+    this.customerIdSubject.next(customerId);
+  }
+
+  getCustomerId(): Observable<string> {
+    return this.customerId$;
+  }
 
   getList(): Observable<GetListResponseDto<ContactMediumResponseDto>> {
     return this.http.get<GetListResponseDto<ContactMediumResponseDto>>
