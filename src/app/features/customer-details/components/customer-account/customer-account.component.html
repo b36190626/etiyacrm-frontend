@@ -14,11 +14,23 @@
       </tr>
     </thead>
     <tbody>
+        <ng-container *ngFor="let account of billingAccountInfo; let i = index" class="aaccordion-item">
+          <tr data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + i" aria-expanded="false" [attr.aria-controls]="'collapse' + i">
+            <td>Active</td>
+            <td>{{ account.accountNumber}}</td>
+            <td>{{account.name }}</td>
+            <td>{{account.type }}</td>
+
+            <td class="justify-content-center gap-3">
+              <i class="fa-regular fa-circle-xmark" type="button"></i>
+              <i class="fa-solid fa-pen-clip m-1" type="button" style="color: #24233f" routerLink="/update-account/{{account.customerId}}"></i>
+            </td>
+          </tr>
+        </ng-container>
+
+
 
       <!-- <ng-container *ngFor="let account of list; let i = index" class="aaccordion-item"> -->
-
-
-
             <!-- <tr data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + i" aria-expanded="false" [attr.aria-controls]="'collapse' + i"> -->
               <!-- <ng-container *ngIf="account.billingAccounts && account.billingAccounts.length > 0">
                 <td>{{ account.billingAccounts[0].status || '-'}}</td>
@@ -33,7 +45,6 @@
                   <i class="fa-solid fa-pen-clip m-1" type="button" style="color: #24233f" routerLink="/edit-account/{{account.billingAccounts[0].id}}"></i>
                 </td>
               </ng-container> -->
-
             <!-- </tr> -->
 
 
@@ -41,7 +52,7 @@
         <!-- Accordion içeriği -->
         <tr>
           <td colspan="5" class="p-0">
-            <!-- <div id="collapse{{i}}" class="accordion-collapse collapse" [attr.aria-labelledby]="'heading' + i" data-bs-parent="#accountsAccordion"> -->
+            <!-- <div id="collapse{{i}}" class="accordion-collapse collapse" [attr.aria-labelledby]="'heading' + i" data-bs-parent="#accountsAccordion">  -->
               <div class="accordion-body">
           <table class="table product-table">
             <thead>
@@ -54,6 +65,7 @@
               </tr>
             </thead>
             <tbody>
+
               <!-- <ng-container *ngFor="let account of account.billingAccounts">  // PRODUCT - OFFER - ORDER- BILLING ACCOUNTS TABLOLARI / SERVIS MI YAZILACAK? - DISTRICT TABLOSU OLUŞACAK(İLİŞKİSİ DE KURULACAK- ex: ankara tıklandığında şehirleri gelecek one to many) Normalizasyon uygunluğu için gerekli.
                 <ng-container *ngFor="let order of account.orders"> // ADDRESS KISMI(FRONT END) DÜZELDİKTEN SONRA DBYE KAYIT İŞLEMİ YAPILACAK.
                   <ng-container *ngFor="let offer of order.offers">
