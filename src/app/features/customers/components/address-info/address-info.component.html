@@ -22,8 +22,8 @@
             </div>
           </div>
           <p style="font-weight: bolder;" *ngIf="address.isDefaultAddress"> Primary Adress </p>
-          <li>City: {{ address.customerId| appIdToName:cities }}</li>
-          <li>District: {{ address.districtId | appIdToName:districts }}</li>
+          <li>City: {{ address.districtId | appIdToName:districts:cities:'city' }}</li>
+          <li>District: {{ address.districtId | appIdToName:districts:districts:'district' }}</li>
           <li>Street: {{ address.street }}</li>
           <li>Flat Number: {{ address.flatNumber }}</li>
           <li>Description: {{ address.description }}</li>

@@ -7,6 +7,8 @@ import { select, Store } from '@ngrx/store';
 import { selectAddress } from '../../../../shared/stores/addresses/address.selector';
 import { CreateAddressRequest } from '../../models/address/requests/create-address-request';
 import { IdToNamePipe } from '../../../../core/pipes/idToName.pipe';
+import { CitiesResponseDto } from '../../models/cities/cities-response-dto';
+import { DistrictsResponseDto } from '../../models/districts/districts-response-dto';
 
 @Component({
   selector: 'app-address-info',
@@ -17,8 +19,8 @@ import { IdToNamePipe } from '../../../../core/pipes/idToName.pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddressInfoComponent implements OnInit {
-  cities: any = [];
-  districts: any = [];
+  cities: CitiesResponseDto[] = [];
+  districts: DistrictsResponseDto[] = [];
   filteredDistricts: any = [];
   isFormValid = false;
   addressList: CreateAddressRequest[] = [];
@@ -36,11 +38,11 @@ export class AddressInfoComponent implements OnInit {
     });
   }
 
-  cityTransferParent(cityList: any[]) {
+  cityTransferParent(cityList: CitiesResponseDto[]) {
     this.cities = cityList;
-
   }
-  districtTransferParent(districtList: any[]) {
+
+  districtTransferParent(districtList: DistrictsResponseDto[]) {
     this.districts = districtList;
   }
 
