@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CreateCustomerRequest } from '../../models/customer/requests/create-customer-request';
@@ -9,6 +9,7 @@ import { selectIndividualCustomer } from '../../../../shared/stores/customers/in
 import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
 import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-message.pipe';
 import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
+import { tcValidator } from './tcValidator';
 
 @Component({
   selector: 'app-demographic-form',
@@ -30,6 +31,7 @@ export class DemographicFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private cdr: ChangeDetectorRef,
     private router: Router,
     private store: Store<{ individualCustomer: CreateCustomerRequest }>
   ) {}
@@ -42,12 +44,14 @@ export class DemographicFormComponent implements OnInit {
       .subscribe((individualCustomer) => {
         this.customerForm.patchValue(individualCustomer);
         console.log('individualCustomerState:', individualCustomer);
+        this.cdr.detectChanges();
       });
     // Formun durumunu dinamik olarak izleme
     this.customerForm.statusChanges.subscribe(
       status => {
         this.isFormValid = status === 'VALID';
         console.log(status);
+        this.cdr.detectChanges();
 });
   }
 
@@ -64,9 +68,12 @@ export class DemographicFormComponent implements OnInit {
         Validators.required,
         Validators.maxLength(11),
         Validators.minLength(11),
-        Validators.pattern("^[1-9]{1}[0-9]{9}[02468]{1}$")
-        //buraya tc içi başka kontroller gelmeli
+        tcValidator()
+        //buraya tc içi başka kontroller gelmeli // - geldi:)
       ]]
+    });
+    this.customerForm.valueChanges.subscribe(() => {
+      this.cdr.detectChanges();
     });
   }
 

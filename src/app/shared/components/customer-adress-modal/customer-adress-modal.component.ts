@@ -104,7 +104,7 @@ export class CustomerAdressModalComponent implements OnInit {
       districtId: this.addressForm.value.district,
       flatNumber: this.addressForm.value.flatNumber,
       description: this.addressForm.value.description,
-      isDefaultAddress: this.addressForm.value.isDefault,
+      defaultAddress: this.addressForm.value.isDefault,
       customerId:'',
     };
 

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, SimpleChanges } from '@angular/core';
 import { ControlErrorMessagePipe } from '../../../core/pipes/control-error-message.pipe';
 
 
@@ -16,10 +16,14 @@ import { ControlErrorMessagePipe } from '../../../core/pipes/control-error-messa
 export class WarningPopupComponent {
 @Input() message: unknown;
 
-  isOpen: boolean = true
-  openModal(){
-    this.isOpen = true;
+isOpen: boolean = true;
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['message']) {
+      this.isOpen = true; // message değiştiğinde popup'ı tekrar aç
+    }
   }
+
   closeModal(){
     this.isOpen = false;
   }

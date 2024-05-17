@@ -11,13 +11,13 @@
 
     <div class="button-group">
       <div>
-        <button class="clear-button" [ngClass]="{ 'clear-button': isFormValid,'clear-button-disabled': !isFormValid }" type="reset">
+        <button class="clear-button" [ngClass]="{ 'clear-button': isFormValid,'clear-button-disabled': !isFormValid }" type="button" (click)="onClear()" [disabled]="!isFormValid">
           <i class="fa-solid fa-eraser" style="color: white;"></i>
           Clear
         </button>
       </div>
       <div class="search-group">
-        <button class="search-button" [ngClass]="{ 'search-button': isFormValid,'search-button-disabled': !isFormValid }" type="click" (click)="onSubmit()">
+        <button class="search-button" [ngClass]="{ 'search-button': isFormValid,'search-button-disabled': !isFormValid }" type="click" (click)="onSubmit()" [disabled]="!isFormValid">
           <i class="fa-solid fa-magnifying-glass" style="color: white"></i>
           Search
         </button>

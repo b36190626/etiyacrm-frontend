@@ -1,6 +1,7 @@
 <div class="container-fluid">
-  <h3>Customer Account</h3>
-  <button class="create-account" routerLink="/create-account">Create New Account</button>
+<h3>Customer Account</h3>
+<button class="create-account" [routerLink]="['/home/customer', customerId, 'account', 'create-account']" (click)="navigateToCreateAccount()">Create New Account</button>
+
 
 
   <table class="table table-striped mt-3">

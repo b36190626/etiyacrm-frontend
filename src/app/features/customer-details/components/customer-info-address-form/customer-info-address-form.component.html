@@ -27,8 +27,8 @@
         {{ detail.address.description }}
       </p>
 
-      <div class="radio-button-container">
-        <input class="form-check-input" type="radio" id="selectAddress{{i}}" name="selectedAddress" value="{{i}}">
+      <div *ngIf="detail.address.defaultAddress" class="radio-button-container"> <b> Primary Address</b> &nbsp;
+        <input class="form-check-input" type="radio" id="selectAddress{{i}}" name="selectedAddress" [value]="detail.address.defaultAddress" checked>
       </div>
     </div>
   </div>

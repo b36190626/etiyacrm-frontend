@@ -5,6 +5,7 @@ import { WarningPopupComponent } from '../../../../shared/components/warning-pop
 import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
 import { SearchApiService } from '../../services/searchApi.service';
 import { SearchFilterResponse } from '../../models/search-filter/responses/search-filter-response';
+import { Router, RouterModule } from '@angular/router';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { SearchFilterResponse } from '../../models/search-filter/responses/searc
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    RouterModule,
     WarningPopupComponent,
     NoStringInputDirective
   ],
@@ -21,6 +23,7 @@ import { SearchFilterResponse } from '../../models/search-filter/responses/searc
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchFilterComponent implements OnInit{
+
   isFormValid: boolean = false;
   @Output() customerList = new EventEmitter<SearchFilterResponse[]>();
   customers: any = [];
@@ -41,6 +44,7 @@ export class SearchFilterComponent implements OnInit{
   constructor(
     private fb: FormBuilder,
     private searchApiService: SearchApiService,
+    private router: Router,
   )
   {
     this.form.valueChanges.subscribe(()=>{
@@ -56,6 +60,12 @@ export class SearchFilterComponent implements OnInit{
   }
 
   ngOnInit(): void {}
+
+  onClear() {
+    this.form.reset();
+    window.location.href = 'http://localhost:4200/home'; // geçiçi yönlendirme, düzeltelim.
+    //this.router.navigate(['/home']); // searchservice üstünde çalıştığından dolayı home'a dönemiyor.
+    }
 
   onSubmit(){
     this.getFilters();

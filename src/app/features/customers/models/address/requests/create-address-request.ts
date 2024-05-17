@@ -4,5 +4,5 @@ export interface CreateAddressRequest{
   customerId: string;
   flatNumber: number;
   description: string;
-  isDefaultAddress: boolean;
+  defaultAddress: boolean;
 }

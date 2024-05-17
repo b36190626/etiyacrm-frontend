@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { SuccessMessageService } from '../../../features/customers/services/successMessage.service';
 import { Subscription } from 'rxjs';
 
@@ -18,11 +18,16 @@ export class SuccessPopupComponent implements OnInit, OnDestroy {
   isOpen: boolean = true;
   private subscription: Subscription;
 
-  constructor(private successMessageService: SuccessMessageService) {
+  constructor(
+    private successMessageService: SuccessMessageService,
+    private cdr: ChangeDetectorRef
+  ) {
     this.subscription = this.successMessageService.successMessage$.subscribe(message => {
       this.successMessage = message;
+      this.cdr.markForCheck();
       setTimeout(() => {
         this.successMessage = null;
+        this.cdr.markForCheck();
       }, 5000);
     });
   }
@@ -33,7 +38,8 @@ export class SuccessPopupComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  closeModal(){
+  closeModal() {
     this.isOpen = false;
+    this.cdr.markForCheck();
   }
 }

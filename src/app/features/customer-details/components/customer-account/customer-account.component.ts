@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
 import { NgxPaginationModule } from 'ngx-pagination';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { GetListResponseDto } from '../../../customers/models/get-list-response-dto';
 import { CustomerResponseDto } from '../../../customers/models/customer/customer-response-dto';
 import { GetBillingAccountRequest } from '../../../customers/models/billing-account/requests/get-billing-account-request';
@@ -22,24 +22,27 @@ import { BillingAccountApiService } from '../../../customers/services/billingAcc
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomerAccountComponent implements OnInit{
+
   customerId!: string;
   billingAccountInfo!: GetBillingAccountRequest[];
 
   list: GetListResponseDto<CustomerResponseDto>;
   p: number = 1;
   selectedRow: number = -1;
+click: any;
 
   constructor(
     //private customersApiService: CustomerApiService,
     private billingAccountApiService: BillingAccountApiService,
     private change: ChangeDetectorRef,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
     this.activatedRoute.parent.params.subscribe(params => {
       this.customerId = params['id'];
-    }).unsubscribe();
+    })
     this.getBillingAccount();
 
   }
@@ -55,15 +58,15 @@ export class CustomerAccountComponent implements OnInit{
       }
     })
   }
-
+  navigateToCreateAccount(): void {
+    this.router.navigate([`/home/customer/${this.customerId}/account/create-account`]);
+  }
   // getList() {
   //     this.customersApiService.getList().subscribe(customers => {
   //     this.list = customers;
   //     this.change.markForCheck();
   //   });
   // }
-
-
 
   toggleAccordion(index: number) {
     this.selectedRow = (this.selectedRow === index) ? -1 : index;
