@@ -32,7 +32,9 @@ export class SearchResultComponent implements OnInit {
   @Input() customerList: SearchFilterResponse[] = [];
   @Output() selectedCustomer = new EventEmitter<string>();
 
-  p: number = 0;
+  p: number = 1;
+  itemsPerPage: number = 10;
+  totalItems: number;
 
   constructor(
     private searchApiService: SearchApiService,
@@ -56,6 +58,21 @@ export class SearchResultComponent implements OnInit {
     this.selectedCustomer.emit(customerId);
     this.route.navigate(['/home/customer', customerId, 'info']);
 
+  }
+
+  goToFirstPage(): void {
+    if (this.p !== 1) {
+      this.p = 1;
+    }
+  }
+
+  goToLastPage(): void {
+    this.p = this.totalPages;
+  }
+
+  get totalPages(): number {
+    this.totalItems = this.customerList.length;
+    return Math.ceil(this.totalItems / this.itemsPerPage);
   }
 
 }

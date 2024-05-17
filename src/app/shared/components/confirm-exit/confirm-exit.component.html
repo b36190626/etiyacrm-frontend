@@ -1,0 +1,25 @@
+<!-- <div class="popup-container">
+  <div class="popup-content">
+    <h2>Changes will not be saved. Are you sure to change the screen?</h2>
+    <button (click)="onConfirm()">Yes</button>
+    <button (click)="onCancel()">No</button>
+  </div>
+</div> -->
+
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered ">
+    <div class="modal-content">
+      <div class="modal-body d-flex align-items-center justify-content-between gap-4">
+        <i class="fa-solid fa-triangle-exclamation fa-2x"></i>
+        <p class="message">
+          {{message}}
+        </p>
+          <!-- Changes will not be saved. Are you sure to change the screen? -->
+      </div>
+      <div class="modal-footer d-flex justify-content-center gap-5">
+        <button type="button" class="btn yes-button" data-bs-dismiss="modal">Yes</button>
+        <button type="button" class="btn no-button mx-4" data-bs-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>

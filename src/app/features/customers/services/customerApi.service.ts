@@ -10,6 +10,7 @@ import { CustomerDetailsDto } from '../models/customer/customer-details-dto';
 import { CustomerUpdateRequest } from '../models/customer/requests/customer-update-request';
 import { CustomerUpdateResponse } from '../models/customer/responses/customer-update-response';
 import { CreatedCustomerResponse } from '../models/customer/responses/created-customer-response';
+import { DeletedCustomerResponse } from '../models/customer/responses/deleted-customer-response';
 
 
 @Injectable({
@@ -35,5 +36,11 @@ export class CustomerApiService {
     return this.http.put<CustomerUpdateResponse>
     (`http://localhost:8081/customerservice/api/v1/individualcustomers/${id}`,customer)
   }
+
+  deleteCustomer(id: string): Observable<DeletedCustomerResponse> {
+    return this.http.delete<DeletedCustomerResponse>
+    (`http://localhost:8081/customerservice/api/v1/individualcustomers/${id}`)
+  }
+
 
 }

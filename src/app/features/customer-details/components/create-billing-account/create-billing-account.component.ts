@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddressInfoComponent } from '../../../customers/components/address-info/address-info.component';
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
+import { CustomerInfoAddressFormComponent } from '../customer-info-address-form/customer-info-address-form.component';
 
 @Component({
   selector: 'app-create-billing-account',
@@ -11,7 +12,8 @@ import { HeaderComponent } from '../../../../shared/components/header/header.com
     CommonModule,
     ReactiveFormsModule,
     AddressInfoComponent,
-    HeaderComponent
+    HeaderComponent,
+    CustomerInfoAddressFormComponent
   ],
   templateUrl: './create-billing-account.component.html',
   styleUrl: './create-billing-account.component.scss',

@@ -1,12 +1,13 @@
 import { CustomerApiService } from './../../../customers/services/customerApi.service';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CustomerUpdateRequest } from '../../../customers/models/customer/requests/customer-update-request';
 import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
 import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-message.pipe';
 import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
+import { ConfirmExitComponent } from '../../../../shared/components/confirm-exit/confirm-exit.component';
 
 @Component({
   selector: 'app-customer-info-update-form',
@@ -17,7 +18,8 @@ import { WarningPopupComponent } from '../../../../shared/components/warning-pop
     RouterModule,
     NoStringInputDirective,
     ControlErrorMessagePipe,
-    WarningPopupComponent
+    WarningPopupComponent,
+    ConfirmExitComponent
   ],
   templateUrl: './customer-info-update-form.component.html',
   styleUrl: './customer-info-update-form.component.scss',
@@ -27,6 +29,9 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
   customerUpdateForm!: FormGroup;
   isFormValid: boolean = false;
   pathId!: string;
+  @ViewChild(ConfirmExitComponent) confirmExitComponent!: ConfirmExitComponent;
+  message: string = 'Changes will not be saved. Are you sure to change the screen?';
+  successMessage: string = 'Changed saved'; //bunu tüm updatelere ekle
 
   constructor(
     private fb: FormBuilder,
@@ -38,7 +43,6 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
     this.activatedRoute.parent.params.subscribe(params => {
     this.pathId = params['id'];
     console.log('pathID:', this.pathId);
-
     }).unsubscribe();
 
 
@@ -85,11 +89,16 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
       }
     })
   }
-
   onSubmit() {
     if (this.customerUpdateForm.valid) {
       console.log('Form Submitted!', this.customerUpdateForm.value);
       this.updateCustomer();
+    }
+  }
+
+onCancel() {
+    if (this.confirmExitComponent) {
+      this.confirmExitComponent.cancel(this.pathId);
     }
   }
 }

@@ -102,6 +102,6 @@ export class DemographicFormComponent implements OnInit {
 
   onCancel() {
     this.customerForm.reset();
-    this.router.navigate(['/home/search'])
+    this.router.navigate(['/home'])
   }
 }

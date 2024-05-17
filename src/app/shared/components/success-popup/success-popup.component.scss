@@ -2,13 +2,14 @@
   display: flex;
   justify-content: center;
   margin: auto;
-  width: 30vw;
+  width: 35vw;
 }
 .popup-inner {
   background: white;
   border-radius: 1rem;
   display: flex;
   align-items: center;
+  flex-direction: column;
   gap: 1rem;
   padding: 1rem;
   background-color: rgb(224, 220, 220);

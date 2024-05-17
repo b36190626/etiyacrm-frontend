@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
 import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
@@ -45,6 +45,7 @@ export class SearchFilterComponent implements OnInit{
     private fb: FormBuilder,
     private searchApiService: SearchApiService,
     private router: Router,
+    private change: ChangeDetectorRef,
   )
   {
     this.form.valueChanges.subscribe(()=>{
@@ -64,12 +65,14 @@ export class SearchFilterComponent implements OnInit{
   onClear() {
     this.form.reset();
     window.location.href = `${window.location.origin}/home`;
+    this.change.markForCheck();
     //window.location.href = 'http://localhost:4200/home'; // geçiçi yönlendirme, düzeltelim.
     //this.router.navigate(['/home']); // searchservice üstünde çalıştığından dolayı home'a dönemiyor.
     }
 
   onSubmit(){
     this.getFilters();
+    this.change.markForCheck();
   }
 
   getFilters(){
@@ -88,6 +91,9 @@ export class SearchFilterComponent implements OnInit{
     this.searchApiService.getBySearchFilter(apiUrl).subscribe(response => {
       this.customers = response;
       this.customerList.emit(this.customers);
+
+      this.change.markForCheck();
+
       console.log("apiUrl",apiUrl);
       console.log("customer list response:",response);
     })

@@ -33,4 +33,18 @@ table{
   }
 }
 
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+i{
+  margin-bottom: 1rem;
+}
+
+.custom-pagination .ngx-pagination-previous:before,
+.custom-pagination .ngx-pagination-next:before {
+  content: none; /* Önceki ve Sonraki işaretleri gizle */
+}
+
 

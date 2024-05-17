@@ -1,9 +1,16 @@
-  <div class="nav d-flex justify-content-center align-items-center mt-4">
-    <app-top-bar></app-top-bar>
-    <div class="trash-button">
-      <i class="fa-solid fa-trash-can fa-2xl"></i>
-    </div>
+<div class="nav d-flex justify-content-center align-items-center mt-4">
+  <app-top-bar></app-top-bar>
+  <div class="trash-button">
+    <i
+      class="fa-solid fa-trash-can fa-2xl"
+      data-bs-toggle="modal"
+      data-bs-target="#confirmModal"
+    ></i>
   </div>
-
+</div>
+<app-confirm-exit [message]="message" (click)="onDelete()"></app-confirm-exit>
 <router-outlet></router-outlet>
 
+<ng-container *ngIf="!isDeleted">
+  <app-success-popup [successMessage]="successMessage"></app-success-popup>
+</ng-container>

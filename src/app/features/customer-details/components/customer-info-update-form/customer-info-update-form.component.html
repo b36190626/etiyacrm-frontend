@@ -1,57 +1,123 @@
-<div class="info-page container-fluid mt-5 m-3" style="background-color: white;">
+<div class="info-page container-fluid mt-5 m-3" style="background-color: white">
   <h4>Customer Info Update</h4>
   <form [formGroup]="customerUpdateForm" (ngSubmit)="onSubmit()" class="mt-3">
-      <div class="row">
-          <div class="col-md-6 mb-3 d-flex">
-              <label for="first-name">First Name*:</label>
-              <input type="text" id="first-name" class="form-control" formControlName="firstName" >
-          </div>
-          <div class="col-md-6 mb-3 d-flex">
-              <label for="middle-name">Middle Name:</label>
-              <input type="text" id="middle-name" class="form-control" formControlName="middleName">
-          </div>
+    <div class="row">
+      <div class="col-md-6 mb-3 d-flex">
+        <label for="first-name">First Name*:</label>
+        <input
+          type="text"
+          id="first-name"
+          class="form-control"
+          formControlName="firstName"
+        />
       </div>
-      <div class="row">
-          <div class="col-md-6 mb-3 d-flex">
-              <label for="last-name">Last Name*:</label>
-              <input type="text" id="last-name" class="form-control" formControlName="lastName" >
-          </div>
-          <div class="col-md-6 mb-3 d-flex">
-              <label for="birth-date">Birth Date*:</label>
-              <input type="date" id="birth-date" class="form-control" formControlName="birthDate" >
-          </div>
+      <div class="col-md-6 mb-3 d-flex">
+        <label for="middle-name">Middle Name:</label>
+        <input
+          type="text"
+          id="middle-name"
+          class="form-control"
+          formControlName="middleName"
+        />
       </div>
-      <div class="row">
-          <div class="col-md-6 mb-3 d-flex">
-              <label for="gender">Gender*:</label>
-              <select id="gender" class="form-control" formControlName="gender" >
-                  <option value="">Select Gender</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Other">Other</option>
-              </select>
-          </div>
-          <div class="col-md-6 mb-3 d-flex">
-            <label for="father-name">Father Name:</label>
-            <input type="text" id="father-name" class="form-control" formControlName="fatherName">
-        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3 d-flex">
+        <label for="last-name">Last Name*:</label>
+        <input
+          type="text"
+          id="last-name"
+          class="form-control"
+          formControlName="lastName"
+        />
       </div>
-      <div class="row">
-          <div class="col-md-6 mb-3 d-flex">
-              <label for="mother-name">Mother Name:</label>
-              <input type="text" id="mother-name" class="form-control" formControlName="motherName">
-          </div>
-          <div class="col-md-6 d-flex">
-              <label for="nationality-identity">Nationality ID*:</label>
-              <input type="text" id="nationality-identity" class="form-control" formControlName="nationalityIdentity" appNoStringInput>
-          </div>
-        </div>
-      <div class="form-actions">
-          <button type="button" class="button-cancel" routerLink="/home/customer/{{pathId}}/info">Cancel</button>
-          <button type="submit" class="button-next" [ngClass]="{ 'valid-next-button': isFormValid,'invalid-next-button': !isFormValid }">Save</button>
+      <div class="col-md-6 mb-3 d-flex">
+        <label for="birth-date">Birth Date*:</label>
+        <input
+          type="date"
+          id="birth-date"
+          class="form-control"
+          formControlName="birthDate"
+        />
       </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3 d-flex">
+        <label for="gender">Gender*:</label>
+        <select id="gender" class="form-control" formControlName="gender">
+          <option value="">Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="col-md-6 mb-3 d-flex">
+        <label for="father-name">Father Name:</label>
+        <input
+          type="text"
+          id="father-name"
+          class="form-control"
+          formControlName="fatherName"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3 d-flex">
+        <label for="mother-name">Mother Name:</label>
+        <input
+          type="text"
+          id="mother-name"
+          class="form-control"
+          formControlName="motherName"
+        />
+      </div>
+      <div class="col-md-6 d-flex">
+        <label for="nationality-identity">Nationality ID*:</label>
+        <input
+          type="text"
+          id="nationality-identity"
+          class="form-control"
+          formControlName="nationalityIdentity"
+          appNoStringInput
+        />
+      </div>
+    </div>
+    <div class="form-actions">
+      <button
+        type="button"
+        class="button-cancel"
+
+        data-bs-toggle="modal"
+        data-bs-target="#confirmModal"
+      >
+        Cancel
+      </button>
+      <button
+        type="submit"
+        class="button-next"
+        [ngClass]="{
+          'valid-next-button': isFormValid,
+          'invalid-next-button': !isFormValid
+        }"
+        (click)="onSubmit()"
+      >
+        Save
+      </button>
+    </div>
   </form>
-  <div class="mt-2" *ngIf="customerUpdateForm.get('nationalityIdentity')?.invalid && customerUpdateForm.get('nationalityIdentity')?.touched">
-    <app-warning-popup [message]="customerUpdateForm.get('nationalityIdentity')!.errors | etiyaControlErrorMessage"></app-warning-popup>
+  <div
+    class="mt-2"
+    *ngIf="
+      customerUpdateForm.get('nationalityIdentity')?.invalid &&
+      customerUpdateForm.get('nationalityIdentity')?.touched
+    "
+  >
+    <app-warning-popup
+      [message]="
+        customerUpdateForm.get('nationalityIdentity')!.errors
+          | etiyaControlErrorMessage
+      "
+    ></app-warning-popup>
   </div>
+  <app-confirm-exit (click)="onCancel()" [message]="message"></app-confirm-exit>
 </div>

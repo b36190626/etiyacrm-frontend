@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { SuccessMessageService } from '../../../features/customers/services/successMessage.service';
 import { Subscription } from 'rxjs';
 
@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
   styleUrl: './success-popup.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SuccessPopupComponent implements OnInit, OnDestroy {
+export class SuccessPopupComponent implements OnChanges {
   @Input() successMessage: string | null = null;
   isOpen: boolean = true;
   private subscription: Subscription;
@@ -21,21 +21,21 @@ export class SuccessPopupComponent implements OnInit, OnDestroy {
   constructor(
     private successMessageService: SuccessMessageService,
     private cdr: ChangeDetectorRef
-  ) {
-    this.subscription = this.successMessageService.successMessage$.subscribe(message => {
-      this.successMessage = message;
-      this.cdr.markForCheck();
-      setTimeout(() => {
-        this.successMessage = null;
-        this.cdr.markForCheck();
-      }, 5000);
-    });
+  ) {}
+
+  visible: boolean = false;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['successMessage'] && this.successMessage) {
+      this.showMessage();
+    }
   }
 
-  ngOnInit(): void {}
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  showMessage(): void {
+    this.visible = true;
+    setTimeout(() => {
+      this.visible = false;
+    }, 5000);
   }
 
   closeModal() {
