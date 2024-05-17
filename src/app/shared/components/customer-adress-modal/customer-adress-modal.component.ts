@@ -136,6 +136,17 @@ export class CustomerAdressModalComponent implements OnInit {
   }
 
   onCancel() {
-    this.addressForm.reset();
+    console.log("Form values before reset:", this.addressForm.value);
+    this.addressForm.reset({
+      city: '',
+      street: '',
+      district: { value: '', disabled: true },
+      flatNumber: null,
+      description: '',
+      isDefault: false
+    });
+    this.addressForm.get('district').disable();
+    this.cdr.detectChanges();
+    console.log("Form values after reset:", this.addressForm.value);
   }
-}
+  }
