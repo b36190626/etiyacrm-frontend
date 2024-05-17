@@ -63,7 +63,8 @@ export class SearchFilterComponent implements OnInit{
 
   onClear() {
     this.form.reset();
-    window.location.href = 'http://localhost:4200/home'; // geçiçi yönlendirme, düzeltelim.
+    window.location.href = `${window.location.origin}/home`;
+    //window.location.href = 'http://localhost:4200/home'; // geçiçi yönlendirme, düzeltelim.
     //this.router.navigate(['/home']); // searchservice üstünde çalıştığından dolayı home'a dönemiyor.
     }
 
