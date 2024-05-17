@@ -108,7 +108,7 @@ export class ContactMediumComponent implements OnInit {
               flatNumber: address.flatNumber || 0,
               districtId: address.districtId,
               customerId,
-              isDefaultAddress: address.isDefaultAddress || true
+              defaultAddress: address.defaultAddress
             }));
 
             console.log('newaddresler BURADA', newAddresses);

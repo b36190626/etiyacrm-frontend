@@ -5,5 +5,5 @@ export interface CreatedAddressResponse {
   street: string;
   customerId: string;
   districtId: string;
-  isDefaultAddress: boolean;
+  defaultAddress: boolean;
 }

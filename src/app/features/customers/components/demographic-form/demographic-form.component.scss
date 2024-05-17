@@ -43,10 +43,10 @@ label {
   border-radius: 0.5rem;
   height: 2.3rem;
 }
+
 .invalid-next-button, .button-cancel{
   padding: 10px;
   width: 9rem;
-  height: 6vh;
   border: none;
   border-radius: 2rem;
   font-weight: 500;
@@ -56,19 +56,16 @@ label {
   background-color: #FBCDA6;
   color: black;
   cursor: pointer;
-  width: 9rem;
 }
 
 .invalid-next-button{
   margin-right: 12rem;
-  height: 6vh;
 }
 
 .valid-next-button {
       background-color: #FBCDA6;
       padding: 10px;
       width: 9rem;
-      height: 6vh;
       border: none;
       color: black;
       margin-right: 12rem;

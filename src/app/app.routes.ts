@@ -62,14 +62,10 @@ export const routes: Routes = [
           {
             path:"account",
             component: CustomerAccountComponent,
-            children: [
-              {
-                path:"create-account",
-                pathMatch: 'prefix',
-                component:CreateBillingAccountComponent
-              },
-
-            ]
+          },
+                    {
+            path: "account/create-account",
+            component: CreateBillingAccountComponent,
           },
           {
             path: "address",

@@ -95,9 +95,7 @@
       <button type="button" class="button-cancel" (click)="onCancel()">
         Cancel
       </button>
-      <div class="error-message" *ngIf="customerForm.get('nationalityIdentity')?.invalid && customerForm.get('nationalityIdentity')?.touched">
-        <app-warning-popup [message]="customerForm.get('nationalityIdentity')!.errors | etiyaControlErrorMessage"></app-warning-popup>
-      </div>
+
       <button
         type="submit"
         class="button-next"
@@ -108,6 +106,9 @@
       >
         Next
       </button>
+    </div>
+    <div class="error-message" *ngIf="customerForm.get('nationalityIdentity')?.invalid && customerForm.get('nationalityIdentity')?.touched">
+      <app-warning-popup [message]="customerForm.get('nationalityIdentity')!.errors | etiyaControlErrorMessage"></app-warning-popup>
     </div>
   </form>
 </div>

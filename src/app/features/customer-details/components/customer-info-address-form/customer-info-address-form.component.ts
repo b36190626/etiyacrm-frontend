@@ -34,6 +34,7 @@ export class CustomerInfoAddressFormComponent implements OnInit {
       this.customerId = params['id'];
       this.getAddress();
     });
+
   }
 
 
@@ -77,6 +78,7 @@ export class CustomerInfoAddressFormComponent implements OnInit {
             this.addressDetails.push({ address, cityName, districtName });
 
             this.change.markForCheck(); // LAĞNET OLSUN SANA LAĞNETT!
+            console.log(this.addressDetails, "oldu")
           });
         });
       },

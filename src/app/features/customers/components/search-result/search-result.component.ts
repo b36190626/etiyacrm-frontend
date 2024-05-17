@@ -10,7 +10,6 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { CustomerApiService } from '../../services/customerApi.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Router, RouterModule } from '@angular/router';
 import { CustomerNotFoundComponent } from '../customer-not-found/customer-not-found.component';
@@ -36,7 +35,6 @@ export class SearchResultComponent implements OnInit {
   p: number = 0;
 
   constructor(
-    private customersApiService: CustomerApiService,
     private searchApiService: SearchApiService,
     private change: ChangeDetectorRef,
     private route: Router
@@ -57,5 +55,7 @@ export class SearchResultComponent implements OnInit {
   getCustomerInfo(customerId: string) {
     this.selectedCustomer.emit(customerId);
     this.route.navigate(['/home/customer', customerId, 'info']);
+
   }
+
 }

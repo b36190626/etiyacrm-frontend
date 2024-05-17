@@ -12,6 +12,6 @@ export const initialAddressState: AddressState = {
     districtId: '',
     flatNumber: null,
     description: '',
-    isDefaultAddress: false,
+    defaultAddress: false,
   }],
 }
