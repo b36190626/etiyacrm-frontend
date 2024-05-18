@@ -41,7 +41,7 @@ import { SuccessMessageService } from '../../services/successMessage.service';
 export class ContactMediumComponent implements OnInit {
   contactForm!: FormGroup;
   isFormValid = false;
-  routerCustomerId: string;
+  routerCustomerId: string='';
 
   constructor(
     private fb: FormBuilder,
@@ -145,7 +145,8 @@ export class ContactMediumComponent implements OnInit {
     ).subscribe(response => {
       if (response) {
         this.successMessageService.setSuccessMessage('Customer created successfully');
-        this.router.navigate(['/home/customer/',this.routerCustomerId,'info']);
+        //this.router.navigate(['/home/customer/',this.routerCustomerId,'info']);
+       // this.router.navigate([`/home/customer/${this.routerCustomerId}/info`]);
       }
     });
   }
@@ -154,6 +155,8 @@ export class ContactMediumComponent implements OnInit {
     if (this.contactForm.valid) {
       console.log('Form Submitted!', this.contactForm.value);
       this.saveToDatabase();
+      this.router.navigate(['/home/customer/',this.routerCustomerId,'info']);
+      //this.router.navigate([`/home/customer/${this.routerCustomerId}/info`]);
     }
   }
 

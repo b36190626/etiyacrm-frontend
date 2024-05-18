@@ -17,8 +17,8 @@
           <!-- Changes will not be saved. Are you sure to change the screen? -->
       </div>
       <div class="modal-footer d-flex justify-content-center gap-5">
-        <button type="button" class="btn yes-button" data-bs-dismiss="modal">Yes</button>
-        <button type="button" class="btn no-button mx-4" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn yes-button" data-bs-dismiss="modal" (click)="onConfirm()">Yes</button>
+        <button type="button" class="btn no-button mx-4" data-bs-dismiss="modal" (click)="onCancel()">No</button>
       </div>
     </div>
   </div>

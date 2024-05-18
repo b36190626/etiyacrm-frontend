@@ -5,12 +5,18 @@
       class="fa-solid fa-trash-can fa-2xl"
       data-bs-toggle="modal"
       data-bs-target="#confirmModal"
+      (click)="onDelete()"
     ></i>
   </div>
 </div>
-<app-confirm-exit [message]="message" (click)="onDelete()"></app-confirm-exit>
+<app-confirm-exit *ngIf="showConfirmation"
+  message="Are you sure to delete this customer?"
+  (confirm)="onConfirmDelete()"
+  (cancel)="onCloseConfirmation()"
+>
+</app-confirm-exit>
 <router-outlet></router-outlet>
 
-<ng-container *ngIf="!isDeleted">
+<ng-container>
   <app-success-popup [successMessage]="successMessage"></app-success-popup>
 </ng-container>

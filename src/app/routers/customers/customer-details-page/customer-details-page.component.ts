@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TopBarComponent } from '../../../shared/components/top-bar/top-bar.component';
@@ -22,12 +22,12 @@ import { SuccessPopupComponent } from '../../../shared/components/success-popup/
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomerDetailsPageComponent implements OnInit{
-  message: string = 'Are you sure to delete this customer?';
+  //message: string = 'Are you sure to delete this customer?';
   successMessage: string = 'Customer deleted successfully.';
   customerId: string | null = null;
-  isDeleted: boolean = false;
-  @ViewChild(ConfirmExitComponent) confirmExitComponent!: ConfirmExitComponent;
-
+  //isDeleted: boolean = false;
+  //@ViewChild(ConfirmExitComponent) confirmExitComponent!: ConfirmExitComponent;
+  showConfirmation = false;
 
   constructor(
     private customerApiService: CustomerApiService,
@@ -48,18 +48,31 @@ export class CustomerDetailsPageComponent implements OnInit{
       {
         next: (response) => {
           console.log('Customer deleted successfully', response);
-          this.isDeleted = true;
+
+
         },
         error: (error) => {
           console.error('Error', error)
         },
-        complete: () => {}
+        complete: () => {
+          this.router.navigate(['/home']);
+          this.showConfirmation = false;
+        }
       }
     )
   }
 
-  onDelete(){
+  onDelete() {
+    this.showConfirmation = true;
+  }
+
+  onConfirmDelete() {
     this.deleteCustomer();
+    this.showConfirmation = false;
     this.router.navigate(['/home']);
+  }
+
+  onCloseConfirmation() {
+    this.showConfirmation = false;
   }
 }

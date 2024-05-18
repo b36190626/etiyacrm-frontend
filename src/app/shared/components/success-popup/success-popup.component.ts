@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
 })
 export class SuccessPopupComponent implements OnChanges {
   @Input() successMessage: string | null = null;
-  isOpen: boolean = true;
+  isOpen: boolean = false;
   private subscription: Subscription;
 
   constructor(

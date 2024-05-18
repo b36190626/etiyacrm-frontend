@@ -84,9 +84,9 @@
     </div>
     <div class="form-actions">
       <button
-        type="button"
+        type="submit"
         class="button-cancel"
-
+        (click)="onCancel()"
         data-bs-toggle="modal"
         data-bs-target="#confirmModal"
       >
@@ -119,5 +119,10 @@
       "
     ></app-warning-popup>
   </div>
-  <app-confirm-exit (click)="onCancel()" [message]="message"></app-confirm-exit>
+  <app-confirm-exit *ngIf="showConfirmation"
+  message="Changes will not be saved. Are you sure to change the screen?"
+  (confirm)="onConfirmCancel()"
+  (cancel)="onCloseConfirmation()"
+  >
+  </app-confirm-exit>
 </div>

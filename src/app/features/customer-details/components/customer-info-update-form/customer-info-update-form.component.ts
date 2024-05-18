@@ -1,6 +1,6 @@
 import { CustomerApiService } from './../../../customers/services/customerApi.service';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CustomerUpdateRequest } from '../../../customers/models/customer/requests/customer-update-request';
@@ -29,9 +29,11 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
   customerUpdateForm!: FormGroup;
   isFormValid: boolean = false;
   pathId!: string;
-  @ViewChild(ConfirmExitComponent) confirmExitComponent!: ConfirmExitComponent;
-  message: string = 'Changes will not be saved. Are you sure to change the screen?';
-  successMessage: string = 'Changed saved'; //bunu tüm updatelere ekle
+  //@ViewChild(ConfirmExitComponent) confirmExitComponent!: ConfirmExitComponent;
+  //message: string = 'Changes will not be saved. Are you sure to change the screen?';
+  //successMessage: string = 'Changed saved'; //bunu tüm updatelere ekle
+  showConfirmation = false;
+
 
   constructor(
     private fb: FormBuilder,
@@ -96,9 +98,25 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
     }
   }
 
-onCancel() {
-    if (this.confirmExitComponent) {
-      this.confirmExitComponent.cancel(this.pathId);
+  onCancel() {
+    if (!this.showConfirmation) {
+      this.showConfirmation = true;
     }
   }
+
+  onConfirmCancel() {
+    this.showConfirmation = false;
+    this.router.navigate(['/home/customer/',this.pathId ,'info'])
+  }
+
+  onCloseConfirmation() {
+    this.showConfirmation = false;
+  }
+
+// onCancel() {
+//     if (this.confirmExitComponent) {
+//       this.confirmExitComponent.cancel(this.pathId);
+//       this.router.navigate(['/home/customer/',this.pathId ,'info'])
+//     }
+//   }
 }
