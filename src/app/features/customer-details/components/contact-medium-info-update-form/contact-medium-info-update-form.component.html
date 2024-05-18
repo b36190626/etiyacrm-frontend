@@ -29,7 +29,9 @@
       <button
         type="button"
         class="button-cancel"
-        routerLink="/home/customer/{{ customerId }}/info"
+        (click)="onCancel()"
+        data-bs-toggle="modal"
+        data-bs-target="#confirmModal"
       >
         Cancel
       </button>
@@ -40,6 +42,7 @@
           'valid-next-button': isFormValid,
           'invalid-next-button': !isFormValid
         }"
+        (click)="onSubmit()"
       >
         Save
       </button>
@@ -48,6 +51,12 @@
   <div class="error-message mt-2" *ngIf="contactMediumInfoUpdateForm.get('email')?.invalid && contactMediumInfoUpdateForm.get('email')?.touched">
     <app-warning-popup [message]="contactMediumInfoUpdateForm.get('email')!.errors | etiyaControlErrorMessage"></app-warning-popup>
   </div>
+  <app-confirm-exit
+  message="Changes will not be saved. Are you sure to change the screen?"
+  (confirm)="onConfirmCancel()"
+  (cancel)="onCloseConfirmation()"
+  >
+  </app-confirm-exit>
 
   <div *ngIf="isSuccess">
     <app-success-popup [successMessage]="'Update successful!'"></app-success-popup>

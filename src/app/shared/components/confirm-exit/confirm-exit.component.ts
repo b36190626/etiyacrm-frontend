@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
+
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-confirm-exit',
@@ -17,7 +19,15 @@ export class ConfirmExitComponent {
   @Input() message: string;
   @Output() confirm = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
+  @ViewChild('confirmModal') confirmModalRef: ElementRef;
+  showModal: boolean = true;
 
+  private modalInstance: any;
+
+  openModal() {
+    this.showModal = true;
+
+  }
   onConfirm() {
     this.confirm.emit();
   }
@@ -26,20 +36,4 @@ export class ConfirmExitComponent {
     this.cancel.emit();
   }
 
-
-
-// @Input() message: string = '';
-
-//   constructor(
-//     private router: Router,
-//   ){}
-
-
-//   cancel(pathId: string) {
-//     this.router.navigate(['/home/customer/', pathId, 'info']);
-//   }
-
-//   delete(){
-//     //this.router.navigate(['/home']);
-//   }
 }

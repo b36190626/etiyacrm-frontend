@@ -15,8 +15,11 @@
   (cancel)="onCloseConfirmation()"
 >
 </app-confirm-exit>
-<router-outlet></router-outlet>
+<router-outlet>
 
-<ng-container>
+ <ng-container>
   <app-success-popup [successMessage]="successMessage"></app-success-popup>
 </ng-container>
+</router-outlet>
+
+

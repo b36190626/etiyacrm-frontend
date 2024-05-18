@@ -119,7 +119,7 @@
       "
     ></app-warning-popup>
   </div>
-  <app-confirm-exit *ngIf="showConfirmation"
+  <app-confirm-exit
   message="Changes will not be saved. Are you sure to change the screen?"
   (confirm)="onConfirmCancel()"
   (cancel)="onCloseConfirmation()"

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { UpdateContactMediumRequest } from '../../../customers/models/contact-medium/requests/update-contact-medium-request';
@@ -9,6 +9,7 @@ import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-me
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
 import { SuccessPopupComponent } from '../../../../shared/components/success-popup/success-popup.component';
+import { ConfirmExitComponent } from '../../../../shared/components/confirm-exit/confirm-exit.component';
 
 @Component({
   selector: 'app-contact-medium-info-update-form',
@@ -24,7 +25,8 @@ import { SuccessPopupComponent } from '../../../../shared/components/success-pop
     ControlErrorMessagePipe,
     NgxMaskDirective,
     WarningPopupComponent,
-    SuccessPopupComponent
+    SuccessPopupComponent,
+    ConfirmExitComponent
   ],
   templateUrl: './contact-medium-info-update-form.component.html',
   styleUrl: './contact-medium-info-update-form.component.scss',
@@ -36,6 +38,8 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
   pathId!: string;
   customerId!: string;
   isSuccess: boolean = false;
+  showConfirmation = false;
+  @ViewChild(ConfirmExitComponent) confirmExitComponent: ConfirmExitComponent;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -86,7 +90,6 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
       },
       complete: () => {
         this.contactMediumInfoUpdateForm.reset();
-        this.router.navigate(['/home/customer/', this.customerId , 'contact-medium-info'])
         this.isSuccess = true;
       }
     })
@@ -99,5 +102,18 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
     } else {
       this.isFormValid = false;
     }
+  }
+
+  onCancel() {
+    this.confirmExitComponent.openModal();
+  }
+
+  onConfirmCancel() {
+    this.showConfirmation = false;
+    this.router.navigate(['/home/customer/',this.customerId ,'contact-medium-info'])
+  }
+
+  onCloseConfirmation() {
+    this.showConfirmation = false;
   }
 }

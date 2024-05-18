@@ -25,6 +25,7 @@ import { WarningPopupComponent } from '../../../../shared/components/warning-pop
 export class LoginFormComponent {
   showPassword: boolean = false;
   showPopup: boolean = false;
+  loginErrorMessage: string;
 
   form: FormGroup = this.fb.group({
     username: [
@@ -41,7 +42,8 @@ export class LoginFormComponent {
         Validators.minLength(8),
         Validators.maxLength(20),
       ]
-    ]
+    ],
+    rememberMe: [false],
   })
 
 
@@ -69,6 +71,34 @@ export class LoginFormComponent {
   }
 
   onSubmit() {
+    const dummyUsername = 'testuser';
+    const dummyPassword = 'testpassword';
+
+    const enteredUsername = this.form.get('username')?.value;
+    const enteredPassword = this.form.get('password')?.value;
+    const rememberMe = this.form.get('rememberMe')?.value;
+
+    if (!enteredUsername || !enteredPassword) {
+      this.loginErrorMessage = 'Username and password fields cannot be empty.';
+      return;
+    }
+
+    if (enteredUsername === dummyUsername && enteredPassword === dummyPassword) {
+      console.log('Başarılı giriş!');
+      this.router.navigate(['/home'])
+      //success message
+
+      if (rememberMe) {
+        localStorage.setItem('currentUser', JSON.stringify({ username: enteredUsername, password: enteredPassword }));
+      } else {
+        // "Remember me" seçeneği işaretli değilse, saklanmış herhangi bir kullanıcı bilgisini temizleyin.
+        localStorage.removeItem('currentUser');
+      }
+    } else {
+      // Hatalı giriş işlemleri burada gerçekleştirilir (örneğin, hata mesajı gösterimi)
+      this.loginErrorMessage = 'Wrong username or password. Please try again';
+      console.log('Hatalı kullanıcı adı veya şifre!');
+    }
   }
 
 }

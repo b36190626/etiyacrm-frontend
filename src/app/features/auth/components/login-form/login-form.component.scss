@@ -5,10 +5,10 @@
     font-size: 1.5rem;
   }
 
-  .username-input, .password-input{
+  .username-input{
     margin-bottom: 2rem;
     width: 25vw;
-    height: 18vh;
+    height: 16vh;
   }
   .password-input{
     width: 25vw;
@@ -56,7 +56,7 @@
     cursor: pointer;
   }
 
-  .valid-login-button{
+  .valid-login-button, .invalid-login-button{
     height: 3rem;
     background-color: #F58220;
     color: white;
@@ -66,19 +66,12 @@
     font-weight: 400;
     font-family: "Arial";
     font-size: 1.5rem;
-
+    margin-bottom: 1rem;
   }
 
   .invalid-login-button{
-        height: 3rem;
     background-color: #FBCDA6;
-    color: white;
-    width: 12rem;
-    border-radius: 30px;
     border:1px solid #FBCDA6;
-    font-weight: 400;
-    font-family: "Arial";
-    font-size: 1.5rem;
-  }
 
+  }
 }
