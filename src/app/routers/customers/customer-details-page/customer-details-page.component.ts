@@ -6,6 +6,7 @@ import { TopBarComponent } from '../../../shared/components/top-bar/top-bar.comp
 import { ConfirmExitComponent } from '../../../shared/components/confirm-exit/confirm-exit.component';
 import { CustomerApiService } from '../../../features/customers/services/customerApi.service';
 import { SuccessPopupComponent } from '../../../shared/components/success-popup/success-popup.component';
+import { SuccessMessageService } from '../../../features/customers/services/successMessage.service';
 
 @Component({
   selector: 'app-customer-details-page',
@@ -23,7 +24,7 @@ import { SuccessPopupComponent } from '../../../shared/components/success-popup/
 })
 export class CustomerDetailsPageComponent implements OnInit{
   //message: string = 'Are you sure to delete this customer?';
-  successMessage: string = 'Customer deleted successfully.';
+  successMessage: string | null = null;
   customerId: string | null = null;
   //isDeleted: boolean = false;
   //@ViewChild(ConfirmExitComponent) confirmExitComponent!: ConfirmExitComponent;
@@ -33,7 +34,8 @@ export class CustomerDetailsPageComponent implements OnInit{
     private customerApiService: CustomerApiService,
     private change: ChangeDetectorRef,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private successMessageService: SuccessMessageService
   ) {}
 
   ngOnInit(): void {
@@ -41,6 +43,9 @@ export class CustomerDetailsPageComponent implements OnInit{
       this.customerId = params.get('id');
       console.log("customerId", this.customerId);
     }).unsubscribe();
+    this.successMessageService.successMessage$.subscribe(message => {
+      this.successMessage = message;
+    });
   }
 
   deleteCustomer(){
@@ -48,6 +53,8 @@ export class CustomerDetailsPageComponent implements OnInit{
       {
         next: (response) => {
           console.log('Customer deleted successfully', response);
+          this.successMessageService.setSuccessMessage('Customer deleted successfully.');
+
 
 
         },
@@ -66,13 +73,29 @@ export class CustomerDetailsPageComponent implements OnInit{
     this.showConfirmation = true;
   }
 
-  onConfirmDelete() {
-    this.deleteCustomer();
-    this.showConfirmation = false;
-    this.router.navigate(['/home']);
+  onConfirmDelete(confirmed: boolean) {
+    if (confirmed) {
+      this.deleteCustomer();
+    } else {
+      this.showConfirmation = false;
+    }
   }
 
   onCloseConfirmation() {
     this.showConfirmation = false;
   }
+
+  // onDelete() {
+  //   this.showConfirmation = true;
+  // }
+
+  // onConfirmDelete() {
+  //   this.deleteCustomer();
+  //   this.showConfirmation = false;
+  //   this.router.navigate(['/home']);
+  // }
+
+  // onCloseConfirmation() {
+  //   this.showConfirmation = false;
+  // }
 }

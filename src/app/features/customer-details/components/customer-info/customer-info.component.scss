@@ -34,6 +34,7 @@ label {
 .button-action{
   display: flex;
   justify-content: flex-end;
+  gap: 5rem;
 
 
 }
@@ -41,6 +42,7 @@ label {
   background-color: #FBCDA6;
   padding: 10px;
   width: 9rem;
+  height: 6vh;
   border: none;
   color: black;
   border-radius: 2rem;

@@ -3,12 +3,15 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ContactMediumApiService } from '../../../customers/services/contactMediumApi.service';
+import { SuccessPopupComponent } from '../../../../shared/components/success-popup/success-popup.component';
+import { SuccessMessageService } from '../../../customers/services/successMessage.service';
 @Component({
   selector: 'app-contact-medium-info',
   standalone: true,
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    SuccessPopupComponent
   ],
   templateUrl: './contact-medium-info.component.html',
   styleUrl: './contact-medium-info.component.scss',
@@ -18,11 +21,14 @@ export class ContactMediumInfoComponent implements OnInit{
   customerId!: string;
   contactMediumInfo!: GetContactMediumRequestDto;
   pathId!: string;
+  successMessage: string | null = null;
+
   constructor(
     private contactMediumApiService: ContactMediumApiService,
     private change: ChangeDetectorRef,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private successMessageService: SuccessMessageService
   ){}
 
   ngOnInit(): void {
@@ -32,6 +38,9 @@ export class ContactMediumInfoComponent implements OnInit{
     });
 
     this.getContactMedium();
+    this.successMessageService.successMessage$.subscribe(message => {
+      this.successMessage = message;
+    });
   }
   onClick(){
     this.router.navigate

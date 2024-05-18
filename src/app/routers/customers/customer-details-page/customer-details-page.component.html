@@ -11,15 +11,15 @@
 </div>
 <app-confirm-exit *ngIf="showConfirmation"
   message="Are you sure to delete this customer?"
-  (confirm)="onConfirmDelete()"
+  (confirm)="onConfirmDelete($event)"
   (cancel)="onCloseConfirmation()"
 >
 </app-confirm-exit>
 <router-outlet>
-
+<!--
  <ng-container>
   <app-success-popup [successMessage]="successMessage"></app-success-popup>
-</ng-container>
+</ng-container> -->
 </router-outlet>
 
 

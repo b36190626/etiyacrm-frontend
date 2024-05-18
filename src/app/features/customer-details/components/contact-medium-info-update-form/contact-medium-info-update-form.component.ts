@@ -8,8 +8,8 @@ import { NoStringInputDirective } from '../../../../core/directives/no-string-in
 import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-message.pipe';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
-import { SuccessPopupComponent } from '../../../../shared/components/success-popup/success-popup.component';
 import { ConfirmExitComponent } from '../../../../shared/components/confirm-exit/confirm-exit.component';
+import { SuccessMessageService } from '../../../customers/services/successMessage.service';
 
 @Component({
   selector: 'app-contact-medium-info-update-form',
@@ -25,7 +25,6 @@ import { ConfirmExitComponent } from '../../../../shared/components/confirm-exit
     ControlErrorMessagePipe,
     NgxMaskDirective,
     WarningPopupComponent,
-    SuccessPopupComponent,
     ConfirmExitComponent
   ],
   templateUrl: './contact-medium-info-update-form.component.html',
@@ -37,7 +36,7 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
   isFormValid: boolean = false;
   pathId!: string;
   customerId!: string;
-  isSuccess: boolean = false;
+  //isSuccess: boolean = false;
   showConfirmation = false;
   @ViewChild(ConfirmExitComponent) confirmExitComponent: ConfirmExitComponent;
 
@@ -47,6 +46,7 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private change: ChangeDetectorRef,
+    private successMessageService: SuccessMessageService
   ) {}
 
   onKeyDown(event: any) {
@@ -84,13 +84,15 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
       fax: this.contactMediumInfoUpdateForm.value.fax,
     };
     this.contactMediumApiService.putContactMedium(this.pathId, request).subscribe({
-      next: (response) => {},
+      next: (response) => {
+        this.successMessageService.setSuccessMessage('Changes are Saved');
+      },
       error: (error) => {
         console.error('Error', error)
       },
       complete: () => {
         this.contactMediumInfoUpdateForm.reset();
-        this.isSuccess = true;
+        this.router.navigate(['/home/customer/',this.customerId ,'contact-medium-info'])
       }
     })
   }

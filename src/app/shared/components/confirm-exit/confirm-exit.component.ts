@@ -17,7 +17,7 @@ declare var bootstrap: any;
 })
 export class ConfirmExitComponent {
   @Input() message: string;
-  @Output() confirm = new EventEmitter<void>();
+  @Output() confirm = new EventEmitter<boolean>();
   @Output() cancel = new EventEmitter<void>();
   @ViewChild('confirmModal') confirmModalRef: ElementRef;
   showModal: boolean = true;

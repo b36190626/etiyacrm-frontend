@@ -14,6 +14,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { Router, RouterModule } from '@angular/router';
 import { CustomerNotFoundComponent } from '../customer-not-found/customer-not-found.component';
 import { SearchFilterResponse } from '../../models/search-filter/responses/search-filter-response';
+import { SuccessMessageService } from '../../services/successMessage.service';
+import { SuccessPopupComponent } from '../../../../shared/components/success-popup/success-popup.component';
 
 @Component({
   selector: 'app-search-result',
@@ -23,6 +25,7 @@ import { SearchFilterResponse } from '../../models/search-filter/responses/searc
     NgxPaginationModule,
     RouterModule,
     CustomerNotFoundComponent,
+    SuccessPopupComponent
   ],
   templateUrl: './search-result.component.html',
   styleUrl: './search-result.component.scss',
@@ -35,15 +38,20 @@ export class SearchResultComponent implements OnInit {
   p: number = 1;
   itemsPerPage: number = 10;
   totalItems: number;
+  successMessage: string | null = null;
 
   constructor(
     private searchApiService: SearchApiService,
     private change: ChangeDetectorRef,
-    private route: Router
+    private route: Router,
+    private successMessageService: SuccessMessageService
   ) {}
 
   ngOnInit(): void {
     this.getList();
+    this.successMessageService.successMessage$.subscribe(message => {
+      this.successMessage = message;
+    });
   }
 
   getList() {

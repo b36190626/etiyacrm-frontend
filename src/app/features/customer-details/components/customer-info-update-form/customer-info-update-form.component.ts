@@ -8,6 +8,7 @@ import { NoStringInputDirective } from '../../../../core/directives/no-string-in
 import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-message.pipe';
 import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
 import { ConfirmExitComponent } from '../../../../shared/components/confirm-exit/confirm-exit.component';
+import { SuccessMessageService } from '../../../customers/services/successMessage.service';
 
 @Component({
   selector: 'app-customer-info-update-form',
@@ -39,7 +40,8 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private customerApiService: CustomerApiService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private successMessageService: SuccessMessageService
   ) {}
   ngOnInit() {
     this.activatedRoute.parent.params.subscribe(params => {
@@ -81,7 +83,9 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
       nationalityIdentity: this.customerUpdateForm.value.nationalityIdentity,
     };
     this.customerApiService.putCustomer(this.pathId, request).subscribe({
-      next: (response) =>{},
+      next: (response) =>{
+        this.successMessageService.setSuccessMessage('Changes are Saved');
+      },
       error: (error) => {
         console.error('Error', error)
       },

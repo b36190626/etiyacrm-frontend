@@ -64,7 +64,12 @@
     </button>
     <app-warning-popup *ngIf="loginErrorMessage" [message]="loginErrorMessage"></app-warning-popup>
   </div>
-
+  <div class="error-message-container" *ngIf="form.get('username')?.invalid && form.get('username')?.touched" class="col-auto">
+    <app-warning-popup [message]="form.get('username')!.errors | etiyaControlErrorMessage"></app-warning-popup>
+  </div>
+  <div class="error-message-container" *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="col-auto">
+    <app-warning-popup [message]="form.get('password')!.errors | etiyaControlErrorMessage"></app-warning-popup>
+  </div>
 
 </form>
 </div>

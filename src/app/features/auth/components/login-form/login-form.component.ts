@@ -1,3 +1,4 @@
+import { SuccessMessageService } from './../../../customers/services/successMessage.service';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
@@ -50,6 +51,7 @@ export class LoginFormComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private successMessageService: SuccessMessageService
   ){}
 
 
@@ -83,10 +85,14 @@ export class LoginFormComponent {
       return;
     }
 
+    if (enteredPassword.minLength){
+      this.loginErrorMessage = 'Password cannot be less than 8 characters';
+    }
+
     if (enteredUsername === dummyUsername && enteredPassword === dummyPassword) {
       console.log('Başarılı giriş!');
-      this.router.navigate(['/home'])
-      //success message
+      this.successMessageService.setSuccessMessage('Logged in successfully');
+      this.router.navigate(['/home']);
 
       if (rememberMe) {
         localStorage.setItem('currentUser', JSON.stringify({ username: enteredUsername, password: enteredPassword }));
@@ -95,7 +101,6 @@ export class LoginFormComponent {
         localStorage.removeItem('currentUser');
       }
     } else {
-      // Hatalı giriş işlemleri burada gerçekleştirilir (örneğin, hata mesajı gösterimi)
       this.loginErrorMessage = 'Wrong username or password. Please try again';
       console.log('Hatalı kullanıcı adı veya şifre!');
     }
