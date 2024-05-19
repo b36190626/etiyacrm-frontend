@@ -9,6 +9,7 @@ import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-me
 import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
 import { ConfirmExitComponent } from '../../../../shared/components/confirm-exit/confirm-exit.component';
 import { SuccessMessageService } from '../../../customers/services/successMessage.service';
+import { tcValidator } from '../../../customers/components/demographic-form/tcValidator';
 
 @Component({
   selector: 'app-customer-info-update-form',
@@ -61,9 +62,7 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
       motherName: [''],
       nationalityIdentity: ['', [
         Validators.required,
-        Validators.maxLength(11),
-        Validators.minLength(11),
-        Validators.pattern("^[1-9]{1}[0-9]{9}[02468]{1}$")
+        tcValidator()
       ]]
     });
     this.customerUpdateForm.statusChanges.subscribe(status => {

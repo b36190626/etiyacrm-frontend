@@ -66,8 +66,6 @@ export class DemographicFormComponent implements OnInit {
       motherName: [''],
       nationalityIdentity: ['', [
         Validators.required,
-        Validators.maxLength(11),
-        Validators.minLength(11),
         tcValidator()
         //buraya tc içi başka kontroller gelmeli // - geldi:)
       ]]

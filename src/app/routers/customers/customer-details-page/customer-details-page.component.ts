@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TopBarComponent } from '../../../shared/components/top-bar/top-bar.component';
@@ -22,13 +22,13 @@ import { SuccessMessageService } from '../../../features/customers/services/succ
   styleUrl: './customer-details-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CustomerDetailsPageComponent implements OnInit{
+export class CustomerDetailsPageComponent{
   //message: string = 'Are you sure to delete this customer?';
   successMessage: string | null = null;
   customerId: string | null = null;
   //isDeleted: boolean = false;
   //@ViewChild(ConfirmExitComponent) confirmExitComponent!: ConfirmExitComponent;
-  showConfirmation = false;
+  showConfirmation: boolean = false;
 
   constructor(
     private customerApiService: CustomerApiService,
@@ -38,58 +38,42 @@ export class CustomerDetailsPageComponent implements OnInit{
     private successMessageService: SuccessMessageService
   ) {}
 
-  ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe(params => {
-      this.customerId = params.get('id');
-      console.log("customerId", this.customerId);
-    }).unsubscribe();
-    this.successMessageService.successMessage$.subscribe(message => {
-      this.successMessage = message;
-    });
-  }
+  // ngOnInit(): void {
+  //   this.activatedRoute.paramMap.subscribe(params => {
+  //     this.customerId = params.get('id');
+  //     console.log("customerId", this.customerId);
+  //   }).unsubscribe();
+  // }
 
-  deleteCustomer(){
-    this.customerApiService.deleteCustomer(this.customerId).subscribe(
-      {
-        next: (response) => {
-          console.log('Customer deleted successfully', response);
-          this.successMessageService.setSuccessMessage('Customer deleted successfully.');
-
-
-
-        },
-        error: (error) => {
-          console.error('Error', error)
-        },
-        complete: () => {
-          this.router.navigate(['/home']);
-          this.showConfirmation = false;
-        }
-      }
-    )
-  }
-
-  onDelete() {
-    this.showConfirmation = true;
-  }
-
-  onConfirmDelete(confirmed: boolean) {
-    if (confirmed) {
-      this.deleteCustomer();
-    } else {
-      this.showConfirmation = false;
-    }
-  }
-
-  onCloseConfirmation() {
-    this.showConfirmation = false;
-  }
+  //deleteCustomer(){
+  //   this.customerApiService.deleteCustomer(this.customerId).subscribe(
+  //     {
+  //       next: (response) => {
+  //         console.log('Customer deleted successfully', response);
+  //         this.successMessageService.setSuccessMessage('Customer deleted successfully.');
+  //       },
+  //       error: (error) => {
+  //         console.error('Error', error)
+  //       },
+  //       complete: () => {
+  //         this.router.navigate(['/home']);
+  //         this.showConfirmation = false;
+  //       }
+  //     }
+  //   )
+  // }
 
   // onDelete() {
   //   this.showConfirmation = true;
   // }
 
   // onConfirmDelete() {
+  //   // if (confirmed) {
+  //   //   this.deleteCustomer();
+  //   // } else {
+  //   //   this.showConfirmation = false;
+  //       //this.deleteCustomer();
+  //   // }
   //   this.deleteCustomer();
   //   this.showConfirmation = false;
   //   this.router.navigate(['/home']);

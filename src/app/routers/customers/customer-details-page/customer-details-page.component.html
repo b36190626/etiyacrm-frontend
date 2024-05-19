@@ -1,25 +1,24 @@
 <div class="nav d-flex justify-content-center align-items-center mt-4">
   <app-top-bar></app-top-bar>
-  <div class="trash-button">
+  <!-- <div class="trash-button">
     <i
       class="fa-solid fa-trash-can fa-2xl"
       data-bs-toggle="modal"
       data-bs-target="#confirmModal"
       (click)="onDelete()"
     ></i>
-  </div>
+  </div> -->
 </div>
-<app-confirm-exit *ngIf="showConfirmation"
+<!-- <app-confirm-exit *ngIf="showConfirmation"
   message="Are you sure to delete this customer?"
-  (confirm)="onConfirmDelete($event)"
+  (confirm)="onConfirmDelete()"
   (cancel)="onCloseConfirmation()"
 >
-</app-confirm-exit>
+</app-confirm-exit> -->
 <router-outlet>
-<!--
- <ng-container>
-  <app-success-popup [successMessage]="successMessage"></app-success-popup>
-</ng-container> -->
 </router-outlet>
 
 
+<ng-container>
+  <app-success-popup [successMessage]="successMessage"></app-success-popup>
+</ng-container>
