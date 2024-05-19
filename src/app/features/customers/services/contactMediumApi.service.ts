@@ -30,17 +30,17 @@ export class ContactMediumApiService {
 
   getList(): Observable<GetListResponseDto<ContactMediumResponseDto>> {
     return this.http.get<GetListResponseDto<ContactMediumResponseDto>>
-    ('http://localhost:8081/customerservice/api/v1/individualcustomers?page=0&size=10');
+    ('http://localhost:8001/customerservice/api/v1/individualcustomers?page=0&size=10');
   }
   getById(customerId: string): Observable<GetContactMediumRequestDto>{
-    return this.http.get<GetContactMediumRequestDto>(`http://localhost:8081/customerservice/api/v1/contact-mediums/${customerId}`)
+    return this.http.get<GetContactMediumRequestDto>(`http://localhost:8001/customerservice/api/v1/contact-mediums/${customerId}`)
   }
   postContactMedium(contactMedium: CreateContactMediumRequest): Observable<CreatedContactMediumResponse> {
-    return this.http.post<CreatedContactMediumResponse>('http://localhost:8081/customerservice/api/v1/contact-mediums' ,contactMedium)
+    return this.http.post<CreatedContactMediumResponse>('http://localhost:8001/customerservice/api/v1/contact-mediums' ,contactMedium)
   }
   putContactMedium(id: string, contactMedium: UpdateContactMediumRequest): Observable<UpdatedContactMediumResponse>{
     return this.http.put<UpdatedContactMediumResponse>
-    (`http://localhost:8081/customerservice/api/v1/contact-mediums/${id}`, contactMedium)
+    (`http://localhost:8001/customerservice/api/v1/contact-mediums/${id}`, contactMedium)
   }
 
 }

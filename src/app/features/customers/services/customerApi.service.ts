@@ -43,7 +43,11 @@ export class CustomerApiService {
   }
 
   checkNationalityIdentityDuplicated(nationalityIdentity: string): Observable<boolean>{
-    return this.http.get<boolean>(`http://localhost:8001/customerservice/api/v1/individualcustomers/checkNationalityIdentityDuplicated/${nationalityIdentity}`)
+    return this.http.get<boolean>(`http://localhost:8001/customerservice/api/v1/individualcustomers/check-nationality-identity-duplicated/${nationalityIdentity}`)
+  }
+
+  checkCustomerReal(checkCustomer: string): Observable<boolean> {
+    return this.http.get<boolean>(checkCustomer);
   }
 
 }

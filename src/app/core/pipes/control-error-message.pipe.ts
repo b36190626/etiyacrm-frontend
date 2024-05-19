@@ -11,15 +11,14 @@ export class ControlErrorMessagePipe implements PipeTransform {
     if(!control){
       return '';
     }
-            //ilk mesajı bununla değiştirdim ama sadece update sayfalarına bunu yazmış butona basarsa görünecek
     return  control['required']? ' You must fill in the required fields marked with the "*" symbol. ':
             control['customerError']? 'Unknown error.':
-            control['loginError']? 'Wrong username or password. Please try again..':
-            control['loginEmpty']? 'Username and password fields cant be left empty.':
+            //control['loginError']? 'Wrong username or password. Please try again..':
+           // control['loginEmpty']? 'Username and password fields cant be left empty.':
             control['loginCharacter']? 'Username field does not allow Turkish characters, numbers, or symbols.':
             control['credential']? 'Matching credentials not found.':
             control['pattern']? 'Invalid format.':
-            control['minlength'] ? `Password cannot be less than 8 characters` :
+            control['minlength'] ? `This field must be minimum ${control['minlength'].requiredLength} characters but it has ${control['minlength'].actualLength} characters.` :
             control['maxlength'] ? `This field must be maximum ${control['maxlength'].requiredLength} characters but it has ${control['maxlength'].actualLength} characters.` :
             control['email']? 'This is not a valid e-mail format Correct usage: example@email.com.':
             control['invalidTCKN']? 'This Nationality ID is not valid.':

@@ -23,11 +23,9 @@ constructor(
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['message']) {
-      this.isOpen = true; // message değiştiğinde popup'ı tekrar aç
         this.cdr.detectChanges();
     }
   }
-
   closeModal(){
     this.isOpen = false;
   }
