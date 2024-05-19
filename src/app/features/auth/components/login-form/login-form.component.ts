@@ -1,4 +1,4 @@
-import { SuccessMessageService } from './../../../customers/services/successMessage.service';
+import { MessageService } from '../../../customers/services/message.service';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
@@ -51,7 +51,7 @@ export class LoginFormComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private successMessageService: SuccessMessageService
+    private messageService: MessageService
   ){}
 
 
@@ -91,7 +91,7 @@ export class LoginFormComponent {
 
     if (enteredUsername === dummyUsername && enteredPassword === dummyPassword) {
       console.log('Başarılı giriş!');
-      this.successMessageService.setSuccessMessage('Logged in successfully');
+      this.messageService.setmessage('Logged in successfully');
       this.router.navigate(['/home']);
 
       if (rememberMe) {

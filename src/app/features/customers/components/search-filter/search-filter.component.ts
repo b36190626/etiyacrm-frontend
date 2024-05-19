@@ -6,6 +6,7 @@ import { NoStringInputDirective } from '../../../../core/directives/no-string-in
 import { SearchApiService } from '../../services/searchApi.service';
 import { SearchFilterResponse } from '../../models/search-filter/responses/search-filter-response';
 import { Router, RouterModule } from '@angular/router';
+import { NgxMaskDirective } from 'ngx-mask';
 
 
 @Component({
@@ -16,7 +17,8 @@ import { Router, RouterModule } from '@angular/router';
     ReactiveFormsModule,
     RouterModule,
     WarningPopupComponent,
-    NoStringInputDirective
+    NoStringInputDirective,
+    NgxMaskDirective,
   ],
   templateUrl: './search-filter.component.html',
   styleUrl: './search-filter.component.scss',
@@ -28,16 +30,12 @@ export class SearchFilterComponent implements OnInit{
   @Output() customerList = new EventEmitter<SearchFilterResponse[]>();
   customers: any = [];
   form: FormGroup = this.fb.group({
-    nationalityIdentity:['', [
-      Validators.maxLength(11),
-      Validators.minLength(11),
-      Validators.pattern("^[1-9]{1}[0-9]{9}[02468]{1}$")
-    ]],
+    nationalityIdentity:['', [Validators.pattern(/^\d{11}$/)]],
     id:[''],
     accountNumber:[''],
     gsmNumber:['',
       [
-        Validators.pattern("^[1-9]{1}[0-9]{9}[02468]{1}$")
+        Validators.pattern("^\d{10}$")
       ]
     ],
     firstname:[''],

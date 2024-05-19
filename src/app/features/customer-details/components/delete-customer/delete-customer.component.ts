@@ -4,7 +4,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ConfirmExitComponent } from '../../../../shared/components/confirm-exit/confirm-exit.component';
 import { SuccessPopupComponent } from '../../../../shared/components/success-popup/success-popup.component';
 import { CustomerApiService } from '../../../customers/services/customerApi.service';
-import { SuccessMessageService } from '../../../customers/services/successMessage.service';
+import { MessageService } from '../../../customers/services/message.service';
 
 @Component({
   selector: 'app-delete-customer',
@@ -30,7 +30,7 @@ export class DeleteCustomerComponent implements OnInit {
     private change: ChangeDetectorRef,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private successMessageService: SuccessMessageService
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -45,7 +45,7 @@ export class DeleteCustomerComponent implements OnInit {
       {
         next: (response) => {
           console.log('Customer deleted successfully', response);
-          this.successMessageService.setSuccessMessage('Customer deleted successfully.');
+          this.messageService.setmessage('Customer deleted successfully.');
           setTimeout(() => {
             this.router.navigate(['/home']);
           },3000);

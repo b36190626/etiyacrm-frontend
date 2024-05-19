@@ -6,17 +6,14 @@ import { UpdateContactMediumRequest } from '../../../customers/models/contact-me
 import { ContactMediumApiService } from '../../../customers/services/contactMediumApi.service';
 import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
 import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-message.pipe';
-import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { NgxMaskDirective } from 'ngx-mask';
 import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
 import { ConfirmExitComponent } from '../../../../shared/components/confirm-exit/confirm-exit.component';
-import { SuccessMessageService } from '../../../customers/services/successMessage.service';
+import { MessageService } from '../../../customers/services/message.service';
 
 @Component({
   selector: 'app-contact-medium-info-update-form',
   standalone: true,
-  providers: [
-    provideNgxMask(),
-  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -36,7 +33,6 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
   isFormValid: boolean = false;
   pathId!: string;
   customerId!: string;
-  //isSuccess: boolean = false;
   showConfirmation = false;
   @ViewChild(ConfirmExitComponent) confirmExitComponent: ConfirmExitComponent;
 
@@ -46,7 +42,7 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private change: ChangeDetectorRef,
-    private successMessageService: SuccessMessageService
+    private messageService: MessageService
   ) {}
 
   onKeyDown(event: any) {
@@ -85,7 +81,7 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
     };
     this.contactMediumApiService.putContactMedium(this.pathId, request).subscribe({
       next: (response) => {
-        this.successMessageService.setSuccessMessage('Changes are Saved');
+        this.messageService.setmessage('Changes are Saved');
       },
       error: (error) => {
         console.error('Error', error)

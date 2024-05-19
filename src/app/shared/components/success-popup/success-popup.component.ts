@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { SuccessMessageService } from '../../../features/customers/services/successMessage.service';
+import { MessageService } from '../../../features/customers/services/message.service';
 
 @Component({
   selector: 'app-success-popup',
@@ -21,16 +21,16 @@ export class SuccessPopupComponent implements OnInit, OnDestroy  {
 
   constructor(
     private cdr: ChangeDetectorRef,
-    private successMessageService: SuccessMessageService
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
-    this.subscription = this.successMessageService.successMessage$.subscribe(message => {
+    this.subscription = this.messageService.message$.subscribe(message => {
       this.successMessage = message;
       if (message) {
         this.isOpen = true; // Show the success message component
         setTimeout(() => {
-          this.successMessageService.clearSuccessMessage();
+          this.messageService.clearmessage();
           this.isOpen = false; // Hide the success message component after 3 seconds
           this.cdr.detectChanges(); // Trigger change detection
         }, 3000);
