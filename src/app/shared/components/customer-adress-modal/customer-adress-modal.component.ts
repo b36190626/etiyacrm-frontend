@@ -56,6 +56,7 @@ export class CustomerAdressModalComponent implements OnInit {
       this.addressForm.patchValue(address),
         console.log('addressState: ', address);
 
+
     });
 
     this.addressForm.statusChanges.subscribe((status) => {
@@ -72,7 +73,7 @@ export class CustomerAdressModalComponent implements OnInit {
       district: [{ value: '', disabled: true }, Validators.required],
       flatNumber: [null, Validators.required],
       description: ['', Validators.required],
-      isDefault: [false, Validators.required], //if isDefault changes, don't allow to check gibi birşey yapalım.
+      //isDefault: [false, Validators.required], //if isDefault changes, don't allow to check gibi birşey yapalım.
     });
   }
 
@@ -104,7 +105,7 @@ export class CustomerAdressModalComponent implements OnInit {
       districtId: this.addressForm.value.district,
       flatNumber: this.addressForm.value.flatNumber,
       description: this.addressForm.value.description,
-      defaultAddress: this.addressForm.value.isDefault,
+      defaultAddress: false,
       customerId:'',
     };
 
@@ -143,7 +144,7 @@ export class CustomerAdressModalComponent implements OnInit {
       district: { value: '', disabled: true },
       flatNumber: null,
       description: '',
-      isDefault: false
+      //isDefault: false
     });
     this.addressForm.get('district').disable();
     this.cdr.detectChanges();

@@ -21,6 +21,7 @@ import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-me
 import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
 import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
 import { SuccessMessageService } from '../../services/successMessage.service';
+import { setContactMedium } from '../../../../shared/stores/contact-medium/contact-medium.action';
 
 @Component({
   selector: 'app-contact-medium',
@@ -154,6 +155,7 @@ export class ContactMediumComponent implements OnInit {
   onSubmit() {
     if (this.contactForm.valid) {
       console.log('Form Submitted!', this.contactForm.value);
+
       this.saveToDatabase();
       //this.router.navigate(['/home/customer/',this.routerCustomerId,'info']);
       //this.router.navigate([`/home/customer/${this.routerCustomerId}/info`]);
@@ -161,7 +163,17 @@ export class ContactMediumComponent implements OnInit {
   }
 
   onCancel() {
+    const contactMedium: CreateContactMediumRequest = {
+      email: this.contactForm.value.email,
+      homePhone: this.contactForm.value.homePhone,
+      mobilePhone: this.contactForm.value.mobilePhone,
+      fax: this.contactForm.value.fax,
+      customerId: ''
+    };
+    this.store.dispatch(setContactMedium({ contactMedium }));
+
     this.contactForm.reset();
+
     this.router.navigate(['/create-customer/address-info']);
   }
 }

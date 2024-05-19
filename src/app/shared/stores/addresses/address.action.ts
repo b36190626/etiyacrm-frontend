@@ -4,3 +4,8 @@ import { CreateAddressRequest } from "../../../features/customers/models/address
 export const setAddress = createAction(
   '[address] set address',
   props<{ address: CreateAddressRequest}>())
+
+  export const setAddresses = createAction(
+    '[address] set addresses',
+    props<{ addresses: CreateAddressRequest[] }>()
+  );

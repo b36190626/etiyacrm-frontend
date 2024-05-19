@@ -44,14 +44,14 @@ export class DemographicFormComponent implements OnInit {
       .subscribe((individualCustomer) => {
         this.customerForm.patchValue(individualCustomer);
         console.log('individualCustomerState:', individualCustomer);
-        this.cdr.detectChanges();
+        this.updateFormValidity();
       });
     // Formun durumunu dinamik olarak izleme
     this.customerForm.statusChanges.subscribe(
       status => {
         this.isFormValid = status === 'VALID';
         console.log(status);
-        this.cdr.detectChanges();
+        this.updateFormValidity();
 });
   }
 
@@ -73,10 +73,14 @@ export class DemographicFormComponent implements OnInit {
       ]]
     });
     this.customerForm.valueChanges.subscribe(() => {
-      this.cdr.detectChanges();
+      this.updateFormValidity();
     });
   }
 
+  updateFormValidity() {
+    this.isFormValid = this.customerForm.valid;
+    this.cdr.detectChanges();
+  }
   createCustomer() {
     const individualCustomer: CreateCustomerRequest = {
       firstName: this.customerForm.value.firstName,
