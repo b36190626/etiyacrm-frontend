@@ -48,7 +48,9 @@ export class SearchResultComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getList();
+    if(!this.customerList.length){
+      this.getList();
+    }
     this.successMessageService.successMessage$.subscribe(message => {
       this.successMessage = message;
     });
