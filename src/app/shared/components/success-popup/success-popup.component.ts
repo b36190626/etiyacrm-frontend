@@ -16,7 +16,6 @@ import { MessageService } from '../../../features/customers/services/message.ser
 export class SuccessPopupComponent implements OnInit, OnDestroy  {
   @Input() successMessage: string | null = null;
   isOpen: boolean = false;
-  visible: boolean = false;
   private subscription: Subscription;
 
   constructor(

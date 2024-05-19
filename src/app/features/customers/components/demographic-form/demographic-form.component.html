@@ -123,6 +123,8 @@
       <app-warning-popup [message]="customerForm.get('nationalityIdentity')!.errors | etiyaControlErrorMessage"></app-warning-popup>
     }
 
+    <app-warning-popup *ngIf="errorMessage" [message]="errorMessage"></app-warning-popup>
+
 
     <!-- <div class="error-message" *ngIf="customerForm.get('nationalityIdentity')?.invalid && customerForm.get('nationalityIdentity')?.touched">
       <app-warning-popup [message]="customerForm.get('nationalityIdentity')!.errors | etiyaControlErrorMessage"></app-warning-popup>

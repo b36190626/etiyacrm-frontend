@@ -10,6 +10,7 @@ import { NoStringInputDirective } from '../../../../core/directives/no-string-in
 import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-message.pipe';
 import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
 import { tcValidator } from './tcValidator';
+import { CustomerApiService } from '../../services/customerApi.service';
 
 @Component({
   selector: 'app-demographic-form',
@@ -28,12 +29,15 @@ import { tcValidator } from './tcValidator';
 export class DemographicFormComponent implements OnInit {
   customerForm!: FormGroup;
   isFormValid: boolean = false; //bootstrpsiz angular ile form validasyon takibi yaptım
+  isNationalityIdentityDuplicated: boolean = false;
+  errorMessage: string;
 
   constructor(
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
     private router: Router,
-    private store: Store<{ individualCustomer: CreateCustomerRequest }>
+    private store: Store<{ individualCustomer: CreateCustomerRequest }>,
+    private customerApiService: CustomerApiService
   ) {}
   ngOnInit() {
 
@@ -94,10 +98,33 @@ export class DemographicFormComponent implements OnInit {
     this.router.navigate(['/create-customer/address-info']);
   }
 
+  checkIfNationalityIdentityDuplicated(){
+    console.log("customerNatID: ", this.customerForm.value.nationalityIdentity)
+    this.customerApiService.checkNationalityIdentityDuplicated(this.customerForm.value.nationalityIdentity)
+    .subscribe({
+      next: (response) => {
+        this.isNationalityIdentityDuplicated = response;
+        this.cdr.markForCheck();
+        console.log(response,"response buuuuu")
+      },
+      error: (error) => {
+        this.errorMessage = error.error.detail;
+        this.cdr.markForCheck();
+      }
+
+
+    })
+  }
+
   onSubmit() {
-    if (this.customerForm.valid) {
+    if (!this.isNationalityIdentityDuplicated){
+      this.checkIfNationalityIdentityDuplicated();
+    }
+
+    if (this.customerForm.valid && this.isNationalityIdentityDuplicated === true) {
       console.log('Form Submitted!', this.customerForm.value);
       this.createCustomer();
+
     }
 
   }

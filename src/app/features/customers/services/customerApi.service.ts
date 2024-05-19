@@ -21,26 +21,29 @@ export class CustomerApiService {
   constructor(private http: HttpClient) { }
 
   getList(): Observable<GetListResponseDto<CustomerResponseDto>> {
-    return this.http.get<GetListResponseDto<CustomerResponseDto>>('http://localhost:8081/customerservice/api/v1/individualcustomers?page=0&size=10');
+    return this.http.get<GetListResponseDto<CustomerResponseDto>>('http://localhost:8001/customerservice/api/v1/individualcustomers?page=0&size=10');
   }
 
   getById(id: string): Observable<CustomerDetailsDto> {
-    return this.http.get<CustomerDetailsDto>(`http://localhost:8081/customerservice/api/v1/individualcustomers/${id}`)
+    return this.http.get<CustomerDetailsDto>(`http://localhost:8001/customerservice/api/v1/individualcustomers/${id}`)
   }
 
-  postCustomer(customer: CreateCustomerRequest): Observable<CreatedCustomerResponse>{ //postCustomerResponse
-    return this.http.post<CreatedCustomerResponse>('http://localhost:8081/customerservice/api/v1/individualcustomers', customer);
+  postCustomer(customer: CreateCustomerRequest): Observable<CreatedCustomerResponse>{
+    return this.http.post<CreatedCustomerResponse>('http://localhost:8001/customerservice/api/v1/individualcustomers', customer);
   }
 
   putCustomer(id: string, customer: CustomerUpdateRequest): Observable<CustomerUpdateResponse>{
     return this.http.put<CustomerUpdateResponse>
-    (`http://localhost:8081/customerservice/api/v1/individualcustomers/${id}`,customer)
+    (`http://localhost:8001/customerservice/api/v1/individualcustomers/${id}`,customer)
   }
 
   deleteCustomer(id: string): Observable<DeletedCustomerResponse> {
     return this.http.delete<DeletedCustomerResponse>
-    (`http://localhost:8081/customerservice/api/v1/individualcustomers/${id}`)
+    (`http://localhost:8001/customerservice/api/v1/individualcustomers/${id}`)
   }
 
+  checkNationalityIdentityDuplicated(nationalityIdentity: string): Observable<boolean>{
+    return this.http.get<boolean>(`http://localhost:8001/customerservice/api/v1/individualcustomers/checkNationalityIdentityDuplicated/${nationalityIdentity}`)
+  }
 
 }

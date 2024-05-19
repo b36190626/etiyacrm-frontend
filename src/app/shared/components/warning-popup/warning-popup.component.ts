@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ControlErrorMessagePipe } from '../../../core/pipes/control-error-message.pipe';
 
 
@@ -13,14 +13,18 @@ import { ControlErrorMessagePipe } from '../../../core/pipes/control-error-messa
   styleUrl: './warning-popup.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WarningPopupComponent {
+export class WarningPopupComponent implements OnChanges {
 @Input() message: unknown;
-
 isOpen: boolean = true;
+
+constructor(
+  private cdr: ChangeDetectorRef,
+) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['message']) {
       this.isOpen = true; // message değiştiğinde popup'ı tekrar aç
+        this.cdr.detectChanges();
     }
   }
 
