@@ -21,6 +21,12 @@
       </div>
   </form>
 
-  <app-customer-info-address-form></app-customer-info-address-form>
+  <div class="address-info">
+      <app-customer-info-address-form (addresList)="addresList" ></app-customer-info-address-form>
+  </div>
+<div>
+  <button class="btn">Cancel</button>
+  <button class="btn">Create</button>
+</div>
 
 </div>

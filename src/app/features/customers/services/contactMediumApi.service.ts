@@ -1,13 +1,13 @@
 import { CreatedContactMediumResponse } from './../models/contact-medium/responses/created-contact-medium-response';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GetListResponseDto } from '../models/get-list-response-dto';
-import { ContactMediumResponseDto } from '../models/contact-medium/contact-medium-response-dto';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { GetContactMediumRequestDto } from '../models/contact-medium/requests/get-contact-medium-request';
 import { UpdateContactMediumRequest } from '../models/contact-medium/requests/update-contact-medium-request';
 import { UpdatedContactMediumResponse } from '../models/contact-medium/responses/updated-contact-medium-response';
 import { CreateContactMediumRequest } from '../models/contact-medium/requests/create-contact-medium-request';
+import { GetListResponseDto } from '../models/get-list-response-dto';
+import { ContactMediumResponseDto } from '../models/contact-medium/contact-medium-response-dto';
 
 
 @Injectable({

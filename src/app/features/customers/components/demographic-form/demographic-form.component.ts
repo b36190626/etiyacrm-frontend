@@ -40,8 +40,8 @@ import { CustomerApiService } from '../../services/customerApi.service';
 export class DemographicFormComponent implements OnInit {
   customerForm!: FormGroup;
   isFormValid: boolean = false; //bootstrpsiz angular ile form validasyon takibi yaptım
-  isNationalityIdentityDuplicated: boolean = false;
-  isCustomerReal: boolean = false;
+  isNationalityIdentityDuplicated: boolean = true;
+  isCustomerReal: boolean = true;
   errorMessage: string;
 
   constructor(
@@ -126,7 +126,7 @@ export class DemographicFormComponent implements OnInit {
         },
         error: (error) => {
           this.errorMessage = error.error.detail;
-          this.errorMessage = this.errorMessage.replace(/"/g, '');
+          //this.errorMessage = this.errorMessage.replace(/"/g, '');
           this.messageService.setmessage(this.errorMessage);
           this.cdr.markForCheck();
         },
@@ -172,10 +172,11 @@ export class DemographicFormComponent implements OnInit {
         console.log("2.response", response)
         this.isCustomerReal = response;
         this.cdr.markForCheck();
+
       },
       error: (error) => {
         this.errorMessage = error.error.detail;
-        this.errorMessage = this.errorMessage.replace(/"/g, '');
+        //this.errorMessage = this.errorMessage.replace(/"/g, '');
         this.messageService.setmessage(this.errorMessage);
         this.cdr.markForCheck();
       },
@@ -191,6 +192,7 @@ export class DemographicFormComponent implements OnInit {
 
     if (!this.isCustomerReal) {
       this.checkCustomerReal();
+      console.log("girdi")
     }
 
     if (

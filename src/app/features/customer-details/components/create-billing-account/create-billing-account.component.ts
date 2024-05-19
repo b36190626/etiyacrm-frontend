@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddressInfoComponent } from '../../../customers/components/address-info/address-info.component';
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
@@ -19,4 +19,6 @@ import { CustomerInfoAddressFormComponent } from '../customer-info-address-form/
   styleUrl: './create-billing-account.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateBillingAccountComponent { }
+export class CreateBillingAccountComponent {
+  @Input() addresList;
+}
