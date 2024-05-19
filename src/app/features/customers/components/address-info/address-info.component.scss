@@ -61,10 +61,45 @@
   .address-button:hover{
     background-color: #FBCDA6 ;
   }
-  .previous, .next{
-    border-radius: 2rem;
-    background-color: #FBCDA6;
-    font-weight: bold;
-    width: 8vw;
-  }
 }
+  .invalid-next-button, .previous-button{
+    padding: 10px;
+    width: 9rem;
+    border: none;
+    border-radius: 2rem;
+    font-weight: 500;
+    color: black;
+  }
+  .previous-button {
+    background-color: #FBCDA6;
+    color: black;
+    margin-left: 2rem;
+    cursor: pointer;
+  }
+
+  .invalid-next-button{
+    margin-right: 7rem;
+    background-color: #f0f0f0;
+  }
+
+    .valid-next-button {
+        background-color: #FBCDA6;
+        padding: 10px;
+        width: 9rem;
+        border: none;
+        color: black;
+        margin-right: 7rem;
+        border-radius: 2rem;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+  .valid-next-button:hover{
+        background-color: #f48221;
+        color: white;
+    }
+
+  .previous-button:hover {
+    background-color: #f48221;
+    color: white;
+  }

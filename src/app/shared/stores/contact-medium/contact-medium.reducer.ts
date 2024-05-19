@@ -6,8 +6,6 @@ export const contactMediumReducer = createReducer(
   initialContactMediumState,
   on(setContactMedium, (state, {contactMedium}) => ({
     ...state,
-    contactMedium: {
-      ...contactMedium,
-    }
+    contactMedium
   }))
 );

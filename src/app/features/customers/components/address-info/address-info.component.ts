@@ -9,6 +9,7 @@ import { CreateAddressRequest } from '../../models/address/requests/create-addre
 import { IdToNamePipe } from '../../../../core/pipes/idToName.pipe';
 import { CitiesResponseDto } from '../../models/cities/cities-response-dto';
 import { DistrictsResponseDto } from '../../models/districts/districts-response-dto';
+import { setAddresses } from '../../../../shared/stores/addresses/address.action';
 
 @Component({
   selector: 'app-address-info',
@@ -26,6 +27,7 @@ export class AddressInfoComponent implements OnInit {
   addressList: CreateAddressRequest[] = [];
   form: any;
   showPopup: boolean = false;
+  defaultSelected: boolean = false;
 
   constructor(
     private router: Router,
@@ -35,7 +37,11 @@ export class AddressInfoComponent implements OnInit {
   ngOnInit(): void {
     this.store.pipe(select(selectAddress)).subscribe((address: CreateAddressRequest[]) => {
       this.addressList = address;
+      this.defaultSelected = this.addressList.some(address => address.defaultAddress);
     });
+  }
+  get validAddressList() {
+    return this.addressList.filter(address => address && address.street && address.districtId && address.flatNumber && address.description);
   }
 
   cityTransferParent(cityList: CitiesResponseDto[]) {
@@ -49,6 +55,20 @@ export class AddressInfoComponent implements OnInit {
   togglePopup(event: Event) {
     event?.preventDefault();
     this.showPopup = !this.showPopup;
+  }
+
+  onDefaultAddressChange(districtId: string) {
+    // Güncellenmiş adres listesi
+    const updatedAddressList = this.addressList.map(address => ({
+      ...address,
+      defaultAddress: address.districtId === districtId
+    }));
+
+    // Yeni adres listesini tek seferde store'a gönderme
+    this.store.dispatch(setAddresses({ addresses: updatedAddressList }));
+    this.defaultSelected = true;
+    console.log(updatedAddressList);
+
   }
 
   updateNextButtonState(valid: boolean) {

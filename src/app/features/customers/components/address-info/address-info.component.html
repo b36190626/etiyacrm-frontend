@@ -7,7 +7,7 @@
   ></app-customer-adress-modal>
     <h4>Address Info</h4>
     <div class="row">
-      <div class="col-md-6" *ngIf="addressList.length > 0">
+      <div class="col-md-6" *ngIf="validAddressList.length > 0">
         <div class="addresses"  *ngFor="let address of addressList |slice:1; let i=index">
           <div class="address-options dropdown">
             <div
@@ -28,8 +28,16 @@
           <li>Flat Number: {{ address.flatNumber }}</li>
           <li>Description: {{ address.description }}</li>
 
-        <div class="radio-button-container" *ngIf="address.defaultAddress">Primary Adress &nbsp;
-          <input class="form-check-input" type="radio" id="selectAddress{{i}}" name="selectedAddress" [value]="address.defaultAddress" checked>
+        <div class="radio-button-container"><b>Primary Adress*</b> &nbsp;
+            <input
+    class="form-check-input"
+    type="radio"
+    id="selectAddress{{ i }}"
+    name="selectedAddress"
+    [value]="address.districtId"
+    [checked]="address.defaultAddress"
+    (change)="onDefaultAddressChange(address.districtId)"
+  />
         </div>
 
         </div>
@@ -49,15 +57,20 @@
     </div>
 
     <div class="d-flex justify-content-between my-5">
-      <button type="button" class="btn previous" (click)="onPrevious()">
+      <button type="button" class="previous-button" (click)="onPrevious()">
         Previous
       </button>
       <button
         type="button"
-        class="btn next"
-        [disabled]="!isFormValid"
+        class="button-next"
+        [disabled]="! defaultSelected"
+        [ngClass]="{
+          'valid-next-button': defaultSelected,
+          'invalid-next-button': !defaultSelected
+        }"
         (click)="onNext()"
       >
+
         Next
       </button>
     </div>
