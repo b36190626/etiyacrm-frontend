@@ -39,9 +39,9 @@ import { CustomerApiService } from '../../services/customerApi.service';
 })
 export class DemographicFormComponent implements OnInit {
   customerForm!: FormGroup;
-  isFormValid: boolean = false; //bootstrpsiz angular ile form validasyon takibi yaptım
-  isNationalityIdentityDuplicated: boolean = false;
-  isCustomerReal: boolean = false;
+  isFormValid: boolean = false;
+  isNationalityIdentityDuplicated: boolean;
+  isCustomerReal: boolean;
   errorMessage: string;
 
   constructor(
@@ -62,7 +62,6 @@ export class DemographicFormComponent implements OnInit {
         console.log('individualCustomerState:', individualCustomer);
         this.updateFormValidity();
       });
-    // Formun durumunu dinamik olarak izleme
     this.customerForm.statusChanges.subscribe((status) => {
       this.isFormValid = status === 'VALID';
       console.log(status);
@@ -84,7 +83,6 @@ export class DemographicFormComponent implements OnInit {
         [
           Validators.required,
           tcValidator(),
-          //buraya tc içi başka kontroller gelmeli // - geldi:)
         ],
       ],
     });
@@ -114,23 +112,24 @@ export class DemographicFormComponent implements OnInit {
 
   checkIfNationalityIdentityDuplicated() {
     console.log('customerNatID: ', this.customerForm.value.nationalityIdentity);
-    this.customerApiService
-      .checkNationalityIdentityDuplicated(
-        this.customerForm.value.nationalityIdentity
-      )
-      .subscribe({
-        next: (response) => {
-          this.isNationalityIdentityDuplicated = response;
-          this.cdr.markForCheck();
-          console.log(response, 'response buuuuu');
-        },
-        error: (error) => {
-          this.errorMessage = error.error.detail;
-          this.errorMessage = this.errorMessage.replace(/"/g, '');
-          this.messageService.setmessage(this.errorMessage);
-          this.cdr.markForCheck();
-        },
-      });
+    return new Promise<void>((resolve, reject) => {
+      this.customerApiService
+        .checkNationalityIdentityDuplicated(this.customerForm.value.nationalityIdentity)
+        .subscribe({
+          next: (response) => {
+            this.isNationalityIdentityDuplicated = response;
+            this.cdr.markForCheck();
+            resolve();
+          },
+          error: (error) => {
+            this.errorMessage = error.error.detail;
+            this.errorMessage = this.errorMessage.replace(/"/g, '');
+            this.messageService.setmessage(this.errorMessage);
+            this.cdr.markForCheck();
+            reject();
+          },
+        });
+    });
   }
 
   checkCustomerReal() {
@@ -167,34 +166,34 @@ export class DemographicFormComponent implements OnInit {
     const queryString = fullQueryParams.join('&');
     const apiUrl = `http://localhost:8001/customerservice/api/v1/individualcustomers/check-customer-real?${queryString}`;
 
-    this.customerApiService.checkCustomerReal(apiUrl).subscribe({
-      next: (response) => {
-        console.log("2.response", response)
-        this.isCustomerReal = response;
-        this.cdr.markForCheck();
-
-      },
-      error: (error) => {
-        this.errorMessage = error.error.detail;
-        this.errorMessage = this.errorMessage.replace(/"/g, '');
-        this.messageService.setmessage(this.errorMessage);
-        this.cdr.markForCheck();
-      },
+    return new Promise<void>((resolve, reject) => {
+      this.customerApiService.checkCustomerReal(apiUrl).subscribe({
+        next: (response) => {
+          if (response === true) {
+            this.isCustomerReal = true;
+            this.cdr.markForCheck();
+          }
+          resolve();
+        },
+        error: (error) => {
+          this.errorMessage = error.error.detail;
+          this.errorMessage = this.errorMessage.replace(/"/g, '');
+          this.messageService.setmessage(this.errorMessage);
+          this.cdr.markForCheck();
+          reject();
+        },
+      });
     });
-    console.log("birth", this.customerForm.value.birthDate)
-    console.log("url", apiUrl)
+
   }
 
-  onSubmit() {
-  if (!this.isNationalityIdentityDuplicated) {
-    this.checkIfNationalityIdentityDuplicated();
-    this.cdr.detectChanges();
-  }
+  async onSubmit() {
+    this.isCustomerReal = false;
+    this.isNationalityIdentityDuplicated = false;
 
-  if (!this.isCustomerReal) {
-    this.checkCustomerReal();
-    this.cdr.detectChanges();
-  }
+    await this.checkCustomerReal();
+
+    await this.checkIfNationalityIdentityDuplicated();
 
   setTimeout(() => {
     if (
