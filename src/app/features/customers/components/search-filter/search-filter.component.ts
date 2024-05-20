@@ -6,6 +6,7 @@ import { NoStringInputDirective } from '../../../../core/directives/no-string-in
 import { SearchApiService } from '../../services/searchApi.service';
 import { SearchFilterResponse } from '../../models/search-filter/responses/search-filter-response';
 import { Router, RouterModule } from '@angular/router';
+import { NgxMaskDirective } from 'ngx-mask';
 
 
 @Component({
@@ -16,7 +17,8 @@ import { Router, RouterModule } from '@angular/router';
     ReactiveFormsModule,
     RouterModule,
     WarningPopupComponent,
-    NoStringInputDirective
+    NoStringInputDirective,
+    NgxMaskDirective,
   ],
   templateUrl: './search-filter.component.html',
   styleUrl: './search-filter.component.scss',
@@ -28,14 +30,14 @@ export class SearchFilterComponent implements OnInit{
   @Output() customerList = new EventEmitter<SearchFilterResponse[]>();
   customers: any = [];
   form: FormGroup = this.fb.group({
-    nationalityIdentity:['', [
-      Validators.maxLength(11),
-      Validators.minLength(11),
-      Validators.pattern("^[1-9]{1}[0-9]{9}[02468]{1}$")
-    ]],
-    customerId:[''],
+    nationalityIdentity:['', [Validators.pattern(/^\d{11}$/)]],
+    id:[''],
     accountNumber:[''],
-    gsmNumber:[''],
+    gsmNumber:['',
+      [
+        Validators.pattern("^\d{10}$")
+      ]
+    ],
     firstname:[''],
     lastname:[''],
     orderNumber:[''],
@@ -51,7 +53,7 @@ export class SearchFilterComponent implements OnInit{
     this.form.valueChanges.subscribe(()=>{
       this.isFormValid = this.form.valid &&
       (this.form.get('nationalityIdentity'))?.value ||
-      (this.form.get('customerId'))?.value ||
+      (this.form.get('id'))?.value ||
       (this.form.get('accountNumber'))?.value ||
       (this.form.get('gsmNumber'))?.value ||
       (this.form.get('firstname'))?.value ||
@@ -64,6 +66,7 @@ export class SearchFilterComponent implements OnInit{
 
   onClear() {
     this.form.reset();
+    this.getFilters();
     window.location.href = `${window.location.origin}/home`;
     this.change.markForCheck();
     //window.location.href = 'http://localhost:4200/home'; // geçiçi yönlendirme, düzeltelim.
@@ -78,14 +81,17 @@ export class SearchFilterComponent implements OnInit{
   getFilters(){
     const queryParams: string[] = [];
     queryParams.push(this.form.get('nationalityIdentity')?.value ? `nationalityIdentity=${this.form.get('nationalityIdentity')?.value}` : '');
-    queryParams.push(this.form.get('customerId')?.value ? `customerId=${this.form.get('customerId')?.value}` : '');
+    queryParams.push(this.form.get('id')?.value ? `id=${this.form.get('id')?.value}` : '');
     queryParams.push(this.form.get('accountNumber')?.value ? `accountNumber=${this.form.get('accountNumber')?.value}` : '');
     queryParams.push(this.form.get('gsmNumber')?.value ? `mobilePhone=${this.form.get('gsmNumber')?.value}` : '');
     queryParams.push(this.form.get('firstname')?.value ? `firstName=${this.form.get('firstname')?.value}` : '');
     queryParams.push(this.form.get('lastname')?.value ? `lastName=${this.form.get('lastname')?.value}` : '');
     queryParams.push(this.form.get('orderNumber')?.value ? `orderNumber=${this.form.get('orderNumber')?.value}` : '');
 
-    const queryString = queryParams.join('&');
+    // Boş sorgu parametrelerini filtrele
+    const filteredQueryParams = queryParams.filter(param => param !== '');
+
+    const queryString = filteredQueryParams.join('&');
     const apiUrl = `http://localhost:8082/api/v1/search-service?${queryString}`;
 
     this.searchApiService.getBySearchFilter(apiUrl).subscribe(response => {
@@ -93,11 +99,10 @@ export class SearchFilterComponent implements OnInit{
       this.customerList.emit(this.customers);
 
       this.change.markForCheck();
-
-      console.log("apiUrl",apiUrl);
       console.log("customer list response:",response);
     })
   }
+
 
 }
 

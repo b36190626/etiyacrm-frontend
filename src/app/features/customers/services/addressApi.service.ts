@@ -25,30 +25,30 @@ export class AddressApiService {
     ('http://localhost:8081/customerservice/api/v1/addresses');
   }
   getById(customerId: string): Observable<AddressResponseDto[]>{
-    return this.http.get<AddressResponseDto[]>(`http://localhost:8081/customerservice/api/v1/addresses/${customerId}`)
+    return this.http.get<AddressResponseDto[]>(`http://localhost:8001/customerservice/api/v1/addresses/${customerId}`)
   }
 
   putAddress(id: string, address: UpdateAddressRequest): Observable<UpdatedAddressResponse>{
     return this.http.put<UpdatedAddressResponse>
-    (`http://localhost:8081/customerservice/api/v1/addresses/${id}`, address)
+    (`http://localhost:8001/customerservice/api/v1/addresses/${id}`, address)
   }
 
   postAddress(address: CreateAddressRequest): Observable<CreatedAddressResponse>{
-    return this.http.post<CreatedAddressResponse>('http://localhost:8081/customerservice/api/v1/addresses', address);
+    return this.http.post<CreatedAddressResponse>('http://localhost:8001/customerservice/api/v1/addresses', address);
   }
 
   getCities(): Observable<CitiesResponseDto> { //getCitiesRequest,response...
-    return this.http.get<CitiesResponseDto>('http://localhost:8081/customerservice/api/v1/cities');
+    return this.http.get<CitiesResponseDto>('http://localhost:8001/customerservice/api/v1/cities');
   }
 
   getDistricts(): Observable<DistrictsResponseDto> {
-    return this.http.get<DistrictsResponseDto>(`http://localhost:8081/customerservice/api/v1/districts`);
+    return this.http.get<DistrictsResponseDto>(`http://localhost:8001/customerservice/api/v1/districts`);
   }
   getCityById(cityId): Observable<CitiesResponseDto> { //getCitiesRequest,response...
-    return this.http.get<CitiesResponseDto>(`http://localhost:8081/customerservice/api/v1/cities/${cityId}`);
+    return this.http.get<CitiesResponseDto>(`http://localhost:8001/customerservice/api/v1/cities/${cityId}`);
   }
   getDistrictById(districtId: string): Observable<DistrictsResponseDto> {
-    return this.http.get<DistrictsResponseDto>(`http://localhost:8081/customerservice/api/v1/districts/${districtId}`);
+    return this.http.get<DistrictsResponseDto>(`http://localhost:8001/customerservice/api/v1/districts/${districtId}`);
   }
   // getCityName(cityId: string, cities: CitiesResponseDto[]): string {
   //   const city = cities.find(c => c.id === cityId);

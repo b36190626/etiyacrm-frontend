@@ -33,11 +33,17 @@
         <label>Nationality ID:</label>
         <label>{{customerInfo.nationalityIdentity}}</label>
       </div>
+
       <div class="button-action">
-        <app-success-popup *ngIf="successMessage" [successMessage]="successMessage" ></app-success-popup>
         <button type="button" class="cancel-button" routerLink="/home">Cancel</button>
+      </div>
+      <div class="d-flex justify-content-center">
+        <app-success-popup *ngIf="successMessage"  [successMessage]="successMessage" ></app-success-popup>
       </div>
     </div>
 
 </div>
+
+
+
 

@@ -1,8 +1,17 @@
 .popup {
+  position: fixed;
+  // top: 50;
+  // left: 50;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%); /* Popup'ı yatay eksende ortalamak için */
   display: flex;
   justify-content: center;
   margin: auto;
   width: 35vw;
+  z-index: 1000;
+  display: flex;
+
 }
 .popup-inner {
   background: white;

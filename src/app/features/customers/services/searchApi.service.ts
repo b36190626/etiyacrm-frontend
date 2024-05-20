@@ -15,6 +15,6 @@ export class SearchApiService {
   }
 
   getAllCustomer(): Observable<SearchFilterResponse[]> {
-    return this.http.get<SearchFilterResponse[]>("http://localhost:8082/api/v1/search-service/getAll");
+    return this.http.get<SearchFilterResponse[]>("http://localhost:8001/search-service/api/v1/search-service/getAll");
   }
 }

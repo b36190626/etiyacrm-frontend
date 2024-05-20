@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CustomerDetailsDto } from '../../../customers/models/customer/customer-details-dto';
 import { SearchResultComponent } from '../../../customers/components/search-result/search-result.component';
-import { SuccessMessageService } from '../../../customers/services/successMessage.service';
+import { MessageService } from '../../../customers/services/message.service';
 import { SuccessPopupComponent } from '../../../../shared/components/success-popup/success-popup.component';
 
 @Component({
@@ -29,7 +29,7 @@ constructor(
   private customerApiService: CustomerApiService,
   private change: ChangeDetectorRef,
   private activatedRoute: ActivatedRoute,
-  private successMessageService: SuccessMessageService
+  private messageService: MessageService
 ){}
 
   ngOnInit(): void {
@@ -40,7 +40,7 @@ constructor(
 
     }).unsubscribe();
     this.getCustomerInfo();
-    this.successMessageService.successMessage$.subscribe(message => {
+    this.messageService.message$.subscribe(message => {
       this.successMessage = message;
     });
   }

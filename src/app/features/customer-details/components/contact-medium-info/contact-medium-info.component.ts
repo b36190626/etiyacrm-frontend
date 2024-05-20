@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ContactMediumApiService } from '../../../customers/services/contactMediumApi.service';
 import { SuccessPopupComponent } from '../../../../shared/components/success-popup/success-popup.component';
-import { SuccessMessageService } from '../../../customers/services/successMessage.service';
+import { MessageService } from '../../../customers/services/message.service';
 @Component({
   selector: 'app-contact-medium-info',
   standalone: true,
@@ -28,7 +28,7 @@ export class ContactMediumInfoComponent implements OnInit{
     private change: ChangeDetectorRef,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private successMessageService: SuccessMessageService
+    private messageService: MessageService
   ){}
 
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class ContactMediumInfoComponent implements OnInit{
     });
 
     this.getContactMedium();
-    this.successMessageService.successMessage$.subscribe(message => {
+    this.messageService.message$.subscribe(message => {
       this.successMessage = message;
     });
   }

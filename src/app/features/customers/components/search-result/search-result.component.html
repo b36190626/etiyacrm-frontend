@@ -30,9 +30,7 @@
           </tr>
         </tbody>
       </table>
-      <div *ngIf="successMessage">
-        <app-success-popup [successMessage]="successMessage" ></app-success-popup>
-      </div>
+
       <div class="d-flex justify-content-center align-items-center my-3">
         <i class="fa-solid fa-angles-left fa-0" (click)="goToFirstPage()" [ngClass]="{ 'disabled': p === 1 }"></i>
         <pagination-controls
@@ -47,3 +45,6 @@
       </div>
     </div>
 </fieldset>
+<div *ngIf="successMessage">
+  <app-success-popup [successMessage]="successMessage" ></app-success-popup>
+</div>

@@ -1,10 +1,10 @@
 <fieldset class="fieldset">
   <legend>Search Filter</legend>
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="search-form">
-    <input class="form-control" formControlName="nationalityIdentity"  type="number" placeholder="ID Number"  name="nationalityIdentity" appNoStringInput/>
-    <input class="form-control" formControlName="customerId" type="text" placeholder="Customer ID"  name="customerId"/>
-    <input class="form-control" formControlName="accountNumber" type="text" placeholder="Account Number"  name="accountNumber" appNoStringInput/>
-    <input class="form-control" formControlName="gsmNumber" type="text" placeholder="GSM Number"  name="gsmNumber" appNoStringInput/>
+    <input class="form-control" formControlName="nationalityIdentity"  type="number" placeholder="ID Number" mask="00000000000" name="nationalityIdentity" appNoStringInput/>
+    <input class="form-control" formControlName="id" type="text" placeholder="Customer ID"  name="id"/>
+    <input class="form-control" formControlName="accountNumber" type="text" placeholder="Account Number" name="accountNumber" appNoStringInput/>
+    <input class="form-control" formControlName="gsmNumber" type="number" placeholder="GSM Number"  name="gsmNumber" mask="0000000000" appNoStringInput/>
     <input class="form-control" formControlName="firstname" type="text" placeholder="First Name"  name="firstname"/>
     <input class="form-control" formControlName="lastname" type="text" placeholder="Last Name"  name="lastname"/>
     <input class="form-control" formControlName="orderNumber" type="text" placeholder="Order Number" name="orderNumber" appNoStringInput/>
@@ -17,7 +17,7 @@
         </button>
       </div>
       <div class="search-group">
-        <button class="search-button" [ngClass]="{ 'search-button': isFormValid,'search-button-disabled': !isFormValid }" type="click" (click)="onSubmit()" [disabled]="!isFormValid">
+        <button class="search-button" [ngClass]="{ 'search-button': isFormValid,'search-button-disabled': !isFormValid }" type="button" (click)="onSubmit()" [disabled]="!isFormValid">
           <i class="fa-solid fa-magnifying-glass" style="color: white"></i>
           Search
         </button>
