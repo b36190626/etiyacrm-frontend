@@ -15,9 +15,12 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   EventEmitter,
   OnInit,
   Output,
+  Renderer2,
+  ViewChild,
 } from '@angular/core';
 import { selectAddress } from '../../stores/addresses/address.selector';
 
@@ -30,16 +33,19 @@ import { selectAddress } from '../../stores/addresses/address.selector';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomerAdressModalComponent implements OnInit {
+  @ViewChild('customerAddressModal') modalElement!: ElementRef;
+
   addressForm!: FormGroup;
-  @Output() formValid = new EventEmitter<boolean>();
   isFormValid: boolean = false;
   cities: any = [];
   districts: any = [];
   @Output() cityList = new EventEmitter<any>();
   @Output() districtList = new EventEmitter<any>();
   filteredDistricts: any[] = [];
+  isEditMode: boolean = false;
 
   constructor(
+    private renderer: Renderer2,
     private fb: FormBuilder,
     private router: Router,
     private addressApiService: AddressApiService,
@@ -59,12 +65,24 @@ export class CustomerAdressModalComponent implements OnInit {
     });
 
     this.addressForm.statusChanges.subscribe((status) => {
-      this.formValid.emit(status === 'VALID');
       this.isFormValid = status === 'VALID';
       console.log(status);
     });
   }
+  ngAfterViewInit(): void {
+    // Native DOM event listener for modal hidden event
+    this.modalElement.nativeElement.addEventListener('hidden.bs.modal', this.handleModalClose.bind(this));
+  }
 
+  ngOnDestroy(): void {
+    // Cleanup listener to avoid memory leaks
+    this.modalElement.nativeElement.removeEventListener('hidden.bs.modal', this.handleModalClose.bind(this));
+  }
+  handleModalClose(): void {
+    // Modal is closed, disable form fields
+    this.addressForm.enable();
+    console.log('Modal closed, form fields disabled.');
+  }
   createForm() {
     this.addressForm = this.fb.group({
       city: ['', Validators.required],
@@ -74,7 +92,27 @@ export class CustomerAdressModalComponent implements OnInit {
       description: ['', Validators.required],
     });
   }
+  populateForm(address: CreateAddressRequest) {
+    this.isEditMode = true;
+    const district = this.districts.find(d => d.id === address.districtId);
+    const cityId = district ? district.cityId : null;
+    const city = this.cities.find(c => c.id === cityId);
 
+    if (city) {
+      this.addressForm.patchValue({
+        city: city.id,
+        street: address.street,
+        district: address.districtId,
+        flatNumber: address.flatNumber,
+        description: address.description
+      });
+
+      this.filteredDistricts = this.districts.filter(d => d.cityId === city.id);
+      this.addressForm.get('district')?.enable();
+      this.addressForm.get('city')?.disable();
+      this.addressForm.get('district')?.disable();
+    }
+  }
   loadCitiesOnOpenModal() {
     this.addressApiService.getCities().subscribe((citiesData) => {
       this.cities = citiesData;
@@ -127,7 +165,7 @@ export class CustomerAdressModalComponent implements OnInit {
   }
 
   onCancel() {
-    console.log("Form values before reset:", this.addressForm.value);
+    this.isEditMode = false;
     this.addressForm.reset({
       city: '',
       street: '',
@@ -135,8 +173,8 @@ export class CustomerAdressModalComponent implements OnInit {
       flatNumber: null,
       description: '',
     });
-    this.addressForm.get('district').disable();
+    this.addressForm.get('district')?.disable();
+    this.addressForm.get('city')?.enable();
     this.cdr.detectChanges();
-    console.log("Form values after reset:", this.addressForm.value);
   }
 }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CustomerAdressModalComponent } from '../../../../shared/components/customer-adress-modal/customer-adress-modal.component';
 
@@ -20,6 +20,8 @@ import { setAddresses } from '../../../../shared/stores/addresses/address.action
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddressInfoComponent implements OnInit {
+  @ViewChild(CustomerAdressModalComponent) addressModalComponent!: CustomerAdressModalComponent;
+
   cities: CitiesResponseDto[] = [];
   districts: DistrictsResponseDto[] = [];
   filteredDistricts: any = [];
@@ -85,6 +87,7 @@ export class AddressInfoComponent implements OnInit {
   editAddress(districtId: string) {
     const addressToEdit = this.addressList.find(address => address.districtId === districtId);
     if (addressToEdit) {
+      this.addressModalComponent.populateForm(addressToEdit);
       this.store.dispatch(setAddresses({ addresses: this.addressList.map(address => address.districtId === districtId ? { ...address, ...addressToEdit } : address) }));
     }
   }

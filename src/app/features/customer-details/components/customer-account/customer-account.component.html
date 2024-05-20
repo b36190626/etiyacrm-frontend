@@ -24,6 +24,10 @@
                 <i class="fa-solid fa-pen-clip m-1" type="button" style="color: #24233f" routerLink="/update-account/{{account.customerId}}"></i>
               </td>
             </tr>
+            <td class="justify-content-center gap-3">
+              <i class="fa-regular fa-circle-xmark" type="button"></i>
+              <i class="fa-solid fa-pen-clip m-1" type="button" style="color: #24233f" routerLink="/update-account/{{account.customerId}}"></i>
+            </td>
 
             <!-- Accordion içeriği -->
             <tr>
@@ -41,6 +45,22 @@
                   </tr>
                 </thead>
                 <tbody>
+          <!-- Accordion içeriği -->
+          <tr>
+            <td colspan="5" class="p-0">
+              <div id="collapse{{i}}" class="accordion-collapse collapse" [attr.aria-labelledby]="'heading' + i" data-bs-parent="#accountsAccordion">
+                <div class="accordion-body">
+            <table class="table product-table">
+              <thead>
+                <tr>
+                  <th scope="col">Product ID </th>
+                  <th scope="col">Product Name</th>
+                  <th scope="col">Campaign Name</th>
+                  <th scope="col">Campaign ID</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
 
                 <!-- <ng-container *ngFor="let account of account.billingAccounts">  // PRODUCT - OFFER - ORDER- BILLING ACCOUNTS TABLOLARI / SERVIS MI YAZILACAK? - DISTRICT TABLOSU OLUŞACAK(İLİŞKİSİ DE KURULACAK- ex: ankara tıklandığında şehirleri gelecek one to many) Normalizasyon uygunluğu için gerekli.
                   <ng-container *ngFor="let order of account.orders"> // ADDRESS KISMI(FRONT END) DÜZELDİKTEN SONRA DBYE KAYIT İŞLEMİ YAPILACAK.
