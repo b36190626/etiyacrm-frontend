@@ -61,12 +61,17 @@ export class ContactMediumComponent implements OnInit {
 
   createForm() {
     this.contactForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [
+        Validators.required,
+        Validators.email,
+      ]],
       homePhone: [''],
       mobilePhone: ['', Validators.required],
       fax: ['']
     });
   }
+
+
 
   subscribeToContactMediumState() {
     this.store.pipe(select(selectContactMedium)).subscribe(contactMedium => {
@@ -146,7 +151,7 @@ export class ContactMediumComponent implements OnInit {
       if (response) {
         this.messageService.setmessage('Customer created successfully');
         this.router.navigate(['/home/customer/',this.routerCustomerId,'info']);
-       // this.router.navigate([`/home/customer/${this.routerCustomerId}/info`]);
+
       }
     });
   }
@@ -156,8 +161,6 @@ export class ContactMediumComponent implements OnInit {
       console.log('Form Submitted!', this.contactForm.value);
 
       this.saveToDatabase();
-      //this.router.navigate(['/home/customer/',this.routerCustomerId,'info']);
-      //this.router.navigate([`/home/customer/${this.routerCustomerId}/info`]);
     }
   }
 

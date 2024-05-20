@@ -20,7 +20,8 @@ export class ControlErrorMessagePipe implements PipeTransform {
             control['pattern']? 'Invalid format.':
             control['minlength'] ? `This field must be minimum ${control['minlength'].requiredLength} characters but it has ${control['minlength'].actualLength} characters.` :
             control['maxlength'] ? `This field must be maximum ${control['maxlength'].requiredLength} characters but it has ${control['maxlength'].actualLength} characters.` :
-            control['email']? 'This is not a valid e-mail format Correct usage: example@email.com.':
+            control['email']? 'This is not a valid e-mail format.':
+            control['invalidDomain']? 'This is not a valid e-mail format Correct usage: example@email.com.':
             control['invalidTCKN']? 'This Nationality ID is not valid.':
             control['nationalityIdExist']? 'A customer already exists with this Nationality ID.':
             'Invalid'
