@@ -17,8 +17,16 @@
               aria-expanded="false"
             ></div>
             <div class="option-click dropdown-menu">
-              <a class="dropdown-item" routerLink="">edit</a>
-              <a class="dropdown-item" routerLink="">delete</a>
+              <a
+                class="dropdown-item"
+                (click)="editAddress(address[i].districtId)"
+                data-bs-toggle="modal"
+                data-bs-target="#customerAddressModal"
+                >Edit
+              </a>
+              <a class="dropdown-item"
+              (click)="deleteAddress(address)"
+              >Delete</a>
             </div>
           </div>
 
