@@ -24,8 +24,64 @@ form{
   }
 }
 
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-right: 5rem;
+
+  .valid-create-button {
+    background-color: #FBCDA6;
+    padding: 10px;
+    width: 9rem;
+    border: none;
+    color: black;
+    margin-right: 7rem;
+    border-radius: 2rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+  .invalid-create-button, .button-cancel{
+    padding: 10px;
+    width: 9rem;
+    border: none;
+    border-radius: 2rem;
+    font-weight: 500;
+    color: black;
+  }
+
+  .invalid-create-button{
+    margin-right: 7rem;
+  }
+
+  .button-cancel {
+    background-color: #FBCDA6;
+    margin-left: 2rem;
+  }
+
+  .valid-create-button:hover{
+    background-color: #f48221;
+    color: white;
+  }
+
+  .button-cancel:hover {
+    background-color: #f48221;
+    color: white;
+  }
+}
+
+
+
+
+
+
+
+
 
 .address-info{
   width: 25vw;
   height: 25vh;
 }
+
+

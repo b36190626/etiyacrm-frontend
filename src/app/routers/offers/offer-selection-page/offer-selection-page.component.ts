@@ -22,7 +22,11 @@ import { CampaignSelectionComponent } from '../../../features/offers/components/
 })
 export class OfferSelectionPageComponent {
   selectedTab: string = 'catalog';
-  constructor(private router: Router){}
+
+  constructor(
+    private router: Router,
+  ){}
+
 
   selectTab(tab: string) {
     this.selectedTab = tab;
