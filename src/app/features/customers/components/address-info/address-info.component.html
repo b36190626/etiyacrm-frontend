@@ -17,8 +17,21 @@
               aria-expanded="false"
             ></div>
             <div class="option-click dropdown-menu">
+<<<<<<< HEAD
               <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#customerAddressModal">edit</a>
               <a class="dropdown-item">delete</a>
+=======
+              <a
+                class="dropdown-item"
+                (click)="editAddress(address[i].districtId)"
+                data-bs-toggle="modal"
+                data-bs-target="#customerAddressModal"
+                >Edit
+              </a>
+              <a class="dropdown-item"
+              (click)="deleteAddress(address)"
+              >Delete</a>
+>>>>>>> b68d37e526defe15654cd373655b26afa81d28d2
             </div>
           </div>
 

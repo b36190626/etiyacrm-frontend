@@ -26,7 +26,7 @@ import { selectAddress } from '../../stores/addresses/address.selector';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, NoStringInputDirective],
   templateUrl: './customer-adress-modal.component.html',
-  styleUrl: './customer-adress-modal.component.scss',
+  styleUrls: ['./customer-adress-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomerAdressModalComponent implements OnInit {
@@ -38,7 +38,6 @@ export class CustomerAdressModalComponent implements OnInit {
   @Output() cityList = new EventEmitter<any>();
   @Output() districtList = new EventEmitter<any>();
   filteredDistricts: any[] = [];
-
 
   constructor(
     private fb: FormBuilder,
@@ -53,10 +52,10 @@ export class CustomerAdressModalComponent implements OnInit {
     this.loadCitiesOnOpenModal();
 
     this.store.pipe(select(selectAddress)).subscribe((address) => {
-      this.addressForm.patchValue(address),
-        console.log('addressState: ', address);
-
-
+      if (address) {
+        this.addressForm.patchValue(address);
+      }
+      console.log('addressState: ', address);
     });
 
     this.addressForm.statusChanges.subscribe((status) => {
@@ -73,26 +72,21 @@ export class CustomerAdressModalComponent implements OnInit {
       district: [{ value: '', disabled: true }, Validators.required],
       flatNumber: [null, Validators.required],
       description: ['', Validators.required],
-      //isDefault: [false, Validators.required], //if isDefault changes, don't allow to check gibi birşey yapalım.
     });
   }
-
 
   loadCitiesOnOpenModal() {
     this.addressApiService.getCities().subscribe((citiesData) => {
       this.cities = citiesData;
       this.districts = [];
       if (citiesData) {
-
-
         this.addressApiService.getDistricts().subscribe((districtsData) => {
           this.districts = districtsData;
           this.districtList.emit(this.districts);
-          this.cdr.detectChanges(); // LAĞNET olsun HALA UNUTUYORUZ
+          this.cdr.detectChanges();
           console.log(districtsData);
-        })
+        });
         this.cityList.emit(this.cities);
-        //this.districtList.emit(this.districts);
         console.log("cityList", this.cityList)
       }
     });
@@ -100,33 +94,29 @@ export class CustomerAdressModalComponent implements OnInit {
 
   createAddress() {
     const newAddress: CreateAddressRequest = {
-      //city: this.addressForm.value.city, //city district.id den gelecek
       street: this.addressForm.value.street,
       districtId: this.addressForm.value.district,
       flatNumber: this.addressForm.value.flatNumber,
       description: this.addressForm.value.description,
       defaultAddress: false,
-      customerId:'',
+      customerId: '',
     };
 
     this.store.dispatch(setAddress({ address: newAddress }));
     console.log(newAddress);
   }
 
-
   onCityChange(cityId: any) {
     this.addressForm.get('district').reset({ value: '', disabled: true });
     if (cityId) {
       this.addressForm.get('district').enable();
-      this.filteredDistricts= this.districts.filter(
+      this.filteredDistricts = this.districts.filter(
         (district) => district.cityId === cityId
       );
-
     } else {
       this.addressForm.get('district').disable();
     }
   }
-
 
   onSubmit() {
     if (this.addressForm.valid) {
@@ -144,10 +134,9 @@ export class CustomerAdressModalComponent implements OnInit {
       district: { value: '', disabled: true },
       flatNumber: null,
       description: '',
-      //isDefault: false
     });
     this.addressForm.get('district').disable();
     this.cdr.detectChanges();
     console.log("Form values after reset:", this.addressForm.value);
   }
-  }
+}
