@@ -7,9 +7,11 @@ import {
   ViewChild,
 } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
+  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -73,7 +75,11 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
     });
 
     this.contactMediumInfoUpdateForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [
+        Validators.required,
+        Validators.email,
+        this.emailDomainValidator
+      ]],
       homePhone: [''],
       mobilePhone: ['', Validators.required],
       fax: [''],
@@ -81,6 +87,18 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
     this.contactMediumInfoUpdateForm.statusChanges.subscribe((status) => {
       this.isFormValid = status === 'VALID';
     });
+  }
+
+
+  emailDomainValidator(control: AbstractControl): ValidationErrors | null {
+    const email = control.value;
+    if (email && email.includes('@')) {
+      const [_, domain] = email.split('@');
+      if (domain !== 'gmail.com' && domain !== 'yahoo.com') {
+        return { 'invalidDomain': true };
+      }
+    }
+    return null;
   }
 
   getContactMediumInfo() {

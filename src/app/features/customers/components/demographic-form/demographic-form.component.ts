@@ -40,8 +40,8 @@ import { CustomerApiService } from '../../services/customerApi.service';
 export class DemographicFormComponent implements OnInit {
   customerForm!: FormGroup;
   isFormValid: boolean = false; //bootstrpsiz angular ile form validasyon takibi yaptım
-  isNationalityIdentityDuplicated: boolean = true;
-  isCustomerReal: boolean = true;
+  isNationalityIdentityDuplicated: boolean = false;
+  isCustomerReal: boolean = false;
   errorMessage: string;
 
   constructor(
@@ -126,7 +126,7 @@ export class DemographicFormComponent implements OnInit {
         },
         error: (error) => {
           this.errorMessage = error.error.detail;
-          //this.errorMessage = this.errorMessage.replace(/"/g, '');
+          this.errorMessage = this.errorMessage.replace(/"/g, '');
           this.messageService.setmessage(this.errorMessage);
           this.cdr.markForCheck();
         },
@@ -176,7 +176,7 @@ export class DemographicFormComponent implements OnInit {
       },
       error: (error) => {
         this.errorMessage = error.error.detail;
-        //this.errorMessage = this.errorMessage.replace(/"/g, '');
+        this.errorMessage = this.errorMessage.replace(/"/g, '');
         this.messageService.setmessage(this.errorMessage);
         this.cdr.markForCheck();
       },
@@ -186,15 +186,17 @@ export class DemographicFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (!this.isNationalityIdentityDuplicated) {
-      this.checkIfNationalityIdentityDuplicated();
-    }
+  if (!this.isNationalityIdentityDuplicated) {
+    this.checkIfNationalityIdentityDuplicated();
+    this.cdr.detectChanges();
+  }
 
-    if (!this.isCustomerReal) {
-      this.checkCustomerReal();
-      console.log("girdi")
-    }
+  if (!this.isCustomerReal) {
+    this.checkCustomerReal();
+    this.cdr.detectChanges();
+  }
 
+  setTimeout(() => {
     if (
       this.customerForm.valid &&
       this.isNationalityIdentityDuplicated === true &&
@@ -203,7 +205,9 @@ export class DemographicFormComponent implements OnInit {
       console.log('Form Submitted!', this.customerForm.value);
       this.createCustomer();
     }
-  }
+  }, 0);
+}
+
 
   onCancel() {
     this.customerForm.reset();

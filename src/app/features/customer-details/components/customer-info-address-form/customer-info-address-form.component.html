@@ -1,4 +1,7 @@
 <div class="info-page container-fluid mt-5 m-3" style="background-color: white">
+  <app-customer-adress-modal
+
+></app-customer-adress-modal>
   <h4>
     Address Info
   </h4>
@@ -8,7 +11,7 @@
       <div class="address-options dropdown">
         <i class="fa-solid fa-ellipsis-vertical fa-xl" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
         <div class="option-click dropdown-menu">
-          <a class="dropdown-item" routerLink="">edit</a>
+          <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#customerAddressModal">edit</a>
           <a class="dropdown-item" routerLink="">delete</a>
         </div>
       </div>

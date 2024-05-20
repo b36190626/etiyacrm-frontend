@@ -5,6 +5,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, On
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { IdToNamePipe } from "../../../../core/pipes/idToName.pipe";
 import { map, Observable, switchMap, catchError, of, forkJoin } from 'rxjs';
+import { CustomerAdressModalComponent } from '../../../../shared/components/customer-adress-modal/customer-adress-modal.component';
 
 @Component({
   selector: 'app-customer-info-address-form',
@@ -15,7 +16,8 @@ import { map, Observable, switchMap, catchError, of, forkJoin } from 'rxjs';
   imports: [
     CommonModule,
     RouterModule,
-    IdToNamePipe
+    IdToNamePipe,
+    CustomerAdressModalComponent
   ]
 })
 export class CustomerInfoAddressFormComponent implements OnInit {
