@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { NgxMaskDirective } from 'ngx-mask';
 import { forkJoin, of } from 'rxjs';
 import { catchError, switchMap, take } from 'rxjs/operators';
 
@@ -20,13 +20,12 @@ import { selectContactMedium } from '../../../../shared/stores/contact-medium/co
 import { ControlErrorMessagePipe } from '../../../../core/pipes/control-error-message.pipe';
 import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
 import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
-import { SuccessMessageService } from '../../services/successMessage.service';
+import { MessageService } from '../../services/message.service';
 import { setContactMedium } from '../../../../shared/stores/contact-medium/contact-medium.action';
 
 @Component({
   selector: 'app-contact-medium',
   standalone: true,
-  providers: [provideNgxMask()],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -51,7 +50,7 @@ export class ContactMediumComponent implements OnInit {
     private contactMediumApiService: ContactMediumApiService,
     private router: Router,
     private store: Store,
-    private successMessageService: SuccessMessageService
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -145,7 +144,7 @@ export class ContactMediumComponent implements OnInit {
       })
     ).subscribe(response => {
       if (response) {
-        this.successMessageService.setSuccessMessage('Customer created successfully');
+        this.messageService.setmessage('Customer created successfully');
         this.router.navigate(['/home/customer/',this.routerCustomerId,'info']);
        // this.router.navigate([`/home/customer/${this.routerCustomerId}/info`]);
       }

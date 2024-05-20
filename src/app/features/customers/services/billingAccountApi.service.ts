@@ -19,22 +19,22 @@ export class BillingAccountApiService {
 
   getList(): Observable<GetListResponseDto<BillingAccountResponse>> {
     return this.http.get<GetListResponseDto<BillingAccountResponse>>
-    ('http://localhost:8081/customerservice/api/v1/billing-accounts');
+    ('http://localhost:8001/customerservice/api/v1/billing-accounts');
   }
 
   getById(customerId: string): Observable<GetBillingAccountRequest[]> {
     return this.http.get<GetBillingAccountRequest[]>
-    (`http://localhost:8081/customerservice/api/v1/billing-accounts/${customerId}`);
+    (`http://localhost:8001/customerservice/api/v1/billing-accounts/${customerId}`);
   }
 
   putBillingAccount(id: string, billingAccount: UpdateBillingAccountRequest): Observable<UpdatedBillingAccountResponse> {
     return this.http.put<UpdateBillingAccountRequest>
-    (`http://localhost:8081/customerservice/api/v1/billing-accounts/${id}`, billingAccount);
+    (`http://localhost:8001/customerservice/api/v1/billing-accounts/${id}`, billingAccount);
   }
 
   postBillingAccount(billingAccount: CreateBillingAccountComponent): Observable<CreatedBillingAccountResponse> {
     return this.http.post<CreateBillingAccountRequest>
-    ('http://localhost:8081/customerservice/api/v1/billing-accounts', billingAccount);
+    ('http://localhost:8001/customerservice/api/v1/billing-accounts', billingAccount);
   }
 
 

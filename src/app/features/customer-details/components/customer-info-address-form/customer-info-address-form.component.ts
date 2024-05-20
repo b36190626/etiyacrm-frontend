@@ -1,7 +1,7 @@
 import { AddressResponseDto } from './../../../customers/models/address/address-response-dto';
 import { AddressApiService } from './../../../customers/services/addressApi.service';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { IdToNamePipe } from "../../../../core/pipes/idToName.pipe";
 import { map, Observable, switchMap, catchError, of, forkJoin } from 'rxjs';
@@ -22,6 +22,7 @@ export class CustomerInfoAddressFormComponent implements OnInit {
   customerId!: string;
   addressInfo!: AddressResponseDto[];
   addressDetails: Array<{ address: AddressResponseDto, cityName?: string, districtName?: string }> = [];
+  @Output() addresList = new EventEmitter<AddressResponseDto[]>();
 
   constructor(
     private addressApiService: AddressApiService,
@@ -33,6 +34,7 @@ export class CustomerInfoAddressFormComponent implements OnInit {
     this.activatedRoute.parent.params.subscribe(params => {
       this.customerId = params['id'];
       this.getAddress();
+      this.change.markForCheck();
     });
 
   }
@@ -81,6 +83,9 @@ export class CustomerInfoAddressFormComponent implements OnInit {
             console.log(this.addressDetails, "oldu")
           });
         });
+        this.addresList.emit(this.addressInfo);
+        this.change.markForCheck();
+        console.log(this.addresList, "address list")
       },
       error: (error) => {
         console.error('Error fetching address info', error);

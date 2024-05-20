@@ -9,6 +9,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideStore } from '@ngrx/store';
 import { getAppProviders } from './shared/providers/app-providers';
+import { provideNgxMask } from 'ngx-mask';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes),
@@ -17,7 +18,8 @@ export const appConfig: ApplicationConfig = {
     provideTranslate(),
     provideAnimationsAsync(),
     provideStore(),
-    getAppProviders()
+    getAppProviders(),
+    provideNgxMask(),
   ]
 };
 function provideBrowserAnimations(){
