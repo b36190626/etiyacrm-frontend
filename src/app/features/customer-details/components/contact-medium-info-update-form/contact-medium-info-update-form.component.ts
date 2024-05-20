@@ -1,6 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { UpdateContactMediumRequest } from '../../../customers/models/contact-medium/requests/update-contact-medium-request';
 import { ContactMediumApiService } from '../../../customers/services/contactMediumApi.service';
@@ -22,14 +33,14 @@ import { MessageService } from '../../../customers/services/message.service';
     ControlErrorMessagePipe,
     NgxMaskDirective,
     WarningPopupComponent,
-    ConfirmExitComponent
+    ConfirmExitComponent,
   ],
   templateUrl: './contact-medium-info-update-form.component.html',
   styleUrl: './contact-medium-info-update-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactMediumInfoUpdateFormComponent implements OnInit {
-  contactMediumInfoUpdateForm!: FormGroup ;
+  contactMediumInfoUpdateForm!: FormGroup;
   isFormValid: boolean = false;
   pathId!: string;
   customerId!: string;
@@ -52,45 +63,68 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.parent.params.subscribe(params =>{
-    this.pathId = params['id'];
+    this.activatedRoute.parent.params.subscribe((params) => {
+      this.pathId = params['id'];
 
-    this.customerId = history.state.customerId;
-    console.log(this.customerId,"geldi looo")
+      this.customerId = history.state.customerId;
+      console.log(this.customerId, 'geldi looo');
       this.change.markForCheck();
+      this.getContactMediumInfo();
     });
 
     this.contactMediumInfoUpdateForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       homePhone: [''],
       mobilePhone: ['', Validators.required],
-      fax: ['']
+      fax: [''],
     });
-    this.contactMediumInfoUpdateForm.statusChanges.subscribe(status => {
+    this.contactMediumInfoUpdateForm.statusChanges.subscribe((status) => {
       this.isFormValid = status === 'VALID';
-    })
-
+    });
   }
 
-  updateContactMedium(){
+  getContactMediumInfo() {
+    this.contactMediumApiService.getById(this.customerId).subscribe({
+      next: (contactMediumDetails) => {
+        this.contactMediumInfoUpdateForm.patchValue({
+          email: contactMediumDetails.email,
+          homePhone: contactMediumDetails.homePhone,
+          mobilePhone: contactMediumDetails.mobilePhone,
+          fax: contactMediumDetails.fax,
+        });
+        this.change.markForCheck();
+      },
+      error: (error) => {
+        console.error('Error fetching contact medium details', error);
+      },
+    });
+  }
+
+  updateContactMedium() {
     const request: UpdateContactMediumRequest = {
       email: this.contactMediumInfoUpdateForm.value.email,
       homePhone: this.contactMediumInfoUpdateForm.value.homePhone,
       mobilePhone: this.contactMediumInfoUpdateForm.value.mobilePhone,
       fax: this.contactMediumInfoUpdateForm.value.fax,
     };
-    this.contactMediumApiService.putContactMedium(this.pathId, request).subscribe({
-      next: (response) => {
-        this.messageService.setmessage('Changes are Saved');
-      },
-      error: (error) => {
-        console.error('Error', error)
-      },
-      complete: () => {
-        this.contactMediumInfoUpdateForm.reset();
-        this.router.navigate(['/home/customer/',this.customerId ,'contact-medium-info'])
-      }
-    })
+    this.contactMediumApiService
+      .putContactMedium(this.pathId, request)
+      .subscribe({
+        next: (response) => {
+          this.messageService.setmessage('Changes are Saved');
+        },
+        error: (error) => {
+          console.error('Error', error);
+        },
+        complete: () => {
+          this.contactMediumInfoUpdateForm.reset();
+          this.router.navigate([
+            '/home/customer/',
+            this.customerId,
+            'contact-medium-info',
+          ]);
+        },
+      });
   }
 
   onSubmit() {
@@ -108,7 +142,11 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
 
   onConfirmCancel() {
     this.showConfirmation = false;
-    this.router.navigate(['/home/customer/',this.customerId ,'contact-medium-info'])
+    this.router.navigate([
+      '/home/customer/',
+      this.customerId,
+      'contact-medium-info',
+    ]);
   }
 
   onCloseConfirmation() {

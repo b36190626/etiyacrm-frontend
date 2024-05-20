@@ -1,7 +1,18 @@
 import { CustomerApiService } from './../../../customers/services/customerApi.service';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CustomerUpdateRequest } from '../../../customers/models/customer/requests/customer-update-request';
 import { NoStringInputDirective } from '../../../../core/directives/no-string-input.directive';
@@ -21,7 +32,7 @@ import { tcValidator } from '../../../customers/components/demographic-form/tcVa
     NoStringInputDirective,
     ControlErrorMessagePipe,
     WarningPopupComponent,
-    ConfirmExitComponent
+    ConfirmExitComponent,
   ],
   templateUrl: './customer-info-update-form.component.html',
   styleUrl: './customer-info-update-form.component.scss',
@@ -40,17 +51,18 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
     private customerApiService: CustomerApiService,
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
-    private cdr: ChangeDetectorRef,
+    private cdr: ChangeDetectorRef
   ) {}
-  ngOnInit() {
-    this.activatedRoute.parent.params.subscribe(params => {
-    this.pathId = params['id'];
-    console.log('pathID:', this.pathId);
-    }).unsubscribe();
 
+  ngOnInit() {
+    this.activatedRoute.parent.params.subscribe((params) => {
+        this.pathId = params['id'];
+        console.log('pathID:', this.pathId);
+        this.getCustomerInfo();
+      })
+      .unsubscribe();
 
     this.customerUpdateForm = this.fb.group({
-
       firstName: ['', Validators.required],
       middleName: [''],
       lastName: ['', Validators.required],
@@ -58,16 +70,34 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
       gender: ['', Validators.required],
       fatherName: [''],
       motherName: [''],
-      nationalityIdentity: ['', [
-        Validators.required,
-        tcValidator()
-      ]]
+      nationalityIdentity: ['', [Validators.required, tcValidator()]],
     });
-    this.customerUpdateForm.statusChanges.subscribe(status => {
-    this.isFormValid = status === 'VALID';
-});
+    this.customerUpdateForm.statusChanges.subscribe((status) => {
+      this.isFormValid = status === 'VALID';
+    });
   }
-  updateCustomer(){
+
+  getCustomerInfo() {
+    this.customerApiService.getById(this.pathId).subscribe({
+      next: (customerDetails) => {
+        this.customerUpdateForm.patchValue({
+          firstName: customerDetails.firstName,
+          middleName: customerDetails.middleName,
+          lastName: customerDetails.lastName,
+          birthDate: customerDetails.birthDate,
+          gender: customerDetails.gender,
+          fatherName: customerDetails.fatherName,
+          motherName: customerDetails.motherName,
+          nationalityIdentity: customerDetails.nationalityIdentity,
+        });
+        this.cdr.markForCheck();
+      },
+      error: (error) => {
+        console.error('Error fetching customer details', error);
+      },
+    });
+  }
+  updateCustomer() {
     const request: CustomerUpdateRequest = {
       customerId: this.pathId,
       firstName: this.customerUpdateForm.value.firstName,
@@ -81,17 +111,17 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
     };
     this.cdr.detectChanges();
     this.customerApiService.putCustomer(this.pathId, request).subscribe({
-      next: () =>{
+      next: () => {
         this.messageService.setmessage('Changes are Saved');
       },
       error: (error) => {
-        console.error('Error', error)
+        console.error('Error', error);
       },
       complete: () => {
         this.customerUpdateForm.reset();
-        this.router.navigate(['/home/customer/',this.pathId ,'info'])
-      }
-    })
+        this.router.navigate(['/home/customer/', this.pathId, 'info']);
+      },
+    });
   }
   onSubmit() {
     if (this.customerUpdateForm.valid) {
@@ -106,17 +136,17 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
 
   onConfirmCancel() {
     this.showConfirmation = false;
-    this.router.navigate(['/home/customer/',this.pathId ,'info'])
+    this.router.navigate(['/home/customer/', this.pathId, 'info']);
   }
 
   onCloseConfirmation() {
     this.showConfirmation = false;
   }
 
-// onCancel() {
-//     if (this.confirmExitComponent) {
-//       this.confirmExitComponent.cancel(this.pathId);
-//       this.router.navigate(['/home/customer/',this.pathId ,'info'])
-//     }
-//   }
+  // onCancel() {
+  //     if (this.confirmExitComponent) {
+  //       this.confirmExitComponent.cancel(this.pathId);
+  //       this.router.navigate(['/home/customer/',this.pathId ,'info'])
+  //     }
+  //   }
 }
