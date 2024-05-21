@@ -1,11 +1,11 @@
 import { createAction, props } from "@ngrx/store";
-import { CreateAddressRequest } from "../../../features/customers/models/address/requests/create-address-request";
+import { AddressItem } from "./address.state";
 
 export const setAddress = createAction(
   '[address] set address',
-  props<{ address: CreateAddressRequest}>())
+  props<{ address: AddressItem}>())
 
   export const setAddresses = createAction(
     '[address] set addresses',
-    props<{ addresses: CreateAddressRequest[] }>()
+    props<{ addresses: AddressItem[] }>()
   );

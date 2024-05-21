@@ -23,6 +23,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { selectAddress } from '../../stores/addresses/address.selector';
+import { AddressItem } from '../../stores/addresses/address.state';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-customer-adress-modal',
@@ -109,8 +111,7 @@ export class CustomerAdressModalComponent implements OnInit {
 
       this.filteredDistricts = this.districts.filter(d => d.cityId === city.id);
       this.addressForm.get('district')?.enable();
-      this.addressForm.get('city')?.disable();
-      this.addressForm.get('district')?.disable();
+
     }
   }
   loadCitiesOnOpenModal() {
@@ -131,17 +132,20 @@ export class CustomerAdressModalComponent implements OnInit {
   }
 
   createAddress() {
-    const newAddress: CreateAddressRequest = {
+    this.store.pipe(select(selectAddress),take(1)).subscribe(response => {
+      const nextId:number=Math.max(...response.map(r => r.id))+1
+      const newAddress: AddressItem = {
       street: this.addressForm.value.street,
       districtId: this.addressForm.value.district,
       flatNumber: this.addressForm.value.flatNumber,
       description: this.addressForm.value.description,
       defaultAddress: false,
       customerId: '',
+      id: nextId,
     };
-
     this.store.dispatch(setAddress({ address: newAddress }));
     console.log(newAddress);
+    })
   }
 
   onCityChange(cityId: any) {

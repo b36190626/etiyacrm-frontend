@@ -7,7 +7,7 @@
     <h4>Address Info</h4>
     <div class="row">
       <div class="col-md-6" *ngIf="validAddressList.length > 0">
-        <div class="addresses"  *ngFor="let address of addressList |slice:1; let i=index">
+        <div class="addresses"  *ngFor="let address of addressList let i=index">
           <div class="address-options dropdown">
             <div
               class="fa-solid fa-ellipsis-vertical fa-xl"
@@ -18,7 +18,7 @@
             <div class="option-click dropdown-menu">
               <a
                 class="dropdown-item"
-                (click)="editAddress(address.districtId)"
+                (click)="editAddress(address.id)"
                 data-bs-toggle="modal"
                 data-bs-target="#customerAddressModal"
                 >Edit
