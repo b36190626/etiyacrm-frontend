@@ -107,27 +107,28 @@
         Next
       </button>
     </div>
-    @if (customerForm.get('nationalityIdentity')?.invalid && customerForm.get('nationalityIdentity')?.touched) {
-      <app-warning-popup [message]="customerForm.get('nationalityIdentity')!.errors | etiyaControlErrorMessage"></app-warning-popup>
-    }
-    @else if (customerForm.get('firstName')?.invalid && customerForm.get('firstName')?.touched) {
-      <app-warning-popup [message]="customerForm.get('firstName')!.errors | etiyaControlErrorMessage"></app-warning-popup>
-    }
-    @else if (customerForm.get('lastName')?.invalid && customerForm.get('lastName')?.touched) {
-      <app-warning-popup [message]="customerForm.get('lastName')!.errors | etiyaControlErrorMessage"></app-warning-popup>
-    }
-    @else if (customerForm.get('birthDate')?.invalid && customerForm.get('birthDate')?.touched) {
-      <app-warning-popup [message]="customerForm.get('birthDate')!.errors | etiyaControlErrorMessage"></app-warning-popup>
-    }
-    @else if (customerForm.get('nationalityIdentity')?.invalid && customerForm.get('nationalityIdentity')?.touched) {
-      <app-warning-popup [message]="customerForm.get('nationalityIdentity')!.errors | etiyaControlErrorMessage"></app-warning-popup>
-    }
-
-    <app-warning-popup *ngIf="errorMessage" [message]="errorMessage"></app-warning-popup>
-
-
     <!-- <div class="error-message" *ngIf="customerForm.get('nationalityIdentity')?.invalid && customerForm.get('nationalityIdentity')?.touched">
       <app-warning-popup [message]="customerForm.get('nationalityIdentity')!.errors | etiyaControlErrorMessage"></app-warning-popup>
     </div> -->
   </form>
 </div>
+<div class="error-message-container position-fixed">
+@if (customerForm.get('nationalityIdentity')?.invalid && customerForm.get('nationalityIdentity')?.touched) {
+  <app-warning-popup [message]="customerForm.get('nationalityIdentity')!.errors | etiyaControlErrorMessage"></app-warning-popup>
+}
+@else if (customerForm.get('firstName')?.invalid && customerForm.get('firstName')?.touched) {
+  <app-warning-popup [message]="customerForm.get('firstName')!.errors | etiyaControlErrorMessage"></app-warning-popup>
+}
+@else if (customerForm.get('lastName')?.invalid && customerForm.get('lastName')?.touched) {
+  <app-warning-popup [message]="customerForm.get('lastName')!.errors | etiyaControlErrorMessage"></app-warning-popup>
+}
+@else if (customerForm.get('birthDate')?.invalid && customerForm.get('birthDate')?.touched) {
+  <app-warning-popup [message]="customerForm.get('birthDate')!.errors | etiyaControlErrorMessage"></app-warning-popup>
+}
+@else if (customerForm.get('nationalityIdentity')?.invalid && customerForm.get('nationalityIdentity')?.touched) {
+  <app-warning-popup [message]="customerForm.get('nationalityIdentity')!.errors | etiyaControlErrorMessage"></app-warning-popup>
+}
+
+<app-warning-popup *ngIf="errorMessage" [message]="errorMessage"></app-warning-popup>
+</div>
+

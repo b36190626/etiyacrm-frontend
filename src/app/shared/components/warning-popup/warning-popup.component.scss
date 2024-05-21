@@ -1,22 +1,71 @@
+@keyframes slideInUp {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-35);
+  }
+}
+
+.slide-out {
+  animation: slideOutDown 0.5s;
+}
+
+@keyframes slideOutDown {
+  0% {
+    transform: translateY(-35);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
 .popup {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin: auto;
   width: 28vw;
+  position: relative; //position fixed ile yandaki scalelerden kurtul veya warningi dive at divi position fixed yap.
+  z-index: 9999;
+  transform: translateY(-35px);
+  animation: slideInUp 0.5s ease-in-out, slideOutDown 0.5s 2.5s ease-in-out forwards;
+  margin-top: 10px;
 }
 .popup-inner {
   background: white;
   border-radius: 1rem;
+  text-align: center;
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 1rem;
   background-color: rgb(224, 220, 220);
   margin: auto;
+  max-width: 80vw;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .popup-message{
   color: red;
   font-weight: bold;
+  text-align: center;
+  align-items: center;
 }
 
+
+//   align-items: center; /* Dikey ortalama için */
+//   position: fixed; /* Ekrana sabitlemek için */
+//   top: 0;
+//   left: 0;
+//   width: 100vw;
+//   height: 100vh;
+//   background: rgba(0, 0, 0, 0.5); /* Arka planı karartmak için */
+//   z-index: 9999; /* Diğer öğelerin üstünde göstermek için */
+// }
+
+
+// .popup-message {
+//   color: red;
+//   font-weight: bold;
+//   text-align: center; /* Metni ortalamak için */
+// }

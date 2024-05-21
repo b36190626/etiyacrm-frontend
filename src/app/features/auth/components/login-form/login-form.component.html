@@ -11,10 +11,14 @@
         placeholder="{{ 'username' | translate }}"
         formControlName="username"
       />
-      <div class="error-message-container" *ngIf="form.get('username')?.invalid && form.get('username')?.touched" class="col-auto">
+      @if (form.get('username')?.invalid && form.get('username')?.touched)
+      {
+        <div class="error-message-container" class="col-auto">
         <!-- <span class="text-danger">{{ form.get('username')!.errors | etiyaControlErrorMessage }}</span> -->
         <!-- <app-warning-popup [message]="form.get('username')!.errors | etiyaControlErrorMessage"></app-warning-popup> -->
       </div>
+      }
+
     </div>
     <div class="password-input">
       <label for="password" class="form-label"
@@ -35,9 +39,14 @@
         (click)="togglePasswordVisibility()"
       ></i>
     </label>
-      <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="col-auto">
+
+    @if ((form.get('password')?.invalid && form.get('password')?.touched))
+    {
+      <div class="col-auto">
         <!-- <span class="text-danger">{{ form.get('password')!.errors | etiyaControlErrorMessage }}</span> -->
       </div>
+    }
+
     </div>
     <div class="row my-2">
       <div class="col">
@@ -55,21 +64,28 @@
         />
       </div>
     </div>
+
+
   </div>
 
-
   <div class="button-group d-flex flex-column align-items-center">
-    <button type="submit" class="btn" (click)="onSubmit()" [ngClass]="{ 'valid-login-button': form.valid,'invalid-login-button': !form.valid }" (click)="togglePopup($event)">
+    <button type="submit" class="btn position-fixed" (click)="onSubmit()" [ngClass]="{ 'valid-login-button': form.valid,'invalid-login-button': !form.valid }" (click)="togglePopup($event)">
       {{ "login" | translate }}
     </button>
     <app-warning-popup *ngIf="loginErrorMessage" [message]="loginErrorMessage"></app-warning-popup>
   </div>
-  <div class="error-message-container" *ngIf="form.get('username')?.invalid && form.get('username')?.touched" class="col-auto">
-    <app-warning-popup [message]="form.get('username')!.errors | etiyaControlErrorMessage"></app-warning-popup>
-  </div>
-  <div class="error-message-container" *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="col-auto">
-    <app-warning-popup [message]="form.get('password')!.errors | etiyaControlErrorMessage"></app-warning-popup>
-  </div>
 
 </form>
+</div>
+<div class="error-message-container position-fixed">
+  @if (form.get('username')?.invalid && form.get('username')?.touched) {
+    <div class="error-message-container" class="col-auto">
+    <app-warning-popup [message]="form.get('username')!.errors | etiyaControlErrorMessage"></app-warning-popup>
+    </div>
+  }
+  @if (form.get('password')?.invalid && form.get('password')?.touched) {
+    <div class="error-message-container" class="col-auto">
+    <app-warning-popup [message]="form.get('password')!.errors | etiyaControlErrorMessage"></app-warning-popup>
+    </div>
+  }
 </div>
