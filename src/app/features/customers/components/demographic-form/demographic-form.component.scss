@@ -83,3 +83,15 @@ label {
   background-color: #f48221;
   color: white;
 }
+.error-message-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; // htmlde div pos fixed cssde pos relative olacak.
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  z-index: 10;
+  text-align: center;
+}

@@ -16,11 +16,10 @@ import { MessageService } from '../../../customers/services/message.service';
     SuccessPopupComponent
   ],
   templateUrl: './delete-customer.component.html',
-  styleUrl: './delete-customer.component.scss',
+  styleUrls: ['./delete-customer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteCustomerComponent implements OnInit {
-  //successMessage: string | null = null;
   customerId: string | null = null;
   showConfirmation: boolean = false;
   @ViewChild(ConfirmExitComponent) confirmExitComponent: ConfirmExitComponent;
@@ -31,16 +30,16 @@ export class DeleteCustomerComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private messageService: MessageService
-  ) {}
+  ) {this.onDelete();}
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
       this.customerId = params.get('id');
       console.log("customerId", this.customerId);
-    }).unsubscribe();
+    })
   }
 
-  deleteCustomer(){
+  deleteCustomer() {
     this.customerApiService.deleteCustomer(this.customerId).subscribe(
       {
         next: (response) => {
@@ -48,37 +47,27 @@ export class DeleteCustomerComponent implements OnInit {
           this.messageService.setmessage('Customer deleted successfully.');
           setTimeout(() => {
             this.router.navigate(['/home']);
-          },3000);
-
+          }, 3000);
         },
         error: (error) => {
-          console.error('Error', error)
+          console.error('Error', error);
         },
         complete: () => {
           this.router.navigate(['/home']);
           this.showConfirmation = false;
         }
       }
-    )
+    );
   }
+
   onDelete() {
     this.showConfirmation = true;
-    //this.confirmExitComponent.openModal();
+    console.log("onDelete called");
   }
 
   onConfirmDelete(): void {
     if (this.customerId) {
       this.deleteCustomer();
-      // this.customerApiService.deleteCustomer(this.customerId).subscribe({
-      //   next: () => {
-      //     console.log('Customer deleted successfully');
-      //     this.successMessageService.setSuccessMessage('Customer deleted successfully.');
-      //     this.router.navigate(['/home']);
-      //   },
-      //   error: (error) => {
-      //     console.error('Error deleting customer', error);
-      //   }
-      // });
     }
     this.showConfirmation = false;
   }
@@ -86,19 +75,4 @@ export class DeleteCustomerComponent implements OnInit {
   onCloseConfirmation() {
     this.showConfirmation = false;
   }
-
-  // onConfirmDelete() {
-  //   // if (confirmed) {
-  //   //   this.deleteCustomer();
-  //   // } else {
-  //   //   this.showConfirmation = false;
-  //       //this.deleteCustomer();
-  //   // }
-  //   this.deleteCustomer();
-  //   this.showConfirmation = false;
-  //   this.router.navigate(['/home']);
-  // }
-
-
-
 }

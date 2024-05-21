@@ -11,9 +11,9 @@
     height: 16vh;
   }
   .password-input{
-    width: 28vw;
-    height: 14vh;
-    margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
   }
 
 

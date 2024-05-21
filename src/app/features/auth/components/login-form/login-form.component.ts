@@ -53,7 +53,9 @@ export class LoginFormComponent {
     private router: Router,
     private messageService: MessageService
   ){}
-
+  ngOnInit() {
+    this.form.valueChanges.subscribe(() => this.form.markAllAsTouched()); // Tek satırda tüm kontrol değişikliklerini dinler ve dokunulmuş olarak işaretler
+  }
 
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
@@ -65,7 +67,7 @@ export class LoginFormComponent {
   }
 
   noCharacterValidator(control) {
-    const turkishChars = /^[a-zA-Z][a-zA-Z]{3,20}$/;
+    const turkishChars = /^[a-zA-Z][a-zA-Z]{3,20}$/; //min 3 karakter şartı alıyo?
     if (turkishChars.test(control.value)) {
       return null;
     }
