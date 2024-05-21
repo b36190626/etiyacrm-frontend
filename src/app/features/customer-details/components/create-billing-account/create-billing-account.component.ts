@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AddressInfoComponent } from '../../../customers/components/address-info/address-info.component';
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
 import { CustomerInfoAddressFormComponent } from '../customer-info-address-form/customer-info-address-form.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-billing-account',
@@ -22,16 +22,21 @@ import { Router } from '@angular/router';
 })
 export class CreateBillingAccountComponent implements OnInit {
   accountform: FormGroup;
+  pathId: string | null = null;
   isFormValid = false;
   @Input() addresList;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
     this.createForm();
+    this.activatedRoute.parent.params.subscribe(params => {
+      this.pathId = params['id'];
+    })
   }
 
   createForm() {
@@ -40,6 +45,13 @@ export class CreateBillingAccountComponent implements OnInit {
       description: ['', Validators.required],
       address: [''], //yok
     });
+    this.accountform.statusChanges.subscribe((status) => {
+      this.isFormValid = status === 'VALID';
+    });
+  }
+
+  onCancel(){
+    this.router.navigate(['home/customer/', this.pathId, 'account'])
   }
 
 }

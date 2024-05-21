@@ -67,6 +67,10 @@ export const routes: Routes = [
             component: CreateBillingAccountComponent,
           },
           {
+            path:"account/update-account",
+            component:UpdateBillingAccountComponent
+          },
+          {
             path: "address",
             component: CustomerInfoAddressFormComponent,
           },
@@ -81,10 +85,6 @@ export const routes: Routes = [
         ]
       },
     ]
-  },
-  {
-    path:"update-account",
-    component:UpdateBillingAccountComponent
   },
   {
     path: "create-customer",

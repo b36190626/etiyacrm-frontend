@@ -67,7 +67,7 @@ export class LoginFormComponent {
   }
 
   noCharacterValidator(control) {
-    const turkishChars = /^[a-zA-Z][a-zA-Z]{3,20}$/; //min 3 karakter şartı alıyo?
+    const turkishChars = /^[a-zA-Z][a-zA-Z]$/;
     if (turkishChars.test(control.value)) {
       return null;
     }

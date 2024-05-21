@@ -29,10 +29,10 @@
       <app-customer-info-address-form (addresList)="addresList" ></app-customer-info-address-form>
   </div> -->
     <div class="form-actions text-right">
-      <button type="button" class="btn button-cancel">Cancel</button>
+      <button type="button" class="btn button-cancel" (click)="onCancel()">Cancel</button>
       <button
         type="submit"
-        class="btn button-next"
+        class="button-create"
         [ngClass]="{
           'valid-create-button': isFormValid,
           'invalid-create-button': !isFormValid

@@ -30,13 +30,14 @@ export class DeleteCustomerComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private messageService: MessageService
-  ) {this.onDelete();}
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
       this.customerId = params.get('id');
       console.log("customerId", this.customerId);
     })
+    this.onDelete();
   }
 
   deleteCustomer() {

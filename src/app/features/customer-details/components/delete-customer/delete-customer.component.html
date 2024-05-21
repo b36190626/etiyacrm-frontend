@@ -2,13 +2,14 @@
   <i
     class="fa-solid fa-trash-can fa-2xl"
     data-bs-toggle="modal"
-    data-bs-target="#confirmModal"
+    data-bs-target="#delete"
     (click)="onDelete()"
   ></i>
 </div>
   <app-confirm-exit *ngIf="showConfirmation"
   message="Are you sure to delete this customer?"
   (confirm)="onConfirmDelete()"
+  modalId="delete"
 >
 <!-- (cancel)="onCloseConfirmation()" -->
 </app-confirm-exit>

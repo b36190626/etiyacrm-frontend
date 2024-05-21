@@ -1,3 +1,4 @@
+import { BillingAccountResponse } from './../../../customers/models/billing-account/responses/billing-account-response-dto';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
@@ -5,7 +6,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { GetListResponseDto } from '../../../customers/models/get-list-response-dto';
 import { CustomerResponseDto } from '../../../customers/models/customer/customer-response-dto';
-import { GetBillingAccountRequest } from '../../../customers/models/billing-account/requests/get-billing-account-request';
 import { BillingAccountApiService } from '../../../customers/services/billingAccountApi.service';
 
 @Component({
@@ -24,12 +24,12 @@ import { BillingAccountApiService } from '../../../customers/services/billingAcc
 export class CustomerAccountComponent implements OnInit{
 
   customerId!: string;
-  billingAccountInfo!: GetBillingAccountRequest[];
+  billingAccountInfo!: BillingAccountResponse[];
 
   list: GetListResponseDto<CustomerResponseDto>;
   p: number = 1;
   selectedRow: number = -1;
-click: any;
+  click: any;
 
   constructor(
     //private customersApiService: CustomerApiService,
@@ -71,5 +71,9 @@ click: any;
   toggleAccordion(index: number) {
     this.selectedRow = (this.selectedRow === index) ? -1 : index;
     console.log("olmadı")
+  }
+
+  navigateToUpdateAccount(): void{
+    this.router.navigate([`/home/customer/${this.customerId}/account/update-account`]);
   }
 }

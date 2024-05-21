@@ -124,7 +124,7 @@ export class DemographicFormComponent implements OnInit {
           error: (error) => {
             this.errorMessage = error.error.detail;
             this.errorMessage = this.errorMessage.replace(/"/g, '');
-            this.messageService.setmessage(this.errorMessage);
+            //this.messageService.setmessage(this.errorMessage);
             this.cdr.markForCheck();
             reject();
           },
@@ -178,7 +178,7 @@ export class DemographicFormComponent implements OnInit {
         error: (error) => {
           this.errorMessage = error.error.detail;
           this.errorMessage = this.errorMessage.replace(/"/g, '');
-          this.messageService.setmessage(this.errorMessage);
+          //this.messageService.setmessage(this.errorMessage);
           this.cdr.markForCheck();
           reject();
         },
