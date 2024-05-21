@@ -8,7 +8,7 @@ export const addressReducer = createReducer(
   on(setAddress, (state, { address }) => ({
     ...state,
     address: [
-      ...state.address.filter(a => a.districtId !== address.districtId), // Eski adresi kaldır
+      ...state.address.filter(a => a.id !== address.id), // Eski adresi kaldır
       address // Yeni adresi ekle
     ]
   })),

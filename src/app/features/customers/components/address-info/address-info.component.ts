@@ -10,6 +10,7 @@ import { IdToNamePipe } from '../../../../core/pipes/idToName.pipe';
 import { CitiesResponseDto } from '../../models/cities/cities-response-dto';
 import { DistrictsResponseDto } from '../../models/districts/districts-response-dto';
 import { setAddresses } from '../../../../shared/stores/addresses/address.action';
+import { AddressItem, AddressState } from '../../../../shared/stores/addresses/address.state';
 
 @Component({
   selector: 'app-address-info',
@@ -26,18 +27,18 @@ export class AddressInfoComponent implements OnInit {
   districts: DistrictsResponseDto[] = [];
   filteredDistricts: any = [];
   isFormValid = false;
-  addressList: CreateAddressRequest[] = [];
+  addressList: AddressItem[] = [];
   form: any;
   showPopup: boolean = false;
   defaultSelected: boolean = false;
 
   constructor(
     private router: Router,
-    private store: Store<{ address: CreateAddressRequest }>
+    private store: Store<AddressState>
   ) {}
 
   ngOnInit(): void {
-    this.store.pipe(select(selectAddress)).subscribe((address: CreateAddressRequest[]) => {
+    this.store.pipe(select(selectAddress)).subscribe((address: AddressItem[]) => {
       this.addressList = address;
       this.defaultSelected = this.addressList.some(address => address.defaultAddress);
     });
@@ -83,12 +84,12 @@ export class AddressInfoComponent implements OnInit {
     this.router.navigate(['/create-customer/contact-medium']);
   }
 
-  // Method to edit address
-  editAddress(districtId: string) {
-    const addressToEdit = this.addressList.find(address => address.districtId === districtId);
+  // Method to edit address //city-customer not found?
+  editAddress(id: number) {
+    const addressToEdit = this.addressList.find(address => address.id === id);
     if (addressToEdit) {
       this.addressModalComponent.populateForm(addressToEdit);
-      this.store.dispatch(setAddresses({ addresses: this.addressList.map(address => address.districtId === districtId ? { ...address, ...addressToEdit } : address) }));
+      this.store.dispatch(setAddresses({ addresses: this.addressList.map(address => address.id === id ? { ...address, ...addressToEdit } : address) }));
     }
   }
 
