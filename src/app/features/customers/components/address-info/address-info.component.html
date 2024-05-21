@@ -6,7 +6,6 @@
   ></app-customer-adress-modal>
     <h4>Address Info</h4>
     <div class="row">
-      <div class="col-md-6" *ngIf="validAddressList.length > 0">
         <div class="addresses"  *ngFor="let address of addressList let i=index">
           <div class="address-options dropdown">
             <div
@@ -41,14 +40,14 @@
     type="radio"
     id="selectAddress{{ i }}"
     name="selectedAddress"
-    [value]="address.districtId"
+    [value]="address.id"
     [checked]="address.defaultAddress"
-    (change)="onDefaultAddressChange(address.districtId)"
+    (change)="onDefaultAddressChange(address.id)"
   />
         </div>
 
         </div>
-      </div>
+
       <div class="col-md-6">
         <div class="add-new-address">
           <button

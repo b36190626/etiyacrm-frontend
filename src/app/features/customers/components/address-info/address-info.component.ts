@@ -5,7 +5,6 @@ import { CustomerAdressModalComponent } from '../../../../shared/components/cust
 
 import { select, Store } from '@ngrx/store';
 import { selectAddress } from '../../../../shared/stores/addresses/address.selector';
-import { CreateAddressRequest } from '../../models/address/requests/create-address-request';
 import { IdToNamePipe } from '../../../../core/pipes/idToName.pipe';
 import { CitiesResponseDto } from '../../models/cities/cities-response-dto';
 import { DistrictsResponseDto } from '../../models/districts/districts-response-dto';
@@ -44,10 +43,6 @@ export class AddressInfoComponent implements OnInit {
     });
   }
 
-  get validAddressList() {
-    return this.addressList.filter(address => address && address.street && address.districtId && address.flatNumber && address.description);
-  }
-
   cityTransferParent(cityList: CitiesResponseDto[]) {
     this.cities = cityList;
   }
@@ -61,10 +56,10 @@ export class AddressInfoComponent implements OnInit {
     this.showPopup = !this.showPopup;
   }
 
-  onDefaultAddressChange(districtId: string) {
+  onDefaultAddressChange(addressId:number) {
     const updatedAddressList = this.addressList.map(address => ({
       ...address,
-      defaultAddress: address.districtId === districtId
+      defaultAddress: address.id === addressId
     }));
 
     this.store.dispatch(setAddresses({ addresses: updatedAddressList }));
@@ -84,7 +79,7 @@ export class AddressInfoComponent implements OnInit {
     this.router.navigate(['/create-customer/contact-medium']);
   }
 
-  // Method to edit address //city-customer not found?
+
   editAddress(id: number) {
     const addressToEdit = this.addressList.find(address => address.id === id);
     if (addressToEdit) {
@@ -93,9 +88,9 @@ export class AddressInfoComponent implements OnInit {
     }
   }
 
-  // Method to delete address
-  deleteAddress(address: CreateAddressRequest) {
-    this.addressList = this.addressList.filter(addr => addr.districtId !== address.districtId);
+
+  deleteAddress(address: AddressItem) {
+    this.addressList = this.addressList.filter(addr => addr.id !== address.id);
     this.store.dispatch(setAddresses({ addresses: this.addressList }));
   }
 }
