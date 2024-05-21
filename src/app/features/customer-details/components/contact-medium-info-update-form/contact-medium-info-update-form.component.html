@@ -51,6 +51,9 @@
   <div class="error-message mt-2" *ngIf="contactMediumInfoUpdateForm.get('email')?.invalid && contactMediumInfoUpdateForm.get('email')?.touched">
     <app-warning-popup [message]="contactMediumInfoUpdateForm.get('email')!.errors | etiyaControlErrorMessage"></app-warning-popup>
   </div>
+  <div class="error-message mt-2" *ngIf="contactMediumInfoUpdateForm.get('mobilePhone')?.invalid && contactMediumInfoUpdateForm.get('mobilePhone')?.touched">
+    <app-warning-popup [message]="contactMediumInfoUpdateForm.get('mobilePhone')!.errors | etiyaControlErrorMessage"></app-warning-popup>
+  </div>
   <app-confirm-exit
   message="Changes will not be saved. Are you sure to change the screen?"
   (confirm)="onConfirmCancel()"

@@ -72,12 +72,12 @@
     <button type="submit" class="btn position-fixed" (click)="onSubmit()" [ngClass]="{ 'valid-login-button': form.valid,'invalid-login-button': !form.valid }" (click)="togglePopup($event)">
       {{ "login" | translate }}
     </button>
-    <app-warning-popup *ngIf="loginErrorMessage" [message]="loginErrorMessage"></app-warning-popup>
   </div>
 
 </form>
 </div>
 <div class="error-message-container position-fixed">
+  <app-warning-popup *ngIf="loginErrorMessage" [message]="loginErrorMessage"></app-warning-popup>
   @if (form.get('username')?.invalid && form.get('username')?.touched) {
     <div class="error-message-container" class="col-auto">
     <app-warning-popup [message]="form.get('username')!.errors | etiyaControlErrorMessage:'username'"></app-warning-popup>

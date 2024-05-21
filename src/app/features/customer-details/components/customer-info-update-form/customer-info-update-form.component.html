@@ -120,6 +120,7 @@
   <div class="mt-2" *ngIf="customerUpdateForm.get('nationalityIdentity')?.invalid &&customerUpdateForm.get('nationalityIdentity')?.touched">
     <app-warning-popup [message]=" customerUpdateForm.get('nationalityIdentity')!.errors | etiyaControlErrorMessage"></app-warning-popup>
   </div>
+  <app-warning-popup *ngIf="errorMessage" [message]="errorMessage"></app-warning-popup>
   <app-confirm-exit
   message="Changes will not be saved. Are you sure to change the screen?"
   (confirm)="onConfirmCancel()"

@@ -43,6 +43,7 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
   isFormValid: boolean = false;
   pathId!: string;
   showConfirmation = false;
+  errorMessage : string;
   @ViewChild(ConfirmExitComponent) confirmExitComponent: ConfirmExitComponent;
 
   constructor(
@@ -120,6 +121,10 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error', error);
+        this.errorMessage = error.error.detail;
+        console.log("message", this.errorMessage)
+        this.errorMessage = this.errorMessage.replace(/"/g, '');
+        this.cdr.markForCheck();
       },
       complete: () => {
         this.customerUpdateForm.reset();

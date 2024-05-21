@@ -1,12 +1,11 @@
 <div class="modal fade" [id]="modalId" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered ">
     <div class="modal-content">
-      <div class="modal-body d-flex align-items-center justify-content-between gap-4">
+      <div class="modal-body d-flex align-items-center gap-5">
         <i class="fa-solid fa-triangle-exclamation fa-2x"></i>
         <p class="message">
           {{message}}
         </p>
-          <!-- Changes will not be saved. Are you sure to change the screen? -->
       </div>
       <div class="modal-footer d-flex justify-content-center gap-5">
         <button type="button" class="btn yes-button" data-bs-dismiss="modal" (click)="onConfirm()">Yes</button>
@@ -15,4 +14,3 @@
     </div>
   </div>
 </div>
-s
