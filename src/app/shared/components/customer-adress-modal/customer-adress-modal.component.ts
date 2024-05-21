@@ -18,9 +18,7 @@ import {
   ElementRef,
   EventEmitter,
   OnInit,
-  Output,
-  Renderer2,
-  ViewChild,
+  Output, ViewChild
 } from '@angular/core';
 import { selectAddress } from '../../stores/addresses/address.selector';
 import { AddressItem } from '../../stores/addresses/address.state';
@@ -44,10 +42,8 @@ export class CustomerAdressModalComponent implements OnInit {
   @Output() cityList = new EventEmitter<any>();
   @Output() districtList = new EventEmitter<any>();
   filteredDistricts: any[] = [];
-  isEditMode: boolean = false;
 
   constructor(
-    private renderer: Renderer2,
     private fb: FormBuilder,
     private router: Router,
     private addressApiService: AddressApiService,
@@ -71,20 +67,7 @@ export class CustomerAdressModalComponent implements OnInit {
       console.log(status);
     });
   }
-  ngAfterViewInit(): void {
-    // Native DOM event listener for modal hidden event
-    this.modalElement.nativeElement.addEventListener('hidden.bs.modal', this.handleModalClose.bind(this));
-  }
 
-  ngOnDestroy(): void {
-    // Cleanup listener to avoid memory leaks
-    this.modalElement.nativeElement.removeEventListener('hidden.bs.modal', this.handleModalClose.bind(this));
-  }
-  handleModalClose(): void {
-    // Modal is closed, disable form fields
-    this.addressForm.enable();
-    console.log('Modal closed, form fields disabled.');
-  }
   createForm() {
     this.addressForm = this.fb.group({
       city: ['', Validators.required],
@@ -95,7 +78,6 @@ export class CustomerAdressModalComponent implements OnInit {
     });
   }
   populateForm(address: CreateAddressRequest) {
-    this.isEditMode = true;
     const district = this.districts.find(d => d.id === address.districtId);
     const cityId = district ? district.cityId : null;
     const city = this.cities.find(c => c.id === cityId);
@@ -133,7 +115,8 @@ export class CustomerAdressModalComponent implements OnInit {
 
   createAddress() {
     this.store.pipe(select(selectAddress),take(1)).subscribe(response => {
-      const nextId:number=Math.max(...response.map(r => r.id))+1
+      // const nextId:number=Math.max(...response.map(r => r.id))+1
+      const nextId: number = response.length ? Math.max(...response.map(r => r.id)) + 1 : 1;
       const newAddress: AddressItem = {
       street: this.addressForm.value.street,
       districtId: this.addressForm.value.district,
@@ -169,7 +152,6 @@ export class CustomerAdressModalComponent implements OnInit {
   }
 
   onCancel() {
-    this.isEditMode = false;
     this.addressForm.reset({
       city: '',
       street: '',
@@ -178,7 +160,6 @@ export class CustomerAdressModalComponent implements OnInit {
       description: '',
     });
     this.addressForm.get('district')?.disable();
-    this.addressForm.get('city')?.enable();
     this.cdr.detectChanges();
   }
 }
