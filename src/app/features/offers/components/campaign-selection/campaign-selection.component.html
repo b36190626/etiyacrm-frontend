@@ -1,32 +1,29 @@
 <div>
   <div class="campaign-form">
-    <form>
+    <form [formGroup]="campaignForm" (ngSubmit)="searchOffers()">
       <div class="row">
         <div class="col"></div>
           <label for="campaign">Campaign Selection:</label>
-            <select id="campaign" class="form-select" formControlName="campaign" required>
+            <select id="campaign" class="form-select" formControlName="campaign" required (change)="onCampaignChange()">
               <option value="">Select</option>
-              <option value="campaign1">Campaign Selection 1</option>
-              <option value="campaign2">Campaign Selection 2</option>
+              <option *ngFor="let campaign of campaignList" [value]="campaign.id">{{campaign.name}}</option>
             </select>
       </div>
       <div class="row d-flex align-items-end mt-3">
         <div class="col">
-          <label for="prod-offer-id">Campaign ID:</label>
-          <input type="text" id="prod-offer-id" class="form-control" formControlName="">
+          <label for="prod-offer-id">Prod Offer ID:</label>
+          <input type="text" id="prod-offer-id" class="form-control" formControlName="prodOfferId">
       </div>
       <div class="col">
-          <label for="prod-offer-name">Campaign Name:</label>
-          <input type="text" id="prod-offer-name" class="form-control" formControlName="">
+          <label for="prod-offer-name">Prod Offer Name:</label>
+          <input type="text" id="prod-offer-name" class="form-control" formControlName="prodOfferName">
       </div>
       <div class="col">
-        <button class="search-button">Searchs</button>
+        <button class="search-button" type="submit">Search</button>
       </div>
       </div>
     </form>
   </div>
-
-
   <div class="table-responsive" style="max-height: 35vh; overflow-y: auto;">
     <table class="table table-bordered">
       <thead>
@@ -37,14 +34,22 @@
           <th>Prod Offer Name</th>
         </tr>
       </thead>
-      <tbody>
-        <tr *ngFor="let product of products" >
+      <tbody *ngIf="campaignProductOfferList.length === 0">
+        <tr class="empty-table" *ngFor="let i of [0, 1, 2 ,3, 4]">
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="campaignProductOfferList.length > 0">
+        <tr *ngFor="let campaignOffer of campaignProductOfferList" >
           <td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            {{ product.campaignId }}
+            {{ campaignOffer.campaignId | slice:0:8 }}
           </td>
-          <td>{{ product.campaignName }}</td>
-          <td>{{ product.prodOfferId }}</td>
-          <td>{{ product.prodOfferName }}</td>
+          <td>{{ campaignOffer.campaignName }}</td>
+          <td>{{ campaignOffer.productOfferId | slice:0:8 }}</td>
+          <td>{{ campaignOffer.productOfferName }}</td>
         </tr>
       </tbody>
     </table>
