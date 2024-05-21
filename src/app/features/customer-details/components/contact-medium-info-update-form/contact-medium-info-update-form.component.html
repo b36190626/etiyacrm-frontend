@@ -31,7 +31,7 @@
         class="button-cancel"
         (click)="onCancel()"
         data-bs-toggle="modal"
-        data-bs-target="#confirmModal"
+        data-bs-target="#updateConfirm"
       >
         Cancel
       </button>
@@ -55,6 +55,7 @@
   message="Changes will not be saved. Are you sure to change the screen?"
   (confirm)="onConfirmCancel()"
   (cancel)="onCloseConfirmation()"
+  modalId="updateConfirm"
   >
   </app-confirm-exit>
 </div>

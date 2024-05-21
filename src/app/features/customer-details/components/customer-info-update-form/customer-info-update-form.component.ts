@@ -58,9 +58,9 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
     this.activatedRoute.parent.params.subscribe((params) => {
         this.pathId = params['id'];
         console.log('pathID:', this.pathId);
+        this.cdr.markForCheck();
         this.getCustomerInfo();
-      })
-      .unsubscribe();
+      });
 
     this.customerUpdateForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -98,6 +98,10 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
     });
   }
   updateCustomer() {
+    if (this.showConfirmation) {
+      // Eğer onaylama mekanizması aktifse işlemi iptal edin
+      return;
+    }
     const request: CustomerUpdateRequest = {
       customerId: this.pathId,
       firstName: this.customerUpdateForm.value.firstName,
@@ -109,8 +113,8 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
       motherName: this.customerUpdateForm.value.motherName,
       nationalityIdentity: this.customerUpdateForm.value.nationalityIdentity,
     };
-    this.cdr.detectChanges();
-    this.customerApiService.putCustomer(this.pathId, request).subscribe({
+    this.customerApiService.putCustomer(this.pathId, request)
+    .subscribe({
       next: () => {
         this.messageService.setmessage('Changes are Saved');
       },
@@ -127,6 +131,8 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
     if (this.customerUpdateForm.valid) {
       console.log('Form Submitted!', this.customerUpdateForm.value);
       this.updateCustomer();
+    } else {
+      this.isFormValid = false;
     }
   }
 
@@ -142,11 +148,4 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
   onCloseConfirmation() {
     this.showConfirmation = false;
   }
-
-  // onCancel() {
-  //     if (this.confirmExitComponent) {
-  //       this.confirmExitComponent.cancel(this.pathId);
-  //       this.router.navigate(['/home/customer/',this.pathId ,'info'])
-  //     }
-  //   }
 }
