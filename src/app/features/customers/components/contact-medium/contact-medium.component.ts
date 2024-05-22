@@ -138,7 +138,7 @@ export class ContactMediumComponent implements OnInit {
             );
           }),
           catchError(error => {
-            console.error('cu', error);
+            console.error('YAKALANAN HATA < TIKLA >', error);
             return of(null);
           })
         );

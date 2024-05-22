@@ -118,14 +118,14 @@ export class DemographicFormComponent implements OnInit {
         .subscribe({
           next: (response) => {
             this.isNationalityIdentityDuplicated = response;
-            this.cdr.markForCheck();
+            this.cdr.detectChanges();
             resolve();
           },
           error: (error) => {
             this.errorMessage = error.error.detail;
             this.errorMessage = this.errorMessage.replace(/"/g, '');
             //this.messageService.setmessage(this.errorMessage);
-            this.cdr.markForCheck();
+            this.cdr.detectChanges();
             reject();
           },
         });
@@ -171,7 +171,7 @@ export class DemographicFormComponent implements OnInit {
         next: (response) => {
           if (response === true) {
             this.isCustomerReal = true;
-            this.cdr.markForCheck();
+            this.cdr.detectChanges();
           }
           resolve();
         },
@@ -179,7 +179,7 @@ export class DemographicFormComponent implements OnInit {
           this.errorMessage = error.error.detail;
           this.errorMessage = this.errorMessage.replace(/"/g, '');
           //this.messageService.setmessage(this.errorMessage);
-          this.cdr.markForCheck();
+          this.cdr.detectChanges();
           reject();
         },
       });
