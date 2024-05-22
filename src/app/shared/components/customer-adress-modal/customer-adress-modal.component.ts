@@ -1,3 +1,4 @@
+import { AddressState } from './../../stores/addresses/address.state';
 import { AddressApiService } from './../../../features/customers/services/addressApi.service';
 import { CommonModule } from '@angular/common';
 import {
@@ -8,7 +9,6 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { CreateAddressRequest } from '../../../features/customers/models/address/requests/create-address-request';
 import { setAddress } from '../../stores/addresses/address.action';
 import { NoStringInputDirective } from '../../../core/directives/no-string-input.directive';
 import {
@@ -42,12 +42,13 @@ export class CustomerAdressModalComponent implements OnInit {
   @Output() cityList = new EventEmitter<any>();
   @Output() districtList = new EventEmitter<any>();
   filteredDistricts: any[] = [];
+  editingAddressId: number | null = null;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private addressApiService: AddressApiService,
-    private store: Store<{ address: CreateAddressRequest }>,
+    private store: Store<{ address: AddressState }>,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -77,7 +78,7 @@ export class CustomerAdressModalComponent implements OnInit {
       description: ['', Validators.required],
     });
   }
-  populateForm(address: CreateAddressRequest) {
+  populateForm(address: AddressItem) {
     const district = this.districts.find(d => d.id === address.districtId);
     const cityId = district ? district.cityId : null;
     const city = this.cities.find(c => c.id === cityId);
@@ -93,7 +94,7 @@ export class CustomerAdressModalComponent implements OnInit {
 
       this.filteredDistricts = this.districts.filter(d => d.cityId === city.id);
       this.addressForm.get('district')?.enable();
-
+      this.editingAddressId = address.id;
     }
   }
   loadCitiesOnOpenModal() {
@@ -124,9 +125,10 @@ export class CustomerAdressModalComponent implements OnInit {
       description: this.addressForm.value.description,
       defaultAddress: false,
       customerId: '',
-      id: nextId,
+      id: this.editingAddressId ?? nextId,
     };
     this.store.dispatch(setAddress({ address: newAddress }));
+    this.editingAddressId = null;
     console.log(newAddress);
     })
   }
@@ -159,6 +161,7 @@ export class CustomerAdressModalComponent implements OnInit {
       flatNumber: null,
       description: '',
     });
+    this.editingAddressId = null;
     this.addressForm.get('district')?.disable();
     this.cdr.detectChanges();
   }
