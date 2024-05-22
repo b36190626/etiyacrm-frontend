@@ -117,7 +117,7 @@ export class CustomerAdressModalComponent implements OnInit {
   createAddress() {
     this.store.pipe(select(selectAddress),take(1)).subscribe(response => {
       // const nextId:number=Math.max(...response.map(r => r.id))+1
-      //const nextId: number = response.length ? Math.max(...response.map(r => r.id)) + 1 : 1;
+      const nextId: number = response.length ? Math.max(...response.map(r => r.id)) + 1 : 1;
       const newAddress: AddressItem = {
       street: this.addressForm.value.street,
       districtId: this.addressForm.value.district,
@@ -125,7 +125,7 @@ export class CustomerAdressModalComponent implements OnInit {
       description: this.addressForm.value.description,
       defaultAddress: false,
       customerId: '',
-      id: this.editingAddressId ?? (response.length ? Math.max(...response.map(r => r.id)) + 1 : 1),
+      id: this.editingAddressId ?? nextId,
     };
     this.store.dispatch(setAddress({ address: newAddress }));
     this.editingAddressId = null;
