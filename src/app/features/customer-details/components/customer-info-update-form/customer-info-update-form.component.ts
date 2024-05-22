@@ -44,6 +44,8 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
   pathId!: string;
   showConfirmation = false;
   errorMessage : string;
+  isNationalityIdentityDuplicated: boolean;
+  isCustomerReal: boolean;
   @ViewChild(ConfirmExitComponent) confirmExitComponent: ConfirmExitComponent;
 
   constructor(
@@ -58,7 +60,6 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.parent.params.subscribe((params) => {
         this.pathId = params['id'];
-        console.log('pathID:', this.pathId);
         this.cdr.markForCheck();
         this.getCustomerInfo();
       });
@@ -100,7 +101,6 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
   }
   updateCustomer() {
     if (this.showConfirmation) {
-      // Eğer onaylama mekanizması aktifse işlemi iptal edin
       return;
     }
     const request: CustomerUpdateRequest = {
@@ -120,9 +120,7 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
         this.messageService.setmessage('Changes are Saved');
       },
       error: (error) => {
-        console.error('Error', error);
         this.errorMessage = error.error.detail;
-        console.log("message", this.errorMessage)
         this.errorMessage = this.errorMessage.replace(/"/g, '');
         this.cdr.markForCheck();
       },
@@ -132,13 +130,106 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
       },
     });
   }
-  onSubmit() {
-    if (this.customerUpdateForm.valid) {
+
+  checkIfNationalityIdentityDuplicated() {
+    console.log('customerNatID: ', this.customerUpdateForm.value.nationalityIdentity);
+    return new Promise<void>((resolve, reject) => {
+      this.customerApiService
+        .checkNationalityIdentityDuplicated(this.customerUpdateForm.value.nationalityIdentity)
+        .subscribe({
+          next: (response) => {
+            this.isNationalityIdentityDuplicated = response;
+            this.cdr.detectChanges();
+            resolve();
+          },
+          error: (error) => {
+            this.errorMessage = error.error.detail;
+            this.errorMessage = this.errorMessage.replace(/"/g, '');
+            this.cdr.detectChanges();
+            reject();
+          },
+        });
+    });
+  }
+
+  checkCustomerReal() {
+    const queryParams: string[] = [];
+    queryParams.push(
+      this.customerUpdateForm.get('nationalityIdentity')?.value
+        ? `nationalityIdentity=${
+            this.customerUpdateForm.get('nationalityIdentity')?.value
+          }`
+        : ''
+    );
+    queryParams.push(
+      this.customerUpdateForm.get('firstName')?.value
+        ? `firstName=${this.customerUpdateForm.get('firstName')?.value}`
+        : ''
+    );
+    queryParams.push(
+      this.customerUpdateForm.get('middleName')?.value
+        ? `middleName=${this.customerUpdateForm.get('middleName')?.value}`
+        : ''
+    );
+    queryParams.push(
+      this.customerUpdateForm.get('lastName')?.value
+        ? `lastName=${this.customerUpdateForm.get('lastName')?.value}`
+        : ''
+    );
+    queryParams.push(
+      this.customerUpdateForm.get('birthDate')?.value
+        ? `birthDate=${this.customerUpdateForm.get('birthDate')?.value}`
+        : ''
+    );
+    const fullQueryParams = queryParams.filter((param) => param !== '');
+
+    const queryString = fullQueryParams.join('&');
+    const apiUrl = `http://localhost:8001/customerservice/api/v1/individualcustomers/check-customer-real?${queryString}`;
+
+    return new Promise<void>((resolve, reject) => {
+      this.customerApiService.checkCustomerReal(apiUrl).subscribe({
+        next: (response) => {
+          if (response === true) {
+            this.isCustomerReal = true;
+            this.cdr.detectChanges();
+          }
+          resolve();
+        },
+        error: (error) => {
+          this.errorMessage = error.error.detail;
+          this.errorMessage = this.errorMessage.replace(/"/g, '');
+          this.cdr.detectChanges();
+          reject();
+        },
+      });
+    });
+
+  }
+
+
+  async onSubmit() {
+    // if (this.customerUpdateForm.valid) {
+    //   this.updateCustomer();
+    // } else {
+    //   this.isFormValid = false;
+    // }
+    this.isCustomerReal = false;
+    this.isNationalityIdentityDuplicated = false;
+
+    await this.checkCustomerReal();
+
+    await this.checkIfNationalityIdentityDuplicated();
+
+  setTimeout(() => {
+    if (
+      this.customerUpdateForm.valid &&
+      this.isNationalityIdentityDuplicated === true &&
+      this.isCustomerReal === true
+    ) {
       console.log('Form Submitted!', this.customerUpdateForm.value);
       this.updateCustomer();
-    } else {
-      this.isFormValid = false;
     }
+  }, 0);
   }
 
   onCancel() {

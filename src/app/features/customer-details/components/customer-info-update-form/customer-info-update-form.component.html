@@ -105,22 +105,24 @@
       </button>
     </div>
   </form>
-  <div class="mt-2" *ngIf="customerUpdateForm.get('firstName')?.invalid &&customerUpdateForm.get('firstName')?.touched">
-    <app-warning-popup [message]=" customerUpdateForm.get('firstName')!.errors | etiyaControlErrorMessage"></app-warning-popup>
-  </div>
-  <div class="mt-2" *ngIf="customerUpdateForm.get('lastName')?.invalid &&customerUpdateForm.get('lastName')?.touched">
-    <app-warning-popup [message]=" customerUpdateForm.get('lastName')!.errors | etiyaControlErrorMessage"></app-warning-popup>
-  </div>
-  <div class="mt-2" *ngIf="customerUpdateForm.get('gender')?.invalid &&customerUpdateForm.get('gender')?.touched">
-    <app-warning-popup [message]=" customerUpdateForm.get('gender')!.errors | etiyaControlErrorMessage"></app-warning-popup>
-  </div>
-  <div class="mt-2" *ngIf="customerUpdateForm.get('birthDate')?.invalid &&customerUpdateForm.get('birthDate')?.touched">
-    <app-warning-popup [message]=" customerUpdateForm.get('birthDate')!.errors | etiyaControlErrorMessage"></app-warning-popup>
-  </div>
-  <div class="mt-2" *ngIf="customerUpdateForm.get('nationalityIdentity')?.invalid &&customerUpdateForm.get('nationalityIdentity')?.touched">
-    <app-warning-popup [message]=" customerUpdateForm.get('nationalityIdentity')!.errors | etiyaControlErrorMessage"></app-warning-popup>
-  </div>
-  <app-warning-popup *ngIf="errorMessage" [message]="errorMessage"></app-warning-popup>
+  <div class="error-message-container ">
+    <div class="mt-2" *ngIf="customerUpdateForm.get('firstName')?.invalid &&customerUpdateForm.get('firstName')?.touched">
+      <app-warning-popup [message]=" customerUpdateForm.get('firstName')!.errors | etiyaControlErrorMessage"></app-warning-popup>
+    </div>
+    <div class="mt-2" *ngIf="customerUpdateForm.get('lastName')?.invalid &&customerUpdateForm.get('lastName')?.touched">
+      <app-warning-popup [message]=" customerUpdateForm.get('lastName')!.errors | etiyaControlErrorMessage"></app-warning-popup>
+    </div>
+    <div class="mt-2" *ngIf="customerUpdateForm.get('gender')?.invalid &&customerUpdateForm.get('gender')?.touched">
+      <app-warning-popup [message]=" customerUpdateForm.get('gender')!.errors | etiyaControlErrorMessage"></app-warning-popup>
+    </div>
+    <div class="mt-2" *ngIf="customerUpdateForm.get('birthDate')?.invalid &&customerUpdateForm.get('birthDate')?.touched">
+      <app-warning-popup [message]=" customerUpdateForm.get('birthDate')!.errors | etiyaControlErrorMessage"></app-warning-popup>
+    </div>
+    <div class="mt-2" *ngIf="customerUpdateForm.get('nationalityIdentity')?.invalid &&customerUpdateForm.get('nationalityIdentity')?.touched">
+      <app-warning-popup [message]=" customerUpdateForm.get('nationalityIdentity')!.errors | etiyaControlErrorMessage"></app-warning-popup>
+    </div>
+    <app-warning-popup *ngIf="errorMessage" [message]="errorMessage"></app-warning-popup>
+</div>
   <app-confirm-exit
   message="Changes will not be saved. Are you sure to change the screen?"
   (confirm)="onConfirmCancel()"
