@@ -6,6 +6,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { IdToNamePipe } from "../../../../core/pipes/idToName.pipe";
 import { map, Observable, switchMap, catchError, of, forkJoin } from 'rxjs';
 import { CustomerAdressModalComponent } from '../../../../shared/components/customer-adress-modal/customer-adress-modal.component';
+import { PutDefaultAddressRequest } from '../../../customers/models/address/requests/put-default-address-request';
 
 @Component({
   selector: 'app-customer-info-address-form',
@@ -42,7 +43,6 @@ export class CustomerInfoAddressFormComponent implements OnInit {
   }
 
 
-  // city idsine göre city name çek
   getCityName(districtId: string): Observable<string> {
     return this.addressApiService.getDistrictById(districtId).pipe(
       switchMap(district => this.addressApiService.getCityById(district.cityId)),
@@ -55,7 +55,6 @@ export class CustomerInfoAddressFormComponent implements OnInit {
     );
   }
 
-  // districtIdye göre district name çek
   getDistrictName(districtId: string): Observable<string> {
     return this.addressApiService.getDistrictById(districtId).pipe(
       map(district => district.name),
@@ -120,18 +119,20 @@ export class CustomerInfoAddressFormComponent implements OnInit {
     });
   }
 
-  // setDefaultAddress(addressId: string) {
-  //   this.addressApiService.setDefaultAddress(addressId, this.customerId).subscribe({
-  //     next: () => {
-  //       this.addressDetails.forEach(detail => {
-  //         detail.address.defaultAddress = (detail.address.id === addressId);
-  //       });
-  //       this.change.markForCheck();
-  //     },
-  //     error: (error) => {
-  //       console.error('Error setting default address', error);
-  //     }
-  //   });
-  // }
+  setDefaultAddress(address: PutDefaultAddressRequest) {
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",address)
+    this.addressApiService.putDefaultAddress(address.id,address).subscribe({
+      next: () => {
+        console.log(address.id,address)
+        this.addressDetails.forEach(detail => {
+          detail.address.defaultAddress = (detail.address.id === address.id);
+        });
+        this.change.markForCheck();
+      },
+      error: (error) => {
+        console.error('Error setting default address', error);
+      }
+    });
+  }
 
 }

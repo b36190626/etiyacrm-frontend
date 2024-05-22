@@ -1,3 +1,4 @@
+import { PutDefaultAddressResponse } from './../models/address/responses/put-default-address-response';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -10,6 +11,7 @@ import { CreatedAddressResponse } from '../models/address/responses/created-addr
 import { CitiesResponseDto } from '../models/cities/cities-response-dto';
 import { DistrictsResponseDto } from '../models/districts/districts-response-dto';
 import { DeletedAddressResponse } from '../models/address/responses/deleted-address-response';
+import { PutDefaultAddressRequest } from '../models/address/requests/put-default-address-request';
 
 
 
@@ -36,10 +38,10 @@ export class AddressApiService {
     return this.http.put<UpdatedAddressResponse>
     (`http://localhost:8001/customerservice/api/v1/addresses/${id}`, address)
   }
-  // putDefaultAddress(defaultAddress: boolean, address: UpdateAddressRequest): Observable<UpdatedAddressResponse>{
-  //   return this.http.put<UpdatedAddressResponse>
-  //   (`http://localhost:8001/ustomerservice/api/v1/addresses/setDefaultAddress`, defaultAddress)
-  // }
+  putDefaultAddress(id: string, address: PutDefaultAddressRequest): Observable<PutDefaultAddressResponse>{
+    return this.http.put<PutDefaultAddressResponse>
+    (`http://localhost:8001/customerservice/api/v1/addresses/setDefaultAddress/${id}`, address)
+  }
   postAddress(address: CreateAddressRequest): Observable<CreatedAddressResponse>{
     return this.http.post<CreatedAddressResponse>('http://localhost:8001/customerservice/api/v1/addresses', address);
   }

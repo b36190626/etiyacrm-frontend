@@ -92,7 +92,7 @@ export class SearchFilterComponent implements OnInit{
     const filteredQueryParams = queryParams.filter(param => param !== '');
 
     const queryString = filteredQueryParams.join('&');
-    const apiUrl = `http://localhost:8082/api/v1/search-service?${queryString}`;
+    const apiUrl = `http://localhost:8001/search-service/api/v1/search-service?${queryString}`;
 
     this.searchApiService.getBySearchFilter(apiUrl).subscribe(response => {
       this.customers = response;
