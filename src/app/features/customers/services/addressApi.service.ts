@@ -36,7 +36,10 @@ export class AddressApiService {
     return this.http.put<UpdatedAddressResponse>
     (`http://localhost:8001/customerservice/api/v1/addresses/${id}`, address)
   }
-
+  // putDefaultAddress(defaultAddress: boolean, address: UpdateAddressRequest): Observable<UpdatedAddressResponse>{
+  //   return this.http.put<UpdatedAddressResponse>
+  //   (`http://localhost:8001/ustomerservice/api/v1/addresses/setDefaultAddress`, defaultAddress)
+  // }
   postAddress(address: CreateAddressRequest): Observable<CreatedAddressResponse>{
     return this.http.post<CreatedAddressResponse>('http://localhost:8001/customerservice/api/v1/addresses', address);
   }
