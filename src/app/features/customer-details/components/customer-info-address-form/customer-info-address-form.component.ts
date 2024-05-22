@@ -1,7 +1,7 @@
 import { AddressResponseDto } from './../../../customers/models/address/address-response-dto';
 import { AddressApiService } from './../../../customers/services/addressApi.service';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { IdToNamePipe } from "../../../../core/pipes/idToName.pipe";
 import { map, Observable, switchMap, catchError, of, forkJoin } from 'rxjs';
@@ -24,7 +24,7 @@ export class CustomerInfoAddressFormComponent implements OnInit {
   customerId!: string;
   addressInfo!: AddressResponseDto[];
   addressDetails: Array<{ address: AddressResponseDto, cityName?: string, districtName?: string }> = [];
-  @Output() addresList = new EventEmitter<AddressResponseDto[]>();
+ // @Output() addresList = new EventEmitter<AddressResponseDto[]>();
 
   constructor(
     private addressApiService: AddressApiService,
@@ -81,17 +81,57 @@ export class CustomerInfoAddressFormComponent implements OnInit {
             // addressdetails fieldlarını arraye al
             this.addressDetails.push({ address, cityName, districtName });
 
-            this.change.markForCheck(); // LAĞNET OLSUN SANA LAĞNETT!
+            this.change.markForCheck();
             console.log(this.addressDetails, "oldu")
           });
         });
-        this.addresList.emit(this.addressInfo);
+        //this.addresList.emit(this.addressInfo);
         this.change.markForCheck();
-        console.log(this.addresList, "address list")
+        //console.log(this.addresList, "address list")
       },
       error: (error) => {
         console.error('Error fetching address info', error);
       }
     });
   }
+  // editAddress(address: UpdateAddressRequest) {
+  //   this.addressApiService.putAddress(address.id,address).subscribe({
+  //     next: (updatedAddress) => {
+  //       const index = this.addressDetails.findIndex(detail => detail.address.id === updatedAddress.id);
+  //       if (index !== -1) {
+  //         this.addressDetails[index].address = updatedAddress;
+  //         this.change.markForCheck();
+  //       }
+  //     },
+  //     error: (error) => {
+  //       console.error('Error updating address', error);
+  //     }
+  //   });
+  // }
+  deleteAddress(addressId: string) {
+    this.addressApiService.deleteAddress(addressId).subscribe({
+      next: () => {
+        this.addressDetails = this.addressDetails.filter(detail => detail.address.id !== addressId);
+        this.change.markForCheck();
+      },
+      error: (error) => {
+        console.error('Error deleting address', error);
+      }
+    });
+  }
+
+  // setDefaultAddress(addressId: string) {
+  //   this.addressApiService.setDefaultAddress(addressId, this.customerId).subscribe({
+  //     next: () => {
+  //       this.addressDetails.forEach(detail => {
+  //         detail.address.defaultAddress = (detail.address.id === addressId);
+  //       });
+  //       this.change.markForCheck();
+  //     },
+  //     error: (error) => {
+  //       console.error('Error setting default address', error);
+  //     }
+  //   });
+  // }
+
 }

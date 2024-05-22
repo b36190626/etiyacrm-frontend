@@ -9,6 +9,7 @@ import { CreateAddressRequest } from '../models/address/requests/create-address-
 import { CreatedAddressResponse } from '../models/address/responses/created-address-response';
 import { CitiesResponseDto } from '../models/cities/cities-response-dto';
 import { DistrictsResponseDto } from '../models/districts/districts-response-dto';
+import { DeletedAddressResponse } from '../models/address/responses/deleted-address-response';
 
 
 
@@ -27,7 +28,10 @@ export class AddressApiService {
   getById(customerId: string): Observable<AddressResponseDto[]>{
     return this.http.get<AddressResponseDto[]>(`http://localhost:8001/customerservice/api/v1/addresses/${customerId}`)
   }
-
+  deleteAddress(id: string): Observable<DeletedAddressResponse> {
+    return this.http.delete<DeletedAddressResponse>
+    (`http://localhost:8001/customerservice/api/v1/addresses/${id}`)
+  }
   putAddress(id: string, address: UpdateAddressRequest): Observable<UpdatedAddressResponse>{
     return this.http.put<UpdatedAddressResponse>
     (`http://localhost:8001/customerservice/api/v1/addresses/${id}`, address)
@@ -50,14 +54,6 @@ export class AddressApiService {
   getDistrictById(districtId: string): Observable<DistrictsResponseDto> {
     return this.http.get<DistrictsResponseDto>(`http://localhost:8001/customerservice/api/v1/districts/${districtId}`);
   }
-  // getCityName(cityId: string, cities: CitiesResponseDto[]): string {
-  //   const city = cities.find(c => c.id === cityId);
-  //   return city.name ? city.name : 'City not found';
-  // }
 
-  // getDistrictName(districtId: string, districts: DistrictsResponseDto[]): string {
-  //   const district = districts.find(d => d.id === districtId);
-  //   return district ? district.name : 'District not found';
-  // }
 }
 
