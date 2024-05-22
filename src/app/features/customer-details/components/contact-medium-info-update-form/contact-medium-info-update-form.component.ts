@@ -94,7 +94,7 @@ export class ContactMediumInfoUpdateFormComponent implements OnInit {
     const email = control.value;
     if (email && email.includes('@')) {
       const [_, domain] = email.split('@');
-      if (domain !== 'gmail.com' && domain !== 'yahoo.com') {
+      if (domain !== 'gmail.com' && domain !== 'yahoo.com' && domain !== 'etiya.com') {
         return { 'invalidDomain': true };
       }
     }
