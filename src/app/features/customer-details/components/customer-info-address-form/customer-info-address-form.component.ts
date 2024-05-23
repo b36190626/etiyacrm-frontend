@@ -7,6 +7,9 @@ import { IdToNamePipe } from "../../../../core/pipes/idToName.pipe";
 import { map, Observable, switchMap, catchError, of, forkJoin } from 'rxjs';
 import { CustomerAdressModalComponent } from '../../../../shared/components/customer-adress-modal/customer-adress-modal.component';
 import { PutDefaultAddressRequest } from '../../../customers/models/address/requests/put-default-address-request';
+import { MessageService } from '../../../customers/services/message.service';
+import { SuccessPopupComponent } from '../../../../shared/components/success-popup/success-popup.component';
+import { WarningPopupComponent } from '../../../../shared/components/warning-popup/warning-popup.component';
 
 @Component({
   selector: 'app-customer-info-address-form',
@@ -18,11 +21,14 @@ import { PutDefaultAddressRequest } from '../../../customers/models/address/requ
     CommonModule,
     RouterModule,
     IdToNamePipe,
-    CustomerAdressModalComponent
+    CustomerAdressModalComponent,
+    SuccessPopupComponent,
+    WarningPopupComponent
   ]
 })
 export class CustomerInfoAddressFormComponent implements OnInit {
-
+  successMessage: string;
+  errorMessage: string;
   customerId!: string;
   addressInfo!: AddressResponseDto[];
   addressDetails: Array<{ address: AddressResponseDto, cityName?: string, districtName?: string }> = [];
@@ -31,16 +37,18 @@ export class CustomerInfoAddressFormComponent implements OnInit {
   constructor(
     private addressApiService: AddressApiService,
     private change: ChangeDetectorRef,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private messageService: MessageService,
   ) { }
 
   ngOnInit(): void {
     this.activatedRoute.parent.params.subscribe(params => {
       this.customerId = params['id'];
       this.getAddress();
-
     });
-
+    this.messageService.message$.subscribe(message => {
+      this.successMessage = message;
+    });
   }
 
 
@@ -116,10 +124,14 @@ export class CustomerInfoAddressFormComponent implements OnInit {
       next: () => {
         this.addressDetails = this.addressDetails.filter(detail => detail.address.id !== addressId);
         this.change.markForCheck();
-        alert("adres silindi!") //error pop-up yapılacak
+        this.messageService.setmessage('Customer address deleted');
+
       },
       error: (error) => {
+        this.errorMessage = error.error.detail;
+        this.change.detectChanges();
         console.error('Error deleting address', error);
+
       }
     });
   }

@@ -44,7 +44,6 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
   pathId!: string;
   showConfirmation = false;
   errorMessage : string;
-  isNationalityIdentityDuplicated: boolean;
   isCustomerReal: boolean;
   @ViewChild(ConfirmExitComponent) confirmExitComponent: ConfirmExitComponent;
 
@@ -131,26 +130,6 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
     });
   }
 
-  checkIfNationalityIdentityDuplicated() {
-    console.log('customerNatID: ', this.customerUpdateForm.value.nationalityIdentity);
-    return new Promise<void>((resolve, reject) => {
-      this.customerApiService
-        .checkNationalityIdentityDuplicated(this.customerUpdateForm.value.nationalityIdentity)
-        .subscribe({
-          next: (response) => {
-            this.isNationalityIdentityDuplicated = response;
-            this.cdr.detectChanges();
-            resolve();
-          },
-          error: (error) => {
-            this.errorMessage = error.error.detail;
-            this.errorMessage = this.errorMessage.replace(/"/g, '');
-            this.cdr.detectChanges();
-            reject();
-          },
-        });
-    });
-  }
 
   checkCustomerReal() {
     const queryParams: string[] = [];
@@ -208,22 +187,13 @@ export class CustomerInfoUpdateFormComponent implements OnInit {
 
 
   async onSubmit() {
-    // if (this.customerUpdateForm.valid) {
-    //   this.updateCustomer();
-    // } else {
-    //   this.isFormValid = false;
-    // }
     this.isCustomerReal = false;
-    this.isNationalityIdentityDuplicated = false;
 
     await this.checkCustomerReal();
-
-    await this.checkIfNationalityIdentityDuplicated();
 
   setTimeout(() => {
     if (
       this.customerUpdateForm.valid &&
-      this.isNationalityIdentityDuplicated === true &&
       this.isCustomerReal === true
     ) {
       console.log('Form Submitted!', this.customerUpdateForm.value);

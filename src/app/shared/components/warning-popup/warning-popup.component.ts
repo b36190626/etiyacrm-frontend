@@ -49,8 +49,8 @@ export class WarningPopupComponent implements OnChanges, OnInit, OnDestroy {
     this.isOpen = true;
     this.cdr.detectChanges();
     this.timeoutId = setTimeout(() => {
-      this.isOpen = false; // Hide the success message component after count milliseconds
-      this.cdr.detectChanges(); // Trigger change detection
+      this.isOpen = false;
+      this.cdr.detectChanges();
     }, count);
   }
 

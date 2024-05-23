@@ -55,5 +55,7 @@
         </button>
       </div>
     </div>
+    <app-success-popup *ngIf="successMessage" [successMessage]="successMessage" ></app-success-popup>
   </div>
+  <app-warning-popup *ngIf="errorMessage" [message]="errorMessage"></app-warning-popup>
 </div>
