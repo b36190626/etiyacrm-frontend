@@ -90,11 +90,7 @@ export class AddressInfoComponent implements OnInit {
 
 
   deleteAddress(address: AddressItem) {
-    if (this.addressList.length > 1) {
-      this.addressList = this.addressList.filter(addr => addr.id !== address.id);
-      this.store.dispatch(setAddresses({ addresses: this.addressList }));
-    } else {
-      alert('Cannot delete the only address.');
-    }
+    this.addressList = this.addressList.filter(addr => addr.id !== address.id);
+    this.store.dispatch(setAddresses({ addresses: this.addressList }));
   }
 }

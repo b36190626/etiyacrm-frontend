@@ -6,6 +6,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { IdToNamePipe } from "../../../../core/pipes/idToName.pipe";
 import { map, Observable, switchMap, catchError, of, forkJoin } from 'rxjs';
 import { CustomerAdressModalComponent } from '../../../../shared/components/customer-adress-modal/customer-adress-modal.component';
+import { PutDefaultAddressRequest } from '../../../customers/models/address/requests/put-default-address-request';
 
 @Component({
   selector: 'app-customer-info-address-form',
@@ -21,6 +22,7 @@ import { CustomerAdressModalComponent } from '../../../../shared/components/cust
   ]
 })
 export class CustomerInfoAddressFormComponent implements OnInit {
+
   customerId!: string;
   addressInfo!: AddressResponseDto[];
   addressDetails: Array<{ address: AddressResponseDto, cityName?: string, districtName?: string }> = [];
@@ -36,13 +38,12 @@ export class CustomerInfoAddressFormComponent implements OnInit {
     this.activatedRoute.parent.params.subscribe(params => {
       this.customerId = params['id'];
       this.getAddress();
-      this.change.markForCheck();
+
     });
 
   }
 
 
-  // city idsine göre city name çek
   getCityName(districtId: string): Observable<string> {
     return this.addressApiService.getDistrictById(districtId).pipe(
       switchMap(district => this.addressApiService.getCityById(district.cityId)),
@@ -55,7 +56,6 @@ export class CustomerInfoAddressFormComponent implements OnInit {
     );
   }
 
-  // districtIdye göre district name çek
   getDistrictName(districtId: string): Observable<string> {
     return this.addressApiService.getDistrictById(districtId).pipe(
       map(district => district.name),
@@ -81,12 +81,12 @@ export class CustomerInfoAddressFormComponent implements OnInit {
             // addressdetails fieldlarını arraye al
             this.addressDetails.push({ address, cityName, districtName });
 
-            this.change.markForCheck();
+            this.change.detectChanges();
             console.log(this.addressDetails, "oldu")
           });
         });
         //this.addresList.emit(this.addressInfo);
-        this.change.markForCheck();
+        this.change.detectChanges();
         //console.log(this.addresList, "address list")
       },
       error: (error) => {
@@ -94,6 +94,7 @@ export class CustomerInfoAddressFormComponent implements OnInit {
       }
     });
   }
+
   // editAddress(address: UpdateAddressRequest) {
   //   this.addressApiService.putAddress(address.id,address).subscribe({
   //     next: (updatedAddress) => {
@@ -108,11 +109,14 @@ export class CustomerInfoAddressFormComponent implements OnInit {
   //     }
   //   });
   // }
+
+
   deleteAddress(addressId: string) {
     this.addressApiService.deleteAddress(addressId).subscribe({
       next: () => {
         this.addressDetails = this.addressDetails.filter(detail => detail.address.id !== addressId);
         this.change.markForCheck();
+        alert("adres silindi!") //error pop-up yapılacak
       },
       error: (error) => {
         console.error('Error deleting address', error);
@@ -120,18 +124,19 @@ export class CustomerInfoAddressFormComponent implements OnInit {
     });
   }
 
-  // setDefaultAddress(addressId: string) {
-  //   this.addressApiService.setDefaultAddress(addressId, this.customerId).subscribe({
-  //     next: () => {
-  //       this.addressDetails.forEach(detail => {
-  //         detail.address.defaultAddress = (detail.address.id === addressId);
-  //       });
-  //       this.change.markForCheck();
-  //     },
-  //     error: (error) => {
-  //       console.error('Error setting default address', error);
-  //     }
-  //   });
-  // }
+  setDefaultAddress(address: PutDefaultAddressRequest) {
+    this.addressApiService.putDefaultAddress(address.id,address).subscribe({
+      next: () => {
+        console.log(address.id,address)
+        this.addressDetails.forEach(detail => {
+          detail.address.defaultAddress = (detail.address.id === address.id);
+        });
+        this.change.markForCheck();
+      },
+      error: (error) => {
+        console.error('Error setting default address', error);
+      }
+    });
+  }
 
 }

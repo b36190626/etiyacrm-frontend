@@ -15,8 +15,8 @@
       <div class="col-md-6 mb-3 d-flex">
         <label for="home-phone">Home Phone:</label>
         <input
-          type="text"
-          id="middle-name"
+          type="tel"
+          id="home-phone"
           class="form-control"
           formControlName="homePhone"
           mask="(000) 000 00 00"
@@ -29,7 +29,7 @@
         <label for="mobile-phone">Mobile Phone*:</label>
         <input
           type="tel"
-          id="last-name"
+          id="mobile-phone"
           class="form-control"
           formControlName="mobilePhone"
           required
@@ -40,11 +40,11 @@
       <div class="col-md-6 mb-3 d-flex">
         <label for="fax">Fax:</label>
         <input
-          type="text"
+          type="tel"
           id="fax"
           class="form-control"
           formControlName="fax"
-          mask="0 (999) 999 99 99"
+          mask="(999) 999 99 99"
           [showMaskTyped]="true"
         />
       </div>

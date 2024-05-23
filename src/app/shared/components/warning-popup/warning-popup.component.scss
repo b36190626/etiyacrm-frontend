@@ -28,7 +28,7 @@
   position: relative; //position fixed ile yandaki scalelerden kurtul veya warningi dive at divi position fixed yap.
   z-index: 9999;
   transform: translateY(-35px);
-  animation: slideInUp 0.5s ease-in-out, slideOutDown 0.5s 2.5s ease-in-out forwards;
+  animation: slideInUp 0.5s ease-in-out, slideOutDown 0.5s 10s ease-in-out forwards;
   margin-top: 10px;
 }
 .popup-inner {

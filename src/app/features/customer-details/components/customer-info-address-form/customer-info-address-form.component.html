@@ -1,6 +1,7 @@
 <div class="info-page container-fluid mt-5 m-3" style="background-color: white">
   <app-customer-adress-modal
-
+  [isUpdatePage]="true"
+  [custId]="customerId"
 ></app-customer-adress-modal>
   <h4>
     Address Info
@@ -27,15 +28,31 @@
         <br>
         {{ detail.address.street }}, {{ detail.address.flatNumber }}
         <br>
-        {{ detail.address.description }}
+        {{ detail.address.description }}<br>
+        <!-- customerid= {{ detail.address.customerId }}<br>
+        id= {{ detail.address.id }} -->
       </p>
 
-      <div *ngIf="detail.address.defaultAddress" class="radio-button-container"> <b> Primary Address</b> &nbsp;
-        <input class="form-check-input" type="radio" id="selectAddress{{i}}" name="selectedAddress" [value]="detail.address.defaultAddress" checked>
-        <!-- <div class="radio-button-container">
-          <b>Primary Address</b> &nbsp;
-          <input class="form-check-input" type="radio" id="selectAddress{{i}}" name="selectedAddress" [checked]="detail.address.defaultAddress" (change)="setDefaultAddress(detail.address.id)">
-        </div> -->
+      <div class="radio-button-container"> <b> Primary Address</b> &nbsp;
+        <input class="form-check-input"
+        type="radio"
+        id="selectAddress{{i}}"
+        name="selectedAddress"
+        [value]="detail.address.defaultAddress"
+        [checked]="detail.address.defaultAddress"
+        (change)="setDefaultAddress({ id: detail.address.id, defaultAddress: true, customerId: detail.address.customerId})">
+      </div>
+    </div>
+    <div class="address-info">
+      <div class="add-new-address">
+        <button
+          type="button"
+          class="btn address-button"
+          data-bs-toggle="modal"
+          data-bs-target="#customerAddressModal"
+        >
+          Add New Adress
+        </button>
       </div>
     </div>
   </div>
