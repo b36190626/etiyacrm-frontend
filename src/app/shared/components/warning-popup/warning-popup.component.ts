@@ -18,7 +18,7 @@ export class WarningPopupComponent implements OnChanges, OnInit, OnDestroy {
   @Input() message: unknown;
   isOpen: boolean = true;
   private subscription: Subscription;
-  private timeoutId: any; // bunun tipi ReturnType<typeof setTimeout>
+  private timeoutId: any;
 
   constructor(
     private cdr: ChangeDetectorRef,
