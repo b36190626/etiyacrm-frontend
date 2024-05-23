@@ -17,6 +17,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Input,
   OnInit,
   Output, ViewChild
 } from '@angular/core';
@@ -34,11 +35,13 @@ import { take } from 'rxjs';
 })
 export class CustomerAdressModalComponent implements OnInit {
   @ViewChild('customerAddressModal') modalElement!: ElementRef;
-
+  @Input() isUpdatePage: boolean = false;
+  @Input() custId: string='';
   addressForm!: FormGroup;
   isFormValid: boolean = false;
   cities: any = [];
   districts: any = [];
+  @Input() addressList: AddressItem[] = [];
   @Output() cityList = new EventEmitter<any>();
   @Output() districtList = new EventEmitter<any>();
   filteredDistricts: any[] = [];
@@ -116,6 +119,7 @@ export class CustomerAdressModalComponent implements OnInit {
 
   createAddress() {
     this.store.pipe(select(selectAddress),take(1)).subscribe(response => {
+      const existingAddress = this.addressList.find(address => address.id === this.editingAddressId);
       // const nextId:number=Math.max(...response.map(r => r.id))+1
       const nextId: number = response.length ? Math.max(...response.map(r => r.id)) + 1 : 1;
       const newAddress: AddressItem = {
@@ -123,14 +127,34 @@ export class CustomerAdressModalComponent implements OnInit {
       districtId: this.addressForm.value.district,
       flatNumber: this.addressForm.value.flatNumber,
       description: this.addressForm.value.description,
-      defaultAddress: false,
+      defaultAddress: existingAddress ? existingAddress.defaultAddress : false,
       customerId: '',
       id: this.editingAddressId ?? nextId,
     };
-    this.store.dispatch(setAddress({ address: newAddress }));
-    this.editingAddressId = null;
-    console.log(newAddress);
-    })
+    if (this.isUpdatePage) {
+      // Veritabanına kaydet
+      newAddress.customerId = this.custId;
+      this.addressApiService.postAddress(newAddress).subscribe({
+        next: (savedAddress) => {
+          console.log('Address saved to database:', savedAddress);
+          this.onCancel();
+        },
+        error: (error) => {
+          console.error('Error saving address to database:', error);
+        },
+        complete: () => {
+          this.addressForm.reset();
+          this.router.navigate(['/home/customer/', this.custId, 'address']);
+        },
+      });
+    } else {
+      // Local state'e kaydet
+      this.store.dispatch(setAddress({ address: newAddress }));
+      this.editingAddressId = null;
+      console.log(newAddress);
+      this.onCancel();
+    }
+    });
   }
 
   onCityChange(cityId: any) {
@@ -145,11 +169,19 @@ export class CustomerAdressModalComponent implements OnInit {
     }
   }
 
+
   onSubmit() {
     if (this.addressForm.valid) {
       console.log('Form Created on Modal', this.addressForm.value);
       this.createAddress();
-      this.router.navigate(['/create-customer/address-info']);
+      if(this.isUpdatePage){
+        this.router.navigate(['/home/customer/', this.custId, 'address']).then(() => {
+          window.location.reload(); // then sonrası geçiçi yöntem
+        });
+      } else {
+        this.router.navigate(['/create-customer/address-info']);
+      }
+      this.onCancel();
     }
   }
 

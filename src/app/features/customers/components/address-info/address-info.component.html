@@ -1,6 +1,7 @@
 <div class="info-page container-fluid mt-2 mx-3" style="background-color: white">
   <div class="address-info">
     <app-customer-adress-modal
+    [addressList]="addressList"
     (cityList)="cityTransferParent($event)"
     (districtList)="districtTransferParent($event)"
   ></app-customer-adress-modal>

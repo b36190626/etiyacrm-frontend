@@ -33,7 +33,7 @@ export class WarningPopupComponent implements OnChanges, OnInit, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['message']) {
-      this.startTimer(3000);
+      this.startTimer(10000);
     }
   }
 

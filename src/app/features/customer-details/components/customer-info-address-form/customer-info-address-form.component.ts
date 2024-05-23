@@ -22,6 +22,7 @@ import { PutDefaultAddressRequest } from '../../../customers/models/address/requ
   ]
 })
 export class CustomerInfoAddressFormComponent implements OnInit {
+
   customerId!: string;
   addressInfo!: AddressResponseDto[];
   addressDetails: Array<{ address: AddressResponseDto, cityName?: string, districtName?: string }> = [];
@@ -37,7 +38,7 @@ export class CustomerInfoAddressFormComponent implements OnInit {
     this.activatedRoute.parent.params.subscribe(params => {
       this.customerId = params['id'];
       this.getAddress();
-      this.change.markForCheck();
+
     });
 
   }
@@ -80,12 +81,12 @@ export class CustomerInfoAddressFormComponent implements OnInit {
             // addressdetails fieldlarını arraye al
             this.addressDetails.push({ address, cityName, districtName });
 
-            this.change.markForCheck();
+            this.change.detectChanges();
             console.log(this.addressDetails, "oldu")
           });
         });
         //this.addresList.emit(this.addressInfo);
-        this.change.markForCheck();
+        this.change.detectChanges();
         //console.log(this.addresList, "address list")
       },
       error: (error) => {
@@ -93,6 +94,7 @@ export class CustomerInfoAddressFormComponent implements OnInit {
       }
     });
   }
+
   // editAddress(address: UpdateAddressRequest) {
   //   this.addressApiService.putAddress(address.id,address).subscribe({
   //     next: (updatedAddress) => {
@@ -107,11 +109,14 @@ export class CustomerInfoAddressFormComponent implements OnInit {
   //     }
   //   });
   // }
+
+
   deleteAddress(addressId: string) {
     this.addressApiService.deleteAddress(addressId).subscribe({
       next: () => {
         this.addressDetails = this.addressDetails.filter(detail => detail.address.id !== addressId);
         this.change.markForCheck();
+        alert("adres silindi!") //error pop-up yapılacak
       },
       error: (error) => {
         console.error('Error deleting address', error);
@@ -120,7 +125,6 @@ export class CustomerInfoAddressFormComponent implements OnInit {
   }
 
   setDefaultAddress(address: PutDefaultAddressRequest) {
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",address)
     this.addressApiService.putDefaultAddress(address.id,address).subscribe({
       next: () => {
         console.log(address.id,address)

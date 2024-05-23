@@ -59,10 +59,19 @@
     background-color: #FBCDA6;
 
   }
-
   .address-button{
     border: 1px solid #F58634 ;
     margin:auto;
+
+  }
+  .address-button:hover{
+    background-color: #FBCDA6 ;
   }
 
-
+  .add-new-address {
+    display: flex;
+    justify-content: center; /* Yatayda ortalama */
+    align-items: center; /* Dikeyde ortalama */
+    height: 100%; /* Tam yükseklik */
+    margin-right: 3rem;
+  }
