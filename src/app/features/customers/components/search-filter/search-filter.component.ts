@@ -69,8 +69,6 @@ export class SearchFilterComponent implements OnInit{
     this.getFilters();
     window.location.href = `${window.location.origin}/home`;
     this.change.markForCheck();
-    //window.location.href = 'http://localhost:4200/home'; // geçiçi yönlendirme, düzeltelim.
-    //this.router.navigate(['/home']); // searchservice üstünde çalıştığından dolayı home'a dönemiyor.
     }
 
   onSubmit(){
@@ -88,7 +86,6 @@ export class SearchFilterComponent implements OnInit{
     queryParams.push(this.form.get('lastname')?.value ? `lastName=${this.form.get('lastname')?.value}` : '');
     queryParams.push(this.form.get('orderNumber')?.value ? `orderNumber=${this.form.get('orderNumber')?.value}` : '');
 
-    // Boş sorgu parametrelerini filtrele
     const filteredQueryParams = queryParams.filter(param => param !== '');
 
     const queryString = filteredQueryParams.join('&');
@@ -99,7 +96,6 @@ export class SearchFilterComponent implements OnInit{
       this.customerList.emit(this.customers);
 
       this.change.markForCheck();
-      console.log("customer list response:",response);
     })
   }
 
