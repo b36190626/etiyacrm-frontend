@@ -129,7 +129,7 @@ export class CustomerInfoAddressFormComponent implements OnInit {
       },
       error: (error) => {
         this.errorMessage = error.error.detail;
-        this.change.detectChanges();
+        this.change.markForCheck();
         console.error('Error deleting address', error);
 
       }
